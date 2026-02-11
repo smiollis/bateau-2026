@@ -1,0 +1,140 @@
+import { motion, AnimatePresence } from "framer-motion";
+import { Switch } from "@/components/ui/switch";
+import { X } from "lucide-react";
+
+interface CookieModalProps {
+  open: boolean;
+  onClose: () => void;
+  analytics: boolean;
+  setAnalytics: (v: boolean) => void;
+  marketing: boolean;
+  setMarketing: (v: boolean) => void;
+  onSave: () => void;
+  onRejectAll: () => void;
+}
+
+const sections = [
+  {
+    id: "necessary",
+    title: "Cookies nécessaires",
+    description: "Essentiels au fonctionnement du site (réservations, sécurité)",
+    alwaysOn: true,
+  },
+  {
+    id: "analytics",
+    title: "Cookies analytiques",
+    description: "Google Analytics pour comprendre l'utilisation du site",
+    alwaysOn: false,
+  },
+  {
+    id: "marketing",
+    title: "Cookies marketing",
+    description: "Personnalisation de l'expérience et publicités ciblées",
+    alwaysOn: false,
+  },
+] as const;
+
+const CookieModal = ({
+  open,
+  onClose,
+  analytics,
+  setAnalytics,
+  marketing,
+  setMarketing,
+  onSave,
+  onRejectAll,
+}: CookieModalProps) => {
+  const getToggleProps = (id: string) => {
+    switch (id) {
+      case "analytics":
+        return { checked: analytics, onCheckedChange: setAnalytics };
+      case "marketing":
+        return { checked: marketing, onCheckedChange: setMarketing };
+      default:
+        return { checked: true, disabled: true, onCheckedChange: () => {} };
+    }
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="relative w-full max-w-2xl bg-card rounded-2xl shadow-2xl p-6 md:p-8"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.25 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <h2 className="font-heading text-2xl text-foreground mb-2">
+              Paramètres des cookies
+            </h2>
+            <p className="text-muted-foreground text-sm mb-6">
+              Nous respectons votre vie privée. Choisissez les cookies que vous acceptez.
+            </p>
+
+            <div className="space-y-0">
+              {sections.map((section, i) => (
+                <div
+                  key={section.id}
+                  className={`flex items-start justify-between gap-4 py-5 ${
+                    i < sections.length - 1 ? "border-b border-border" : ""
+                  }`}
+                >
+                  <div className="flex-1">
+                    <p className="font-semibold text-foreground text-sm">
+                      {section.title}
+                      {section.alwaysOn && (
+                        <span className="ml-2 text-xs text-muted-foreground font-normal">
+                          (toujours actif)
+                        </span>
+                      )}
+                    </p>
+                    <p className="text-muted-foreground text-sm mt-0.5">
+                      {section.description}
+                    </p>
+                  </div>
+                  <Switch
+                    {...getToggleProps(section.id)}
+                    className="mt-1 data-[state=checked]:bg-primary"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 mt-6">
+              <button
+                onClick={onRejectAll}
+                className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors px-4 py-2"
+              >
+                Tout refuser
+              </button>
+              <button
+                onClick={onSave}
+                className="btn-gold w-full sm:w-auto text-center"
+              >
+                Enregistrer mes choix
+              </button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default CookieModal;
