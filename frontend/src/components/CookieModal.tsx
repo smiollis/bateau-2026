@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Switch } from "@/components/ui/switch";
 import { X } from "lucide-react";
@@ -9,7 +12,7 @@ interface CookieModalProps {
   setAnalytics: (v: boolean) => void;
   marketing: boolean;
   setMarketing: (v: boolean) => void;
-  onSave: () => void;
+  onSave: (analytics: boolean, marketing: boolean) => void;
   onRejectAll: () => void;
 }
 
@@ -44,15 +47,29 @@ const CookieModal = ({
   onSave,
   onRejectAll,
 }: CookieModalProps) => {
+  const [localAnalytics, setLocalAnalytics] = useState(analytics);
+  const [localMarketing, setLocalMarketing] = useState(marketing);
+
+  useEffect(() => {
+    if (open) {
+      setLocalAnalytics(analytics);
+      setLocalMarketing(marketing);
+    }
+  }, [open, analytics, marketing]);
+
   const getToggleProps = (id: string) => {
     switch (id) {
       case "analytics":
-        return { checked: analytics, onCheckedChange: setAnalytics };
+        return { checked: localAnalytics, onCheckedChange: setLocalAnalytics };
       case "marketing":
-        return { checked: marketing, onCheckedChange: setMarketing };
+        return { checked: localMarketing, onCheckedChange: setLocalMarketing };
       default:
         return { checked: true, disabled: true, onCheckedChange: () => {} };
     }
+  };
+
+  const handleSave = () => {
+    onSave(localAnalytics, localMarketing);
   };
 
   return (
@@ -76,6 +93,7 @@ const CookieModal = ({
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Fermer"
             >
               <X className="h-5 w-5" />
             </button>
@@ -124,7 +142,7 @@ const CookieModal = ({
                 Tout refuser
               </button>
               <button
-                onClick={onSave}
+                onClick={handleSave}
                 className="btn-gold w-full sm:w-auto text-center"
               >
                 Enregistrer mes choix

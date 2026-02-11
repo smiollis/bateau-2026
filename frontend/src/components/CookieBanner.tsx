@@ -1,37 +1,26 @@
-import { useState } from "react";
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useCookieConsent } from "@/hooks/useCookieConsent";
 import CookieModal from "./CookieModal";
 
 const CookieBanner = () => {
-  const [visible, setVisible] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [analytics, setAnalytics] = useState(false);
-  const [marketing, setMarketing] = useState(false);
-
-  const handleAcceptAll = () => {
-    console.log("Cookies acceptés :", { necessary: true, analytics: true, marketing: true });
-    setVisible(false);
-  };
-
-  const handleSave = () => {
-    console.log("Cookies enregistrés :", { necessary: true, analytics, marketing });
-    setModalOpen(false);
-    setVisible(false);
-  };
-
-  const handleRejectAll = () => {
-    console.log("Cookies refusés :", { necessary: true, analytics: false, marketing: false });
-    setAnalytics(false);
-    setMarketing(false);
-    setModalOpen(false);
-    setVisible(false);
-  };
+  const {
+    showBanner,
+    showModal,
+    acceptAll,
+    openModal,
+    closeModal,
+    consent,
+    rejectAll,
+    updateConsent,
+  } = useCookieConsent();
 
   return (
     <>
       <AnimatePresence>
-        {visible && !modalOpen && (
+        {showBanner && !showModal && (
           <motion.div
             className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-primary bg-card/95 backdrop-blur-md shadow-2xl"
             initial={{ y: 100, opacity: 0 }}
@@ -56,13 +45,13 @@ const CookieBanner = () => {
 
                 <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto shrink-0">
                   <button
-                    onClick={() => setModalOpen(true)}
+                    onClick={openModal}
                     className="border-2 border-primary text-primary font-semibold px-6 py-2 rounded-lg hover:bg-primary/5 transition-colors text-sm"
                   >
                     Personnaliser
                   </button>
                   <button
-                    onClick={handleAcceptAll}
+                    onClick={acceptAll}
                     className="btn-gold text-sm"
                   >
                     Tout accepter
@@ -75,14 +64,14 @@ const CookieBanner = () => {
       </AnimatePresence>
 
       <CookieModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        analytics={analytics}
-        setAnalytics={setAnalytics}
-        marketing={marketing}
-        setMarketing={setMarketing}
-        onSave={handleSave}
-        onRejectAll={handleRejectAll}
+        open={showModal}
+        onClose={closeModal}
+        analytics={consent?.analytics ?? false}
+        setAnalytics={(v) => updateConsent({ analytics: v })}
+        marketing={consent?.marketing ?? false}
+        setMarketing={(v) => updateConsent({ marketing: v })}
+        onSave={(analytics, marketing) => updateConsent({ analytics, marketing })}
+        onRejectAll={rejectAll}
       />
     </>
   );

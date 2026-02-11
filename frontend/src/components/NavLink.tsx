@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { forwardRef } from 'react';
 import { usePathname } from 'next/navigation';
-import cn from '@/lib/utils';
+import { cn } from '@/lib/utils';
 
 interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;

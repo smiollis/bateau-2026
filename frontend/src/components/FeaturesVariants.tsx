@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Clock, MapPin, Users, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -39,11 +41,11 @@ const variantStyles: Record<ThemeVariant, {
   classic: {
     section: "bg-background",
     title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-primary",
-    subtitle: "text-muted-foreground text-lg",
+    subtitle: "text-foreground/70 text-lg",
     card: "bg-card rounded-xl p-6 lg:p-8 border border-border card-hover text-center",
     icon: "bg-primary/10 text-primary group-hover:bg-accent group-hover:text-accent-foreground",
     cardTitle: "font-heading text-xl font-semibold text-primary",
-    cardText: "text-muted-foreground",
+    cardText: "text-foreground/75",
   },
   modern: {
     section: "bg-secondary/30",

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Menu, X, Globe, Anchor, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -5,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useRouter, usePathname } from "next/navigation";
 import logo from "@/assets/logo.png";
+const logoSrc = typeof logo === 'string' ? logo : logo.src;
 
 const navItems = [
   { label: "La Croisière", href: "/#croisiere" },
@@ -27,7 +30,7 @@ const variantStyles: Record<ThemeVariant, {
   classic: {
     header: "bg-white/95 backdrop-blur-md border-b border-border",
     logoClass: "h-14 md:h-16 w-auto",
-    logoSrc: logo,
+    logoSrc: logoSrc,
     nav: "text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200",
     cta: "btn-gold",
     mobileMenuBg: "bg-background",
@@ -36,7 +39,7 @@ const variantStyles: Record<ThemeVariant, {
   modern: {
     header: "bg-primary/95 backdrop-blur-md border-b border-primary-foreground/10",
     logoClass: "h-14 md:h-16 w-auto brightness-0 invert",
-    logoSrc: logo,
+    logoSrc: logoSrc,
     nav: "text-xs font-heading-michroma uppercase tracking-wider text-primary-foreground/80 hover:text-accent transition-colors duration-200",
     cta: "bg-accent text-accent-foreground font-heading-michroma uppercase text-xs tracking-wider hover:bg-accent/90",
     mobileMenuBg: "bg-primary",
@@ -45,7 +48,7 @@ const variantStyles: Record<ThemeVariant, {
   minimal: {
     header: "bg-background border-b-2 border-primary",
     logoClass: "h-14 md:h-16 w-auto",
-    logoSrc: logo,
+    logoSrc: logoSrc,
     nav: "text-xs font-heading-orbitron uppercase tracking-widest text-foreground/70 hover:text-accent transition-colors duration-200",
     cta: "bg-transparent border-2 border-accent text-accent font-heading-orbitron uppercase text-xs tracking-wider hover:bg-accent hover:text-accent-foreground",
     mobileMenuBg: "bg-background",
@@ -54,7 +57,7 @@ const variantStyles: Record<ThemeVariant, {
   editorial: {
     header: "bg-amber-50 border-b border-amber-200",
     logoClass: "h-14 md:h-16 w-auto",
-    logoSrc: logo,
+    logoSrc: logoSrc,
     nav: "text-sm font-medium text-amber-900/80 hover:text-amber-700 transition-colors duration-200 italic",
     cta: "bg-amber-700 text-white hover:bg-amber-800",
     mobileMenuBg: "bg-amber-50",
@@ -63,7 +66,7 @@ const variantStyles: Record<ThemeVariant, {
   luxe: {
     header: "bg-black/95 backdrop-blur-md border-b border-amber-500/20",
     logoClass: "h-14 md:h-16 w-auto brightness-0 invert",
-    logoSrc: logo,
+    logoSrc: logoSrc,
     nav: "text-xs uppercase tracking-[0.2em] text-amber-100/70 hover:text-amber-400 transition-colors duration-200",
     cta: "bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold hover:from-amber-400 hover:to-amber-500",
     mobileMenuBg: "bg-black",
@@ -72,7 +75,7 @@ const variantStyles: Record<ThemeVariant, {
   nuit: {
     header: "bg-[#0a1628]/95 backdrop-blur-md border-b border-gold/20",
     logoClass: "h-14 md:h-16 w-auto brightness-0 invert",
-    logoSrc: logo,
+    logoSrc: logoSrc,
     nav: "text-sm font-medium text-blue-100/80 hover:text-accent transition-colors duration-200",
     cta: "btn-gold",
     mobileMenuBg: "bg-[#0a1628]",
@@ -85,7 +88,7 @@ const HeaderVariants = () => {
   const [lang, setLang] = useState<"FR" | "EN">("FR");
   const { variant, setVariant } = useThemeVariant();
   const styles = variantStyles[variant];
-  const navigate = useNavigate();
+  const router = useRouter();
   const pathname = usePathname();
 
   const handleNavClick = (href: string) => {
@@ -94,13 +97,13 @@ const HeaderVariants = () => {
       if (pathname === "/") {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       } else {
-        navigate("/" , { state: { scrollTo: id } });
+        router.push("/");
         setTimeout(() => {
           document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
         }, 100);
       }
     } else {
-      navigate(href);
+      router.push(href);
     }
   };
 
@@ -163,7 +166,7 @@ const HeaderVariants = () => {
             </button>
 
             {/* CTA Button */}
-            <Button className={styles.cta} onClick={() => navigate("/reservation")}>
+            <Button className={styles.cta} onClick={() => router.push("/reservation")}>
               Réservation
             </Button>
           </div>
@@ -223,7 +226,7 @@ const HeaderVariants = () => {
                     {variant === "nuit" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                   </button>
                 </div>
-                <Button className={styles.cta} onClick={() => navigate("/reservation")}>
+                <Button className={styles.cta} onClick={() => router.push("/reservation")}>
                   Réservation
                 </Button>
               </div>

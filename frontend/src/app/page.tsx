@@ -1,5 +1,7 @@
 import React from 'react';
-import Index from '@/pages/Index';
+import Index from '@/views/Index';
+
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
   return <Index />;

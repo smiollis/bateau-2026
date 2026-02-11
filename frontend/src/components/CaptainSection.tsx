@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import capitaineMichel from "@/assets/capitaine-michel.jpg";
@@ -82,7 +84,7 @@ const CaptainSection = () => {
             className="flex justify-center"
           >
             <img
-              src={capitaineMichel}
+              src={typeof capitaineMichel === 'string' ? capitaineMichel : capitaineMichel.src}
               alt="Capitaine Michel"
               className={`w-56 h-56 lg:w-72 lg:h-72 rounded-full object-cover ${styles.imageBorder}`}
             />

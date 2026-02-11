@@ -1,3 +1,5 @@
+"use client";
+
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export type ThemeVariant = "classic" | "modern" | "minimal" | "editorial" | "luxe" | "nuit";

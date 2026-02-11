@@ -1,3 +1,5 @@
+"use client";
+
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { motion } from "framer-motion";
 import { Palette, X } from "lucide-react";

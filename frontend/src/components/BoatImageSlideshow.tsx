@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -7,10 +9,10 @@ import bateau3 from "@/assets/bateau-3.jpg";
 import bateau4 from "@/assets/bateau-4.jpg";
 
 const images = [
-  { src: bateau1, alt: "Le Senang sous un pont parisien" },
-  { src: bateau2, alt: "Le Senang naviguant sur la Seine au crépuscule" },
-  { src: bateau3, alt: "Le Senang sur la Seine avec Paris en arrière-plan" },
-  { src: bateau4, alt: "Vue aérienne du Senang avec ses passagers" },
+  { src: typeof bateau1 === 'string' ? bateau1 : bateau1.src, alt: "Le Senang sous un pont parisien" },
+  { src: typeof bateau2 === 'string' ? bateau2 : bateau2.src, alt: "Le Senang naviguant sur la Seine au crépuscule" },
+  { src: typeof bateau3 === 'string' ? bateau3 : bateau3.src, alt: "Le Senang sur la Seine avec Paris en arrière-plan" },
+  { src: typeof bateau4 === 'string' ? bateau4 : bateau4.src, alt: "Vue aérienne du Senang avec ses passagers" },
 ];
 
 interface BoatImageSlideshowProps {

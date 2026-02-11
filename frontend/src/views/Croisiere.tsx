@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, MapPin, Clock, Ship } from "lucide-react";
@@ -8,7 +10,8 @@ import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
 
 import fond2 from "@/assets/map/fond2.webp";
-import metroIcon from "@/assets/map/metro.png";
+import metroIconImport from "@/assets/map/metro.png";
+const metroIcon = typeof metroIconImport === 'string' ? metroIconImport : metroIconImport.src;
 import trocadero from "@/assets/map/trocadero.svg";
 import tourEiffel from "@/assets/map/tour-eiffel.svg";
 import invalides from "@/assets/map/invalides.svg";
@@ -171,7 +174,7 @@ const Croisiere = () => {
         {/* Map Container - Full Width */}
         <div className="relative w-full overflow-hidden">
           <img
-            src={fond2}
+            src={typeof fond2 === 'string' ? fond2 : fond2.src}
             alt="Carte de l'itinéraire de la croisière sur la Seine"
             className="w-full h-auto block"
           />

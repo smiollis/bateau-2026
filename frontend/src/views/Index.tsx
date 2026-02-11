@@ -1,3 +1,5 @@
+"use client";
+
 import HeaderVariants from "@/components/HeaderVariants";
 import HeroVariants from "@/components/HeroVariants";
 import FeaturesVariants from "@/components/FeaturesVariants";
@@ -9,7 +11,6 @@ import CTAVariants from "@/components/CTAVariants";
 import ContactForm from "@/components/ContactForm";
 import FooterVariants from "@/components/FooterVariants";
 import GalleryPreview from "@/components/GalleryPreview";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const Index = () => {
   return (
@@ -27,7 +28,6 @@ const Index = () => {
         <ContactForm />
       </main>
       <FooterVariants />
-      <ThemeSwitcher />
     </div>
   );
 };

@@ -1,9 +1,13 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import Link from "next/link";
 import formulePremiumImg from "@/assets/formule-premium.jpg";
+
+const formuleImage = typeof formulePremiumImg === 'string' ? formulePremiumImg : formulePremiumImg.src;
 
 const offers = [
   {
@@ -29,7 +33,7 @@ const offers = [
     price: 600,
     priceExtra: 100,
     description: "L'expérience complète pour les gourmets",
-    image: formulePremiumImg,
+    image: formuleImage,
     features: ["2h de croisière privée", "Jusqu'à 6 personnes", "Champagne premium", "Planches charcuterie & fromages"],
     popular: false,
   },

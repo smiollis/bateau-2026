@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Clock, MapPin, Users, Sparkles } from "lucide-react";
 

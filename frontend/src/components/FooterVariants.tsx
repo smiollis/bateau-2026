@@ -1,9 +1,13 @@
+"use client";
+
 import { Facebook, Instagram, Mail, MapPin, Phone, Anchor } from "lucide-react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
+import { useCookieConsent } from "@/hooks/useCookieConsent";
 import { useCallback } from "react";
 import logo from "@/assets/logo.png";
+const logoSrc = typeof logo === 'string' ? logo : logo.src;
 
 const navItems = [
   { label: "Le Bateau", to: "/#bateau" },
@@ -81,8 +85,9 @@ const variantStyles: Record<ThemeVariant, {
 const FooterVariants = () => {
   const { variant } = useThemeVariant();
   const styles = variantStyles[variant];
-  const navigate = useNavigate();
+  const router = useRouter();
   const pathname = usePathname();
+  const { openModal: openCookieSettings } = useCookieConsent();
 
   const handleNavClick = useCallback((to: string, e: React.MouseEvent) => {
     if (to.startsWith("/#")) {
@@ -91,13 +96,13 @@ const FooterVariants = () => {
       if (pathname === "/") {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       } else {
-        navigate("/");
+        router.push("/");
         setTimeout(() => {
           document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
         }, 100);
       }
     }
-  }, [pathname, navigate]);
+  }, [pathname, router]);
 
   // Minimal: Simple single-row footer
   if (variant === "minimal") {
@@ -106,12 +111,12 @@ const FooterVariants = () => {
         <div className="container-custom py-12">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-4">
-              <img src={logo} alt="Un Bateau à Paris" className="h-10" />
+              <img src={logoSrc} alt="Un Bateau à Paris" className="h-10" />
             </div>
             
             <div className="flex flex-wrap items-center justify-center gap-6">
               {navItems.map((item) => (
-                <Link key={item.label} to={item.to} onClick={(e) => handleNavClick(item.to, e)} className={styles.link}>
+                <Link key={item.label} href={item.to} onClick={(e) => handleNavClick(item.to, e)} className={styles.link}>
                   {item.label}
                 </Link>
               ))}
@@ -127,8 +132,9 @@ const FooterVariants = () => {
             </div>
           </div>
           
-          <div className={`mt-8 pt-8 border-t ${styles.border} text-center`}>
+          <div className={`mt-8 pt-8 border-t ${styles.border} flex flex-col items-center gap-2`}>
             <p className={styles.copyright}>© 2025 Un Bateau à Paris</p>
+            <button onClick={openCookieSettings} className={styles.link}>Paramètres cookies</button>
           </div>
         </div>
       </footer>
@@ -141,13 +147,13 @@ const FooterVariants = () => {
       <footer className={styles.footer} id="contact">
         <div className="container-custom py-16">
           <div className="text-center mb-12">
-            <img src={logo} alt="Un Bateau à Paris" className="h-12 mx-auto brightness-0 invert sepia mb-6" />
+            <img src={logoSrc} alt="Un Bateau à Paris" className="h-12 mx-auto brightness-0 invert sepia mb-6" />
             <p className="text-amber-400/60 uppercase tracking-[0.2em] text-sm">Croisières privées sur la Seine</p>
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-8 mb-12">
             {navItems.map((item) => (
-              <Link key={item.label} to={item.to} onClick={(e) => handleNavClick(item.to, e)} className={styles.link}>
+              <Link key={item.label} href={item.to} onClick={(e) => handleNavClick(item.to, e)} className={styles.link}>
                 {item.label}
               </Link>
             ))}
@@ -167,6 +173,7 @@ const FooterVariants = () => {
             <div className="flex gap-6">
               <Link href="/mentions-legales" className={styles.link}>Mentions légales</Link>
               <Link href="/cgv" className={styles.link}>CGV</Link>
+              <button onClick={openCookieSettings} className={styles.link}>Cookies</button>
             </div>
           </div>
         </div>
@@ -210,8 +217,9 @@ const FooterVariants = () => {
             </div>
           </div>
           
-          <div className={`mt-12 pt-8 border-t ${styles.border} text-center`}>
+          <div className={`mt-12 pt-8 border-t ${styles.border} flex flex-col items-center gap-2`}>
             <p className={styles.copyright}>© 2025 Un Bateau à Paris. Tous droits réservés.</p>
+            <button onClick={openCookieSettings} className={styles.link}>Paramètres cookies</button>
           </div>
         </div>
       </footer>
@@ -225,7 +233,7 @@ const FooterVariants = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           <div>
             {variant === "modern" ? (
-              <img src={logo} alt="Un Bateau à Paris" className="h-10 brightness-0 invert mb-4" />
+              <img src={logoSrc} alt="Un Bateau à Paris" className="h-10 brightness-0 invert mb-4" />
             ) : (
               <h3 className={`${styles.title} mb-4`}>Un Bateau à Paris</h3>
             )}
@@ -247,7 +255,7 @@ const FooterVariants = () => {
             <ul className="space-y-3">
               {navItems.map((item) => (
                 <li key={item.label}>
-                  <Link to={item.to} onClick={(e) => handleNavClick(item.to, e)} className={styles.link}>{item.label}</Link>
+                  <Link href={item.to} onClick={(e) => handleNavClick(item.to, e)} className={styles.link}>{item.label}</Link>
                 </li>
               ))}
             </ul>
@@ -278,6 +286,7 @@ const FooterVariants = () => {
               <li><Link href="/cgv" className={styles.link}>Conditions générales de vente</Link></li>
               <li><Link href="/mentions-legales" className={styles.link}>Politique de confidentialité</Link></li>
               <li><Link href="/faq" className={styles.link}>FAQ</Link></li>
+              <li><button onClick={openCookieSettings} className={styles.link}>Paramètres cookies</button></li>
             </ul>
           </div>
         </div>

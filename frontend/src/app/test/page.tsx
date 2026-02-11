@@ -1,6 +1,8 @@
 import React from 'react';
 import { getPages } from '@/lib/wordpress';
 
+export const dynamic = 'force-dynamic';
+
 export default async function TestPage() {
   let pages: any[] = [];
   try {

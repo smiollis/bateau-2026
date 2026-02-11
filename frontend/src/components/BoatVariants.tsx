@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Ruler, Users, Sun, Anchor, Shield, ArrowRight, Map } from "lucide-react";
@@ -31,11 +33,11 @@ const variantStyles: Record<ThemeVariant, {
     section: "bg-background",
     title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-primary",
     subtitle: "text-accent font-heading text-lg",
-    text: "text-muted-foreground text-lg leading-relaxed",
+    text: "text-foreground/80 text-lg leading-relaxed",
     highlight: "flex items-start gap-4",
     highlightIcon: "w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0",
     highlightTitle: "font-semibold text-primary",
-    highlightText: "text-muted-foreground text-sm",
+    highlightText: "text-foreground/70 text-sm",
     cta: "btn-gold",
     badge: "bg-accent text-accent-foreground",
     slideRounded: "rounded-2xl",
@@ -269,7 +271,7 @@ const BoatVariants = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <p className={`${styles.subtitle} mb-2`}>Naviguez, vivez Paris autrement</p>
+            {variant !== "classic" && <p className={`${styles.subtitle} mb-2`}>Naviguez, vivez Paris autrement</p>}
             <h2 className={`${styles.title} mb-6`}>Bienvenue sur le Senang</h2>
             <p className={`${styles.text} mb-8`}>
               Le Senang est à l'aise aussi bien en navigation côtière que sur les eaux intérieures. 

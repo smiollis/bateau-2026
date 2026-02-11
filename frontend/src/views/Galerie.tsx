@@ -1,28 +1,20 @@
+"use client";
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, ArrowLeft, Instagram, Heart, MessageCircle, ExternalLink } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowLeft, Instagram, ExternalLink, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { galleryImages } from "@/data/galleryImages";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
+import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
-
-const instagramPosts = [
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/08/WhatsApp-Image-2025-07-27-a-12.22.05_77ed38c8.webp", likes: 124, comments: 8 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-03-03-a-16.00.24_13d1702e.jpg", likes: 89, comments: 12 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-08-a-22.20.47_261af646.webp", likes: 156, comments: 15 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-08-a-22.20.42_88a4983b.webp", likes: 203, comments: 22 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-08-a-21.50.25_ac11bce0.webp", likes: 97, comments: 6 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-03-03-a-16.00.26_b41cf5f5.webp", likes: 178, comments: 19 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-08-a-20.58.31_fcc03538.webp", likes: 145, comments: 11 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-03-02-a-21.18.40_52501437.webp", likes: 112, comments: 9 },
-  { src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-04-a-17.33.30_ea0b05c2.webp", likes: 234, comments: 28 },
-];
 
 const Galerie = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { isDark } = useThemeVariant();
+  const { posts: instagramPosts, isLoading: igLoading } = useInstagramFeed(9);
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -159,40 +151,41 @@ const Galerie = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-3 gap-2 md:gap-4 max-w-4xl mx-auto">
-            {instagramPosts.map((post, i) => (
-              <motion.a
-                key={i}
-                href="https://www.instagram.com/bateau_a_paris/"
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
-              >
-                <img
-                  src={post.src}
-                  alt="Instagram post"
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-4 text-white">
-                    <span className="flex items-center gap-1 text-sm font-medium">
-                      <Heart className="w-4 h-4 fill-white" />
-                      {post.likes}
-                    </span>
-                    <span className="flex items-center gap-1 text-sm font-medium">
-                      <MessageCircle className="w-4 h-4 fill-white" />
-                      {post.comments}
-                    </span>
+          {igLoading ? (
+            <div className="flex justify-center py-12">
+              <Loader2 className="w-8 h-8 animate-spin text-primary" />
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-2 md:gap-4 max-w-4xl mx-auto">
+              {instagramPosts.map((post, i) => (
+                <motion.a
+                  key={post.id}
+                  href={post.permalink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
+                >
+                  <img
+                    src={post.media_type === 'VIDEO' ? (post.thumbnail_url ?? post.media_url) : post.media_url}
+                    alt={post.caption?.slice(0, 100) ?? 'Instagram post'}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end">
+                    {post.caption && (
+                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 text-white text-xs line-clamp-2">
+                        {post.caption.slice(0, 80)}
+                      </div>
+                    )}
                   </div>
-                </div>
-              </motion.a>
-            ))}
-          </div>
+                </motion.a>
+              ))}
+            </div>
+          )}
 
           <div className="text-center mt-8">
             <Button asChild className="btn-gold">

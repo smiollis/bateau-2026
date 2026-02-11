@@ -1,21 +1,16 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import HeroCinemaSlideshow from "./HeroCinemaSlideshow";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-          alt="Paris Seine river with Eiffel Tower"
-          className="w-full h-full object-cover"
-        />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/40 to-primary/70" />
-      </div>
+      <HeroCinemaSlideshow />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-primary/60 via-primary/40 to-primary/70" />
 
       {/* Content */}
       <div className="relative z-10 container-custom text-center text-primary-foreground">
@@ -72,21 +67,19 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            <ChevronDown className="w-8 h-8 text-primary-foreground/60" />
-          </motion.div>
-        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 1.2 }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20"
+      >
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+          <ChevronDown className="w-8 h-8 text-primary-foreground/60" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
