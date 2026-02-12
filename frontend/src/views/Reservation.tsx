@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { CalendarDays, Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import HeaderVariants from "@/components/HeaderVariants";

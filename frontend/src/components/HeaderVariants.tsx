@@ -61,9 +61,17 @@ const HeaderVariants = () => {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       } else {
         router.push("/");
-        setTimeout(() => {
-          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+        let attempts = 0;
+        const interval = setInterval(() => {
+          const el = document.getElementById(id);
+          attempts++;
+          if (el) {
+            clearInterval(interval);
+            el.scrollIntoView({ behavior: "smooth" });
+          } else if (attempts >= 60) {
+            clearInterval(interval);
+          }
+        }, 50);
       }
     } else {
       router.push(href);

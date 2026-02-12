@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import allPosts from "@/data/posts.json";
 import HeaderVariants from "@/components/HeaderVariants";
@@ -68,7 +68,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
           >
             <div className="flex items-center gap-3 mb-4">
               {post.category && (
-                <span className="bg-accent/20 text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                <span className="bg-accent/20 text-primary text-xs font-semibold px-3 py-1 rounded-full">
                   {post.category}
                 </span>
               )}

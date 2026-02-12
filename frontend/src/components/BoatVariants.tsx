@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Ruler, Users, Sun, Anchor, Shield, ArrowRight, Map } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import BoatImageSlideshow from "@/components/BoatImageSlideshow";
 import { useTranslations } from "next-intl";

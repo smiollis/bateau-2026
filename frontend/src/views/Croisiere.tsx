@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, MapPin, Clock, Ship } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
@@ -22,6 +22,8 @@ import notreDame from "@/assets/map/notre-dame.svg";
 import hotelDeVille from "@/assets/map/hotel-de-ville.svg";
 import liberte from "@/assets/map/liberte.svg";
 
+const getSrc = (img: string | { src: string }) => typeof img === 'string' ? img : img.src;
+
 interface Landmark {
   id: string;
   name: string;
@@ -37,19 +39,19 @@ const landmarks: Landmark[] = [
   {
     id: "liberte",
     name: "Statue de la Liberté",
-    icon: liberte,
+    icon: getSrc(liberte),
     description: "Réplique de la statue offerte par les États-Unis, point de départ de votre croisière.",
     top: "62%",
-    left: "1%",
+    left: "2.3%",
     width: "30px",
     tooltipSide: "right",
   },
   {
     id: "trocadero",
     name: "Trocadéro",
-    icon: trocadero,
+    icon: getSrc(trocadero),
     description: "Palais de Chaillot et ses jardins, une vue imprenable sur la Tour Eiffel.",
-    top: "14%",
+    top: "32%",
     left: "10%",
     width: "80px",
     tooltipSide: "bottom",
@@ -57,49 +59,49 @@ const landmarks: Landmark[] = [
   {
     id: "tour-eiffel",
     name: "Tour Eiffel",
-    icon: tourEiffel,
+    icon: getSrc(tourEiffel),
     description: "Le monument le plus emblématique de Paris, illuminé la nuit pour un spectacle inoubliable.",
-    top: "8%",
-    left: "18%",
+    top: "34%",
+    left: "20%",
     width: "30px",
     tooltipSide: "right",
   },
   {
     id: "invalides",
     name: "Invalides",
-    icon: invalides,
+    icon: getSrc(invalides),
     description: "Le Dôme doré des Invalides abrite le tombeau de Napoléon Bonaparte.",
-    top: "28%",
-    left: "25%",
+    top: "40%",
+    left: "35%",
     width: "40px",
     tooltipSide: "bottom",
   },
   {
     id: "assemblee",
     name: "Assemblée Nationale",
-    icon: assemblee,
+    icon: getSrc(assemblee),
     description: "Palais Bourbon, siège de l'Assemblée nationale française depuis 1798.",
-    top: "12%",
-    left: "30%",
+    top: "34%",
+    left: "40%",
     width: "65px",
     tooltipSide: "top",
   },
   {
     id: "orsay",
     name: "Musée d'Orsay",
-    icon: orsay,
+    icon: getSrc(orsay),
     description: "Ancienne gare reconvertie en musée, abritant la plus grande collection d'art impressionniste au monde.",
-    top: "22%",
-    left: "44%",
+    top: "44%",
+    left: "51%",
     width: "65px",
     tooltipSide: "bottom",
   },
   {
     id: "louvre",
     name: "Louvre",
-    icon: louvre,
+    icon: getSrc(louvre),
     description: "Le plus grand musée du monde et sa célèbre pyramide de verre.",
-    top: "6%",
+    top: "29%",
     left: "55%",
     width: "45px",
     tooltipSide: "top",
@@ -107,20 +109,20 @@ const landmarks: Landmark[] = [
   {
     id: "notre-dame",
     name: "Notre-Dame",
-    icon: notreDame,
+    icon: getSrc(notreDame),
     description: "Cathédrale gothique emblématique, restaurée après l'incendie de 2019.",
-    top: "22%",
-    left: "66%",
+    top: "43%",
+    left: "70%",
     width: "50px",
     tooltipSide: "bottom",
   },
   {
     id: "hotel-de-ville",
     name: "Hôtel de Ville",
-    icon: hotelDeVille,
+    icon: getSrc(hotelDeVille),
     description: "Siège de la municipalité parisienne, chef-d'œuvre de l'architecture néo-Renaissance.",
-    top: "10%",
-    left: "78%",
+    top: "47%",
+    left: "81%",
     width: "60px",
     tooltipSide: "top",
   },

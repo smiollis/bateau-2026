@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import formulePremiumImg from "@/assets/formule-premium.jpg";
 

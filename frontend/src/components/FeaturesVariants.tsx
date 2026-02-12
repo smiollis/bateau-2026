@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Clock, MapPin, Users, Sparkles, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations } from "next-intl";

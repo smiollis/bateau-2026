@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Calendar, Instagram, ExternalLink, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import allPosts from "@/data/posts.json";
@@ -127,7 +127,7 @@ const Actualites = () => {
                   <div className="p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center gap-3 mb-4">
                       {filteredPosts[0].category && (
-                        <span className="bg-accent/20 text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                        <span className="bg-accent/20 text-primary text-xs font-semibold px-3 py-1 rounded-full">
                           {filteredPosts[0].category}
                         </span>
                       )}
@@ -182,7 +182,7 @@ const Actualites = () => {
                       <div className="p-6 flex flex-col flex-grow">
                         <div className="flex items-center gap-3 mb-3">
                           {post.category && (
-                            <span className="bg-accent/20 text-accent-foreground text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                            <span className="bg-accent/20 text-primary text-xs font-semibold px-2.5 py-0.5 rounded-full">
                               {post.category}
                             </span>
                           )}

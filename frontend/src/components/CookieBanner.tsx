@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useCookieConsent } from "@/hooks/useCookieConsent";
 import CookieModal from "./CookieModal";
 

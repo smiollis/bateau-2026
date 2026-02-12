@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import HeroCinemaSlideshow from "@/components/HeroCinemaSlideshow";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 
 const HeroVariants = () => {
