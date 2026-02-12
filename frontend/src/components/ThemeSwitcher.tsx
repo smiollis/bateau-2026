@@ -6,39 +6,15 @@ import { Palette, X } from "lucide-react";
 import { useState } from "react";
 
 const themes: { id: ThemeVariant; name: string; description: string; preview: string }[] = [
-  { 
-    id: "classic", 
-    name: "Classique", 
+  {
+    id: "classic",
+    name: "Classique",
     description: "Playfair Display · Élégant & Intemporel",
     preview: "bg-gradient-to-r from-primary to-primary/80"
   },
-  { 
-    id: "modern", 
-    name: "Moderne", 
-    description: "Michroma · Comme le logo actuel",
-    preview: "bg-gradient-to-r from-primary to-accent"
-  },
-  { 
-    id: "minimal", 
-    name: "Épuré", 
-    description: "Orbitron · Contemporain & Tech",
-    preview: "bg-gradient-to-r from-gray-900 to-gray-700"
-  },
-  { 
-    id: "editorial", 
-    name: "Éditorial", 
-    description: "Mise en page magazine asymétrique",
-    preview: "bg-gradient-to-r from-amber-700 to-orange-500"
-  },
-  { 
-    id: "luxe", 
-    name: "Luxe", 
-    description: "Dark mode · Ultra premium",
-    preview: "bg-gradient-to-r from-black to-amber-900"
-  },
-  { 
-    id: "nuit", 
-    name: "Nuit", 
+  {
+    id: "nuit",
+    name: "Nuit",
     description: "Classique · Bleu profond & Or",
     preview: "bg-gradient-to-r from-[#0a1628] to-[#1e3a8a]"
   },
@@ -74,14 +50,14 @@ const ThemeSwitcher = () => {
             Variantes de design
           </p>
         </div>
-        <button 
+        <button
           onClick={() => setIsOpen(false)}
           className="w-8 h-8 rounded-full hover:bg-secondary flex items-center justify-center transition-colors"
         >
           <X className="w-4 h-4 text-muted-foreground" />
         </button>
       </div>
-      
+
       <div className="space-y-2">
         {themes.map((theme) => (
           <motion.button
@@ -105,7 +81,7 @@ const ThemeSwitcher = () => {
           </motion.button>
         ))}
       </div>
-      
+
       <p className="text-xs text-muted-foreground mt-4 text-center">
         Cliquez pour prévisualiser chaque style
       </p>

@@ -3,41 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import reviewsData from "@/data/reviews.json";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Marie-Claire D.",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    date: "Il y a 2 semaines",
-    text: "Une expérience magique ! Le capitaine était très sympathique et nous a fait découvrir Paris sous un angle totalement différent. Le champagne était excellent et la vue sur la Tour Eiffel au coucher du soleil restera gravée dans nos mémoires.",
-  },
-  {
-    id: 2,
-    name: "Jean-Philippe M.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    date: "Il y a 1 mois",
-    text: "Nous avons réservé pour l'anniversaire de ma femme et ce fut une surprise parfaite. Le bateau est magnifique, très bien entretenu, et l'équipe aux petits soins. Je recommande vivement la formule Premium !",
-  },
-  {
-    id: 3,
-    name: "Sophie L.",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    date: "Il y a 3 semaines",
-    text: "Organisation sans faille, bateau superbe et équipage professionnel. Nous étions 10 pour un team building et tout le monde était enchanté. Le guide historique nous a appris énormément de choses sur Paris !",
-  },
-  {
-    id: 4,
-    name: "Thomas R.",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    date: "Il y a 2 mois",
-    text: "Parfait pour une demande en mariage ! L'équipe a été très discrète et m'a aidé à préparer ce moment unique. Elle a dit oui ! Merci Un Bateau à Paris pour ce souvenir inoubliable.",
-  },
-];
+const testimonials = reviewsData.reviews;
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,7 +58,7 @@ const Testimonials = () => {
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-6 h-6 fill-accent text-accent" />
             ))}
-            <span className="ml-2 text-primary-foreground/80 font-medium">5.0 sur Google</span>
+            <span className="ml-2 text-primary-foreground/80 font-medium">{reviewsData.placeRating}/5 ({reviewsData.totalReviews} avis Google)</span>
           </div>
         </motion.div>
 

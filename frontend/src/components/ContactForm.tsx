@@ -1,99 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
+import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { Send, Phone, Mail, MapPin } from "lucide-react";
-
-const variantStyles: Record<ThemeVariant, {
-  section: string;
-  title: string;
-  text: string;
-  card: string;
-  label: string;
-  input: string;
-  cta: string;
-  infoTitle: string;
-  infoText: string;
-  infoIcon: string;
-}> = {
-  classic: {
-    section: "bg-muted/30",
-    title: "font-heading text-3xl md:text-4xl font-semibold text-primary",
-    text: "text-muted-foreground text-lg",
-    card: "bg-white rounded-2xl shadow-lg p-8 md:p-10",
-    label: "text-sm font-medium text-foreground",
-    input: "border-border focus:border-primary",
-    cta: "btn-gold w-full",
-    infoTitle: "font-heading text-xl font-semibold text-primary",
-    infoText: "text-muted-foreground text-sm",
-    infoIcon: "text-primary",
-  },
-  modern: {
-    section: "bg-primary/5",
-    title: "font-heading-michroma text-2xl md:text-3xl uppercase tracking-wider text-primary",
-    text: "text-muted-foreground",
-    card: "bg-white rounded-none shadow-lg p-8 md:p-10 border-t-4 border-accent",
-    label: "text-xs font-heading-michroma uppercase tracking-wider text-foreground",
-    input: "border-border focus:border-accent rounded-none",
-    cta: "bg-accent text-accent-foreground font-heading-michroma uppercase tracking-wider w-full hover:bg-accent/90 rounded-none",
-    infoTitle: "font-heading-michroma text-lg uppercase tracking-wider text-primary",
-    infoText: "text-muted-foreground text-sm",
-    infoIcon: "text-accent",
-  },
-  minimal: {
-    section: "bg-background",
-    title: "font-heading-orbitron text-xl md:text-2xl uppercase tracking-widest text-foreground",
-    text: "text-muted-foreground text-sm",
-    card: "border-2 border-border p-8 md:p-10",
-    label: "text-xs font-heading-orbitron uppercase tracking-widest text-foreground",
-    input: "border-border focus:border-accent rounded-none",
-    cta: "bg-transparent border-2 border-accent text-accent font-heading-orbitron uppercase tracking-widest w-full hover:bg-accent hover:text-accent-foreground rounded-none",
-    infoTitle: "font-heading-orbitron text-lg uppercase tracking-widest text-foreground",
-    infoText: "text-muted-foreground text-xs",
-    infoIcon: "text-accent",
-  },
-  editorial: {
-    section: "bg-amber-50",
-    title: "font-heading text-3xl md:text-4xl text-amber-900 italic",
-    text: "text-amber-800/60 text-lg",
-    card: "bg-white rounded-3xl shadow-xl p-8 md:p-10",
-    label: "text-sm font-medium text-amber-900",
-    input: "border-amber-200 focus:border-amber-600 rounded-xl",
-    cta: "bg-amber-700 text-white w-full hover:bg-amber-800 rounded-xl",
-    infoTitle: "font-heading text-xl text-amber-900 font-semibold",
-    infoText: "text-amber-700/60 text-sm",
-    infoIcon: "text-amber-700",
-  },
-  luxe: {
-    section: "bg-neutral-950",
-    title: "text-3xl md:text-4xl font-light text-white tracking-tight",
-    text: "text-white/50",
-    card: "bg-white/5 border border-amber-400/10 rounded-2xl p-8 md:p-10",
-    label: "text-xs uppercase tracking-wider text-white/60",
-    input: "bg-white/5 border-white/10 text-white focus:border-amber-400 placeholder:text-white/30",
-    cta: "bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold w-full hover:from-amber-400 hover:to-amber-500",
-    infoTitle: "text-xl font-light text-white",
-    infoText: "text-white/40 text-sm",
-    infoIcon: "text-amber-400",
-  },
-  nuit: {
-    section: "bg-[#0a1628]",
-    title: "font-heading text-3xl md:text-4xl font-semibold text-blue-100",
-    text: "text-blue-200/70 text-lg",
-    card: "bg-white/5 border border-blue-400/10 rounded-2xl p-8 md:p-10",
-    label: "text-sm font-medium text-blue-100",
-    input: "bg-white/5 border-blue-300/10 text-blue-100 focus:border-accent placeholder:text-blue-300/30",
-    cta: "btn-gold w-full",
-    infoTitle: "font-heading text-xl font-semibold text-blue-100",
-    infoText: "text-blue-200/60 text-sm",
-    infoIcon: "text-accent",
-  },
-};
 
 const contactInfo = [
   { icon: Phone, label: "+33 6 70 34 25 43" },
@@ -102,25 +17,71 @@ const contactInfo = [
 ];
 
 const ContactForm = () => {
-  const { variant } = useThemeVariant();
-  const styles = variantStyles[variant];
+  const { isDark } = useThemeVariant();
   const { toast } = useToast();
+  const t = useTranslations("contact");
+
+  const styles = isDark
+    ? {
+        section: "bg-[#0a1628]",
+        title: "font-heading text-3xl md:text-4xl font-semibold text-blue-100",
+        text: "text-blue-200/70 text-lg",
+        card: "bg-white/5 border border-blue-400/10 rounded-2xl p-8 md:p-10",
+        label: "text-sm font-medium text-blue-100",
+        input: "bg-white/5 border-blue-300/10 text-blue-100 focus:border-accent placeholder:text-blue-300/30",
+        cta: "btn-gold w-full",
+        infoTitle: "font-heading text-xl font-semibold text-blue-100",
+        infoText: "text-blue-200/60 text-sm",
+        infoIcon: "text-accent",
+      }
+    : {
+        section: "bg-muted/30",
+        title: "font-heading text-3xl md:text-4xl font-semibold text-primary",
+        text: "text-muted-foreground text-lg",
+        card: "bg-white rounded-2xl shadow-lg p-8 md:p-10",
+        label: "text-sm font-medium text-foreground",
+        input: "border-border focus:border-primary",
+        cta: "btn-gold w-full",
+        infoTitle: "font-heading text-xl font-semibold text-primary",
+        infoText: "text-muted-foreground text-sm",
+        infoIcon: "text-primary",
+      };
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [honeypot, setHoneypot] = useState("");
   const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      toast({ title: "Veuillez remplir tous les champs obligatoires", variant: "destructive" });
+      toast({ title: t("errorRequired"), variant: "destructive" });
       return;
     }
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
-      toast({ title: "Message envoyé !", description: "Nous vous répondrons dans les plus brefs délais." });
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, website: honeypot }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        if (data.error === "rate_limited") {
+          toast({ title: t("errorRateLimit"), variant: "destructive" });
+        } else if (data.error === "validation") {
+          toast({ title: t("errorValidation"), variant: "destructive" });
+        } else {
+          toast({ title: t("errorServer"), variant: "destructive" });
+        }
+        return;
+      }
+      toast({ title: t("successTitle"), description: t("successDesc") });
       setForm({ name: "", email: "", phone: "", message: "" });
-    }, 1000);
+    } catch {
+      toast({ title: t("errorServer"), variant: "destructive" });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -132,10 +93,9 @@ const ContactForm = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className={`${styles.title} mb-4`}>Contactez-nous</h2>
+          <h2 className={`${styles.title} mb-4`}>{t("title")}</h2>
           <p className={`${styles.text} max-w-2xl mx-auto`}>
-            Une question, une demande de devis ? N'hésitez pas à nous écrire, 
-            nous vous répondrons dans les plus brefs délais.
+            {t("subtitle")} <br/>{t("subtitleDetail")}
           </p>
         </motion.div>
 
@@ -147,23 +107,34 @@ const ContactForm = () => {
             viewport={{ once: true }}
           >
             <form onSubmit={handleSubmit} className={styles.card}>
+              {/* Honeypot antispam — invisible pour les humains */}
+              <input
+                type="text"
+                name="website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                className="absolute opacity-0 h-0 w-0 -z-10"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className={`${styles.label} block mb-1.5`}>Nom *</label>
+                  <label className={`${styles.label} block mb-1.5`}>{t("nameLabel")}</label>
                   <Input
                     className={styles.input}
-                    placeholder="Votre nom"
+                    placeholder={t("namePlaceholder")}
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     maxLength={100}
                   />
                 </div>
                 <div>
-                  <label className={`${styles.label} block mb-1.5`}>Email *</label>
+                  <label className={`${styles.label} block mb-1.5`}>{t("emailLabel")}</label>
                   <Input
                     type="email"
                     className={styles.input}
-                    placeholder="votre@email.com"
+                    placeholder={t("emailPlaceholder")}
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     maxLength={255}
@@ -172,11 +143,11 @@ const ContactForm = () => {
               </div>
 
               <div className="mb-4">
-                <label className={`${styles.label} block mb-1.5`}>Téléphone</label>
+                <label className={`${styles.label} block mb-1.5`}>{t("phoneLabel")}</label>
                 <Input
                   type="tel"
                   className={styles.input}
-                  placeholder="+33 6 00 00 00 00"
+                  placeholder={t("phonePlaceholder")}
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   maxLength={20}
@@ -184,10 +155,10 @@ const ContactForm = () => {
               </div>
 
               <div className="mb-6">
-                <label className={`${styles.label} block mb-1.5`}>Message *</label>
+                <label className={`${styles.label} block mb-1.5`}>{t("messageLabel")}</label>
                 <Textarea
                   className={`${styles.input} min-h-[140px]`}
-                  placeholder="Décrivez votre projet de croisière : date souhaitée, nombre de personnes, occasion…"
+                  placeholder={t("messagePlaceholder")}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   maxLength={1000}
@@ -195,7 +166,7 @@ const ContactForm = () => {
               </div>
 
               <Button type="submit" className={styles.cta} disabled={sending}>
-                {sending ? "Envoi en cours…" : "Envoyer"}
+                {sending ? t("sending") : t("send")}
                 <Send className="w-4 h-4 ml-2" />
               </Button>
             </form>
@@ -210,7 +181,7 @@ const ContactForm = () => {
             className="flex flex-col gap-6"
           >
             <div className={styles.card}>
-              <h3 className={`${styles.infoTitle} mb-6`}>Nos coordonnées</h3>
+              <h3 className={`${styles.infoTitle} mb-6`}>{t("infoTitle")}</h3>
               <div className="space-y-5">
                 {contactInfo.map((info) => (
                   <div key={info.label} className="flex items-start gap-3">
@@ -222,11 +193,11 @@ const ContactForm = () => {
             </div>
 
             <div className={styles.card}>
-              <h3 className={`${styles.infoTitle} mb-3`}>Horaires</h3>
+              <h3 className={`${styles.infoTitle} mb-3`}>{t("hoursTitle")}</h3>
               <p className={styles.infoText}>
-                Croisières tous les jours<br />
-                de 10h à 22h<br />
-                sur réservation uniquement
+                {t("hoursText").split("\n").map((line, i) => (
+                  <span key={i}>{line}<br /></span>
+                ))}
               </p>
             </div>
           </motion.div>

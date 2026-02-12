@@ -23,7 +23,10 @@
 | Language | TypeScript 5 (strict) |
 | Analytics | GA4 + Google Consent Mode v2 |
 | API | Instagram Graph API, WordPress REST API |
-| Fonts | Playfair Display, Inter, Michroma, Orbitron |
+| Fonts | Playfair Display, Inter |
+| i18n | next-intl (FR/EN) |
+| Tests | Vitest + Playwright + axe-core |
+| Email | Resend (formulaire de contact) |
 
 ## Quick Start
 
@@ -49,6 +52,10 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Build production |
 | `npm run start` | Serveur production |
 | `npm run lint` | Linter ESLint |
+| `npm run test` | Tests unitaires (Vitest, 39 tests) |
+| `npm run test:watch` | Tests unitaires en mode watch |
+| `npm run test:e2e` | Tests E2E (Playwright, 28 tests) |
+| `npm run test:e2e:ui` | Tests E2E avec interface Playwright |
 
 ## Structure du projet
 
@@ -75,16 +82,12 @@ src/
 
 ## Themes
 
-6 variantes visuelles gerees par `ThemeVariantContext` :
+2 variantes visuelles gerees par `ThemeVariantContext` :
 
 | Theme | Style | Font heading |
 |-------|-------|-------------|
-| classic | Navy/gold elegant | Playfair Display |
-| modern | Geometric minimal | Michroma |
-| minimal | Monochrome clean | Orbitron |
-| editorial | Amber magazine | Playfair Display |
-| luxe | Black/gold premium | System |
-| nuit | Deep navy night | Playfair Display |
+| classic | Navy/gold elegant (jour) | Playfair Display |
+| nuit | Deep navy night (sombre) | Playfair Display |
 
 ## Variables d'environnement
 

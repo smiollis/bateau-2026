@@ -1,26 +1,41 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
-import CookieBanner from "@/components/CookieBanner";
+
 import { getConsentDefaultScript } from "@/lib/gtag";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
-  title: "Un Bateau à Paris | Croisières Privées sur la Seine",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://bateau-a-paris.fr"),
+  title: {
+    default: "Un Bateau à Paris | Croisières Privées sur la Seine",
+    template: "%s | Un Bateau à Paris",
+  },
   description: "Croisière privée sur la Seine à Paris. Naviguez au fil de l'eau avec vue sur la Tour Eiffel et Notre-Dame. Jusqu'à 12 personnes. À partir de 420€.",
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Un Bateau à Paris",
+    images: [{ url: "/images/hero/bateau-a-paris-seine-01.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
   verification: {
     google: "cKXOGqTV4Uxra0cWXHL3lqg-HReW3skbVGDhAw_Ocwo",
   },
@@ -34,9 +49,38 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Michroma&family=Orbitron:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "Un Bateau à Paris",
+              description: "Croisières privées sur la Seine à Paris",
+              url: "https://bateau-a-paris.fr",
+              telephone: "+33670342543",
+              email: "capitaine@bateau-a-paris.fr",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Port de l'Arsenal",
+                addressLocality: "Paris",
+                postalCode: "75012",
+                addressCountry: "FR",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 48.8497,
+                longitude: 2.3666,
+              },
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.9",
+                reviewCount: "69",
+              },
+              priceRange: "420€ - 600€",
+            }),
+          }}
+        />
         {/* Google Consent Mode v2 defaults + GA4 config (avant tout script) */}
         {GA_ID && (
           <script
@@ -45,7 +89,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${playfair.variable} antialiased`}
       >
         {/* GA4 gtag.js — chargé async, consent mode empêche le tracking sans consentement */}
         {GA_ID && (
@@ -56,7 +100,6 @@ export default function RootLayout({
         )}
         <Providers>
           {children}
-          <CookieBanner />
         </Providers>
       </body>
     </html>

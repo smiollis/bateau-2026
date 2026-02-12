@@ -5,19 +5,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
   {
-    src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-08-a-22.20.47_261af646.webp",
+    src: "/images/hero/2025-04-08-a-22.20.47_261af646.webp",
     alt: "Le Senang naviguant sous les ponts de Paris",
   },
   {
-    src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-03-03-a-16.00.24_13d1702e.jpg",
+    src: "/images/hero/2025-03-03-a-16.00.24_13d1702e.jpg",
     alt: "Panorama des monuments parisiens depuis la Seine",
   },
   {
-    src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-08-a-20.58.31_fcc03538.webp",
+    src: "/images/hero/2025-04-08-a-20.58.31_fcc03538.webp",
     alt: "Vue sur les quais et ponts de Paris au fil de l'eau",
   },
   {
-    src: "https://bateau-a-paris.fr/wp-content/uploads/2025/06/WhatsApp-Image-2025-04-08-a-20.57.33_c61d5f00.webp",
+    src: "/images/hero/2025-04-08-a-20.57.33_c61d5f00.webp",
     alt: "Coucher de soleil sur la Seine et ses monuments",
   },
 ];

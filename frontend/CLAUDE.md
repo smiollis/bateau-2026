@@ -34,19 +34,15 @@ bateau-2026/
 - **TypeScript**: strict mode
 - **Analytics**: GA4 (G-N20S788YDW) + Google Consent Mode v2
 - **API**: Instagram Graph API, WordPress REST API (a venir)
-- **Fonts**: Playfair Display (headings), Inter (body), Michroma, Orbitron (variantes)
+- **Fonts**: Playfair Display (headings), Inter (body)
 
 ## Systeme de themes
 
-6 variantes gerees par `ThemeVariantContext` (default: `"classic"`):
-- **classic** : Navy/gold, Playfair Display
-- **modern** : Michroma, geometric
-- **minimal** : Orbitron, monochrome
-- **editorial** : Amber, magazine-style
-- **luxe** : Black/gold, ultra-premium
-- **nuit** : Deep navy, night mode
+2 variantes gerees par `ThemeVariantContext` (default: `"classic"`):
+- **classic** : Navy/gold, Playfair Display (mode jour)
+- **nuit** : Deep navy, night mode (mode sombre)
 
-Tous les composants `*Variants.tsx` adaptent leur style selon le theme actif.
+Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter leur style.
 
 ## Convention de nommage
 
@@ -67,11 +63,23 @@ Tous les composants `*Variants.tsx` adaptent leur style selon le theme actif.
 ## Commandes
 
 ```bash
-npm run dev     # Dev server (port 3000)
-npm run build   # Production build
-npm run start   # Production server
-npm run lint    # ESLint
+npm run dev          # Dev server (port 3000)
+npm run build        # Production build
+npm run start        # Production server
+npm run lint         # ESLint
+npm run test         # Tests unitaires (Vitest)
+npm run test:watch   # Tests unitaires en mode watch
+npm run test:e2e     # Tests E2E (Playwright, build + start auto)
+npm run test:e2e:ui  # Tests E2E avec interface Playwright
 ```
+
+## Tests
+
+- **Vitest** : 39 tests unitaires dans `src/__tests__/` (unit/ + components/)
+- **Playwright** : 28 tests E2E dans `e2e/` (chromium, firefox, webkit, mobile)
+- **axe-core** : audits accessibilite WCAG 2.1 AA integres aux E2E
+- Config : `vitest.config.ts`, `playwright.config.ts`
+- Setup : `src/__tests__/setup.ts` (jest-dom, gtag mock)
 
 ## Variables d'environnement (.env.local)
 

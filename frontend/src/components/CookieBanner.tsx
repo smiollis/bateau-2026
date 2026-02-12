@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useCookieConsent } from "@/hooks/useCookieConsent";
@@ -16,6 +17,7 @@ const CookieBanner = () => {
     rejectAll,
     updateConsent,
   } = useCookieConsent();
+  const t = useTranslations("cookie");
 
   return (
     <>
@@ -33,13 +35,12 @@ const CookieBanner = () => {
                 <span className="text-2xl" aria-hidden="true">🍪</span>
 
                 <p className="flex-1 text-sm text-foreground leading-relaxed">
-                  Nous utilisons des cookies pour améliorer votre expérience et analyser notre trafic.
-                  En poursuivant, vous acceptez notre utilisation des cookies.{" "}
+                  {t("bannerText")}{" "}
                   <Link
-                    href="/mentions-legales"
+                    href="/confidentialite"
                     className="text-primary font-medium hover:underline"
                   >
-                    Politique de confidentialité
+                    {t("privacyLink")}
                   </Link>
                 </p>
 
@@ -48,13 +49,13 @@ const CookieBanner = () => {
                     onClick={openModal}
                     className="border-2 border-primary text-primary font-semibold px-6 py-2 rounded-lg hover:bg-primary/5 transition-colors text-sm"
                   >
-                    Personnaliser
+                    {t("customize")}
                   </button>
                   <button
                     onClick={acceptAll}
                     className="btn-gold text-sm"
                   >
-                    Tout accepter
+                    {t("acceptAll")}
                   </button>
                 </div>
               </div>

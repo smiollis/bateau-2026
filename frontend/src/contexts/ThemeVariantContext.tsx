@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-export type ThemeVariant = "classic" | "modern" | "minimal" | "editorial" | "luxe" | "nuit";
+export type ThemeVariant = "classic" | "nuit";
 
 interface ThemeVariantContextType {
   variant: ThemeVariant;
@@ -15,7 +15,7 @@ const ThemeVariantContext = createContext<ThemeVariantContextType | undefined>(u
 export const ThemeVariantProvider = ({ children }: { children: ReactNode }) => {
   const [variant, setVariant] = useState<ThemeVariant>("classic");
 
-  const isDark = variant === "nuit" || variant === "luxe";
+  const isDark = variant === "nuit";
 
   // Toggle the "dark" class on documentElement for semantic token switching
   useEffect(() => {

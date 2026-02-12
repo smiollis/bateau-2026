@@ -1,0 +1,47 @@
+{
+  "placeRating": 4.9,
+  "totalReviews": 69,
+  "reviews": [
+    {
+      "id": 1,
+      "name": "Axel Chekly",
+      "avatar": "https://lh3.googleusercontent.com/a/ACg8ocKzF_8qRt6lcGYEBHGmYF2MWKUP4QmgkzveYUmSznm6GzeLGA=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "date": "il y a 5 mois",
+      "text": "J’ai eu la chance de vivre une balade magique sur la Seine et je ne peux que recommander cette expérience ! 🌟 Le bateau est confortable, élégant et parfaitement adapté pour profiter d’un moment unique au fil de l’eau.\nNotre skipper Michel a été absolument formidable : accueillant, attentionné et passionné, il a su rendre cette croisière encore plus agréable grâce à son sens de l’hospitalité. On sent qu’il aime son métier et qu’il a à cœur de partager un moment convivial et inoubliable.\nNaviguer au coucher du soleil, découvrir Paris illuminé depuis la Seine, avec cette ambiance intimiste et chaleureuse, restera pour moi un souvenir inoubliable."
+    },
+    {
+      "id": 2,
+      "name": "Victor Bourgeois",
+      "avatar": "https://lh3.googleusercontent.com/a-/ALV-UjXej_hJMLY7Y9jUuojvYp2Z-I6FfrrzpFcBr5zo_eWgQsJNw9Xh=s128-c0x00000000-cc-rp-mo-ba2",
+      "rating": 5,
+      "date": "il y a 5 mois",
+      "text": "Super expérience ! La balade privée sur la Seine était magnifique et nous a permis de voir Paris d’une façon unique. Le service était impeccable : accueil chaleureux, organisation fluide et ambiance intimiste qui donne l’impression d’avoir la ville rien que pour soi.. Je recommande sans hésiter !"
+    },
+    {
+      "id": 3,
+      "name": "A S",
+      "avatar": "https://lh3.googleusercontent.com/a/ACg8ocKMHdDnSnepi1FqiphUnz4eReeeXR1uST6TNHz6RgVuUOVz4Q=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "date": "il y a 9 mois",
+      "text": "Nous avons vécu en famille un moment unique et inoubliable sur ce bateau !! ☀️🌸\n\nCette traversée nous a offert une vue magnifique sur les monuments historiques de Paris depuis la Seine… quel spectacle !\n\nUn grand merci à vous, Michel, pour votre gentillesse. À bientôt"
+    },
+    {
+      "id": 4,
+      "name": "charlotte bosc",
+      "avatar": "https://lh3.googleusercontent.com/a-/ALV-UjXvSuj4R1FXhmMoVWZPETdfpsSof4kS7QKBa66nUfIAA1MphoEJ=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "date": "il y a 6 mois",
+      "text": "« Sortie de classe » avec mon équipe. Un point de départ inédit depuis Bastille avec le passage d’écluse ! Accueil au top par Michel, capitaine multitâche. Le bateau est très confortable- nous étions 9. Un afterwork avec vue magique. La Seine, c’est toujours un best off, avec la croisière qui va avec c’est encore mieux. À refaire"
+    },
+    {
+      "id": 5,
+      "name": "Virginie Lehr Cassan",
+      "avatar": "https://lh3.googleusercontent.com/a-/ALV-UjVFB18Wd3L09Yb2ucAkHC1ru318nDIFxN5PhpuCi7OLwJsW53nmtg=s128-c0x00000000-cc-rp-mo",
+      "rating": 5,
+      "date": "il y a un an",
+      "text": "Une expérience magique ! La croisière sur la Seine à bord du Senang, un bateau à Paris, nous a offert des vues incroyables sur les monuments emblématiques de Paris, Notre dame, le Louvre, la Tour Eiffel...notamment au coucher du soleil. Un moment inoubliable pour découvrir la ville autrement. Je recommande vivement !"
+    }
+  ],
+  "importedAt": "2026-02-11T17:46:06.310Z"
+}

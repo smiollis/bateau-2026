@@ -1,60 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { galleryImages } from "@/data/galleryImages";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
+import { useTranslations } from "next-intl";
 
 const previewImages = galleryImages.slice(0, 10);
 // Duplicate for seamless infinite loop
 const loopImages = [...previewImages, ...previewImages];
 
 const GalleryPreview = () => {
-  const { variant } = useThemeVariant();
+  const { isDark } = useThemeVariant();
+  const t = useTranslations("gallery");
 
-  const isDark = variant === "nuit" || variant === "luxe";
-
-  const sectionBg = variant === "nuit"
-    ? "bg-[#0d1d35]"
-    : variant === "luxe"
-    ? "bg-neutral-900"
-    : variant === "editorial"
-    ? "bg-amber-50/50"
-    : "bg-secondary/30";
-
-  const titleClass = variant === "nuit"
+  const sectionBg = isDark ? "bg-[#0d1d35]" : "bg-secondary/30";
+  const titleClass = isDark
     ? "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100"
-    : variant === "luxe"
-    ? "text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight"
-    : variant === "editorial"
-    ? "font-heading text-3xl md:text-4xl lg:text-5xl text-amber-900 italic"
     : "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-primary";
-
-  const subtitleClass = variant === "nuit"
+  const subtitleClass = isDark
     ? "text-blue-200/70 text-lg"
-    : variant === "luxe"
-    ? "text-white/50 text-lg"
-    : variant === "editorial"
-    ? "text-amber-700/70 text-lg"
     : "text-muted-foreground text-lg";
-
-  const fadeBg = isDark
-    ? variant === "nuit"
-      ? "from-[#0d1d35]"
-      : "from-neutral-900"
-    : variant === "editorial"
-    ? "from-amber-50/50"
-    : "from-secondary/30";
-
-  const ctaClass = variant === "nuit"
-    ? "btn-gold"
-    : variant === "luxe"
-    ? "bg-gradient-to-r from-amber-500 to-amber-600 text-black font-semibold hover:from-amber-400 hover:to-amber-500"
-    : variant === "editorial"
-    ? "bg-amber-700 text-white hover:bg-amber-800"
-    : "btn-gold";
+  const fadeBg = isDark ? "from-[#0d1d35]" : "from-secondary/30";
 
   return (
     <section className={`section-padding ${sectionBg}`} id="galerie">
@@ -66,10 +36,10 @@ const GalleryPreview = () => {
           className="text-center"
         >
           <h2 className={`${titleClass} mb-4`}>
-            Galerie Photos
+            {t("title")}
           </h2>
           <p className={subtitleClass}>
-            Revivez les plus beaux moments de nos croisières
+            {t("subtitle")}
           </p>
         </motion.div>
       </div>
@@ -84,13 +54,14 @@ const GalleryPreview = () => {
           {loopImages.map((img, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-64 md:w-72 h-48 md:h-56 rounded-xl overflow-hidden cursor-pointer group/img"
+              className="flex-shrink-0 w-64 md:w-72 h-48 md:h-56 rounded-xl overflow-hidden cursor-pointer group/img relative"
             >
-              <img
+              <Image
                 src={img.src}
                 alt={img.alt}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110"
+                fill
+                sizes="(max-width: 768px) 256px, 288px"
+                className="object-cover transition-transform duration-500 group-hover/img:scale-110"
               />
             </div>
           ))}
@@ -99,9 +70,9 @@ const GalleryPreview = () => {
 
       {/* CTA button */}
       <div className="container-custom mt-8 text-center">
-        <Button asChild className={ctaClass}>
+        <Button asChild className="btn-gold">
           <Link href="/galerie">
-            Voir la galerie
+            {t("cta")}
             <ArrowRight className="w-4 h-4 ml-2" />
           </Link>
         </Button>

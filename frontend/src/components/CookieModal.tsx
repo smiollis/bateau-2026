@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Switch } from "@/components/ui/switch";
 import { X } from "lucide-react";
@@ -16,27 +17,6 @@ interface CookieModalProps {
   onRejectAll: () => void;
 }
 
-const sections = [
-  {
-    id: "necessary",
-    title: "Cookies nécessaires",
-    description: "Essentiels au fonctionnement du site (réservations, sécurité)",
-    alwaysOn: true,
-  },
-  {
-    id: "analytics",
-    title: "Cookies analytiques",
-    description: "Google Analytics pour comprendre l'utilisation du site",
-    alwaysOn: false,
-  },
-  {
-    id: "marketing",
-    title: "Cookies marketing",
-    description: "Personnalisation de l'expérience et publicités ciblées",
-    alwaysOn: false,
-  },
-] as const;
-
 const CookieModal = ({
   open,
   onClose,
@@ -47,6 +27,29 @@ const CookieModal = ({
   onSave,
   onRejectAll,
 }: CookieModalProps) => {
+  const t = useTranslations("cookie");
+
+  const sections = [
+    {
+      id: "necessary",
+      title: t("necessary"),
+      description: t("necessaryDesc"),
+      alwaysOn: true,
+    },
+    {
+      id: "analytics",
+      title: t("analytics"),
+      description: t("analyticsDesc"),
+      alwaysOn: false,
+    },
+    {
+      id: "marketing",
+      title: t("marketing"),
+      description: t("marketingDesc"),
+      alwaysOn: false,
+    },
+  ] as const;
+
   const [localAnalytics, setLocalAnalytics] = useState(analytics);
   const [localMarketing, setLocalMarketing] = useState(marketing);
 
@@ -93,16 +96,16 @@ const CookieModal = ({
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Fermer"
+              aria-label={t("close")}
             >
               <X className="h-5 w-5" />
             </button>
 
             <h2 className="font-heading text-2xl text-foreground mb-2">
-              Paramètres des cookies
+              {t("modalTitle")}
             </h2>
             <p className="text-muted-foreground text-sm mb-6">
-              Nous respectons votre vie privée. Choisissez les cookies que vous acceptez.
+              {t("modalSubtitle")}
             </p>
 
             <div className="space-y-0">
@@ -118,7 +121,7 @@ const CookieModal = ({
                       {section.title}
                       {section.alwaysOn && (
                         <span className="ml-2 text-xs text-muted-foreground font-normal">
-                          (toujours actif)
+                          ({t("alwaysOn")})
                         </span>
                       )}
                     </p>
@@ -139,13 +142,13 @@ const CookieModal = ({
                 onClick={onRejectAll}
                 className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors px-4 py-2"
               >
-                Tout refuser
+                {t("rejectAll")}
               </button>
               <button
                 onClick={handleSave}
                 className="btn-gold w-full sm:w-auto text-center"
               >
-                Enregistrer mes choix
+                {t("saveChoices")}
               </button>
             </div>
           </motion.div>
