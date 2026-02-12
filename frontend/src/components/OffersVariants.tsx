@@ -29,7 +29,7 @@ const variantStyles: Record<ThemeVariant, {
     cardTitle: "font-heading text-xl font-semibold text-primary",
     price: "text-3xl font-bold text-primary",
     cta: "btn-gold w-full",
-    popularBadge: "bg-accent text-accent-foreground",
+    popularBadge: "bg-accent text-white",
   },
   nuit: {
     section: "bg-[#0a1628]",
@@ -39,7 +39,7 @@ const variantStyles: Record<ThemeVariant, {
     cardTitle: "font-heading text-xl font-semibold text-blue-100",
     price: "text-3xl font-bold text-accent",
     cta: "btn-gold w-full",
-    popularBadge: "bg-accent text-accent-foreground",
+    popularBadge: "bg-accent text-white",
   },
 };
 

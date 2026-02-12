@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Premium button style */
 .btn-gold {
   background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-dark)) 100%);
-  color: hsl(var(--accent-foreground));
+  color: #fff;
   font-weight: 600;
   padding: 0.75rem 2rem;
   border-radius: 0.5rem;
