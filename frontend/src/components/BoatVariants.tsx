@@ -32,7 +32,7 @@ const BoatVariants = () => {
         highlightText: "text-blue-200/60 text-sm",
         iconColor: "text-accent",
         cta: "btn-gold",
-        badge: "bg-accent text-accent-foreground",
+        badge: "bg-accent text-white",
         slideOverlay: "bg-gradient-to-t from-[#0a1628]/50 to-transparent",
       }
     : {
@@ -46,7 +46,7 @@ const BoatVariants = () => {
         highlightText: "text-foreground/70 text-sm",
         iconColor: "text-primary",
         cta: "btn-gold",
-        badge: "bg-accent text-accent-foreground",
+        badge: "bg-accent text-white",
         slideOverlay: "bg-gradient-to-t from-primary/30 to-transparent",
       };
 

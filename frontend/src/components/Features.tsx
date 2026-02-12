@@ -59,7 +59,7 @@ const Features = () => {
             >
               <div className="bg-card rounded-xl p-6 lg:p-8 border border-border card-hover h-full text-center">
                 {/* Icon */}
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-5 group-hover:bg-accent group-hover:text-accent-foreground transition-colors duration-300">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-5 group-hover:bg-accent group-hover:text-white transition-colors duration-300">
                   <feature.icon className="w-7 h-7" />
                 </div>
 

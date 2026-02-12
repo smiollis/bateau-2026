@@ -45,7 +45,7 @@ const Boat = () => {
             </div>
 
             {/* Floating Badge */}
-            <div className="absolute -bottom-4 -right-4 md:bottom-8 md:right-8 bg-accent text-accent-foreground px-6 py-3 rounded-xl shadow-lg">
+            <div className="absolute -bottom-4 -right-4 md:bottom-8 md:right-8 bg-accent text-white px-6 py-3 rounded-xl shadow-lg">
               <span className="font-heading text-lg font-semibold">Le Senang</span>
             </div>
           </motion.div>

@@ -19,7 +19,7 @@ const Footer = () => {
                 href="https://www.instagram.com/bateau_a_paris/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-white flex items-center justify-center transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -28,7 +28,7 @@ const Footer = () => {
                 href="https://www.facebook.com/profile.php?id=61557848940884"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-accent-foreground flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-accent hover:text-white flex items-center justify-center transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />

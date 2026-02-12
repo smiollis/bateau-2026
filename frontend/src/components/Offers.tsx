@@ -95,7 +95,7 @@ const Offers = () => {
                 {/* Popular Badge */}
                 {offer.popular && (
                   <div className="absolute top-4 right-4 z-10">
-                    <span className="bg-accent text-accent-foreground text-xs font-semibold px-3 py-1 rounded-full">
+                    <span className="bg-accent text-white text-xs font-semibold px-3 py-1 rounded-full">
                       Populaire
                     </span>
                   </div>

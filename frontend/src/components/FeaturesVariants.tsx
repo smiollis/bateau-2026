@@ -21,7 +21,7 @@ const variantStyles: Record<ThemeVariant, {
     title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-primary",
     subtitle: "text-foreground/70 text-lg",
     card: "bg-card rounded-xl p-6 lg:p-8 border border-border card-hover text-center",
-    icon: "bg-primary/10 text-primary group-hover:bg-accent group-hover:text-accent-foreground",
+    icon: "bg-primary/10 text-primary group-hover:bg-accent group-hover:text-white",
     cardTitle: "font-heading text-xl font-semibold text-primary",
     cardText: "text-foreground/75",
   },

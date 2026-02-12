@@ -276,7 +276,7 @@ const Croisiere = () => {
                 <div className="flex flex-col items-center">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                     index === 0 || index === itinerarySteps.length - 1
-                      ? "bg-accent text-accent-foreground"
+                      ? "bg-accent text-white"
                       : isDark ? "bg-white/10 text-accent" : "bg-primary/10 text-primary"
                   }`}>
                     {index === 0 || index === itinerarySteps.length - 1 ? (

@@ -151,7 +151,7 @@ const OffersVariants = () => {
                     ))}
                   </ul>
 
-                  <Button className={offer.popular ? styles.cta : `w-full ${variant === "nuit" ? "bg-white/10 border border-accent/40 text-accent hover:bg-accent hover:text-accent-foreground" : ""}`} variant={offer.popular ? "default" : "outline"} asChild>
+                  <Button className={offer.popular ? styles.cta : `w-full ${variant === "nuit" ? "bg-white/10 border border-accent/40 text-accent hover:bg-accent hover:text-white" : ""}`} variant={offer.popular ? "default" : "outline"} asChild>
                     <Link href="/reservation">{t("cta")}</Link>
                   </Button>
                 </div>
