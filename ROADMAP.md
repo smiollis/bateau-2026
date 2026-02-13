@@ -631,6 +631,113 @@ Specificites :
 
 ---
 
+### Plan d'action Phase 9 : i18n Multilingue (7 nouvelles langues)
+
+> **Objectif** : etendre le site a 9 langues pour capter le trafic international (touristes a Paris).
+> **Duree estimee** : Lot 1 : 5-7 jours, Lot 2 : 4-6 jours (RTL + CJK plus complexe)
+> **Prerequis** : Phase 8 (landing pages) terminee pour traduire aussi les landings
+> **Architecture** : next-intl deja en place — ajout de locales + fichiers traduction
+
+#### Etape 9.0 — Infrastructure multilingue (1 jour)
+
+1. **Routing** (`src/i18n/routing.ts`)
+   ```typescript
+   locales: ["fr", "en", "es", "it", "de", "pt-BR", "ar", "ja", "ko"]
+   defaultLocale: "fr"
+   ```
+   - Lot 1 : ajouter `es`, `it`, `de`, `pt-BR`
+   - Lot 2 : ajouter `ar`, `ja`, `ko`
+
+2. **Request config** (`src/i18n/request.ts`)
+   - Mettre a jour le type union des locales acceptees
+   - L'import dynamique `messages/${locale}.json` fonctionne deja pour tout fichier existant
+
+3. **Metadata** (`src/lib/metadata.ts`)
+   - `getAlternates(locale, pagePath)` → generer `languages` pour les 9 locales + x-default
+   - `getOgLocale(locale)` → mapping complet :
+     - fr→fr_FR, en→en_US, es→es_ES, it→it_IT, de→de_DE, pt-BR→pt_BR, ar→ar_AE, ja→ja_JP, ko→ko_KR
+
+4. **Sitemap** (`src/app/sitemap.ts`)
+   - `routing.locales` deja utilise → automatique si routing mis a jour
+
+5. **Middleware** (`src/middleware.ts`)
+   - Deja configure via `createMiddleware(routing)` → automatique
+
+6. **Switcher de langue** (HeaderVariants)
+   - Remplacer le toggle FR/EN par un dropdown (Radix Select ou Popover)
+   - Afficher drapeaux + nom natif (Francais, English, Espanol, Italiano, Deutsch, Portugues, العربية, 日本語, 한국어)
+
+#### Etape 9a — Lot 1 : ES, IT, DE, PT-BR (4-5 jours)
+
+Pour chaque langue :
+
+1. **Traduction messages** : `messages/{locale}.json` (~250 cles, 16 namespaces)
+   - Utiliser Claude pour la traduction initiale, relecture native si possible
+   - Adapter les formules (tutoiement ES/IT/PT vs vouvoiement DE)
+   - Adapter les references culturelles (ex: "enterrement de vie de jeune fille" → equivalents locaux)
+
+2. **Traduction meta SEO** (namespace `meta` dans messages)
+   - title + description uniques pour chaque page × langue
+   - Adapter les mots-cles au marche local
+
+3. **Blog** : `src/data/posts-{locale}.json`
+   - Traduire les 5-10 articles les plus strategiques (JO, EVJF, romantique, ponts)
+   - Fallback sur FR si article non traduit
+
+4. **FAQ JSON-LD** : traduire les 10 Q&A en server component
+   - Soit via `getTranslations` (dynamique)
+   - Soit fichiers JSON-LD statiques par langue
+
+5. **Formules tarifaires** :
+   - EUR pour ES, IT, DE (zone euro)
+   - Adapter affichage pour PT-BR (mention EUR avec contexte)
+
+6. **Tests** :
+   - Navigation complete dans chaque langue
+   - Verifier que les textes longs (DE) ne cassent pas le layout
+   - axe-core WCAG sur chaque locale
+
+#### Etape 9b — Lot 2 : AR, JA, KO (3-5 jours)
+
+1. **RTL pour l'arabe** :
+   - `<html dir="rtl" lang="ar">` dynamique dans root layout
+   - Tailwind RTL : utiliser `rtl:` variant (Tailwind v4 supporte `@variant rtl`)
+   - Inverser : paddings, margins, flex-direction, text-align, icones directionnelles
+   - Tester : header, navigation, formulaire contact, cartes, breadcrumbs
+   - Menu mobile : ouvrir depuis la gauche au lieu de la droite
+
+2. **Polices CJK/Arabe** :
+   - Arabe : `Noto Sans Arabic` via `next/font/google` (variable font, 300-700)
+   - Japonais : `Noto Sans JP` via `next/font/google`
+   - Coreen : `Noto Sans KR` via `next/font/google`
+   - Charger conditionnellement selon la locale (ne pas bloquer les autres langues)
+   - Mettre a jour CSP `font-src` dans `next.config.ts`
+
+3. **Traduction messages** : memes etapes que Lot 1
+   - Arabe : dialecte MSA (Modern Standard Arabic) + termes Golfe (AE/SA)
+   - Japonais : registre poli (desu/masu)
+   - Coreen : registre formel (합니다)
+
+4. **Adaptations specifiques** :
+   - Tarifs : mentionner EUR avec conversion indicative
+   - Telephone : format international (+33)
+   - Calendrier : adapter le format date (JA: 2026年2月14日, KO: 2026년 2월 14일)
+
+5. **Tests RTL/CJK** :
+   - Test visuel complet pages cles en AR (RTL)
+   - Test overflow texte JA/KO (caracteres plus larges)
+   - Playwright : ajouter viewport tests pour chaque locale
+
+#### Etape 9c — SEO & verification (1 jour)
+
+1. **Hreflang** : verifier que chaque page a 9 alternates + x-default
+2. **Google Search Console** : ajouter les proprietes par langue si necessaire
+3. **Sitemap** : verifier toutes les URLs generees (9 locales × N pages)
+4. **Rich Results Test** : verifier JSON-LD dans chaque langue
+5. **Landing pages** : traduire les 6 Tier 1 dans les 7 nouvelles langues (post-Phase 8)
+
+---
+
 ### Plan d'action Sprint 7 : Redirections WordPress → Next.js
 
 > **Objectif** : basculer le domaine sans perdre le SEO acquis
@@ -747,6 +854,74 @@ Pour chaque page :
 - [ ] Verification Rich Results Test Google sur chaque page
 - [ ] Lighthouse > 90 sur toutes les landings
 - [ ] Version anglaise des landing pages (Tier 1 en priorite)
+
+---
+
+## [later] Phase 9 : i18n Multilingue (7 nouvelles langues)
+
+> Extension du site de 2 langues (FR/EN) a 9 langues.
+> Architecture next-intl deja en place — ajout de locales + traductions + SEO.
+
+### Lot 1 — Langues europeennes + bresilien (Sprint 9a)
+
+| Locale | Langue | Direction | og:locale |
+|--------|--------|-----------|-----------|
+| `es` | Espagnol | LTR | `es_ES` |
+| `it` | Italien | LTR | `it_IT` |
+| `de` | Allemand | LTR | `de_DE` |
+| `pt-BR` | Portugais (Bresil) | LTR | `pt_BR` |
+
+Pour chaque langue :
+- [ ] Fichier `messages/{locale}.json` (traduction des ~250 cles)
+- [ ] Fichier `src/data/posts-{locale}.json` (traduction des articles blog prioritaires)
+- [ ] Metadata i18n (`meta` namespace) : titles, descriptions des 10 pages
+- [ ] SEO : hreflang alternates mis a jour sur toutes les pages
+- [ ] Sitemap : ajout des URLs `/{locale}/*`
+- [ ] Test E2E : navigation + contenu dans la nouvelle langue
+
+### Lot 2 — Langues RTL + asiatiques (Sprint 9b)
+
+| Locale | Langue | Direction | og:locale | Specificites |
+|--------|--------|-----------|-----------|-------------|
+| `ar` | Arabe (Golfe) | **RTL** | `ar_AE` | Direction RTL, polices arabes |
+| `ja` | Japonais | LTR | `ja_JP` | Polices CJK, espacement |
+| `ko` | Coreen | LTR | `ko_KR` | Polices CJK, espacement |
+
+Specificites techniques supplementaires :
+- [ ] Support RTL CSS (Tailwind `rtl:` variant ou `dir="rtl"` dynamique)
+- [ ] Police arabe (Noto Sans Arabic ou IBM Plex Arabic via `next/font`)
+- [ ] Polices CJK (Noto Sans JP/KR via `next/font`)
+- [ ] Tests visuels : layout RTL, texte long allemand, caracteres CJK
+
+### 9.1 Infrastructure multilingue
+
+- [ ] Ajouter locales dans `src/i18n/routing.ts` : `["fr", "en", "es", "it", "de", "pt-BR", "ar", "ja", "ko"]`
+- [ ] Mettre a jour `src/i18n/request.ts` (type union des locales)
+- [ ] Mettre a jour `src/lib/metadata.ts` :
+  - `getAlternates()` → generer hreflang pour 9 locales
+  - `getOgLocale()` → mapping 9 locales → og:locale
+- [ ] Mettre a jour `src/app/sitemap.ts` (9 locales × N pages)
+- [ ] Ajouter switcher de langue avec 9 options (menu dropdown)
+- [ ] `next.config.ts` CSP : ajouter domaines fonts si nouvelles polices CDN
+- [ ] Root layout : `<html dir>` dynamique (RTL pour `ar`)
+- [ ] Tailwind : activer le plugin `rtl` ou utiliser `[dir="rtl"]` selectors
+
+### 9.2 Traduction & contenu
+
+- [ ] Lot 1 : traduire `messages/fr.json` → `es.json`, `it.json`, `de.json`, `pt-BR.json`
+- [ ] Lot 2 : traduire `messages/fr.json` → `ar.json`, `ja.json`, `ko.json`
+- [ ] Blog : selectionner les 10 articles les plus importants a traduire par langue
+- [ ] Landing pages (Phase 8) : traduire au minimum les 6 pages Tier 1 par langue
+- [ ] FAQ JSON-LD : traduire les 10 Q&A par langue
+- [ ] Verifier les formules tarifaires (EUR pour EU, adapter pour Bresil/Golfe/Asie)
+
+### 9.3 SEO multilingue
+
+- [ ] Hreflang alternates sur les 9 locales + `x-default` (FR)
+- [ ] Canonical par locale (`/{locale}/page`)
+- [ ] `og:locale` et `og:locale:alternate` pour les 9 variantes
+- [ ] Sitemap multilingue (9 × toutes les pages)
+- [ ] Google Search Console : ajouter les variantes de langue
 
 ---
 
