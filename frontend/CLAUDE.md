@@ -13,18 +13,32 @@ bateau-2026/
 ├── frontend/                 # Next.js 16 + TypeScript + Tailwind CSS v4
 │   ├── src/
 │   │   ├── app/              # App Router (layout, pages, API routes, error boundaries)
+│   │   │   └── [locale]/
+│   │   │       ├── (landing)/  # Route group landing pages
+│   │   │       │   ├── layout.tsx
+│   │   │       │   └── [slug]/page.tsx  # Page dynamique SSG
+│   │   │       └── ...         # Pages principales (croisiere, galerie, faq, etc.)
 │   │   ├── views/            # Page components (ex-src/pages/, renomme pour eviter conflit Pages Router)
-│   │   ├── components/       # Composants React (ui/, cookie-consent/, Variants, GalleryLightbox)
+│   │   ├── components/       # Composants React (ui/, cookie-consent/, Variants, landing/)
+│   │   │   └── landing/      # 11 composants landing reutilisables
 │   │   ├── contexts/         # ThemeVariantContext (2 themes: classic/nuit)
 │   │   ├── hooks/            # useCookieConsent, useInstagramFeed
 │   │   ├── lib/              # cookie-consent, gtag, logger, metadata, utils
-│   │   ├── types/            # cookie-consent.d.ts
-│   │   ├── data/             # posts.json, posts-en.json, galleryImages, reviews
+│   │   │   └── seo/          # jsonld.ts (FAQPage, TouristAttraction, Breadcrumb)
+│   │   ├── data/
+│   │   │   ├── landings/     # Donnees par landing page (types.ts, index.ts, {slug}.ts)
+│   │   │   ├── posts.json    # Articles blog FR
+│   │   │   ├── posts-en.json # Articles blog EN
+│   │   │   └── reviews.json  # Avis Google
 │   │   ├── i18n/             # next-intl config (request.ts, navigation.ts, routing.ts)
 │   │   └── assets/           # Images statiques, logo, map/
 │   ├── .env.local            # WP_API, GA_ID, INSTAGRAM_TOKEN (gitignore)
 │   └── package.json
+├── wordpress/
+│   ├── plugins/bateau-headless-mode/  # Plugin headless (redirects, CORS)
+│   └── themes/bateau-headless/        # Theme minimal Bookly iframe
 ├── ROADMAP.md
+├── CHANGELOG.md
 └── AUDIT-2026-02-12.md       # Audit qualite (9/10)
 ```
 
@@ -40,7 +54,8 @@ bateau-2026/
 - **Logging**: `src/lib/logger.ts` — JSON structure en production, lisible en dev
 - **Fonts**: Playfair Display (headings), Inter (body) via `next/font/google`
 - **Securite**: CSP (12 directives), DOMPurify, 5 security headers
-- **SEO**: Canonical + hreflang + JSON-LD (4 schemas) sur 10 pages
+- **SEO**: Canonical + hreflang + JSON-LD (4 schemas base + 3 par landing page)
+- **Landing pages**: 6 pages Tier 1 SSG (route dynamique `[slug]`), 11 pages restantes
 
 ## Systeme de themes
 
@@ -53,6 +68,9 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 ## Convention de nommage
 
 - Pages App Router : `src/app/[locale]/<route>/page.tsx` (wrappers simples)
+- Landing pages : `src/app/[locale]/(landing)/[slug]/page.tsx` (route dynamique SSG)
+- Landing data : `src/data/landings/<slug>.ts` (une par page, importee dans `index.ts`)
+- Landing composants : `src/components/landing/<LandingNom>.tsx` (11 composants)
 - Vues : `src/views/<NomPage>.tsx` (composants de page complets)
 - Composants variantes : `src/components/<Nom>Variants.tsx`
 - Hooks : `src/hooks/use<Nom>.ts`
@@ -99,15 +117,18 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 
 ## SEO
 
-- **Canonical** : unique par page (10 pages) via `generateMetadata`
+- **Canonical** : unique par page (10 pages + landing pages) via `generateMetadata`
 - **Hreflang** : FR/EN + x-default par page via `getAlternates()`
 - **og:locale** : dynamique via `getOgLocale()`
 - **JSON-LD** :
   - `LocalBusiness` : root layout
-  - `FAQPage` : `src/app/[locale]/faq/page.tsx` (10 Q&A)
+  - `FAQPage` : page FAQ (10 Q&A) + chaque landing page
+  - `TouristAttraction` + `Offer` : chaque landing page
+  - `BreadcrumbList` : chaque landing page
   - `Offers` (TouristTrip) : page croisiere
   - `Article` : `src/views/ArticleDetail.tsx`
-- **Sitemap** : `src/app/sitemap.ts` (statiques + articles dynamiques, multi-locale)
+  - Generators : `src/lib/seo/jsonld.ts`
+- **Sitemap** : `src/app/sitemap.ts` (statiques + articles + landing pages, multi-locale)
 
 ## Securite
 

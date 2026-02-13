@@ -68,29 +68,27 @@ src/
 ├── app/[locale]/           # App Router — pages avec generateMetadata
 │   ├── layout.tsx          # Layout global (fonts, GA4, i18n, providers)
 │   ├── page.tsx            # Homepage
+│   ├── (landing)/          # Route group landing pages SEO
+│   │   ├── layout.tsx      # Layout landing (header + footer)
+│   │   └── [slug]/page.tsx # Page dynamique SSG (6 pages Tier 1)
 │   ├── actualites/         # Blog (liste + [slug])
 │   ├── croisiere/          # Page croisiere
 │   ├── galerie/            # Galerie photos (lightbox lazy-loaded)
 │   ├── faq/                # FAQ (JSON-LD FAQPage)
-│   ├── reservation/        # Reservation (iframe Bookly)
-│   ├── cgv/                # CGV
-│   ├── mentions-legales/   # Mentions legales
-│   ├── confidentialite/    # Politique de confidentialite
-│   ├── error.tsx           # Error boundary locale
-│   └── not-found.tsx       # Page 404
+│   └── ...                 # reservation, cgv, mentions-legales, confidentialite
 ├── views/                  # Composants de page complets
 ├── components/
+│   ├── landing/            # 11 composants landing reutilisables (Hero, FAQ, CTA, etc.)
 │   ├── ui/                 # shadcn/ui (Button, Card, Switch, etc.)
-│   ├── cookie-consent/     # CookieProvider
 │   ├── *Variants.tsx       # Composants multi-theme (isDark ternaire)
-│   ├── GalleryLightbox.tsx # Lightbox (lazy-loaded via next/dynamic)
-│   ├── CookieBanner.tsx    # Banner RGPD
-│   └── CookieModal.tsx     # Modal parametres cookies
-├── contexts/               # ThemeVariantContext (2 themes: classic/nuit)
-├── hooks/                  # useCookieConsent, useInstagramFeed
-├── lib/                    # cookie-consent, gtag, logger, metadata, utils
+│   └── ...                 # GalleryLightbox, CookieBanner, CookieModal
+├── data/
+│   ├── landings/           # Donnees landing pages (types.ts, index.ts, {slug}.ts)
+│   └── ...                 # posts.json, posts-en.json, reviews.json, galleryImages
+├── lib/
+│   ├── seo/jsonld.ts       # Generators JSON-LD (FAQPage, TouristAttraction, Breadcrumb)
+│   └── ...                 # cookie-consent, gtag, logger, metadata, utils
 ├── i18n/                   # Configuration next-intl (request.ts, navigation.ts)
-├── data/                   # posts.json, posts-en.json, galleryImages, reviews.json
 └── assets/                 # Images statiques, logo, map
 ```
 
@@ -105,11 +103,12 @@ src/
 
 ## SEO
 
-- **Canonical URLs** + **hreflang alternates** (FR/EN + x-default) sur 10 pages
-- **JSON-LD** : LocalBusiness, FAQPage (10 Q&A), Offers (TouristTrip), Article
-- **Sitemap** dynamique (`sitemap.ts`) + **robots.txt**
+- **Canonical URLs** + **hreflang alternates** (FR/EN + x-default) sur toutes les pages
+- **JSON-LD** : LocalBusiness, FAQPage, Offers, Article + 3 schemas par landing (TouristAttraction, FAQPage, Breadcrumb)
+- **6 landing pages SEO** Tier 1 (EVJF, EVG, Romantique, Mariage, Anniversaire, Entre amis)
+- **Sitemap** dynamique (statiques + articles + landing pages, multi-locale)
 - **OpenGraph** + **Twitter cards** avec `og:locale` dynamique (fr_FR/en_US)
-- Helper `src/lib/metadata.ts` : `getAlternates()`, `getOgLocale()`
+- Generators JSON-LD : `src/lib/seo/jsonld.ts`
 
 ## Securite
 
@@ -175,7 +174,8 @@ Score actuel : **9/10** — voir [AUDIT-2026-02-12.md](AUDIT-2026-02-12.md) pour
 
 ## Documentation
 
-- [ROADMAP.md](../ROADMAP.md) — Roadmap priorisee, phases, backlog
-- [AUDIT-2026-02-12.md](AUDIT-2026-02-12.md) — Audit qualite detaille (9/10)
+- [ROADMAP.md](../ROADMAP.md) — Reste a faire + etat d'avancement
+- [CHANGELOG.md](../CHANGELOG.md) — Historique des livraisons
+- [AUDIT-2026-02-12.md](AUDIT-2026-02-12.md) — Audit qualite (9/10)
 - [CLAUDE.md](CLAUDE.md) — Contexte pour Claude Code
 - [brief/](../brief/) — Specs detaillees du projet

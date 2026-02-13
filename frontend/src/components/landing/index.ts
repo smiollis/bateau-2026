@@ -1,0 +1,11 @@
+export { default as LandingHero } from "./LandingHero";
+export { default as LandingBenefits } from "./LandingBenefits";
+export { default as LandingFAQ } from "./LandingFAQ";
+export { default as LandingGallery } from "./LandingGallery";
+export { default as LandingTestimonials } from "./LandingTestimonials";
+export { default as LandingPricing } from "./LandingPricing";
+export { default as LandingCTA } from "./LandingCTA";
+export { default as LandingStickyBar } from "./LandingStickyBar";
+export { default as LandingRelated } from "./LandingRelated";
+export { default as LandingBreadcrumb } from "./LandingBreadcrumb";
+export { default as LandingRichtext } from "./LandingRichtext";

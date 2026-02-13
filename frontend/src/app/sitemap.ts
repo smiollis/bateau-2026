@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import allPosts from "@/data/posts.json";
 import { routing } from "@/i18n/routing";
+import { getAllLandingSlugs } from "@/data/landings";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://bateau-a-paris.fr";
@@ -25,5 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...entries, ...articles];
+  const landings = getAllLandingSlugs().flatMap((slug) =>
+    locales.map((locale) => ({
+      url: `${baseUrl}/${locale}/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))
+  );
+
+  return [...entries, ...articles, ...landings];
 }
