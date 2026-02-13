@@ -39,7 +39,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
     <div className="min-h-screen bg-background">
       <HeaderVariants />
 
-      <main className="pt-24 pb-16">
+      <main id="main" className="pt-24 pb-16">
         {/* Hero image */}
         {post.image && (
           <motion.div

@@ -120,31 +120,36 @@ const ContactForm = () => {
               />
               <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className={`${styles.label} block mb-1.5`}>{t("nameLabel")}</label>
+                  <label htmlFor="contact-name" className={`${styles.label} block mb-1.5`}>{t("nameLabel")}</label>
                   <Input
+                    id="contact-name"
                     className={styles.input}
                     placeholder={t("namePlaceholder")}
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     maxLength={100}
+                    aria-required="true"
                   />
                 </div>
                 <div>
-                  <label className={`${styles.label} block mb-1.5`}>{t("emailLabel")}</label>
+                  <label htmlFor="contact-email" className={`${styles.label} block mb-1.5`}>{t("emailLabel")}</label>
                   <Input
+                    id="contact-email"
                     type="email"
                     className={styles.input}
                     placeholder={t("emailPlaceholder")}
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     maxLength={255}
+                    aria-required="true"
                   />
                 </div>
               </div>
 
               <div className="mb-4">
-                <label className={`${styles.label} block mb-1.5`}>{t("phoneLabel")}</label>
+                <label htmlFor="contact-phone" className={`${styles.label} block mb-1.5`}>{t("phoneLabel")}</label>
                 <Input
+                  id="contact-phone"
                   type="tel"
                   className={styles.input}
                   placeholder={t("phonePlaceholder")}
@@ -155,13 +160,15 @@ const ContactForm = () => {
               </div>
 
               <div className="mb-6">
-                <label className={`${styles.label} block mb-1.5`}>{t("messageLabel")}</label>
+                <label htmlFor="contact-message" className={`${styles.label} block mb-1.5`}>{t("messageLabel")}</label>
                 <Textarea
+                  id="contact-message"
                   className={`${styles.input} min-h-[140px]`}
                   placeholder={t("messagePlaceholder")}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   maxLength={1000}
+                  aria-required="true"
                 />
               </div>
 

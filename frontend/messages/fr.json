@@ -9,7 +9,8 @@
     "reservation": "Réservation",
     "dayMode": "Mode jour",
     "nightMode": "Mode nuit",
-    "toggleMenu": "Ouvrir le menu"
+    "toggleMenu": "Ouvrir le menu",
+    "mainNav": "Navigation principale"
   },
   "hero": {
     "badge": "Croisière privée sur la Seine",

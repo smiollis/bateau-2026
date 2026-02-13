@@ -38,7 +38,7 @@ const Galerie = () => {
     <div className="min-h-screen bg-background">
       <HeaderVariants />
 
-      <main className="pt-24 pb-16">
+      <main id="main" className="pt-24 pb-16">
         {/* Header */}
         <div className="container-custom mb-12">
           <Link

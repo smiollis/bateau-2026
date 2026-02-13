@@ -18,7 +18,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <HeaderVariants />
-      <main>
+      <main id="main">
         <HeroVariants />
         <FeaturesVariants />
         <BoatVariants />

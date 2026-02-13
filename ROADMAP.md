@@ -141,6 +141,7 @@
 - [x] OpenGraph + Twitter cards configures
 - [x] OG Image par defaut (image du bateau)
 - [x] Canonical URLs + hreflang alternates (`alternates.languages` en metadata)
+  - **Attention** : canonical et hreflang sont herites du root layout → corrections Sprint 5a
 - [x] OpenGraph `alternateLocale` (fr_FR + en_US)
 
 ### [done] 4.2 Performance
@@ -152,6 +153,7 @@
 - [x] Suppression `export const dynamic = 'force-dynamic'` sur 8 pages statiques
 - [x] Preconnect + DNS prefetch WordPress (accelere chargement iframe Bookly)
 - [x] Bundle analysis : dynamic imports, tree-shaking verifie
+- [x] Vercel Speed Insights (RUM) — `@vercel/speed-insights` dans root layout
 - [ ] Lighthouse score > 90 / Core Web Vitals (LCP < 2.5s, CLS < 0.1)
 
 ---
@@ -176,6 +178,159 @@
 - [ ] Communication parent-iframe (confirmation, erreurs)
 - [ ] Style coherent avec le design Next.js
 - [ ] Test sur mobile
+
+---
+
+## [next] Sprint 5 : Audit — Corrections critiques (Semaine 9)
+
+> Issues identifiees lors de l'audit approfondi du 2026-02-13
+
+### 5a. SEO critique — Canonical & Hreflang par page
+- [ ] **Canonical URLs par page** — chaque page doit avoir son propre canonical (actuellement toutes pointent vers `/`)
+- [ ] **Hreflang par page** — chaque page doit pointer vers son equivalent FR/EN (actuellement toutes pointent vers homepage)
+- [ ] **Ajouter `x-default` hreflang** sur toutes les pages
+- [ ] **`og:locale` dynamique** — `fr_FR` sur `/fr/*`, `en_US` sur `/en/*` (actuellement `fr_FR` en dur)
+- [ ] **Title EN traduit** — le `<title>` de la homepage EN est encore en francais
+
+### 5b. Accessibilite critique (WCAG Level A)
+- [ ] **`<html lang>` dynamique** — `lang="fr"` en dur sur les pages `/en` → passer en dynamique via locale
+- [ ] **Skip-to-content** — ajouter lien "Aller au contenu" (premier element focusable)
+- [ ] **Labels formulaire contact** — associer `<label htmlFor>` + `<input id>` sur les 4 champs
+- [ ] **`aria-expanded` menu mobile** — ajouter sur le bouton hamburger
+- [ ] **Cookie modal `role="dialog"`** — ajouter `aria-modal`, `aria-labelledby`
+
+### 5c. Security headers
+- [ ] **`poweredByHeader: false`** dans `next.config.ts` (supprimer `X-Powered-By: Next.js`)
+- [ ] **Security headers** dans `next.config.ts` `headers()` pour tous les environnements :
+  - `X-Content-Type-Options: nosniff`
+  - `X-Frame-Options: DENY`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
+  - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
+- [ ] **Content-Security-Policy** — CSP adaptee (GA4, Google Fonts, Instagram API, WordPress)
+
+### 5d. Performance
+- [ ] **Activer le cache HTML** — ISR (`revalidate`) ou static generation pour CDN caching (actuellement MISS sur chaque requete)
+- [ ] **AVIF** — ajouter `formats: ['image/avif', 'image/webp']` dans `next.config.ts` images
+- [ ] **Hero images** — migrer les 2 images hero restantes vers `next/image` (srcSet + AVIF)
+
+### 5e. Code quality
+- [ ] **Fix ESLint errors** — 2 `react-hooks/set-state-in-effect` (CookieModal, CookieProvider), 4 `no-explicit-any`
+- [ ] **Ajouter `error.tsx`** + **`global-error.tsx`** pour gestion gracieuse des erreurs runtime
+- [ ] **Contrastes couleurs** — verifier et corriger `text-*/50`, `text-*/60` (WCAG AA 4.5:1)
+
+---
+
+## [next] Sprint 6 : Redirections WordPress → Next.js
+
+> Plan de redirections pour la bascule du domaine bateau-a-paris.fr de WordPress vers Next.js.
+> Toutes les redirections sont **301 (permanent)** sauf indication contraire.
+
+### Pages principales (WordPress → Next.js)
+
+| WordPress (ancien) | Next.js (nouveau) | Note |
+|---|---|---|
+| `/` | `/fr` | Homepage (redirect auto next-intl) |
+| `/en/` | `/en` | Homepage EN |
+| `/croisiere-privee-seine-paris/` | `/fr/croisiere` | Page croisiere FR |
+| `/en/your-private-cruise-in-paris/` | `/en/croisiere` | Page croisiere EN |
+| `/un-bateau-a-paris_le-senang/` | `/fr/croisiere` | Page bateau → croisiere |
+| `/en/our-boat-the-senang/` | `/en/croisiere` | Page bateau EN |
+| `/un-bateau-a-paris_tarif-de-votre-croisiere/` | `/fr/croisiere` | Page tarifs → croisiere |
+| `/en/rates-for-your-private-cruise-in-paris/` | `/en/croisiere` | Tarifs EN |
+| `/en/rates-for-your-private-cruise-in-paris-2/` | `/en/croisiere` | Tarifs EN (doublon) |
+| `/galerie-photos/` | `/fr/galerie` | Galerie |
+| `/foire-aux-questions_un-bateau-a-paris/` | `/fr/faq` | FAQ |
+| `/en/frequently-asked-questions/` | `/en/faq` | FAQ EN |
+| `/les-actualites-du-senang/` | `/fr/actualites` | Blog FR |
+| `/actualites-un-bateau-a-paris/` | `/fr/actualites` | Blog FR (ancien slug) |
+| `/en/our-news/` | `/en/actualites` | Blog EN |
+| `/en/news-un-bateau-a-paris/` | `/en/actualites` | Blog EN (ancien slug) |
+| `/contacter-un-bateau-a-paris/` | `/fr#contact` | Contact FR |
+| `/en/contact-un-bateau-a-paris/` | `/en#contact` | Contact EN |
+| `/en/contact-un-bateau-a-paris-2/` | `/en#contact` | Contact EN (doublon) |
+| `/en/contact-un-bateau-a-paris-3/` | `/en#contact` | Contact EN (doublon) |
+| `/cgv-un-bateau-a-paris/` | `/fr/cgv` | CGV |
+| `/en/terms-conditions/` | `/en/cgv` | CGV EN |
+| `/mentions-legales-un-bateau-a-paris/` | `/fr/mentions-legales` | Mentions legales |
+| `/politique-de-confidentialite/` | `/fr/confidentialite` | Confidentialite |
+| `/un-bateau-a-paris_politique-de-cookies-ue/` | `/fr/confidentialite` | Cookies → confidentialite |
+| `/en/cookie-policy-eu/` | `/en/confidentialite` | Cookies EN |
+
+### Reservation (multiples URLs WordPress → une seule)
+
+| WordPress (ancien) | Next.js (nouveau) |
+|---|---|
+| `/reservation-croisiere-privee-paris/` | `/fr/reservation` |
+| `/reservez-votre-croisiere-privee-a-paris-bookly/` | `/fr/reservation` |
+| `/reservez-votre-croisiere-privee-a-paris-hopleisure/` | `/fr/reservation` |
+| `/reserver-une-croisiere-avec-guide/` | `/fr/reservation` |
+| `/en/book-your-private-cruise-in-paris/` | `/en/reservation` |
+| `/en/book-your-private-cruise-in-paris-2/` | `/en/reservation` |
+| `/en/book-your-private-cruise-in-paris-3/` | `/en/reservation` |
+| `/en/book-your-private-cruise-in-paris-4/` | `/en/reservation` |
+
+### Articles blog (WordPress → Next.js)
+
+| WordPress (ancien) | Next.js (nouveau) |
+|---|---|
+| `/croisiere-a-paris-2pers-6pers/` | `/fr/actualites/croisiere-a-paris-2pers-6pers` |
+| `/croisieres-privees-sur-la-seine-reprise-le-15-mars/` | `/fr/actualites/croisieres-privees-sur-la-seine-reprise-le-15-mars` |
+| `/histoire-des-bateaux-mouches-de-paris/` | `/fr/actualites/histoire-des-bateaux-mouches-de-paris` |
+| `/un-bateau-a-paris-aux-jeux-olympiques/` | `/fr/actualites/un-bateau-a-paris-aux-jeux-olympiques` |
+| `/shooting-photo-au-pieds-de-la-tour-eiffel/` | `/fr/actualites/shooting-photo-au-pieds-de-la-tour-eiffel` |
+| `/le-senang-participe-a-la-ceremonie-douverture-des-jeux-olympiques-de-paris-2024/` | `/fr/actualites/le-senang-participe-a-la-ceremonie-douverture-des-jeux-olympiques-de-paris-2024` |
+| `/tournage-exceptionnel-avec-un-bateau-a-paris-pour-adidas-avec-nicolas-karabatic-triple-medaille-olympique/` | `/fr/actualites/tournage-exceptionnel-avec-un-bateau-a-paris-pour-adidas-avec-nicolas-karabatic-triple-medaille-olympique` |
+| `/le-senang-accueille-le-slip-francais-un-shooting-dexception-sur-la-seine/` | `/fr/actualites/le-senang-accueille-le-slip-francais-un-shooting-dexception-sur-la-seine` |
+| `/un-enterrement-de-vie-de-jeune-fille-inoubliable-a-bord-du-senang/` | `/fr/actualites/un-enterrement-de-vie-de-jeune-fille-inoubliable-a-bord-du-senang` |
+| `/une-croisiere-romantique-au-crepuscule-sur-la-seine-a-bord-du-senang/` | `/fr/actualites/une-croisiere-romantique-au-crepuscule-sur-la-seine-a-bord-du-senang` |
+| `/une-reunion-de-famille-inoubliable-a-bord-du-senang-sur-la-seine/` | `/fr/actualites/une-reunion-de-famille-inoubliable-a-bord-du-senang-sur-la-seine` |
+| `/le-zouave-de-lalma/` | `/fr/actualites/le-zouave-de-lalma` |
+| `/pont-neuf/` | `/fr/actualites/pont-neuf` |
+| `/pont-alexandre-iii/` | `/fr/actualites/pont-alexandre-iii` |
+| `/pont-des-arts/` | `/fr/actualites/pont-des-arts` |
+| `/pont-de-iena/` | `/fr/actualites/pont-de-iena` |
+| `/pont-des-invalides/` | `/fr/actualites/pont-des-invalides` |
+| `/pont-du-carrousel/` | `/fr/actualites/pont-du-carrousel` |
+| `/pont-louis-philippe/` | `/fr/actualites/pont-louis-philippe` |
+| `/pont-de-sully/` | `/fr/actualites/pont-de-sully` |
+| `/pont-notre-dame/` | `/fr/actualites/pont-notre-dame` |
+| `/pont-d-arcole/` | `/fr/actualites/pont-d-arcole` |
+| `/pont-de-l-alma/` | `/fr/actualites/pont-de-l-alma` |
+| `/pont-marie/` | `/fr/actualites/pont-marie` |
+| `/pont-royal/` | `/fr/actualites/pont-royal` |
+| `/pont-au-change/` | `/fr/actualites/pont-au-change` |
+| `/pont-de-larcheveche/` | `/fr/actualites/pont-de-larcheveche` |
+| `/petit-pont-cardinal-lustiger/` | `/fr/actualites/petit-pont-cardinal-lustiger` |
+| `/pont-de-la-tournelle/` | `/fr/actualites/pont-de-la-tournelle` |
+| `/pont-saint-michel/` | `/fr/actualites/pont-saint-michel` |
+| `/pont-de-la-concorde/` | `/fr/actualites/pont-de-la-concorde` |
+| `/en/history-of-bateaux-mouches-de-paris/` | `/en/actualites/history-of-bateaux-mouches-de-paris` |
+| `/en/private-cruises-on-the-seine-back-on-march-15/` | `/en/actualites/private-cruises-on-the-seine-back-on-march-15` |
+| `/en/un-bateau-a-paris-at-the-olympic-games/` | `/en/actualites/un-bateau-a-paris-at-the-olympic-games` |
+
+### Pages speciales (WordPress → redirect ou suppression)
+
+| WordPress (ancien) | Action | Note |
+|---|---|---|
+| `/croisiere-romantique-a-paris/` | → `/fr/croisiere` | Landing page → page croisiere |
+| `/croisiere-en-famille-a-paris/` | → `/fr/croisiere` | Landing page → page croisiere |
+| `/mon-compte/` | → `/fr/reservation` | WooCommerce, plus utilise |
+| `/en/my-account/` | → `/en/reservation` | WooCommerce EN |
+| `/commander/` | → `/fr/reservation` | WooCommerce checkout |
+| `/en/checkout/` | → `/en/reservation` | WooCommerce checkout EN |
+| `/panier/` | → `/fr/reservation` | WooCommerce cart |
+| `/en/cart/` | → `/en/reservation` | WooCommerce cart EN |
+| `/en/shop/` | → `/en/reservation` | WooCommerce shop EN |
+| `/merci/` | → `/fr` | Page merci → homepage |
+| `/reservation-embed/` | **Ne pas rediriger** | Endpoint iframe Bookly (utilise par Next.js) |
+| `/category/*` | → `/fr/actualites` | Categories blog → page actualites |
+| `/en/category/*` | → `/en/actualites` | Categories EN |
+| `/?porto_builder=*` | **410 Gone** | URLs techniques Porto theme |
+
+### Implementation
+
+Les redirections seront ajoutees dans `next.config.ts` `redirects()` une fois le domaine bascule.
+Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching sur les slugs existants.
 
 ---
 

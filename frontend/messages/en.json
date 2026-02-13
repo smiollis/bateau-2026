@@ -9,7 +9,8 @@
     "reservation": "Reservation",
     "dayMode": "Day mode",
     "nightMode": "Night mode",
-    "toggleMenu": "Open the menu"
+    "toggleMenu": "Open the menu",
+    "mainNav": "Main navigation"
   },
   "hero": {
     "badge": "Private cruise on the Seine",

@@ -80,8 +80,14 @@ const HeaderVariants = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 ${styles.header}`}>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
+      >
+        {locale === "en" ? "Skip to content" : "Aller au contenu principal"}
+      </a>
       <div className="container-custom">
-        <nav className="flex items-center justify-between h-16 md:h-20">
+        <nav className="flex items-center justify-between h-16 md:h-20" aria-label={t("mainNav")}>
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
             <Image
@@ -141,6 +147,8 @@ const HeaderVariants = () => {
             className="lg:hidden p-2"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={t("toggleMenu")}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
           >
             {isOpen ? (
               <X className={`w-6 h-6 ${styles.iconColor}`} />
@@ -158,6 +166,7 @@ const HeaderVariants = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
+            id="mobile-nav"
             className={`lg:hidden ${styles.mobileMenuBg} border-b border-border`}
           >
             <div className="container-custom py-4 space-y-4">

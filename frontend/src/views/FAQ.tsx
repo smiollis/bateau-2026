@@ -71,7 +71,7 @@ const FAQ = () => {
   return (
     <div className="min-h-screen bg-background">
       <HeaderVariants />
-      <main className="pt-24 pb-16">
+      <main id="main" className="pt-24 pb-16">
         <div className="container-custom max-w-4xl">
           <Link
             href="/"

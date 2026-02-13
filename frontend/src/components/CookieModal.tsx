@@ -83,6 +83,9 @@ const CookieModal = ({
         >
           <motion.div
             className="relative w-full max-w-2xl bg-card rounded-2xl shadow-2xl p-6 md:p-8"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cookie-modal-title"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
@@ -97,7 +100,7 @@ const CookieModal = ({
               <X className="h-5 w-5" />
             </button>
 
-            <h2 className="font-heading text-2xl text-foreground mb-2">
+            <h2 id="cookie-modal-title" className="font-heading text-2xl text-foreground mb-2">
               {t("modalTitle")}
             </h2>
             <p className="text-muted-foreground text-sm mb-6">

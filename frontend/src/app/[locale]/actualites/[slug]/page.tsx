@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import postsFr from '@/data/posts.json';
 import postsEn from '@/data/posts-en.json';
+import { getAlternates, getOgLocale } from '@/lib/metadata';
 import ArticleDetail from '@/views/ArticleDetail';
 
 function getPostsByLocale(locale: string) {
@@ -24,7 +25,9 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt.slice(0, 160),
+    alternates: getAlternates(locale, `/actualites/${slug}`),
     openGraph: {
+      locale: getOgLocale(locale),
       title: post.title,
       description: post.excerpt.slice(0, 160),
       images: post.image ? [{ url: post.image }] : [],

@@ -6,6 +6,7 @@ import Providers from "@/components/Providers";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getConsentDefaultScript } from "@/lib/gtag";
+import { getLocale } from "next-intl/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,17 +30,8 @@ export const metadata: Metadata = {
     template: "%s | Un Bateau à Paris",
   },
   description: "Croisière privée sur la Seine à Paris. Naviguez au fil de l'eau avec vue sur la Tour Eiffel et Notre-Dame. Jusqu'à 12 personnes. À partir de 420€.",
-  alternates: {
-    canonical: "/",
-    languages: {
-      fr: "/fr",
-      en: "/en",
-    },
-  },
   openGraph: {
     type: "website",
-    locale: "fr_FR",
-    alternateLocale: "en_US",
     siteName: "Un Bateau à Paris",
     images: [{ url: "/images/hero/bateau-a-paris-seine-01.jpg", width: 1200, height: 630 }],
   },
@@ -51,13 +43,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   return (
-    <html lang="fr">
+    <html lang={locale}>
       <head>
         <script
           type="application/ld+json"

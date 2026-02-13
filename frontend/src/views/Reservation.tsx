@@ -46,7 +46,7 @@ const ReservationSkeleton = ({ loadingText }: { loadingText: string }) => (
 const Reservation = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeState, setIframeState] = useState<IframeState>("loading");
-  const [iframeHeight, setIframeHeight] = useState(800);
+  const [iframeHeight, setIframeHeight] = useState(1200);
   const { isDark } = useThemeVariant();
   const t = useTranslations("reservation");
 
@@ -88,7 +88,7 @@ const Reservation = () => {
     <div className="min-h-screen bg-background">
       <HeaderVariants />
 
-      <main className="pt-24">
+      <main id="main" className="pt-24">
         {/* HERO SECTION */}
         <motion.section
           initial={{ opacity: 0 }}
