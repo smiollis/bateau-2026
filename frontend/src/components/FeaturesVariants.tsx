@@ -91,7 +91,7 @@ const FeaturesVariants = () => {
           viewport={{ once: true }}
           className="text-center mt-10"
         >
-          <Button className="btn-gold" asChild>
+          <Button className="btn-gold text-white" asChild>
             <Link href="/croisiere">
               {t("cta")}
               <ArrowRight className="w-4 h-4 ml-2" />

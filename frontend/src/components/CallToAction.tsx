@@ -33,7 +33,7 @@ const CallToAction = () => {
           </h2>
           <p className="text-primary-foreground/80 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
             Réservez dès maintenant votre croisière privée sur la Seine 
-            et découvrez Paris comme vous ne l'avez jamais vu.
+            et découvrez Paris comme vous ne l&apos;avez jamais vu.
           </p>
           
           <motion.div
@@ -42,7 +42,7 @@ const CallToAction = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
           >
-            <Button className="btn-gold text-lg px-12 py-6 h-auto" asChild>
+            <Button className="btn-gold text-white text-lg px-12 py-6 h-auto" asChild>
               <Link href="/reservation">Réserver votre croisière</Link>
             </Button>
           </motion.div>

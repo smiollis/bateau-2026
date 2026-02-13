@@ -39,7 +39,7 @@ const Hero = () => {
 
           {/* Subtitle */}
           <p className="text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto mb-8">
-            Embarquez pour une expérience unique sur la Seine. Découvrez Paris depuis l'eau, 
+            Embarquez pour une expérience unique sur la Seine. Découvrez Paris depuis l&apos;eau, 
             au fil des monuments emblématiques, en toute intimité.
           </p>
 
@@ -52,7 +52,7 @@ const Hero = () => {
           >
             <span className="text-primary-foreground/80">À partir de</span>
             <span className="text-2xl font-bold text-accent">420€</span>
-            <span className="text-primary-foreground/80">· jusqu'à 12 personnes</span>
+            <span className="text-primary-foreground/80">· jusqu&apos;à 12 personnes</span>
           </motion.div>
 
           {/* CTA Button */}
@@ -61,7 +61,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <Button className="btn-gold text-lg px-10 py-6 h-auto" asChild>
+            <Button className="btn-gold text-white text-lg px-10 py-6 h-auto" asChild>
               <Link href="/reservation">Réserver votre croisière</Link>
             </Button>
           </motion.div>

@@ -15,33 +15,33 @@ import {
 
 const faqItems: { question: string; answer: string | React.ReactNode }[] = [
   {
-    question: "Quels types d'événements puis-je organiser à bord du Senang ?",
+    question: "Quels types d&apos;événements puis-je organiser à bord du Senang ?",
     answer:
       "Un Bateau à Paris offre des croisières privées sur la Seine pour diverses occasions telles que des soirées romantiques, des sorties en famille, des réunions entre amis ou entre collègues et de nombreux événements professionnels. Que ce soit pour un anniversaire, un enterrement de vie de jeune fille, des photos de mariage devant la Tour Eiffel, Notre-Dame, la Conciergerie, le Louvre ou la Statue de la Liberté, nous nous efforçons de vous offrir une expérience inoubliable.",
   },
   {
     question: "Comment puis-je réserver une croisière avec Un Bateau à Paris ?",
     answer:
-      "Vous pouvez facilement réserver votre croisière en ligne. Choisissez la date, précisez le nombre de passagers, l'heure de départ souhaitée et la formule qui correspondent à vos préférences, puis validez votre réservation.",
+      "Vous pouvez facilement réserver votre croisière en ligne. Choisissez la date, précisez le nombre de passagers, l&apos;heure de départ souhaitée et la formule qui correspondent à vos préférences, puis validez votre réservation.",
   },
   {
-    question: "Comment se passe l'embarquement ?",
+    question: "Comment se passe l&apos;embarquement ?",
     answer:
-      "Pour que vous profitiez pleinement de votre croisière privée sur la Seine, nous vous donnons rendez-vous 15 minutes avant l'heure du départ au Port de l'Arsenal à Bastille (Paris 12ème).",
+      "Pour que vous profitiez pleinement de votre croisière privée sur la Seine, nous vous donnons rendez-vous 15 minutes avant l&apos;heure du départ au Port de l&apos;Arsenal à Bastille (Paris 12ème).",
   },
   {
     question: "Combien ça coûte ?",
     answer:
-      "Le bateau est exclusivement réservé pour votre soirée romantique, vos retrouvailles entre amis, votre célébration d'anniversaire, votre sortie en famille ou votre événement professionnel. Le coût de la privatisation du bateau est fixe pour 1 à 6 passagers (600 €), puis augmente à 100 € par personne au-delà de 6. Consultez notre section « Tarifs » pour plus de détails.",
+      "Le bateau est exclusivement réservé pour votre soirée romantique, vos retrouvailles entre amis, votre célébration d&apos;anniversaire, votre sortie en famille ou votre événement professionnel. Le coût de la privatisation du bateau est fixe pour 1 à 6 passagers (600 €), puis augmente à 100 € par personne au-delà de 6. Consultez notre section « Tarifs » pour plus de détails.",
   },
   {
     question: "Comment se déroule le paiement ?",
     answer:
-      "Le paiement s'effectue en ligne lors de la réservation de manière complètement sécurisée par l'intermédiaire de PayPal. Nous acceptons les principales cartes de crédit (American Express, MasterCard, Visa). Pour des arrangements spécifiques ou des événements sur mesure, contactez notre équipe pour discuter des modalités.",
+      "Le paiement s&apos;effectue en ligne lors de la réservation de manière complètement sécurisée par l&apos;intermédiaire de PayPal. Nous acceptons les principales cartes de crédit (American Express, MasterCard, Visa). Pour des arrangements spécifiques ou des événements sur mesure, contactez notre équipe pour discuter des modalités.",
   },
   {
-    question: "Quelle est la politique d'annulation ?",
-    answer: (<>Consultez notre page « <Link href="/cgv" className="text-accent font-semibold hover:underline">Conditions Générales de Vente</Link> » pour connaître notre politique d'annulation détaillée. En cas d'annulation, nous favorisons dans la mesure du possible la modification. Contactez-nous dès que possible pour discuter des options disponibles.</>),
+    question: "Quelle est la politique d&apos;annulation ?",
+    answer: (<>Consultez notre page « <Link href="/cgv" className="text-accent font-semibold hover:underline">Conditions Générales de Vente</Link> » pour connaître notre politique d&apos;annulation détaillée. En cas d&apos;annulation, nous favorisons dans la mesure du possible la modification. Contactez-nous dès que possible pour discuter des options disponibles.</>),
   },
   {
     question: "Y a-t-il des restrictions liées à la météo ?",
@@ -51,17 +51,17 @@ const faqItems: { question: string; answer: string | React.ReactNode }[] = [
   {
     question: "Le bateau est-il accessible aux personnes handicapées ?",
     answer:
-      "L'embarquement des passagers se fait avec l'assistance du Capitaine et peut présenter quelques difficultés aux personnes à mobilité réduite. Nous nous efforçons d'accueillir tout le monde mais ne pouvons pas garantir que l'embarquement sera possible pour les personnes handicapées qui ne disposent pas d'une aide appropriée.",
+      "L&apos;embarquement des passagers se fait avec l&apos;assistance du Capitaine et peut présenter quelques difficultés aux personnes à mobilité réduite. Nous nous efforçons d&apos;accueillir tout le monde mais ne pouvons pas garantir que l&apos;embarquement sera possible pour les personnes handicapées qui ne disposent pas d&apos;une aide appropriée.",
   },
   {
     question: "Vous acceptez les enfants ?",
     answer:
-      "Les enfants de tous âges sont évidemment les bienvenus à bord, sous la supervision des adultes les accompagnant tout au long de la croisière. Nous vous prions de respecter un ratio d'un adulte pour deux enfants de moins de 11 ans lors des déplacements de l'avant à l'arrière du bateau.",
+      "Les enfants de tous âges sont évidemment les bienvenus à bord, sous la supervision des adultes les accompagnant tout au long de la croisière. Nous vous prions de respecter un ratio d&apos;un adulte pour deux enfants de moins de 11 ans lors des déplacements de l&apos;avant à l&apos;arrière du bateau.",
   },
   {
     question: "Les animaux sont-ils admis ?",
     answer:
-      "Malheureusement, nos croisières ne sont pas adaptées aux compagnons à poils. Nous voulons nous assurer que tous nos passagers profitent d'une expérience confortable et sécurisée, et c'est pourquoi nous ne pouvons pas accueillir d'animaux à bord. Nous espérons que vous comprendrez.",
+      "Malheureusement, nos croisières ne sont pas adaptées aux compagnons à poils. Nous voulons nous assurer que tous nos passagers profitent d&apos;une expérience confortable et sécurisée, et c&apos;est pourquoi nous ne pouvons pas accueillir d&apos;animaux à bord. Nous espérons que vous comprendrez.",
   },
 ];
 
@@ -78,7 +78,7 @@ const FAQ = () => {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
 
           <motion.div
@@ -92,7 +92,7 @@ const FAQ = () => {
               Bienvenue dans notre section FAQ dédiée à votre expérience exceptionnelle de croisière privée sur la Seine.
             </p>
             <p className="text-muted-foreground mb-12 max-w-2xl">
-              Chez nous, chaque moment compte, c'est pourquoi nous nous efforçons de personnaliser votre voyage en répondant à toutes vos questions dès le départ. Explorez ci-dessous les réponses aux questions fréquemment posées.
+              Chez nous, chaque moment compte, c&apos;est pourquoi nous nous efforçons de personnaliser votre voyage en répondant à toutes vos questions dès le départ. Explorez ci-dessous les réponses aux questions fréquemment posées.
             </p>
           </motion.div>
 
@@ -126,7 +126,7 @@ const FAQ = () => {
             className={`mt-12 p-8 rounded-2xl text-center ${isDark ? "bg-white/5" : "bg-primary/5"}`}
           >
             <p className="text-foreground/80 mb-2">
-              Pour toute <strong>question supplémentaire</strong> ou des <strong>demandes spécifiques</strong>, n'hésitez pas à <Link href="/#contact" className="text-accent font-semibold hover:underline">nous contacter</Link>.
+              Pour toute <strong>question supplémentaire</strong> ou des <strong>demandes spécifiques</strong>, n&apos;hésitez pas à <Link href="/#contact" className="text-accent font-semibold hover:underline">nous contacter</Link>.
             </p>
             <p className="text-muted-foreground text-sm">
               Nous sommes ravis de rendre votre expérience avec Un Bateau à Paris aussi exceptionnelle que possible.

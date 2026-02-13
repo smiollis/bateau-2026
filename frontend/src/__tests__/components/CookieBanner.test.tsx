@@ -61,6 +61,21 @@ vi.mock("next/link", () => ({
   }) => <a href={href}>{children}</a>,
 }));
 
+vi.mock("@/i18n/navigation", () => ({
+  Link: ({
+    children,
+    href,
+  }: {
+    children: React.ReactNode;
+    href: string;
+  }) => <a href={href}>{children}</a>,
+  useRouter: () => ({
+    push: vi.fn(),
+    replace: vi.fn(),
+  }),
+  usePathname: () => "/",
+}));
+
 // Mock CookieModal
 vi.mock("@/components/CookieModal", () => ({
   default: ({ open }: { open: boolean }) =>

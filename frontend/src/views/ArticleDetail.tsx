@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import DOMPurify from "dompurify";
 import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -96,7 +97,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
               prose-p:text-muted-foreground prose-p:leading-relaxed
               prose-li:text-muted-foreground
               ${isDark ? "prose-invert" : ""}`}
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
           />
         </article>
 

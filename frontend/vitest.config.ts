@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "next/navigation": path.resolve(__dirname, "./node_modules/next/navigation.js"),
     },
   },
   test: {
@@ -15,5 +16,10 @@ export default defineConfig({
     setupFiles: ["./src/__tests__/setup.ts"],
     include: ["src/**/*.test.{ts,tsx}"],
     css: false,
+    server: {
+      deps: {
+        inline: ["next-intl"],
+      },
+    },
   },
 });

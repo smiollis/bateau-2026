@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations, useLocale } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
+import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import logo from "@/assets/logo.png";
 
 const variantStyles: Record<ThemeVariant, {
@@ -22,7 +22,7 @@ const variantStyles: Record<ThemeVariant, {
     header: "bg-white/95 backdrop-blur-md border-b border-border",
     logoClass: "h-14 md:h-16 w-auto",
     nav: "text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-200",
-    cta: "btn-gold",
+    cta: "btn-gold text-white",
     mobileMenuBg: "bg-background",
     iconColor: "text-primary",
   },
@@ -30,7 +30,7 @@ const variantStyles: Record<ThemeVariant, {
     header: "bg-[#0a1628]/95 backdrop-blur-md border-b border-gold/20",
     logoClass: "h-14 md:h-16 w-auto brightness-0 invert",
     nav: "text-sm font-medium text-blue-100/80 hover:text-accent transition-colors duration-200",
-    cta: "btn-gold",
+    cta: "btn-gold text-white",
     mobileMenuBg: "bg-[#0a1628]",
     iconColor: "text-accent",
   },
@@ -83,14 +83,14 @@ const HeaderVariants = () => {
       <div className="container-custom">
         <nav className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <Image
               src={logo}
               alt="Un Bateau à Paris"
               className={styles.logoClass}
               priority
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">

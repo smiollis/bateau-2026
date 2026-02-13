@@ -43,7 +43,7 @@ const Galerie = () => {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -115,7 +115,7 @@ const Galerie = () => {
               Suivez-nous sur Instagram
             </h2>
             <p className="text-muted-foreground">
-              Les coulisses, les moments forts et l'ambiance à bord du Senang
+              Les coulisses, les moments forts et l&apos;ambiance à bord du Senang
             </p>
           </motion.div>
 
@@ -156,7 +156,7 @@ const Galerie = () => {
           )}
 
           <div className="text-center mt-8">
-            <Button asChild className="btn-gold">
+            <Button asChild className="btn-gold text-white">
               <a
                 href="https://www.instagram.com/bateau_a_paris/"
                 target="_blank"

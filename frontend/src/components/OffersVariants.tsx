@@ -28,7 +28,7 @@ const variantStyles: Record<ThemeVariant, {
     card: "bg-card rounded-2xl border border-border",
     cardTitle: "font-heading text-xl font-semibold text-primary",
     price: "text-3xl font-bold text-primary",
-    cta: "btn-gold w-full",
+    cta: "btn-gold text-white w-full",
     popularBadge: "bg-accent text-white",
   },
   nuit: {
@@ -38,7 +38,7 @@ const variantStyles: Record<ThemeVariant, {
     card: "bg-white/5 backdrop-blur-sm border border-blue-400/10 rounded-2xl overflow-hidden hover:border-accent/30 transition-all",
     cardTitle: "font-heading text-xl font-semibold text-blue-100",
     price: "text-3xl font-bold text-accent",
-    cta: "btn-gold w-full",
+    cta: "btn-gold text-white w-full",
     popularBadge: "bg-accent text-white",
   },
 };

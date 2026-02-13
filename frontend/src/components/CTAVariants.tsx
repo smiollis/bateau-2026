@@ -16,13 +16,13 @@ const CTAVariants = () => {
         overlay: "bg-gradient-to-b from-[#0a1628]/80 via-[#0a1628]/70 to-[#0a1628]/90",
         title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100",
         text: "text-blue-200/80 text-lg md:text-xl",
-        cta: "btn-gold text-lg px-12 py-6 h-auto",
+        cta: "btn-gold text-white text-lg px-12 py-6 h-auto",
       }
     : {
         overlay: "bg-gradient-to-r from-primary/80 via-primary/70 to-primary/80",
         title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-primary-foreground",
         text: "text-primary-foreground/80 text-lg md:text-xl",
-        cta: "btn-gold text-lg px-12 py-6 h-auto",
+        cta: "btn-gold text-white text-lg px-12 py-6 h-auto",
       };
 
   return (

@@ -70,7 +70,7 @@ const GalleryPreview = () => {
 
       {/* CTA button */}
       <div className="container-custom mt-8 text-center">
-        <Button asChild className="btn-gold">
+        <Button asChild className="btn-gold text-white">
           <Link href="/galerie">
             {t("cta")}
             <ArrowRight className="w-4 h-4 ml-2" />

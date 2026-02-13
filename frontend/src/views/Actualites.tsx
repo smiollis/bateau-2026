@@ -282,7 +282,7 @@ const Actualites = () => {
             )}
 
             <div className="text-center mt-8">
-              <Button asChild className="btn-gold">
+              <Button asChild className="btn-gold text-white">
                 <a
                   href="https://www.instagram.com/bateau_a_paris/"
                   target="_blank"

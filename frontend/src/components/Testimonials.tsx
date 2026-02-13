@@ -117,7 +117,7 @@ const Testimonials = () => {
               </div>
 
               <p className="text-foreground/80 text-lg leading-relaxed italic">
-                "{testimonials[currentIndex].text}"
+                &quot;{testimonials[currentIndex].text}&quot;
               </p>
             </motion.div>
           </AnimatePresence>

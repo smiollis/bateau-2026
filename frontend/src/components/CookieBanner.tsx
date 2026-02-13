@@ -53,7 +53,7 @@ const CookieBanner = () => {
                   </button>
                   <button
                     onClick={acceptAll}
-                    className="btn-gold text-sm"
+                    className="btn-gold text-white text-sm"
                   >
                     {t("acceptAll")}
                   </button>
@@ -68,9 +68,7 @@ const CookieBanner = () => {
         open={showModal}
         onClose={closeModal}
         analytics={consent?.analytics ?? false}
-        setAnalytics={(v) => updateConsent({ analytics: v })}
         marketing={consent?.marketing ?? false}
-        setMarketing={(v) => updateConsent({ marketing: v })}
         onSave={(analytics, marketing) => updateConsent({ analytics, marketing })}
         onRejectAll={rejectAll}
       />

@@ -75,7 +75,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/70">
-                  Port de l'Arsenal<br />
+                  Port de l&apos;Arsenal<br />
                   Paris 12ème
                 </span>
               </li>

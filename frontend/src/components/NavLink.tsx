@@ -7,11 +7,10 @@ interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   className?: string;
   activeClassName?: string;
-  pendingClassName?: string;
 }
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(
-  ({ href, className, activeClassName, pendingClassName, children, ...props }, ref) => {
+  ({ href, className, activeClassName, children, ...props }, ref) => {
     const pathname = usePathname();
     const isActive = pathname === href || (href !== '/' && pathname?.startsWith(href));
     return (

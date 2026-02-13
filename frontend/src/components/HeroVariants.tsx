@@ -83,7 +83,7 @@ const HeroVariants = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <Button className="btn-gold text-lg px-10 py-6 h-auto" asChild>
+            <Button className="btn-gold text-white text-lg px-10 py-6 h-auto" asChild>
               <Link href="/reservation">{t("cta")}</Link>
             </Button>
           </motion.div>

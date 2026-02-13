@@ -2,13 +2,10 @@
 
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
 
 const Confidentialite = () => {
-  const { isDark } = useThemeVariant();
-
   return (
     <div className="min-h-screen bg-background">
       <HeaderVariants />
@@ -19,7 +16,7 @@ const Confidentialite = () => {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
 
           <h1 className="font-heading text-4xl md:text-5xl font-semibold text-primary mb-8">

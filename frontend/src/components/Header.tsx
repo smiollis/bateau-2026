@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const navItems = [
   { label: "Le Bateau", href: "#bateau" },
@@ -23,11 +24,11 @@ const Header = () => {
       <div className="container-custom">
         <nav className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <span className="font-heading text-xl md:text-2xl font-semibold text-primary">
               Un Bateau à Paris
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -54,8 +55,8 @@ const Header = () => {
             </button>
 
             {/* CTA Button */}
-            <Button className="btn-gold" asChild>
-              <a href="/reservation">Réservation</a>
+            <Button className="btn-gold text-white" asChild>
+              <Link href="/reservation">Réservation</Link>
             </Button>
           </div>
 
@@ -102,8 +103,8 @@ const Header = () => {
                   <Globe className="w-4 h-4" />
                   {lang}
                 </button>
-                <Button className="btn-gold" asChild>
-                  <a href="/reservation">Réservation</a>
+                <Button className="btn-gold text-white" asChild>
+                  <Link href="/reservation">Réservation</Link>
                 </Button>
               </div>
             </div>

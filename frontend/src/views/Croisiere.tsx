@@ -80,7 +80,7 @@ const landmarks: Landmark[] = [
     id: "assemblee",
     name: "Assemblée Nationale",
     icon: getSrc(assemblee),
-    description: "Palais Bourbon, siège de l'Assemblée nationale française depuis 1798.",
+    description: "Palais Bourbon, siège de l&apos;Assemblée nationale française depuis 1798.",
     top: "34%",
     left: "40%",
     width: "65px",
@@ -88,9 +88,9 @@ const landmarks: Landmark[] = [
   },
   {
     id: "orsay",
-    name: "Musée d'Orsay",
+    name: "Musée d&apos;Orsay",
     icon: getSrc(orsay),
-    description: "Ancienne gare reconvertie en musée, abritant la plus grande collection d'art impressionniste au monde.",
+    description: "Ancienne gare reconvertie en musée, abritant la plus grande collection d&apos;art impressionniste au monde.",
     top: "44%",
     left: "51%",
     width: "65px",
@@ -110,7 +110,7 @@ const landmarks: Landmark[] = [
     id: "notre-dame",
     name: "Notre-Dame",
     icon: getSrc(notreDame),
-    description: "Cathédrale gothique emblématique, restaurée après l'incendie de 2019.",
+    description: "Cathédrale gothique emblématique, restaurée après l&apos;incendie de 2019.",
     top: "43%",
     left: "70%",
     width: "50px",
@@ -120,7 +120,7 @@ const landmarks: Landmark[] = [
     id: "hotel-de-ville",
     name: "Hôtel de Ville",
     icon: getSrc(hotelDeVille),
-    description: "Siège de la municipalité parisienne, chef-d'œuvre de l'architecture néo-Renaissance.",
+    description: "Siège de la municipalité parisienne, chef-d&apos;œuvre de l&apos;architecture néo-Renaissance.",
     top: "47%",
     left: "81%",
     width: "60px",
@@ -130,10 +130,10 @@ const landmarks: Landmark[] = [
 
 const itinerarySteps = [
   { time: "Départ", label: "Port de Javel (15ème)", detail: "Embarquement et accueil à bord du Senang" },
-  { time: "10 min", label: "Statue de la Liberté", detail: "Réplique parisienne sur l'Île aux Cygnes" },
+  { time: "10 min", label: "Statue de la Liberté", detail: "Réplique parisienne sur l&apos;Île aux Cygnes" },
   { time: "15 min", label: "Tour Eiffel & Trocadéro", detail: "Le monument iconique vu depuis la Seine" },
   { time: "25 min", label: "Invalides & Assemblée Nationale", detail: "Le Dôme doré et le Palais Bourbon" },
-  { time: "35 min", label: "Musée d'Orsay", detail: "L'ancienne gare devenue temple de l'impressionnisme" },
+  { time: "35 min", label: "Musée d&apos;Orsay", detail: "L&apos;ancienne gare devenue temple de l&apos;impressionnisme" },
   { time: "45 min", label: "Le Louvre", detail: "La pyramide de verre et le Pont des Arts" },
   { time: "55 min", label: "Notre-Dame & Hôtel de Ville", detail: "Le cœur historique de Paris" },
   { time: "1h15", label: "Demi-tour & retour", detail: "Retour par la rive opposée pour de nouvelles perspectives" },
@@ -153,10 +153,10 @@ const Croisiere = () => {
         <div className="container-custom">
           <Link href="/" className={`inline-flex items-center gap-2 ${isDark ? "text-blue-200/70 hover:text-blue-100" : "text-primary-foreground/70 hover:text-primary-foreground"} transition-colors mb-4`}>
             <ArrowLeft className="w-4 h-4" />
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
           <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold">
-            L'Itinéraire de la Croisière
+            L&apos;Itinéraire de la Croisière
           </h1>
           <p className={`text-lg mt-2 max-w-2xl ${isDark ? "text-blue-200/70" : "text-primary-foreground/70"}`}>
             2 heures de navigation au cœur de Paris, entre monuments emblématiques et perspectives uniques sur la Seine.
@@ -177,7 +177,7 @@ const Croisiere = () => {
         <div className="relative w-full overflow-hidden">
           <img
             src={typeof fond2 === 'string' ? fond2 : fond2.src}
-            alt="Carte de l'itinéraire de la croisière sur la Seine"
+            alt="Carte de l&apos;itinéraire de la croisière sur la Seine"
             className="w-full h-auto block"
           />
 
@@ -239,7 +239,7 @@ const Croisiere = () => {
             transition={{ delay: 1.8, type: "spring", stiffness: 200 }}
             className="absolute cursor-pointer group"
             style={{ top: "52%", left: "92%" }}
-            title="Métro Bastille — Lieu d'embarquement"
+            title="Métro Bastille — Lieu d&apos;embarquement"
           >
             <div className="relative">
               <img src={metroIcon} alt="Métro Bastille" className="w-6 h-6 md:w-8 md:h-8 drop-shadow-lg" />
@@ -313,10 +313,10 @@ const Croisiere = () => {
             Prêt à embarquer ?
           </h2>
           <p className={`mb-8 max-w-xl mx-auto ${isDark ? "text-blue-200/70" : "text-primary-foreground/70"}`}>
-            Réservez votre croisière privée et découvrez Paris comme vous ne l'avez jamais vu.
+            Réservez votre croisière privée et découvrez Paris comme vous ne l&apos;avez jamais vu.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="btn-gold" size="lg" asChild>
+            <Button className="btn-gold text-white" size="lg" asChild>
               <Link href="/reservation">Réserver ma croisière</Link>
             </Button>
             <Button variant="outline" size="lg" className={`${isDark ? "border-blue-300/30 text-blue-100 hover:bg-white/10" : "border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"}`} asChild>

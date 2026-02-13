@@ -9,13 +9,13 @@ const offers = [
   {
     title: "Formule Découverte",
     price: 420,
-    description: "L'essentiel pour découvrir Paris depuis la Seine",
+    description: "L&apos;essentiel pour découvrir Paris depuis la Seine",
     image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: [
       "2h de croisière privée",
-      "Jusqu'à 12 personnes",
+      "Jusqu&apos;à 12 personnes",
       "Commentaires du capitaine",
-      "Musique d'ambiance",
+      "Musique d&apos;ambiance",
     ],
     popular: false,
   },
@@ -26,7 +26,7 @@ const offers = [
     image: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: [
       "2h de croisière privée",
-      "Jusqu'à 12 personnes",
+      "Jusqu&apos;à 12 personnes",
       "Bouteille de champagne",
       "Verrines apéritives",
     ],
@@ -35,11 +35,11 @@ const offers = [
   {
     title: "Formule Premium",
     price: 600,
-    description: "L'expérience complète pour les gourmets",
+    description: "L&apos;expérience complète pour les gourmets",
     image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: [
       "2h de croisière privée",
-      "Jusqu'à 12 personnes",
+      "Jusqu&apos;à 12 personnes",
       "Champagne premium",
       "Planches charcuterie & fromages",
     ],
@@ -48,11 +48,11 @@ const offers = [
   {
     title: "Croisière Guidée",
     price: 600,
-    description: "Découvrez l'histoire de Paris avec un guide expert",
+    description: "Découvrez l&apos;histoire de Paris avec un guide expert",
     image: "https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     features: [
       "2h de croisière privée",
-      "Jusqu'à 12 personnes",
+      "Jusqu&apos;à 12 personnes",
       "Guide historique diplômé",
       "Anecdotes exclusives",
     ],
@@ -76,7 +76,7 @@ const Offers = () => {
             Nos Formules
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Choisissez l'expérience qui vous correspond
+            Choisissez l&apos;expérience qui vous correspond
           </p>
         </motion.div>
 
@@ -138,7 +138,7 @@ const Offers = () => {
 
                   {/* CTA */}
                   <Button 
-                    className={offer.popular ? 'btn-gold w-full' : 'w-full'}
+                    className={offer.popular ? 'btn-gold text-white w-full' : 'w-full'}
                     variant={offer.popular ? 'default' : 'outline'}
                     asChild
                   >

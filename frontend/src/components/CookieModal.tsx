@@ -10,9 +10,7 @@ interface CookieModalProps {
   open: boolean;
   onClose: () => void;
   analytics: boolean;
-  setAnalytics: (v: boolean) => void;
   marketing: boolean;
-  setMarketing: (v: boolean) => void;
   onSave: (analytics: boolean, marketing: boolean) => void;
   onRejectAll: () => void;
 }
@@ -21,9 +19,7 @@ const CookieModal = ({
   open,
   onClose,
   analytics,
-  setAnalytics,
   marketing,
-  setMarketing,
   onSave,
   onRejectAll,
 }: CookieModalProps) => {
@@ -146,7 +142,7 @@ const CookieModal = ({
               </button>
               <button
                 onClick={handleSave}
-                className="btn-gold w-full sm:w-auto text-center"
+                className="btn-gold text-white w-full sm:w-auto text-center"
               >
                 {t("saveChoices")}
               </button>
