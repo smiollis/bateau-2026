@@ -9,6 +9,7 @@ const BoatVariants = dynamic(() => import("@/components/BoatVariants"));
 const CaptainSection = dynamic(() => import("@/components/CaptainSection"));
 const GalleryPreview = dynamic(() => import("@/components/GalleryPreview"));
 const OffersVariants = dynamic(() => import("@/components/OffersVariants"));
+const OccasionsGrid = dynamic(() => import("@/components/OccasionsGrid"));
 const TestimonialsVariants = dynamic(() => import("@/components/TestimonialsVariants"));
 const CTAVariants = dynamic(() => import("@/components/CTAVariants"));
 const ContactForm = dynamic(() => import("@/components/ContactForm"));
@@ -25,6 +26,7 @@ const Index = () => {
         <CaptainSection />
         <GalleryPreview />
         <OffersVariants />
+        <OccasionsGrid />
         <TestimonialsVariants />
         <CTAVariants />
         <ContactForm />

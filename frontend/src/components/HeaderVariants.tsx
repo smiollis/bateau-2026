@@ -1,14 +1,24 @@
 "use client";
 
-import { useState } from "react";
-import { Menu, X, Globe, Sun, Moon } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Menu, X, Globe, Sun, Moon, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
+import { locales } from "@/i18n/routing";
 import logo from "@/assets/logo.png";
+
+const localeLabels: Record<string, string> = {
+  fr: "FR",
+  en: "EN",
+  es: "ES",
+  it: "IT",
+  de: "DE",
+  "pt-BR": "PT",
+};
 
 const variantStyles: Record<ThemeVariant, {
   header: string;
@@ -38,7 +48,19 @@ const variantStyles: Record<ThemeVariant, {
 
 const HeaderVariants = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
   const { variant, setVariant } = useThemeVariant();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   const styles = variantStyles[variant];
   const router = useRouter();
   const pathname = usePathname();
@@ -84,7 +106,7 @@ const HeaderVariants = () => {
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded"
       >
-        {locale === "en" ? "Skip to content" : "Aller au contenu principal"}
+        {t("skipToContent")}
       </a>
       <div className="container-custom">
         <nav className="flex items-center justify-between h-16 md:h-20" aria-label={t("mainNav")}>
@@ -114,13 +136,55 @@ const HeaderVariants = () => {
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-4">
             {/* Language Switch */}
-            <button
-              onClick={() => router.replace(pathname, { locale: locale === "fr" ? "en" : "fr" })}
-              className={`flex items-center gap-1 text-sm ${styles.iconColor} opacity-70 hover:opacity-100 transition-opacity`}
-            >
-              <Globe className="w-4 h-4" />
-              {locale.toUpperCase()}
-            </button>
+            <div className="relative" ref={langRef}>
+              <button
+                onClick={() => setLangOpen(!langOpen)}
+                className={`flex items-center gap-1 text-sm ${styles.iconColor} opacity-70 hover:opacity-100 transition-opacity`}
+                aria-expanded={langOpen}
+                aria-haspopup="listbox"
+              >
+                <Globe className="w-4 h-4" />
+                {localeLabels[locale] ?? locale.toUpperCase()}
+                <ChevronDown className="w-3 h-3" />
+              </button>
+              <AnimatePresence>
+                {langOpen && (
+                  <motion.ul
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -4 }}
+                    role="listbox"
+                    className={`absolute top-full right-0 mt-2 py-1 rounded-lg shadow-lg border min-w-[100px] ${
+                      variant === "nuit"
+                        ? "bg-[#0a1628] border-gold/20"
+                        : "bg-white border-border"
+                    }`}
+                  >
+                    {locales.map((loc) => (
+                      <li key={loc}>
+                        <button
+                          role="option"
+                          aria-selected={locale === loc}
+                          onClick={() => {
+                            router.replace(pathname, { locale: loc });
+                            setLangOpen(false);
+                          }}
+                          className={`w-full px-4 py-1.5 text-sm text-left transition-colors ${
+                            locale === loc
+                              ? "font-semibold " + styles.iconColor
+                              : variant === "nuit"
+                                ? "text-blue-100/70 hover:text-accent"
+                                : "text-foreground/70 hover:text-primary"
+                          }`}
+                        >
+                          {localeLabels[loc]}
+                        </button>
+                      </li>
+                    ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Day/Night Toggle */}
             <button
@@ -181,13 +245,23 @@ const HeaderVariants = () => {
               ))}
               <div className="pt-4 border-t border-border/50 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => router.replace(pathname, { locale: locale === "fr" ? "en" : "fr" })}
-                    className={`flex items-center gap-1 text-sm ${styles.iconColor} opacity-70`}
-                  >
-                    <Globe className="w-4 h-4" />
-                    {locale.toUpperCase()}
-                  </button>
+                  <div className="flex items-center gap-1 flex-wrap">
+                    {locales.map((loc) => (
+                      <button
+                        key={loc}
+                        onClick={() => { router.replace(pathname, { locale: loc }); setIsOpen(false); }}
+                        className={`px-2 py-1 text-xs rounded transition-colors ${
+                          locale === loc
+                            ? "font-bold " + styles.iconColor
+                            : variant === "nuit"
+                              ? "text-blue-100/60 hover:text-accent"
+                              : "text-foreground/60 hover:text-primary"
+                        }`}
+                      >
+                        {localeLabels[loc]}
+                      </button>
+                    ))}
+                  </div>
                   <button
                     onClick={() => setVariant(variant === "nuit" ? "classic" : "nuit")}
                     className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${

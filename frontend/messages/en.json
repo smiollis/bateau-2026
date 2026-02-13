@@ -10,7 +10,8 @@
     "dayMode": "Day mode",
     "nightMode": "Night mode",
     "toggleMenu": "Open the menu",
-    "mainNav": "Main navigation"
+    "mainNav": "Main navigation",
+    "skipToContent": "Skip to content"
   },
   "hero": {
     "badge": "Private cruise on the Seine",
@@ -247,5 +248,21 @@
     "mentionsDescription": "Legal notices for the Un Bateau à Paris website. Information about the publisher, host, and intellectual property rights.",
     "confidentialiteTitle": "Privacy Policy",
     "confidentialiteDescription": "Privacy policy and personal data protection policy for the Un Bateau à Paris website."
+  },
+  "occasions": {
+    "title": "Our cruises by occasion",
+    "subtitle": "Whatever the occasion, the Seine is the most beautiful backdrop in Paris",
+    "evjf": "Hen party",
+    "evg": "Stag party",
+    "romantique": "Romantic",
+    "mariage": "Marriage proposal",
+    "anniversaire": "Birthday",
+    "amis": "Friends outing",
+    "teamBuilding": "Team building",
+    "famille": "Family",
+    "shooting": "Photo shoot",
+    "coucherSoleil": "Sunset cruise",
+    "apero": "Aperitif boat",
+    "saintValentin": "Valentine's Day"
   }
 }

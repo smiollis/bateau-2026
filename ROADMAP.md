@@ -17,8 +17,8 @@
 | 6. Tests + Deploy | **Termine** | 65 unit + 28 E2E, Vercel production |
 | Sprint 5-6 Audit | **Termine** | Score 6/10 → 9/10 |
 | 7. Redirections WP→NJS | **Planifie** | Mapping 70+ URLs pret, attente bascule DNS |
-| 8. Landing Pages SEO | **En cours** | 6/17 pages Tier 1 faites, Tier 2-3 restants |
-| 9. i18n Multilingue | **Planifie** | 7 langues (ES, IT, DE, PT-BR, AR, JA, KO) |
+| 8. Landing Pages SEO | **Termine** | 17 pages (6 Tier 1 + 6 Tier 2 + 5 Tier 3) + grille occasions homepage |
+| 9. i18n Multilingue | **En cours** | Lot 1 termine (ES, IT, DE, PT-BR), Lot 2 planifie (AR, JA, KO) |
 
 **Score audit : 9/10** — 0 priorite haute/moyenne restante, 5 items basse priorite.
 
@@ -26,39 +26,18 @@
 
 ## Reste a faire
 
-### [wip] Phase 8 : Landing Pages SEO (11 pages restantes)
+### [done] Phase 8 : Landing Pages SEO — 17 pages
 
 > Brief : [`brief/brief-seo-landing-pages.md`](brief/brief-seo-landing-pages.md)
-> Fait : infrastructure + 6 pages Tier 1 (EVJF, EVG, Romantique, Mariage, Anniversaire, Entre amis)
 
-#### 8c — Tier 2 : 6 pages secondaires
-
-| Slug | Cible SEO |
-|------|-----------|
-| `/anniversaire-mariage-seine` | Anniversaire mariage bateau Paris |
-| `/team-building-seine` | Team building bateau Seine |
-| `/croisiere-famille-seine` | Croisiere famille privee Paris |
-| `/shooting-photo-seine` | Shooting photo bateau Seine |
-| `/coucher-soleil-seine` | Croisiere coucher soleil Paris |
-| `/apero-bateau-seine` | Apero bateau Seine Paris |
-
-#### 8d — Tier 3 : 5 pages saisonnieres
-
-| Slug | Cible SEO |
-|------|-----------|
-| `/saint-valentin-seine` | Saint-Valentin bateau Paris |
-| `/nouvel-an-seine` | Reveillon bateau Seine |
-| `/croisiere-noel-seine` | Croisiere Noel Paris |
-| `/fete-des-meres-seine` | Fete des meres bateau Paris |
-| `/seminaire-seine` | Seminaire bateau Seine |
-
-#### 8e — Maillage interne + optimisation
-
-- [ ] Section "Nos croisieres par occasion" sur homepage (grille 6 cards Tier 1)
+- [x] Infrastructure : route dynamique `[slug]`, type `LandingPageData`, JSON-LD TouristAttraction
+- [x] 6 pages Tier 1 (EVJF, EVG, Romantique, Mariage, Anniversaire, Entre amis)
+- [x] 6 pages Tier 2 (Anniversaire mariage, Team building, Famille, Shooting photo, Coucher soleil, Apero)
+- [x] 5 pages Tier 3 saisonnieres (Saint-Valentin, Nouvel An, Noel, Fete des meres, Seminaire)
+- [x] Grille "Nos croisieres par occasion" sur homepage (12 cards avec icones Lucide)
 - [ ] Liens contextuels depuis Croisiere, Tarifs, Blog
 - [ ] Verification Rich Results Test Google
 - [ ] Lighthouse > 90 sur toutes les landings
-- [ ] Version anglaise des 6 landing pages Tier 1
 
 ---
 
@@ -75,17 +54,17 @@
 
 ---
 
-### [later] Phase 9 : i18n Multilingue (7 langues)
+### [done] Phase 9 Lot 1 : i18n ES, IT, DE, PT-BR
 
-> Prerequis : Phase 8 terminee (landing pages a traduire aussi)
+#### Lot 1 — ES, IT, DE, PT-BR (termine)
 
-#### Lot 1 — ES, IT, DE, PT-BR
-
-- [ ] Ajouter locales dans `routing.ts`
-- [ ] Traduire `messages/{locale}.json` (~250 cles × 4 langues)
+- [x] Ajouter 4 locales dans `routing.ts` (6 locales total)
+- [x] Traduire `messages/{locale}.json` (~228 cles × 4 langues, 19 namespaces)
+- [x] Mettre a jour `metadata.ts` (hreflang 6 locales, og:locale dynamique)
+- [x] Switcher de langue dropdown desktop + inline mobile (remplace toggle FR/EN)
+- [x] Skip-to-content accessible multilingue
 - [ ] Traduire articles blog prioritaires (5-10 par langue)
-- [ ] Mettre a jour `metadata.ts` (hreflang 9 locales, og:locale)
-- [ ] Switcher de langue dropdown (remplacer toggle FR/EN)
+- [ ] Traduire landing pages SEO (17 pages × 4 langues)
 
 #### Lot 2 — AR (RTL), JA, KO
 

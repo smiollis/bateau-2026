@@ -10,7 +10,8 @@
     "dayMode": "Mode jour",
     "nightMode": "Mode nuit",
     "toggleMenu": "Ouvrir le menu",
-    "mainNav": "Navigation principale"
+    "mainNav": "Navigation principale",
+    "skipToContent": "Aller au contenu principal"
   },
   "hero": {
     "badge": "Croisière privée sur la Seine",
@@ -247,5 +248,21 @@
     "mentionsDescription": "Mentions légales du site Un Bateau à Paris. Informations sur l'éditeur, l'hébergeur et les droits de propriété intellectuelle.",
     "confidentialiteTitle": "Politique de Confidentialité",
     "confidentialiteDescription": "Politique de confidentialité et protection des données personnelles du site Un Bateau à Paris."
+  },
+  "occasions": {
+    "title": "Nos croisières par occasion",
+    "subtitle": "Quelle que soit l'occasion, la Seine est le plus beau décor de Paris",
+    "evjf": "EVJF",
+    "evg": "EVG",
+    "romantique": "Romantique",
+    "mariage": "Demande en mariage",
+    "anniversaire": "Anniversaire",
+    "amis": "Entre amis",
+    "teamBuilding": "Team building",
+    "famille": "En famille",
+    "shooting": "Shooting photo",
+    "coucherSoleil": "Coucher de soleil",
+    "apero": "Apéro bateau",
+    "saintValentin": "Saint-Valentin"
   }
 }
