@@ -485,6 +485,135 @@ Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching s
 
 ---
 
+### Plan d'action Phase 8 : Landing Pages SEO thematiques
+
+> **Objectif** : creer 17 landing pages longue traine pour capter le trafic a forte intention de conversion.
+> **Duree estimee** : 8-12 jours (infra 2j + Tier 1 3-4j + Tier 2 2-3j + Tier 3 1-2j + optimisation 1j)
+> **Prerequis** : images thematiques (hero + galerie) par occasion, contenu redactionnel valide
+> **Brief complet** : `brief/brief-seo-landing-pages.md`
+
+#### Etape 8a — Infrastructure technique (2 jours)
+
+1. **Types TypeScript** (`src/data/landings/types.ts`)
+   - `LandingPageData` : slug, meta (title, description, canonical, ogImage), hero, sections[], relatedPages, jsonLd
+   - `LandingSection` : union type (richtext | benefits | gallery | testimonials | pricing | faq)
+   - `BenefitItem`, `FAQItem` : types auxiliaires
+
+2. **10 composants reutilisables** (`src/components/landing/`)
+   - `LandingHero` : `next/image` (fill, priority), titre H1 + subtitle + CTA, overlay gradient
+   - `LandingBenefits` : grille responsive 2x2 → 4 colonnes, icones Lucide parametrables
+   - `LandingTestimonials` : filtre avis par tag thematique depuis `reviews.json`
+   - `LandingPricing` : reutilise les donnees tarifs existants, CTA vers reservation avec `?occasion={slug}`
+   - `LandingFAQ` : accordeon (Radix Accordion), genere automatiquement le JSON-LD FAQPage
+   - `LandingGallery` : carrousel horizontal (`next/image`, lazy loading, lightbox optionnel)
+   - `LandingCTA` : bloc CTA recurrent (bouton reservation + lien tel `+33670342543`)
+   - `LandingStickyBar` : barre fixe bottom mobile (`position: sticky`), boutons Reserver + Appeler
+   - `LandingRelated` : cards horizontales avec image + titre des pages liees
+   - `LandingBreadcrumb` : fil d'Ariane visible + JSON-LD BreadcrumbList
+
+3. **Layout landing** (`src/app/[locale]/(landing)/layout.tsx`)
+   - Route group Next.js (pas de segment d'URL supplementaire)
+   - Header simplifie (logo + CTA reservation)
+   - Footer standard (reutilise FooterVariants)
+   - StickyBar mobile en bas de page
+
+4. **Utilitaires SEO** (`src/lib/seo/jsonld.ts`)
+   - `generateFAQPageJsonLd(items: FAQItem[])` → schema FAQPage
+   - `generateTouristAttractionJsonLd(landing: LandingPageData)` → schema TouristAttraction + Offer + AggregateRating
+   - `generateBreadcrumbJsonLd(items: {name, url}[])` → schema BreadcrumbList
+   - Reutilise `getAlternates()` et `getOgLocale()` de `src/lib/metadata.ts`
+
+5. **Sitemap** : ajouter les 17 slugs dans `src/app/sitemap.ts` (FR + EN)
+
+6. **Fichier index** (`src/data/landings/index.ts`)
+   - Export centralise de toutes les configs landing
+   - Permet l'import dynamique par slug : `getLandingData(slug)`
+   - Matrice de maillage interne integree
+
+#### Etape 8b — Pages Tier 1 : 6 pages prioritaires (3-4 jours)
+
+Pour chaque page (EVJF, EVG, Romantique, Demande en mariage, Anniversaire, Entre amis) :
+
+1. **Fichier data** (`src/data/landings/{slug}.ts`)
+   - Meta : title (50-60 car.), description (150-160 car.), canonical, ogImage
+   - Hero : titre H1, subtitle, image, CTA (`Reservez votre {occasion}`)
+   - Sections : richtext (300+ mots), benefits (4 avantages), gallery, testimonials (filtre), pricing, faq (4-5 Q&A)
+   - Related pages (3-4 liens)
+   - JSON-LD config
+
+2. **Page Next.js** (`src/app/[locale]/(landing)/{slug}/page.tsx`)
+   - `generateMetadata()` avec title, description, canonical, og, hreflang
+   - Render : assemblage des composants landing dans l'ordre brief
+   - 3 scripts JSON-LD : FAQPage + TouristAttraction+Offer + BreadcrumbList
+
+3. **Contenu redactionnel** (par page) :
+   - 800-1200 mots uniques, pas de duplicate entre pages
+   - Angle et tonalite specifiques (cf. brief section 7)
+   - Infos pratiques : prix, duree (2h), capacite (2-12 pers.), lieu depart (Arsenal)
+   - Preuves sociales : JO 2024, tournages Adidas/Le Slip Francais, avis Google
+   - CTA avec verbes d'action : "Reservez", "Offrez", "Organisez", "Surprenez"
+
+4. **Images** : hero 1920x1080, OG 1200x630, 4-6 photos galerie par page
+   - Alt text incluant le mot-cle principal
+   - Format AVIF/WebP via `next/image`
+   - Hero image avec `priority` (LCP)
+
+5. **Maillage interne** :
+   - EVJF ↔ EVG ↔ Shooting Photo ↔ Apero
+   - Romantique ↔ Demande en mariage ↔ Anniversaire mariage ↔ Coucher de soleil ↔ Saint-Valentin
+   - Anniversaire ↔ Entre amis ↔ Famille ↔ Apero
+   - Toutes → /reservation, /croisiere, /tarifs (page tarifs = /croisiere)
+
+#### Etape 8c — Pages Tier 2 : 6 pages secondaires (2-3 jours)
+
+Meme process que Tier 1 pour : Anniversaire mariage, Team building, Famille, Shooting photo, Coucher de soleil, Apero bateau.
+
+Specificites :
+- **Team building / Seminaire** : tonalite professionnelle, mention "facture possible", formule sur mesure
+- **Shooting photo** : mise en avant du decor (Pont Alexandre III, lumiere doree), collaboration photographes
+- **Coucher de soleil** : focus sur la golden hour, parcours avec vue Tour Eiffel
+
+#### Etape 8d — Pages Tier 3 : 5 pages saisonnieres (1-2 jours)
+
+Saint-Valentin, Nouvel An, Noel, Fete des meres, Seminaire.
+
+Specificites :
+- Pages activables/desactivables selon la saison (flag `active: boolean` dans les data)
+- Pages saisonnieres referencees dans le sitemap toute l'annee (pas de desindexation)
+- Contenu adapte a l'evenement (menus speciaux, horaires, disponibilites)
+
+#### Etape 8e — Optimisation & maillage (1 jour)
+
+1. **Maillage depuis les pages existantes** :
+   - Homepage : ajouter section "Nos croisieres par occasion" (grille 6 cards Tier 1)
+   - Page Croisiere/Tarifs : liens contextuels ("ideal pour un EVJF", "parfait pour un anniversaire")
+   - Page Le Bateau : mentionner les differents usages avec liens
+   - Articles blog existants : enrichir avec liens vers landing pages pertinentes
+
+2. **Verification technique** :
+   - Rich Results Test Google sur chaque page (FAQPage, TouristAttraction, BreadcrumbList)
+   - Lighthouse > 90 (Performance, Accessibility, SEO) sur toutes les landings
+   - Mobile-first : tester StickyBar, hero image, formulaire CTA
+   - Verifier absence de cannibalisation (1 page = 1 intention, pas de chevauchement)
+
+3. **Checklist qualite par page** (cf. brief section 11) :
+   - Title unique 50-60 car. + mot-cle en debut
+   - Meta description unique 150-160 car. + CTA
+   - H1 unique contenant le mot-cle principal
+   - 800-1200 mots de contenu unique
+   - 3 schemas JSON-LD (FAQ + TouristAttraction + Breadcrumb)
+   - CTA sticky mobile + CTA hero
+   - 3-4 liens internes + liens /reservation + /croisiere
+   - Hero image `priority` + toutes images alt-textees
+   - Page dans le sitemap.xml
+
+4. **Version anglaise** (Tier 1 en priorite) :
+   - Dupliquer les 6 pages Tier 1 en anglais
+   - Hreflang FR ↔ EN sur chaque paire
+   - Adapter le contenu (pas de traduction mot a mot, adapter l'angle pour touristes)
+
+---
+
 ### Plan d'action Sprint 7 : Redirections WordPress → Next.js
 
 > **Objectif** : basculer le domaine sans perdre le SEO acquis
@@ -523,6 +652,84 @@ Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching s
    - Search Console : verifier les impressions/clics
    - Corriger les redirections manquantes au fur et a mesure
 4. **SEO** : verifier que les positions Google sont maintenues
+
+---
+
+## [next] Phase 8 : Landing Pages SEO thematiques
+
+> Brief detaille : [`brief/brief-seo-landing-pages.md`](brief/brief-seo-landing-pages.md)
+> 17 landing pages ciblant des expressions longue traine a forte intention de conversion.
+> Chaque page = 1 intention de recherche = 800-1200 mots de contenu unique + FAQ + JSON-LD.
+
+### 8.1 Infrastructure technique (Sprint 8a)
+
+- [ ] Types TypeScript (`src/data/landings/types.ts`) : `LandingPageData`, `LandingSection`, `BenefitItem`, `FAQItem`
+- [ ] Composants reutilisables `src/components/landing/` :
+  - [ ] `LandingHero.tsx` — Hero image de fond + H1 + subtitle + CTA principal
+  - [ ] `LandingBenefits.tsx` — Grille 2x2 / 4 colonnes avantages (icone + titre + texte)
+  - [ ] `LandingTestimonials.tsx` — Avis clients filtres par thematique
+  - [ ] `LandingPricing.tsx` — Encart tarifs simplifie + CTA
+  - [ ] `LandingFAQ.tsx` — Accordeon FAQ + schema FAQPage JSON-LD
+  - [ ] `LandingGallery.tsx` — Carrousel photos thematiques
+  - [ ] `LandingCTA.tsx` — Bloc CTA recurrent (reservation + tel)
+  - [ ] `LandingStickyBar.tsx` — Barre CTA sticky mobile (reserver + appeler)
+  - [ ] `LandingRelated.tsx` — Cards maillage interne (3-4 pages liees)
+  - [ ] `LandingBreadcrumb.tsx` — Fil d'Ariane + schema BreadcrumbList
+- [ ] Layout commun `src/app/[locale]/(landing)/layout.tsx` (header simplifie, CTA sticky)
+- [ ] Generateur JSON-LD `src/lib/seo/jsonld.ts` (FAQPage, TouristAttraction+Offer, BreadcrumbList)
+- [ ] Mise a jour `src/app/sitemap.ts` pour inclure les landing pages
+- [ ] Convention images : `public/images/landings/{slug}-hero.jpg`, `{slug}-og.jpg`, `{slug}-gallery-0X.jpg`
+
+### 8.2 Pages Tier 1 — 6 pages prioritaires (Sprint 8b)
+
+| # | Slug | Cible | Tonalite |
+|---|------|-------|----------|
+| 1 | `/evjf-seine` | EVJF bateau Seine Paris | Festif, complice |
+| 2 | `/evg-seine` | EVG bateau Seine Paris | Fun, aventure |
+| 3 | `/croisiere-romantique-seine` | Croisiere romantique Paris | Intime, poetique |
+| 4 | `/demande-en-mariage-seine` | Demande mariage bateau Paris | Emotion, surprise |
+| 5 | `/anniversaire-seine` | Anniversaire bateau Seine Paris | Celebration, convivialite |
+| 6 | `/soiree-entre-amis-seine` | Soiree amis bateau Seine | Decontracte, fun |
+
+Pour chaque page :
+- [ ] Fichier data `src/data/landings/{slug}.ts` (meta, hero, sections, FAQ, relatedPages)
+- [ ] Page Next.js `src/app/[locale]/(landing)/{slug}/page.tsx`
+- [ ] Contenu SEO unique 800-1200 mots
+- [ ] 4-5 FAQ specifiques
+- [ ] JSON-LD FAQPage + TouristAttraction+Offer + BreadcrumbList
+- [ ] Images hero + OG (1200x630) + galerie
+- [ ] Maillage interne configure
+
+### 8.3 Pages Tier 2 — 6 pages secondaires (Sprint 8c)
+
+| # | Slug | Cible |
+|---|------|-------|
+| 7 | `/anniversaire-mariage-seine` | Anniversaire mariage bateau Paris |
+| 8 | `/team-building-seine` | Team building bateau Seine Paris |
+| 9 | `/croisiere-famille-seine` | Croisiere famille privee Paris |
+| 10 | `/shooting-photo-seine` | Shooting photo bateau Seine Paris |
+| 11 | `/coucher-soleil-seine` | Croisiere coucher soleil Paris |
+| 12 | `/apero-bateau-seine` | Apero bateau Seine Paris |
+
+### 8.4 Pages Tier 3 — 5 pages saisonnieres (Sprint 8d)
+
+| # | Slug | Cible |
+|---|------|-------|
+| 13 | `/saint-valentin-seine` | Saint-Valentin bateau Paris |
+| 14 | `/nouvel-an-seine` | Reveillon bateau Seine Paris |
+| 15 | `/croisiere-noel-seine` | Croisiere Noel Paris bateau |
+| 16 | `/fete-des-meres-seine` | Fete des meres bateau Paris |
+| 17 | `/seminaire-seine` | Seminaire bateau Seine Paris |
+
+### 8.5 Maillage interne & optimisation (Sprint 8e)
+
+- [ ] Matrice de liens entre landing pages (EVJF↔EVG, Romantique↔Mariage↔Coucher de soleil, etc.)
+- [ ] Liens contextuels depuis pages existantes (Tarifs, Le Bateau, Croisiere)
+- [ ] Section "Nos croisieres par occasion" sur la homepage (grille de cards)
+- [ ] Enrichir les articles blog existants avec liens vers landing pages
+- [ ] Verification Rich Results Test Google sur chaque page
+- [ ] Lighthouse > 90 sur toutes les landings
+- [ ] Version anglaise des landing pages (Tier 1 en priorite)
 
 ---
 
