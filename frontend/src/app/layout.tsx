@@ -4,6 +4,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getConsentDefaultScript } from "@/lib/gtag";
 
 const inter = Inter({
@@ -117,6 +118,7 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
