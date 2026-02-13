@@ -1,0 +1,46 @@
+/*
+Theme Name: Bateau Headless
+Theme URI: https://bateau-a-paris.fr
+Author: Un Bateau à Paris
+Author URI: https://bateau-a-paris.fr
+Description: Minimal WordPress theme for headless mode. Only serves the Bookly reservation iframe — no front-end rendering.
+Version: 1.0.0
+License: GPL-2.0-or-later
+Text Domain: bateau-headless
+*/
+
+/* Minimal reset for the Bookly iframe page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* Bookly form overrides for visual consistency */
+.bookly-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.bookly-form .bookly-btn {
+  background-color: #c5943a !important;
+  border-color: #c5943a !important;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.bookly-form .bookly-btn:hover {
+  background-color: #a67b2e !important;
+  border-color: #a67b2e !important;
+}

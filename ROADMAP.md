@@ -1,6 +1,6 @@
 # Roadmap - bateau-a-paris.fr
 
-> Derniere mise a jour : 2026-02-13
+> Derniere mise a jour : 2026-02-14
 
 ## Legende
 
@@ -78,18 +78,32 @@
 
 ---
 
-## [next] Phase 2 : WordPress Headless + Automatisation (Semaine 4)
+## [wip] Phase 2 : WordPress Headless + Automatisation (Semaine 4)
 
-### 2.1 Plugin WordPress Headless Mode
-- [ ] Developper plugin `bateau-headless-mode`
-- [ ] Desactiver le front-end WordPress (redirect vers Next.js)
-- [ ] Activer CORS pour le domaine de production
-- [ ] Configurer les endpoints REST API custom si necessaire
+### [done] 2.1 Plugin WordPress Headless Mode
+- [x] Developper plugin `bateau-headless-mode` (`wordpress/plugins/bateau-headless-mode/`)
+- [x] Redirect 301 toutes les URLs front-end WordPress vers Next.js
+  - ~25 pages principales FR/EN (mapping exact)
+  - ~8 URLs reservation → `/fr/reservation`
+  - WooCommerce URLs → `/fr/reservation`
+  - Articles blog FR (detection automatique par slug)
+  - 3 articles EN (mapping exact)
+  - Categories → `/fr/actualites`
+  - 410 Gone pour URLs techniques Porto
+- [x] Activer CORS pour le domaine de production (+ Vercel preview + localhost)
+- [x] Desactiver fonctions front-end inutiles (generator, emoji, RSS feeds, oEmbed, XML-RPC)
+- [x] Notice admin informative
+- [ ] **Deployer** sur le WordPress de production
 
-### 2.2 Template Bookly Minimal
-- [ ] Creer un template WordPress minimal pour Bookly
-- [ ] Le endpoint `/reservation` sur WP sert uniquement l'iframe Bookly
-- [ ] Style minimal (pas de theme WP charge)
+### [done] 2.2 Template Bookly Minimal
+- [x] Theme minimal `bateau-headless` (`wordpress/themes/bateau-headless/`)
+  - `style.css` : styles Bookly gold accent (coherent design system Next.js)
+  - `functions.php` : dequeue tous CSS/JS sauf Bookly + jQuery, supprime admin bar
+  - `page-reservation-embed.php` : template HTML minimal + shortcode Bookly uniquement
+  - `index.php` : fallback redirect 301 vers Next.js
+- [x] Communication parent-iframe (postMessage `bookly-resize` pour hauteur responsive)
+- [x] `meta robots noindex` sur la page iframe
+- [ ] **Activer** le theme sur WordPress + assigner le template a la page `reservation-embed`
 
 ### 2.3 Automatisation des imports (cron)
 - [ ] **Cron articles WordPress** — reimport auto lors de publication
@@ -130,7 +144,7 @@
 
 ---
 
-## [done] Phase 4 : SEO & Performance (Semaine 6)
+## [done] Phase 4 : SEO & Performance (Semaine 6-10)
 
 ### [done] 4.1 SEO
 - [x] `metadataBase` dans root layout + title template `%s | Un Bateau a Paris`
@@ -161,7 +175,13 @@
 - [x] Vercel Speed Insights (RUM) — `@vercel/speed-insights` dans root layout
 - [x] Code splitting lightbox galerie (`next/dynamic`, ssr: false)
 - [x] AVIF image format active (`formats: ['image/avif', 'image/webp']`)
-- [ ] Lighthouse score > 90 / Core Web Vitals (LCP < 2.5s, CLS < 0.1)
+
+### [done] 4.3 Cache headers & Lighthouse CI
+- [x] Cache-Control `immutable` sur `/images/*` et `/_next/static/*` (1 an)
+- [x] `@lhci/cli` installe en devDependencies
+- [x] `lighthouserc.js` configure (5 URLs, seuils Performance > 85, A11y > 90, SEO > 95)
+- [x] GitHub Actions workflow `lighthouse.yml` (execute sur chaque PR `frontend/**`)
+- [ ] Lighthouse score > 90 / Core Web Vitals (LCP < 2.5s, CLS < 0.1) — a valider en production
 
 ---
 
@@ -351,7 +371,7 @@ Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching s
 
 ---
 
-## [wip] Phase 6 : Tests & Deploiement
+## [done] Phase 6 : Tests & Deploiement
 
 ### [done] 6.1 Tests
 - [x] Tests unitaires composants critiques (Vitest) — 65 tests, 11 fichiers
@@ -378,17 +398,14 @@ Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching s
 - [x] Tests accessibilite (WCAG 2.1 AA via axe-core)
 - [ ] A11y : corriger button-name, link-name (composants Lovable)
 
-### 6.2 Pre-production
-- [ ] Deployer sur OVH/Coolify (preprod)
-- [ ] Tests fonctionnels complets
-- [ ] Validation client
-
-### 6.3 Production
-- [ ] Deployer sur Vercel ou Coolify (production)
-- [ ] Configuration domaine bateau-a-paris.fr
-- [ ] SSL + CDN
-- [ ] Monitoring (Sentry + Vercel Analytics)
-- [ ] Backup strategy
+### [done] 6.2 Pre-production & Production
+- [x] Deployer sur Vercel (production)
+- [x] SSL + CDN (Vercel Edge Network)
+- [x] Vercel Speed Insights (RUM) actif
+- [x] Vercel Analytics actif
+- [ ] Configuration domaine bateau-a-paris.fr (apres bascule DNS — voir Sprint 7)
+- [ ] Monitoring erreurs (Sentry — optionnel)
+- [ ] Validation client finale
 
 ---
 

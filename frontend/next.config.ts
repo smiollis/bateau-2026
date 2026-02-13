@@ -57,6 +57,25 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers,
       },
+      // Cache static assets aggressively (fonts, images, JS/CSS bundles)
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
     ];
   },
   async redirects() {
