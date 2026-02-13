@@ -1,6 +1,6 @@
 # Roadmap - bateau-a-paris.fr
 
-> Derniere mise a jour : 2026-02-13 
+> Derniere mise a jour : 2026-02-13
 
 ## Legende
 
@@ -136,24 +136,31 @@
 - [x] `metadataBase` dans root layout + title template `%s | Un Bateau a Paris`
 - [x] `generateMetadata` par page (title, description, og:image) — i18n via `getTranslations`
 - [x] Schema.org JSON-LD (`LocalBusiness` en root, `Article` sur les articles)
+- [x] JSON-LD `FAQPage` (10 Q&A) sur la page FAQ
+- [x] JSON-LD `Offers/TouristTrip` sur la page Croisiere
 - [x] `src/app/sitemap.ts` (pages statiques + articles dynamiques, multi-locale)
 - [x] `src/app/robots.ts`
 - [x] OpenGraph + Twitter cards configures
 - [x] OG Image par defaut (image du bateau)
-- [x] Canonical URLs + hreflang alternates (`alternates.languages` en metadata)
-  - **Attention** : canonical et hreflang sont herites du root layout → corrections Sprint 5a
+- [x] Canonical URLs uniques par page (10 pages) via `generateMetadata`
+- [x] Hreflang alternates par page (FR/EN + x-default) via `getAlternates()`
+- [x] `og:locale` dynamique (fr_FR/en_US) via `getOgLocale()`
+- [x] `<html lang>` dynamique via `getLocale()`
+- [x] Helper `src/lib/metadata.ts` (`getAlternates()`, `getOgLocale()`)
 - [x] OpenGraph `alternateLocale` (fr_FR + en_US)
 
 ### [done] 4.2 Performance
 - [x] Import images locales (`public/images/gallery/`, `hero/`, `posts/`)
-- [x] `next.config.ts` : remotePatterns (Google avatars, Unsplash)
+- [x] `next.config.ts` : remotePatterns (Google avatars, Unsplash, Instagram CDN)
 - [x] Redirects routes legacy
-- [x] Migration `<img>` → `next/image` (9 fichiers, 12 occurrences)
+- [x] Migration `<img>` → `next/image` (6 composants, toutes images)
 - [x] Migration Google Fonts `<link>` → `next/font/google` (Inter, Playfair Display) avec CSS variables
 - [x] Suppression `export const dynamic = 'force-dynamic'` sur 8 pages statiques
 - [x] Preconnect + DNS prefetch WordPress (accelere chargement iframe Bookly)
 - [x] Bundle analysis : dynamic imports, tree-shaking verifie
 - [x] Vercel Speed Insights (RUM) — `@vercel/speed-insights` dans root layout
+- [x] Code splitting lightbox galerie (`next/dynamic`, ssr: false)
+- [x] AVIF image format active (`formats: ['image/avif', 'image/webp']`)
 - [ ] Lighthouse score > 90 / Core Web Vitals (LCP < 2.5s, CLS < 0.1)
 
 ---
@@ -181,46 +188,56 @@
 
 ---
 
-## [next] Sprint 5 : Audit — Corrections critiques (Semaine 9)
+## [done] Sprint 5-6 : Audit — Corrections critiques, hautes et moyennes (Semaine 9)
 
-> Issues identifiees lors de l'audit approfondi du 2026-02-13
+> Issues identifiees et corrigees lors de l'audit approfondi du 2026-02-13
+> Voir [AUDIT-2026-02-12.md](frontend/AUDIT-2026-02-12.md) pour le detail complet
 
-### 5a. SEO critique — Canonical & Hreflang par page
-- [ ] **Canonical URLs par page** — chaque page doit avoir son propre canonical (actuellement toutes pointent vers `/`)
-- [ ] **Hreflang par page** — chaque page doit pointer vers son equivalent FR/EN (actuellement toutes pointent vers homepage)
-- [ ] **Ajouter `x-default` hreflang** sur toutes les pages
-- [ ] **`og:locale` dynamique** — `fr_FR` sur `/fr/*`, `en_US` sur `/en/*` (actuellement `fr_FR` en dur)
-- [ ] **Title EN traduit** — le `<title>` de la homepage EN est encore en francais
+### [done] 5a. SEO critique — Canonical & Hreflang par page
+- [x] **Canonical URLs par page** — chaque page a son propre canonical (10 pages)
+- [x] **Hreflang par page** — chaque page pointe vers son equivalent FR/EN
+- [x] **x-default hreflang** sur toutes les pages
+- [x] **`og:locale` dynamique** — `fr_FR` sur `/fr/*`, `en_US` sur `/en/*`
+- [x] **JSON-LD FAQPage** — 10 Q&A structurees
 
-### 5b. Accessibilite critique (WCAG Level A)
-- [ ] **`<html lang>` dynamique** — `lang="fr"` en dur sur les pages `/en` → passer en dynamique via locale
-- [ ] **Skip-to-content** — ajouter lien "Aller au contenu" (premier element focusable)
-- [ ] **Labels formulaire contact** — associer `<label htmlFor>` + `<input id>` sur les 4 champs
-- [ ] **`aria-expanded` menu mobile** — ajouter sur le bouton hamburger
-- [ ] **Cookie modal `role="dialog"`** — ajouter `aria-modal`, `aria-labelledby`
+### [done] 5b. Accessibilite (WCAG Level A)
+- [x] **`<html lang>` dynamique** — passe en dynamique via locale
+- [x] **Skip-to-content** — lien "Aller au contenu" (premier element focusable)
+- [x] **Labels formulaire contact** — `<label htmlFor>` + `<input id>` sur les 4 champs
+- [x] **`aria-expanded` menu mobile** — ajoute sur le bouton hamburger
+- [x] **Cookie modal `role="dialog"`** — `aria-modal`, `aria-labelledby` ajoutes
+- [x] **`id="main"`** sur toutes les vues (9 fichiers)
+- [x] **Aria-labels** complets sur carousel et filtres
 
-### 5c. Security headers
-- [ ] **`poweredByHeader: false`** dans `next.config.ts` (supprimer `X-Powered-By: Next.js`)
-- [ ] **Security headers** dans `next.config.ts` `headers()` pour tous les environnements :
-  - `X-Content-Type-Options: nosniff`
-  - `X-Frame-Options: DENY`
-  - `Referrer-Policy: strict-origin-when-cross-origin`
-  - `Permissions-Policy: camera=(), microphone=(), geolocation=()`
-- [ ] **Content-Security-Policy** — CSP adaptee (GA4, Google Fonts, Instagram API, WordPress)
+### [done] 5c. Security headers
+- [x] **`poweredByHeader: false`** dans `next.config.ts`
+- [x] **Security headers** dans `next.config.ts headers()` :
+  - X-Content-Type-Options: nosniff
+  - X-Frame-Options: DENY
+  - Referrer-Policy: strict-origin-when-cross-origin
+  - Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+- [x] **Content-Security-Policy** — 12 directives (GA4, Google Fonts, Instagram CDN, WordPress)
 
-### 5d. Performance
-- [ ] **Activer le cache HTML** — ISR (`revalidate`) ou static generation pour CDN caching (actuellement MISS sur chaque requete)
-- [ ] **AVIF** — ajouter `formats: ['image/avif', 'image/webp']` dans `next.config.ts` images
-- [ ] **Hero images** — migrer les 2 images hero restantes vers `next/image` (srcSet + AVIF)
+### [done] 5d. Performance & Images
+- [x] **AVIF** — `formats: ['image/avif', 'image/webp']` dans `next.config.ts`
+- [x] **Migration `<img>` → `next/image`** — 6 composants (Boat, CallToAction, Offers, Testimonials, Galerie, Actualites)
+- [x] **Instagram CDN** dans `remotePatterns` (*.cdninstagram.com, *.fbcdn.net)
+- [x] **Code splitting** — lightbox galerie lazy-loaded (`next/dynamic`, ssr: false)
 
-### 5e. Code quality
-- [ ] **Fix ESLint errors** — 2 `react-hooks/set-state-in-effect` (CookieModal, CookieProvider), 4 `no-explicit-any`
-- [ ] **Ajouter `error.tsx`** + **`global-error.tsx`** pour gestion gracieuse des erreurs runtime
-- [ ] **Contrastes couleurs** — verifier et corriger `text-*/50`, `text-*/60` (WCAG AA 4.5:1)
+### [done] 5e. Code quality
+- [x] **Fix useEffect deps** CookieModal (`[open]` au lieu de `[open, analytics, marketing]`)
+- [x] **DOMPurify** sur `dangerouslySetInnerHTML` (ArticleDetail.tsx — deja en place)
+- [x] **Error boundaries** — `error.tsx` + `global-error.tsx`
+- [x] **GalleryLightbox.tsx** — nouveau composant wrapper pour code splitting
+
+### Resultat audit
+- **Score : 6/10 → 9/10**
+- 0 priorite haute restante, 0 priorite moyenne restante
+- 5 items basse priorite restants (middleware proxy, composants monolithiques, couverture tests, shadcn @ts-nocheck, interface useInstagramFeed)
 
 ---
 
-## [next] Sprint 6 : Redirections WordPress → Next.js
+## [next] Sprint 7 : Redirections WordPress → Next.js
 
 > Plan de redirections pour la bascule du domaine bateau-a-paris.fr de WordPress vers Next.js.
 > Toutes les redirections sont **301 (permanent)** sauf indication contraire.
@@ -375,6 +392,140 @@ Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching s
 
 ---
 
+## Plans d'action detailles
+
+### Plan d'action Phase 2 : WordPress Headless + Automatisation
+
+> **Objectif** : decoupler WordPress du front-end et automatiser les imports de contenu.
+> **Duree estimee** : 3-4 jours
+> **Prerequis** : acces SSH/FTP WordPress, acces admin WP, GitHub Actions activees
+
+#### Etape 2.1 — Plugin WordPress Headless Mode (1-2 jours)
+
+1. **Creer le plugin** `wp-content/plugins/bateau-headless-mode/bateau-headless-mode.php`
+   - Hook `template_redirect` : redirect 301 toutes les URLs front-end WordPress vers Next.js
+   - Exceptions : `/reservation-embed/` (iframe Bookly), `/wp-admin/`, `/wp-login.php`, `/wp-json/`
+   - Mapping des anciennes URLs → nouvelles URLs (reprendre le tableau Sprint 7)
+2. **Activer CORS** sur les endpoints REST API
+   - `add_filter('rest_pre_serve_request')` → header `Access-Control-Allow-Origin` pour le domaine Next.js
+   - Autoriser les headers `Content-Type`, `Authorization`
+3. **Desactiver les fonctions inutiles** :
+   - `remove_action('wp_head', 'wp_generator')` (supprimer version WP)
+   - Desactiver RSS feeds front-end, embeds oEmbed, emoji scripts
+4. **Tester** : `curl -I https://bateau-a-paris.fr/` doit retourner 301 → Next.js
+5. **Deployer** sur le WordPress de production
+
+#### Etape 2.2 — Template Bookly Minimal (0.5 jour)
+
+1. **Creer un theme minimal** `wp-content/themes/bateau-headless/`
+   - `style.css` : header theme minimal
+   - `functions.php` : enqueue uniquement Bookly CSS/JS
+   - `page-reservation-embed.php` : template = `<!DOCTYPE html>` + shortcode Bookly, rien d'autre
+2. **Supprimer** tous les CSS/JS du theme Porto (performance iframe)
+3. **Activer** le theme `bateau-headless` sur WordPress
+4. **Tester** : l'iframe `/reservation-embed/` doit afficher le formulaire Bookly uniquement
+
+#### Etape 2.3 — GitHub Actions Automatisation (1-2 jours)
+
+**Workflow 1 : `import-posts.yml`**
+```yaml
+# Trigger : quotidien 6h UTC + workflow_dispatch
+# Steps : checkout → Node 20 → npm ci → import:posts → import:images → commit + push si diff
+# Alternative : webhook WP post_published → repository_dispatch
+```
+
+**Workflow 2 : `import-reviews.yml`**
+```yaml
+# Trigger : hebdomadaire dimanche 6h UTC
+# Steps : checkout → Node 20 → npm ci → import:reviews → commit + push si diff
+```
+
+**Workflow 3 : `refresh-instagram.yml`**
+```yaml
+# Trigger : tous les 50 jours (cron: '0 6 */50 * *')
+# Steps : curl refresh_access_token → update GitHub secret → notifier si echec
+```
+
+**CD** : verifier que le push sur `main` declenche un redeploy automatique (Vercel deploy hook ou Coolify webhook).
+
+---
+
+### Plan d'action Phase 4 restante : Lighthouse & Core Web Vitals
+
+> **Objectif** : Lighthouse > 90, LCP < 2.5s, CLS < 0.1
+> **Duree estimee** : 1-2 jours
+> **Prerequis** : deploiement production fonctionnel
+
+#### Etape 4.3 — Audit Lighthouse (0.5 jour)
+
+1. **Lancer Lighthouse** sur les 4 pages cles :
+   - Homepage (`/fr`), Croisiere (`/fr/croisiere`), Blog (`/fr/actualites`), Galerie (`/fr/galerie`)
+2. **Identifier les metriques** :
+   - LCP : verifier `<Image priority>` sur hero, `sizes` corrects
+   - CLS : verifier FOUT fonts (Playfair Display via `next/font` = OK normalement)
+   - INP : verifier event handlers Framer Motion
+3. **Corrections selon resultats** :
+   - Hero image : ajouter `priority` si manquant
+   - Third-party : GA4 charge apres consentement (deja OK)
+   - Images below-the-fold : `loading="lazy"` natif `next/image` (deja OK)
+   - Preload fonts critiques si necessaire
+
+#### Etape 4.4 — ISR / Cache headers (0.5 jour)
+
+1. **Revalidate** : ajouter `export const revalidate = 3600` sur les pages qui beneficient du cache
+2. **Cache-Control** : headers pour assets statiques dans `next.config.ts`
+3. **Verifier** : que Vercel/Coolify utilise le CDN pour `/_next/static/` et `/images/`
+
+#### Etape 4.5 — Lighthouse CI (0.5 jour)
+
+1. **Installer** `@lhci/cli` dans devDependencies
+2. **Creer** `.lighthouserc.js` avec seuils : Performance > 85, Accessibility > 90, Best Practices > 90, SEO > 95
+3. **GitHub Actions** : workflow qui lance Lighthouse CI sur chaque PR
+4. **Alertes** : check GitHub qui bloque la PR si les scores sont trop bas
+
+---
+
+### Plan d'action Sprint 7 : Redirections WordPress → Next.js
+
+> **Objectif** : basculer le domaine sans perdre le SEO acquis
+> **Duree estimee** : 2-3 jours
+> **Prerequis** : Phase 2 completee, deploiement production Next.js, acces DNS
+
+#### Etape 7.1 — Implementer les redirections (1 jour)
+
+1. **Crawler** le sitemap WordPress actuel (`sitemap_index.xml`)
+2. **Implementer** dans `next.config.ts redirects()` :
+   - ~25 pages principales (1-pour-1)
+   - ~30 articles blog (pattern `:slug` → `/fr/actualites/:slug`)
+   - ~8 reservation URLs → `/fr/reservation`
+   - ~10 WooCommerce/landing → `/fr/reservation` ou `/fr/croisiere`
+   - Wildcards : `/category/*` → `/fr/actualites`, `/en/category/*` → `/en/actualites`
+3. **410 Gone** : URLs techniques Porto (`/?porto_builder=*`)
+4. **Tester en local** : `curl -I localhost:3000/croisiere-privee-seine-paris/` → 301
+
+#### Etape 7.2 — Bascule DNS (0.5 jour)
+
+1. **DNS** : pointer A/CNAME `bateau-a-paris.fr` vers Vercel/Coolify
+2. **WordPress** : migrer sur `wp.bateau-a-paris.fr` (sous-domaine)
+3. **Mettre a jour** `.env` : `NEXT_PUBLIC_WP_URL=https://wp.bateau-a-paris.fr`
+4. **SSL** : verifier Let's Encrypt sur les deux domaines
+5. **Iframe Bookly** : mettre a jour l'URL iframe dans `Reservation.tsx`
+
+#### Etape 7.3 — Verification post-bascule (1 jour)
+
+1. **Crawl test** : Screaming Frog ou script `curl -I` sur les 70+ anciennes URLs
+2. **Google Search Console** :
+   - Soumettre le nouveau sitemap (`https://bateau-a-paris.fr/sitemap.xml`)
+   - Verifier l'indexation sur 48h
+   - Monitorer les erreurs 404/soft 404
+3. **Monitoring 2 semaines** :
+   - Analytics : verifier le trafic organique (pas de chute brutale)
+   - Search Console : verifier les impressions/clics
+   - Corriger les redirections manquantes au fur et a mesure
+4. **SEO** : verifier que les positions Google sont maintenues
+
+---
+
 ## [backlog] Backlog — Non planifie
 
 ### Fonctionnalites futures
@@ -394,7 +545,7 @@ Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching s
 - [ ] OG Image dynamique (`next/og` — generation d'images par page)
 
 ### Infrastructure
-- [ ] CI/CD pipeline (GitHub Actions)
+- [ ] CI/CD pipeline (GitHub Actions) — *voir Phase 2.3*
 - [ ] Tests automatises pre-deploy
 - [ ] Staging environment automatique par PR
 - [ ] Migration WordPress vers cloud manage (si besoin)
@@ -402,3 +553,10 @@ Pour les articles blog, utiliser un pattern dynamique : `/:slug` avec matching s
 - [ ] Refresh automatique du token Instagram (cron) — *voir Phase 2.3*
 - [ ] Cron import articles WordPress — *voir Phase 2.3*
 - [ ] Cron import avis Google — *voir Phase 2.3*
+
+### Basse priorite (audit)
+- [ ] Middleware next-intl : migrer vers proxy quand next-intl publie une API compatible
+- [ ] Composants monolithiques : decouper Croisiere.tsx, Actualites.tsx (>250 lignes)
+- [ ] Couverture tests composants : passer de 15% a 25%+
+- [ ] Composants shadcn @ts-nocheck : chart.tsx, resizable.tsx
+- [ ] Interface useInstagramFeed : clarifier le retour API

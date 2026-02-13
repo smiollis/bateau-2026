@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Ruler, Sofa, Sun, ArrowRight } from "lucide-react";
 
@@ -35,11 +36,13 @@ const Boat = () => {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden">
-              <img
+            <div className="relative rounded-2xl overflow-hidden h-[400px] lg:h-[500px]">
+              <Image
                 src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
                 alt="Le Senang - Bateau de croisière privée"
-                className="w-full h-[400px] lg:h-[500px] object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
             </div>

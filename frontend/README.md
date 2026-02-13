@@ -7,6 +7,7 @@
 [![Radix UI](https://img.shields.io/badge/Radix_UI-latest-161618?style=flat-square&logo=radixui)](https://www.radix-ui.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-FF0055?style=flat-square&logo=framer)](https://www.framer.com/motion/)
 [![Google Analytics](https://img.shields.io/badge/GA4-Consent_Mode_v2-E37400?style=flat-square&logo=googleanalytics&logoColor=white)](https://marketingplatform.google.com/about/analytics/)
+[![Audit](https://img.shields.io/badge/Audit-9%2F10-brightgreen?style=flat-square)]()
 [![License](https://img.shields.io/badge/License-Private-red?style=flat-square)]()
 
 > Site vitrine & reservation pour **Un Bateau a Paris** — croisieres privees sur la Seine.
@@ -17,16 +18,17 @@
 
 | Couche | Technologie |
 |--------|-------------|
-| Framework | Next.js 16 (App Router, Turbopack) |
+| Framework | Next.js 16.1.6 (App Router, Turbopack) |
 | UI | Tailwind CSS v4 + shadcn/ui + Radix UI |
-| Animations | Framer Motion |
+| Animations | Framer Motion 12 |
 | Language | TypeScript 5 (strict) |
+| i18n | next-intl 4 (FR/EN) — 230+ cles, 16 namespaces, blog bilingue |
 | Analytics | GA4 + Google Consent Mode v2 |
 | API | Instagram Graph API, WordPress REST API |
-| Fonts | Playfair Display, Inter |
-| i18n | next-intl (FR/EN) — 230+ cles, blog bilingue |
-| Tests | Vitest (65 tests) + Playwright (28 tests) + axe-core |
+| Fonts | Playfair Display (headings), Inter (body) |
+| Tests | Vitest (65 tests) + Playwright (28 tests) + axe-core WCAG |
 | Email | Resend (formulaire de contact) |
+| Securite | CSP, DOMPurify, 5 security headers |
 | Logging | Logger structure (JSON en prod, lisible en dev) |
 
 ## Quick Start
@@ -57,28 +59,39 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 | `npm run test:watch` | Tests unitaires en mode watch |
 | `npm run test:e2e` | Tests E2E (Playwright, 28 tests) |
 | `npm run test:e2e:ui` | Tests E2E avec interface Playwright |
+| `npm run import:all` | Import donnees (articles, avis, images, Instagram) |
 
 ## Structure du projet
 
 ```
 src/
-├── app/                  # App Router (pages, layout, API routes)
-│   ├── api/instagram/    # API route Instagram feed
-│   ├── layout.tsx        # Layout global (fonts, GA4, Providers)
-│   └── */page.tsx        # Pages (wrappers vers views/)
-├── views/                # Composants de page complets
+├── app/[locale]/           # App Router — pages avec generateMetadata
+│   ├── layout.tsx          # Layout global (fonts, GA4, i18n, providers)
+│   ├── page.tsx            # Homepage
+│   ├── actualites/         # Blog (liste + [slug])
+│   ├── croisiere/          # Page croisiere
+│   ├── galerie/            # Galerie photos (lightbox lazy-loaded)
+│   ├── faq/                # FAQ (JSON-LD FAQPage)
+│   ├── reservation/        # Reservation (iframe Bookly)
+│   ├── cgv/                # CGV
+│   ├── mentions-legales/   # Mentions legales
+│   ├── confidentialite/    # Politique de confidentialite
+│   ├── error.tsx           # Error boundary locale
+│   └── not-found.tsx       # Page 404
+├── views/                  # Composants de page complets
 ├── components/
-│   ├── ui/               # shadcn/ui (Button, Card, Switch, etc.)
-│   ├── cookie-consent/   # CookieProvider
-│   ├── *Variants.tsx     # Composants multi-theme
-│   ├── CookieBanner.tsx  # Banner RGPD
-│   └── CookieModal.tsx   # Modal parametres cookies
-├── contexts/             # ThemeVariantContext (2 themes: classic/nuit)
-├── hooks/                # useCookieConsent, useInstagramFeed
-├── lib/                  # cookie-consent, gtag, utils
-├── types/                # TypeScript declarations
-├── data/                 # Donnees statiques (posts.json, posts-en.json, galleryImages)
-└── assets/               # Images, logo, map
+│   ├── ui/                 # shadcn/ui (Button, Card, Switch, etc.)
+│   ├── cookie-consent/     # CookieProvider
+│   ├── *Variants.tsx       # Composants multi-theme (isDark ternaire)
+│   ├── GalleryLightbox.tsx # Lightbox (lazy-loaded via next/dynamic)
+│   ├── CookieBanner.tsx    # Banner RGPD
+│   └── CookieModal.tsx     # Modal parametres cookies
+├── contexts/               # ThemeVariantContext (2 themes: classic/nuit)
+├── hooks/                  # useCookieConsent, useInstagramFeed
+├── lib/                    # cookie-consent, gtag, logger, metadata, utils
+├── i18n/                   # Configuration next-intl (request.ts, navigation.ts)
+├── data/                   # posts.json, posts-en.json, galleryImages, reviews.json
+└── assets/                 # Images statiques, logo, map
 ```
 
 ## Themes
@@ -90,21 +103,39 @@ src/
 | classic | Navy/gold elegant (jour) | Playfair Display |
 | nuit | Deep navy night (sombre) | Playfair Display |
 
-## Variables d'environnement
+## SEO
 
-```env
-# WordPress API
-NEXT_PUBLIC_WP_API_URL=https://bateau-a-paris.fr/wp-json
-NEXT_PUBLIC_WP_URL=https://bateau-a-paris.fr
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+- **Canonical URLs** + **hreflang alternates** (FR/EN + x-default) sur 10 pages
+- **JSON-LD** : LocalBusiness, FAQPage (10 Q&A), Offers (TouristTrip), Article
+- **Sitemap** dynamique (`sitemap.ts`) + **robots.txt**
+- **OpenGraph** + **Twitter cards** avec `og:locale` dynamique (fr_FR/en_US)
+- Helper `src/lib/metadata.ts` : `getAlternates()`, `getOgLocale()`
 
-# Google Analytics 4
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+## Securite
 
-# Instagram (server-side)
-INSTAGRAM_ACCESS_TOKEN=IGAA...
-INSTAGRAM_USER_ID=12345...
-```
+- **Content-Security-Policy** : 12 directives (GA4, Google Fonts, Instagram CDN, WordPress)
+- **Security headers** : X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy
+- **XSS** : DOMPurify sur tout contenu HTML dynamique (WordPress)
+- **RGPD** : GA4 Consent Mode v2, defaults "denied" pour 33 regions EU
+- **Anti-spam** : Rate limiting 3 req/min + honeypot + escapeHtml
+- **poweredByHeader** : desactive
+- **Error boundaries** : `error.tsx` + `global-error.tsx`
+
+## Performance
+
+- **Images** : toutes migrees vers `next/image` (AVIF/WebP, lazy loading, srcset)
+- **Code splitting** : lightbox galerie lazy-loaded (`next/dynamic`, ssr: false)
+- **Fonts** : `next/font/google` avec CSS variables
+- **Monitoring** : Vercel Speed Insights (RUM)
+
+## Tests
+
+| Suite | Nombre | Outils |
+|-------|--------|--------|
+| Tests unitaires | 65 | Vitest, Testing Library, jsdom |
+| Tests E2E | 28 | Playwright (Chromium, Firefox, WebKit) |
+| Accessibilite | integre | axe-core WCAG 2.1 AA |
+| Mobile | integre | Viewport iPhone 14, touch events |
 
 ## Cookie Consent (RGPD)
 
@@ -114,8 +145,37 @@ INSTAGRAM_USER_ID=12345...
 - Persistance localStorage, versionne
 - Lien "Parametres cookies" dans le footer
 
+## Variables d'environnement
+
+```env
+NEXT_PUBLIC_WP_API_URL=https://...        # URL API WordPress
+NEXT_PUBLIC_WP_URL=https://...            # URL WordPress (CSP + iframe)
+NEXT_PUBLIC_SITE_URL=https://...          # URL du site Next.js
+NEXT_PUBLIC_GA_ID=G-...                   # Google Analytics 4
+INSTAGRAM_ACCESS_TOKEN=...                # Token Instagram Graph API (server-side)
+INSTAGRAM_USER_ID=...                     # ID utilisateur Instagram
+RESEND_API_KEY=re_...                     # Cle API Resend (emails contact)
+CONTACT_EMAIL_TO=...                      # Adresse destinataire formulaire contact
+```
+
+## Audit qualite
+
+Score actuel : **9/10** — voir [AUDIT-2026-02-12.md](AUDIT-2026-02-12.md) pour le detail.
+
+| Categorie | Statut |
+|-----------|--------|
+| Build + TypeScript strict | OK (0 erreur) |
+| ESLint | OK (~0 erreur custom) |
+| Tests | 65 unitaires + 28 E2E, tous OK |
+| SEO | 10/10 pages, 4 schemas JSON-LD |
+| Accessibilite | WCAG 2.1 AA substantiel |
+| Securite | 5/5 headers (dont CSP), 0 vecteur XSS |
+| Performance | next/image partout, AVIF, code splitting |
+| Images optimisees | 100% next/image |
+
 ## Documentation
 
-- [ROADMAP.md](../ROADMAP.md) — Roadmap priorisee et backlog
-- [CHANGELOG.md](../CHANGELOG.md) — Release notes
+- [ROADMAP.md](../ROADMAP.md) — Roadmap priorisee, phases, backlog
+- [AUDIT-2026-02-12.md](AUDIT-2026-02-12.md) — Audit qualite detaille (9/10)
+- [CLAUDE.md](CLAUDE.md) — Contexte pour Claude Code
 - [brief/](../brief/) — Specs detaillees du projet

@@ -12,31 +12,35 @@ bateau-2026/
 ├── brief/                    # Documentation projet (5 briefs .md)
 ├── frontend/                 # Next.js 16 + TypeScript + Tailwind CSS v4
 │   ├── src/
-│   │   ├── app/              # App Router (layout, pages, API routes)
+│   │   ├── app/              # App Router (layout, pages, API routes, error boundaries)
 │   │   ├── views/            # Page components (ex-src/pages/, renomme pour eviter conflit Pages Router)
-│   │   ├── components/       # Composants React (ui/, cookie-consent/, Variants)
+│   │   ├── components/       # Composants React (ui/, cookie-consent/, Variants, GalleryLightbox)
 │   │   ├── contexts/         # ThemeVariantContext (2 themes: classic/nuit)
 │   │   ├── hooks/            # useCookieConsent, useInstagramFeed
-│   │   ├── lib/              # cookie-consent, gtag, logger, utils
+│   │   ├── lib/              # cookie-consent, gtag, logger, metadata, utils
 │   │   ├── types/            # cookie-consent.d.ts
 │   │   ├── data/             # posts.json, posts-en.json, galleryImages, reviews
+│   │   ├── i18n/             # next-intl config (request.ts, navigation.ts, routing.ts)
 │   │   └── assets/           # Images statiques, logo, map/
 │   ├── .env.local            # WP_API, GA_ID, INSTAGRAM_TOKEN (gitignore)
 │   └── package.json
-└── ROADMAP.md
+├── ROADMAP.md
+└── AUDIT-2026-02-12.md       # Audit qualite (9/10)
 ```
 
 ## Stack technique
 
 - **Framework**: Next.js 16.1.6 (App Router, Turbopack)
 - **UI**: Tailwind CSS v4 (`@theme inline` pour les tokens), shadcn/ui, Radix UI
-- **Animations**: Framer Motion
+- **Animations**: Framer Motion 12
 - **TypeScript**: strict mode
-- **i18n**: next-intl (FR/EN) — 230+ cles, 16 namespaces, blog bilingue
+- **i18n**: next-intl 4 (FR/EN) — 230+ cles, 16 namespaces, blog bilingue
 - **Analytics**: GA4 (G-N20S788YDW) + Google Consent Mode v2
 - **API**: Instagram Graph API, WordPress REST API (reservation Bookly)
 - **Logging**: `src/lib/logger.ts` — JSON structure en production, lisible en dev
-- **Fonts**: Playfair Display (headings), Inter (body)
+- **Fonts**: Playfair Display (headings), Inter (body) via `next/font/google`
+- **Securite**: CSP (12 directives), DOMPurify, 5 security headers
+- **SEO**: Canonical + hreflang + JSON-LD (4 schemas) sur 10 pages
 
 ## Systeme de themes
 
@@ -63,6 +67,12 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **Instagram token** : expire le 2026-04-04 — voir section "Renouvellement token Instagram" ci-dessous
 - **Blog bilingue** : `posts.json` (FR) + `posts-en.json` (EN), chargement par locale dans views et pages
 - **Logger** : utiliser `logger.error/warn/info` de `@/lib/logger` au lieu de `console.error`
+- **Images** : TOUJOURS utiliser `next/image` (pas de `<img>`) — toutes les images sont migrees
+- **CSP** : le header Content-Security-Policy est dans `next.config.ts` — penser a ajouter les domaines si on integre un nouveau service
+- **DOMPurify** : TOUJOURS utiliser DOMPurify sur `dangerouslySetInnerHTML` (contenu WordPress)
+- **Code splitting** : utiliser `next/dynamic` avec `ssr: false` pour les composants lourds client-only (ex: GalleryLightbox)
+- **JSON-LD** : 4 schemas en place (LocalBusiness, FAQPage, Offers/TouristTrip, Article) — ajouter de nouveaux schemas dans les `page.tsx` server components
+- **Metadata** : utiliser `getAlternates(locale, path)` et `getOgLocale(locale)` de `@/lib/metadata` pour les `generateMetadata`
 
 ## Commandes
 
@@ -87,15 +97,42 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 - Config : `vitest.config.ts`, `playwright.config.ts`
 - Setup : `src/__tests__/setup.ts` (jest-dom, gtag mock)
 
+## SEO
+
+- **Canonical** : unique par page (10 pages) via `generateMetadata`
+- **Hreflang** : FR/EN + x-default par page via `getAlternates()`
+- **og:locale** : dynamique via `getOgLocale()`
+- **JSON-LD** :
+  - `LocalBusiness` : root layout
+  - `FAQPage` : `src/app/[locale]/faq/page.tsx` (10 Q&A)
+  - `Offers` (TouristTrip) : page croisiere
+  - `Article` : `src/views/ArticleDetail.tsx`
+- **Sitemap** : `src/app/sitemap.ts` (statiques + articles dynamiques, multi-locale)
+
+## Securite
+
+- **Headers** (dans `next.config.ts headers()`) :
+  - X-Content-Type-Options: nosniff
+  - X-Frame-Options: DENY
+  - Referrer-Policy: strict-origin-when-cross-origin
+  - Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  - Content-Security-Policy: 12 directives
+- **poweredByHeader** : false
+- **DOMPurify** : `src/views/ArticleDetail.tsx` (contenu WordPress)
+- **Error boundaries** : `error.tsx` + `global-error.tsx`
+- **Anti-spam** : rate limiting 3 req/min + honeypot + escapeHtml
+
 ## Variables d'environnement (.env.local)
 
 ```
 NEXT_PUBLIC_WP_API_URL    # URL API WordPress
-NEXT_PUBLIC_WP_URL        # URL WordPress
+NEXT_PUBLIC_WP_URL        # URL WordPress (CSP + iframe)
 NEXT_PUBLIC_SITE_URL      # URL du site Next.js
 NEXT_PUBLIC_GA_ID         # Google Analytics 4 Measurement ID
 INSTAGRAM_ACCESS_TOKEN    # Token Instagram Graph API (server-side only)
 INSTAGRAM_USER_ID         # ID utilisateur Instagram
+RESEND_API_KEY            # Cle API Resend (emails contact)
+CONTACT_EMAIL_TO          # Adresse destinataire formulaire contact
 ```
 
 ## Renouvellement token Instagram
@@ -113,6 +150,22 @@ Le token Instagram Graph API expire le **2026-04-04**. Pour renouveler :
 3. **Vercel/production** : mettre a jour la variable d'environnement dans le dashboard Vercel/Coolify.
 
 Le token est valide 60 jours. Renouveler au moins 10 jours avant expiration.
+
+## Score audit
+
+**Score actuel : 9/10** (voir `AUDIT-2026-02-12.md`)
+
+| Categorie | Statut |
+|-----------|--------|
+| Build + TypeScript | OK (0 erreur) |
+| Tests | 65/65 unitaires + 28/28 E2E |
+| SEO | 10/10 pages, 4 JSON-LD |
+| Securite | 5/5 headers, 0 XSS |
+| Accessibilite | WCAG 2.1 AA substantiel |
+| Images | 100% next/image |
+| Performance | AVIF, code splitting |
+
+Reste a faire (basse priorite) : middleware next-intl proxy, couverture tests, composants monolithiques.
 
 ## Briefs de reference
 

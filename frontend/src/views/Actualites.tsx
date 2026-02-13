@@ -271,11 +271,12 @@ const Actualites = () => {
                     transition={{ delay: i * 0.05 }}
                     className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
                   >
-                    <img
+                    <Image
                       src={post.media_type === 'VIDEO' ? (post.thumbnail_url ?? post.media_url) : post.media_url}
                       alt={post.caption?.slice(0, 100) ?? 'Instagram post'}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      fill
+                      sizes="33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end">
                       {post.caption && (

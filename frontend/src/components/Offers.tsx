@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -103,10 +104,12 @@ const Offers = () => {
 
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
+                  <Image
                     src={offer.image}
                     alt={offer.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
                 </div>

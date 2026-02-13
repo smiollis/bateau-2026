@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import reviewsData from "@/data/reviews.json";
 
@@ -93,10 +94,12 @@ const Testimonials = () => {
             >
               <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
                 {/* Avatar */}
-                <img
+                <Image
                   src={testimonials[currentIndex].avatar}
                   alt={testimonials[currentIndex].name}
-                  className="w-16 h-16 rounded-full object-cover"
+                  width={64}
+                  height={64}
+                  className="rounded-full object-cover"
                 />
                 
                 <div className="flex-grow">

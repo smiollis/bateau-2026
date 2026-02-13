@@ -54,7 +54,8 @@ const CookieModal = ({
       setLocalAnalytics(analytics);
       setLocalMarketing(marketing);
     }
-  }, [open, analytics, marketing]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   const getToggleProps = (id: string) => {
     switch (id) {

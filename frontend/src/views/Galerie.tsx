@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { ArrowLeft, Instagram, ExternalLink, Loader2 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -12,13 +13,10 @@ import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import { useTranslations } from "next-intl";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
-import Lightbox from "yet-another-react-lightbox";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
-import Counter from "yet-another-react-lightbox/plugins/counter";
-import "yet-another-react-lightbox/styles.css";
-import "yet-another-react-lightbox/plugins/thumbnails.css";
-import "yet-another-react-lightbox/plugins/counter.css";
+
+const GalleryLightbox = dynamic(() => import("@/components/GalleryLightbox"), {
+  ssr: false,
+});
 
 const slides = galleryImages.map((img) => ({
   src: img.src,
@@ -90,15 +88,12 @@ const Galerie = () => {
         </div>
       </main>
 
-      {/* Lightbox */}
-      <Lightbox
+      {/* Lightbox (lazy-loaded) */}
+      <GalleryLightbox
         open={lightboxIndex >= 0}
         index={lightboxIndex}
-        close={() => setLightboxIndex(-1)}
+        onClose={() => setLightboxIndex(-1)}
         slides={slides}
-        plugins={[Zoom, Thumbnails, Counter]}
-        zoom={{ maxZoomPixelRatio: 3 }}
-        thumbnails={{ position: "bottom", width: 100, height: 60 }}
       />
 
       {/* Instagram Section */}
@@ -140,11 +135,12 @@ const Galerie = () => {
                   transition={{ delay: i * 0.05 }}
                   className="relative aspect-square overflow-hidden rounded-lg group cursor-pointer"
                 >
-                  <img
+                  <Image
                     src={post.media_type === 'VIDEO' ? (post.thumbnail_url ?? post.media_url) : post.media_url}
                     alt={post.caption?.slice(0, 100) ?? 'Instagram post'}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    sizes="33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end">
                     {post.caption && (
