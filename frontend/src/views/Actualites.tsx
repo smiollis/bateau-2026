@@ -8,12 +8,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useInstagramFeed } from "@/hooks/useInstagramFeed";
-import allPosts from "@/data/posts.json";
+import { useTranslations, useLocale } from "next-intl";
+import postsFr from "@/data/posts.json";
+import postsEn from "@/data/posts-en.json";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("fr-FR", {
+function formatDate(iso: string, locale: string): string {
+  return new Date(iso).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -22,24 +24,30 @@ function formatDate(iso: string): string {
 
 const POSTS_PER_PAGE = 6;
 
+const ALL_CATEGORY = "__all__";
+
 const Actualites = () => {
-  const [activeCategory, setActiveCategory] = useState("Tout");
+  const [activeCategory, setActiveCategory] = useState(ALL_CATEGORY);
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
   const { isDark } = useThemeVariant();
   const { posts: instagramPosts, isLoading: igLoading } = useInstagramFeed(9);
+  const t = useTranslations("actualites");
+  const tCommon = useTranslations("common");
+  const locale = useLocale();
+  const allPosts = locale === "en" ? postsEn : postsFr;
 
   const categories = useMemo(
-    () => ["Tout", ...Array.from(new Set(allPosts.map((p) => p.category).filter(Boolean)))],
-    []
+    () => [ALL_CATEGORY, ...Array.from(new Set(allPosts.map((p) => p.category).filter(Boolean)))],
+    [allPosts]
   );
 
-  const filteredPosts = activeCategory === "Tout"
+  const filteredPosts = activeCategory === ALL_CATEGORY
     ? allPosts
     : allPosts.filter((p) => p.category === activeCategory);
 
   // 1 featured + up to visibleCount in grid
   const gridPosts = filteredPosts.slice(1, 1 + visibleCount);
-  const hasMore = activeCategory === "Tout" && filteredPosts.length > 1 + visibleCount;
+  const hasMore = activeCategory === ALL_CATEGORY && filteredPosts.length > 1 + visibleCount;
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,17 +61,17 @@ const Actualites = () => {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour a l&apos;accueil
+            {tCommon("backToHome")}
           </Link>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-primary mb-4">
-              Actualites
+              {t("title")}
             </h1>
             <p className="text-muted-foreground text-lg max-w-3xl">
-              Suivez les dernieres nouvelles du Senang, nos evenements et nos aventures sur la Seine.
+              {t("subtitle")}
             </p>
           </motion.div>
         </div>
@@ -85,7 +93,7 @@ const Actualites = () => {
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80"
                   }`}
                 >
-                  {cat}
+                  {cat === ALL_CATEGORY ? t("allCategories") : cat}
                 </button>
               ))}
             </div>
@@ -94,7 +102,7 @@ const Actualites = () => {
           {/* Empty state */}
           {filteredPosts.length === 0 && (
             <div className="text-center py-24">
-              <p className="text-muted-foreground text-lg">Aucun article pour le moment.</p>
+              <p className="text-muted-foreground text-lg">{t("noArticles")}</p>
             </div>
           )}
 
@@ -133,7 +141,7 @@ const Actualites = () => {
                       )}
                       <span className="text-muted-foreground text-sm flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
-                        {formatDate(filteredPosts[0].date)}
+                        {formatDate(filteredPosts[0].date, locale)}
                       </span>
                     </div>
                     <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-4 group-hover:text-primary transition-colors">
@@ -143,7 +151,7 @@ const Actualites = () => {
                       {filteredPosts[0].excerpt}
                     </p>
                     <div className="flex items-center gap-2 text-primary font-medium">
-                      Lire l&apos;article
+                      {t("readArticle")}
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
@@ -188,7 +196,7 @@ const Actualites = () => {
                           )}
                           <span className="text-muted-foreground text-xs flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
-                            {formatDate(post.date)}
+                            {formatDate(post.date, locale)}
                           </span>
                         </div>
                         <h3 className="font-heading text-lg text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
@@ -198,7 +206,7 @@ const Actualites = () => {
                           {post.excerpt}
                         </p>
                         <div className="flex items-center gap-1 text-primary text-sm font-medium mt-4">
-                          Lire la suite
+                          {t("readMore")}
                           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                         </div>
                       </div>
@@ -217,7 +225,7 @@ const Actualites = () => {
                 variant="outline"
                 className="px-8 py-3 rounded-full"
               >
-                Charger plus d&apos;articles
+                {t("loadMore")}
               </Button>
             </div>
           )}
@@ -238,10 +246,10 @@ const Actualites = () => {
                 <a href="https://www.instagram.com/bateau_a_paris/" target="_blank" rel="noopener noreferrer" className="font-heading text-lg text-primary hover:underline">@bateau_a_paris</a>
               </div>
               <h2 className="font-heading text-3xl md:text-4xl font-semibold text-primary mb-3">
-                Suivez-nous sur Instagram
+                {t("instagramTitle")}
               </h2>
               <p className="text-muted-foreground">
-                Les coulisses, les moments forts et l&apos;ambiance a bord du Senang
+                {t("instagramSubtitle")}
               </p>
             </motion.div>
 
@@ -289,7 +297,7 @@ const Actualites = () => {
                   rel="noopener noreferrer"
                 >
                   <Instagram className="w-4 h-4 mr-2" />
-                  Suivre sur Instagram
+                  {t("followInstagram")}
                   <ExternalLink className="w-3.5 h-3.5 ml-2" />
                 </a>
               </Button>

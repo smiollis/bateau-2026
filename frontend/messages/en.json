@@ -82,7 +82,10 @@
     "googleLabel": "Google Reviews",
     "title": "What our passengers say",
     "titleAccent": "passengers",
-    "ratingLabel": "{rating}/5 ({count} Google reviews)"
+    "ratingLabel": "{rating}/5 ({count} Google reviews)",
+    "prevReview": "Previous review",
+    "nextReview": "Next review",
+    "viewReview": "View review {index}"
   },
   "cta": {
     "title": "Ready to experience",
@@ -99,7 +102,11 @@
   "gallery": {
     "title": "Photo Gallery",
     "subtitle": "Relive the best moments of our cruises",
-    "cta": "View the gallery"
+    "cta": "View the gallery",
+    "pageSubtitle": "Discover the most beautiful moments captured during our private cruises on the Seine.",
+    "instagramTitle": "Follow us on Instagram",
+    "instagramSubtitle": "Behind the scenes, highlights and the atmosphere aboard the Senang",
+    "followInstagram": "Follow @bateau_a_paris"
   },
   "contact": {
     "title": "Contact us",
@@ -139,7 +146,9 @@
     "faq": "Frequently Asked Questions",
     "cookieSettings": "Cookie settings",
     "copyright": "© {year} Un Bateau à Paris. All rights reserved.",
-    "tagline": "Private cruises on the Seine"
+    "tagline": "Private cruises on the Seine",
+    "instagramLabel": "Instagram",
+    "facebookLabel": "Facebook"
   },
   "cookie": {
     "bannerText": "We use cookies to enhance your experience and analyze our traffic. By continuing, you agree to our use of cookies.",
@@ -184,8 +193,33 @@
     "faq": "Frequently asked questions",
     "badgeSSL": "Secure SSL payment",
     "badgeConfirmation": "Instant confirmation",
-    "badgeCalendar": "Google Calendar sync",
-    "badgePayment": "Card, PayPal, Transfer"
+    "badgePayment": "Visa, Mastercard"
+  },
+  "actualites": {
+    "title": "News",
+    "subtitle": "Follow the latest news from the Senang, our events and adventures on the Seine.",
+    "noArticles": "No articles at the moment.",
+    "readArticle": "Read the article",
+    "readMore": "Read more",
+    "loadMore": "Load more articles",
+    "filterCategory": "Filter: {category}",
+    "instagramTitle": "Follow us on Instagram",
+    "instagramSubtitle": "Behind the scenes, highlights and the atmosphere aboard the Senang",
+    "followInstagram": "Follow on Instagram",
+    "allCategories": "All"
+  },
+  "articleDetail": {
+    "backToNews": "Back to news",
+    "relatedArticles": "Related articles",
+    "readMore": "Read more",
+    "ctaTitle": "A private cruise on the Seine with Un Bateau à Paris includes:",
+    "ctaFeature1Title": "Complimentary drink",
+    "ctaFeature1Desc": "A glass of champagne or a fruit cocktail offered with every cruise.",
+    "ctaFeature2Title": "Private route on the Seine",
+    "ctaFeature2Desc": "Your private cruise route lets you discover Paris from the Seine.",
+    "ctaFeature3Title": "2-hour private cruise",
+    "ctaFeature3Desc": "5 times a day, departing from Port de l'Arsenal, enjoy a private cruise on the Seine.",
+    "ctaButton": "Treat yourself to a private cruise on the Seine"
   },
   "common": {
     "backToHome": "Back to home page",

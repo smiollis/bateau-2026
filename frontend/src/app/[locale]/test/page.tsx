@@ -1,12 +1,13 @@
 import React from 'react';
 import { getPages } from '@/lib/wordpress';
+import { logger } from '@/lib/logger';
 
 export default async function TestPage() {
   let pages: any[] = [];
   try {
     pages = await getPages();
   } catch (e) {
-    console.error('WP fetch error', e);
+    logger.error('WP fetch error', 'test-page', e);
   }
 
   return (

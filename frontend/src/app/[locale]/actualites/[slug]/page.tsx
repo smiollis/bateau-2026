@@ -1,10 +1,15 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import allPosts from '@/data/posts.json';
+import postsFr from '@/data/posts.json';
+import postsEn from '@/data/posts-en.json';
 import ArticleDetail from '@/views/ArticleDetail';
 
+function getPostsByLocale(locale: string) {
+  return locale === 'en' ? postsEn : postsFr;
+}
+
 export function generateStaticParams() {
-  return allPosts.map((post) => ({ slug: post.slug }));
+  return postsFr.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -12,7 +17,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const allPosts = getPostsByLocale(locale);
   const post = allPosts.find((p) => p.slug === slug);
   if (!post) return {};
   return {
@@ -31,7 +37,8 @@ export default async function ArticlePage({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const allPosts = getPostsByLocale(locale);
   const post = allPosts.find((p) => p.slug === slug);
   if (!post) notFound();
   return (

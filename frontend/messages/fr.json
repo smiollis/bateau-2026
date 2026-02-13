@@ -82,7 +82,10 @@
     "googleLabel": "Avis Google",
     "title": "Ce que disent nos passagers",
     "titleAccent": "passagers",
-    "ratingLabel": "{rating}/5 ({count} avis Google)"
+    "ratingLabel": "{rating}/5 ({count} avis Google)",
+    "prevReview": "Avis précédent",
+    "nextReview": "Avis suivant",
+    "viewReview": "Voir l'avis {index}"
   },
   "cta": {
     "title": "Prêt à vivre une expérience",
@@ -99,7 +102,11 @@
   "gallery": {
     "title": "Galerie Photos",
     "subtitle": "Revivez les plus beaux moments de nos croisières",
-    "cta": "Voir la galerie"
+    "cta": "Voir la galerie",
+    "pageSubtitle": "Découvrez les plus beaux moments capturés lors de nos croisières privées sur la Seine.",
+    "instagramTitle": "Suivez-nous sur Instagram",
+    "instagramSubtitle": "Les coulisses, les moments forts et l'ambiance à bord du Senang",
+    "followInstagram": "Suivre @bateau_a_paris"
   },
   "contact": {
     "title": "Contactez-nous",
@@ -139,7 +146,9 @@
     "faq": "FAQ",
     "cookieSettings": "Paramètres cookies",
     "copyright": "© {year} Un Bateau à Paris. Tous droits réservés.",
-    "tagline": "Croisières privées sur la Seine"
+    "tagline": "Croisières privées sur la Seine",
+    "instagramLabel": "Instagram",
+    "facebookLabel": "Facebook"
   },
   "cookie": {
     "bannerText": "Nous utilisons des cookies pour améliorer votre expérience et analyser notre trafic. En poursuivant, vous acceptez notre utilisation des cookies.",
@@ -184,8 +193,33 @@
     "faq": "Questions fréquentes",
     "badgeSSL": "Paiement sécurisé SSL",
     "badgeConfirmation": "Confirmation immédiate",
-    "badgeCalendar": "Synchro Google Calendar",
-    "badgePayment": "CB, PayPal, Virement"
+    "badgePayment": "CB, Visa, Mastercard"
+  },
+  "actualites": {
+    "title": "Actualités",
+    "subtitle": "Suivez les dernières nouvelles du Senang, nos événements et nos aventures sur la Seine.",
+    "noArticles": "Aucun article pour le moment.",
+    "readArticle": "Lire l'article",
+    "readMore": "Lire la suite",
+    "loadMore": "Charger plus d'articles",
+    "filterCategory": "Filtrer : {category}",
+    "instagramTitle": "Suivez-nous sur Instagram",
+    "instagramSubtitle": "Les coulisses, les moments forts et l'ambiance à bord du Senang",
+    "followInstagram": "Suivre sur Instagram",
+    "allCategories": "Tout"
+  },
+  "articleDetail": {
+    "backToNews": "Retour aux actualités",
+    "relatedArticles": "Articles similaires",
+    "readMore": "Lire la suite",
+    "ctaTitle": "Une croisière privée sur la Seine avec Un Bateau à Paris c'est notamment :",
+    "ctaFeature1Title": "Cocktail ou coupe offerte",
+    "ctaFeature1Desc": "Une coupe de champagne ou un cocktail de fruit offerte à chaque croisière.",
+    "ctaFeature2Title": "Parcours privé sur la Seine",
+    "ctaFeature2Desc": "Le parcours de votre croisière privée vous permettra de découvrir Paris depuis la Seine.",
+    "ctaFeature3Title": "2h de croisière privée",
+    "ctaFeature3Desc": "5 fois par jour, au départ du Port de l'Arsenal, profitez d'une croisière privée sur la Seine.",
+    "ctaButton": "Offrez-vous une croisière privée sur la Seine"
   },
   "common": {
     "backToHome": "Retour à l'accueil",

@@ -3,15 +3,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, MapPin, Clock, Ship } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
+import { useTranslations } from "next-intl";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
 
 import fond2 from "@/assets/map/fond2.webp";
 import metroIconImport from "@/assets/map/metro.png";
-const metroIcon = typeof metroIconImport === 'string' ? metroIconImport : metroIconImport.src;
 import trocadero from "@/assets/map/trocadero.svg";
 import tourEiffel from "@/assets/map/tour-eiffel.svg";
 import invalides from "@/assets/map/invalides.svg";
@@ -21,8 +22,6 @@ import louvre from "@/assets/map/louvre.svg";
 import notreDame from "@/assets/map/notre-dame.svg";
 import hotelDeVille from "@/assets/map/hotel-de-ville.svg";
 import liberte from "@/assets/map/liberte.svg";
-
-const getSrc = (img: string | { src: string }) => typeof img === 'string' ? img : img.src;
 
 interface Landmark {
   id: string;
@@ -39,7 +38,7 @@ const landmarks: Landmark[] = [
   {
     id: "liberte",
     name: "Statue de la Liberté",
-    icon: getSrc(liberte),
+    icon: liberte.src,
     description: "Réplique de la statue offerte par les États-Unis, point de départ de votre croisière.",
     top: "62%",
     left: "2.3%",
@@ -49,7 +48,7 @@ const landmarks: Landmark[] = [
   {
     id: "trocadero",
     name: "Trocadéro",
-    icon: getSrc(trocadero),
+    icon: trocadero.src,
     description: "Palais de Chaillot et ses jardins, une vue imprenable sur la Tour Eiffel.",
     top: "32%",
     left: "10%",
@@ -59,7 +58,7 @@ const landmarks: Landmark[] = [
   {
     id: "tour-eiffel",
     name: "Tour Eiffel",
-    icon: getSrc(tourEiffel),
+    icon: tourEiffel.src,
     description: "Le monument le plus emblématique de Paris, illuminé la nuit pour un spectacle inoubliable.",
     top: "34%",
     left: "20%",
@@ -69,7 +68,7 @@ const landmarks: Landmark[] = [
   {
     id: "invalides",
     name: "Invalides",
-    icon: getSrc(invalides),
+    icon: invalides.src,
     description: "Le Dôme doré des Invalides abrite le tombeau de Napoléon Bonaparte.",
     top: "40%",
     left: "35%",
@@ -79,7 +78,7 @@ const landmarks: Landmark[] = [
   {
     id: "assemblee",
     name: "Assemblée Nationale",
-    icon: getSrc(assemblee),
+    icon: assemblee.src,
     description: "Palais Bourbon, siège de l&apos;Assemblée nationale française depuis 1798.",
     top: "34%",
     left: "40%",
@@ -89,7 +88,7 @@ const landmarks: Landmark[] = [
   {
     id: "orsay",
     name: "Musée d&apos;Orsay",
-    icon: getSrc(orsay),
+    icon: orsay.src,
     description: "Ancienne gare reconvertie en musée, abritant la plus grande collection d&apos;art impressionniste au monde.",
     top: "44%",
     left: "51%",
@@ -99,7 +98,7 @@ const landmarks: Landmark[] = [
   {
     id: "louvre",
     name: "Louvre",
-    icon: getSrc(louvre),
+    icon: louvre.src,
     description: "Le plus grand musée du monde et sa célèbre pyramide de verre.",
     top: "29%",
     left: "55%",
@@ -109,7 +108,7 @@ const landmarks: Landmark[] = [
   {
     id: "notre-dame",
     name: "Notre-Dame",
-    icon: getSrc(notreDame),
+    icon: notreDame.src,
     description: "Cathédrale gothique emblématique, restaurée après l&apos;incendie de 2019.",
     top: "43%",
     left: "70%",
@@ -119,7 +118,7 @@ const landmarks: Landmark[] = [
   {
     id: "hotel-de-ville",
     name: "Hôtel de Ville",
-    icon: getSrc(hotelDeVille),
+    icon: hotelDeVille.src,
     description: "Siège de la municipalité parisienne, chef-d&apos;œuvre de l&apos;architecture néo-Renaissance.",
     top: "47%",
     left: "81%",
@@ -143,6 +142,7 @@ const itinerarySteps = [
 const Croisiere = () => {
   const [activeLandmark, setActiveLandmark] = useState<string | null>(null);
   const { isDark } = useThemeVariant();
+  const t = useTranslations("croisiere");
 
   return (
     <div className="min-h-screen bg-background">
@@ -153,13 +153,13 @@ const Croisiere = () => {
         <div className="container-custom">
           <Link href="/" className={`inline-flex items-center gap-2 ${isDark ? "text-blue-200/70 hover:text-blue-100" : "text-primary-foreground/70 hover:text-primary-foreground"} transition-colors mb-4`}>
             <ArrowLeft className="w-4 h-4" />
-            Retour à l&apos;accueil
+            {t("backToHome")}
           </Link>
           <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold">
-            L&apos;Itinéraire de la Croisière
+            {t("pageTitle")}
           </h1>
           <p className={`text-lg mt-2 max-w-2xl ${isDark ? "text-blue-200/70" : "text-primary-foreground/70"}`}>
-            2 heures de navigation au cœur de Paris, entre monuments emblématiques et perspectives uniques sur la Seine.
+            {t("pageSubtitle")}
           </p>
         </div>
       </div>
@@ -168,17 +168,18 @@ const Croisiere = () => {
       <section className="py-12 md:py-16">
         <div className="text-center mb-8 px-4">
           <h2 className="font-heading text-2xl md:text-3xl font-semibold text-primary mb-2">
-            La Carte du Parcours
+            {t("mapTitle")}
           </h2>
-          <p className="text-muted-foreground">Cliquez sur un monument pour en savoir plus</p>
+          <p className="text-muted-foreground">{t("mapHint")}</p>
         </div>
 
         {/* Map Container - Full Width */}
         <div className="relative w-full overflow-hidden">
-          <img
-            src={typeof fond2 === 'string' ? fond2 : fond2.src}
+          <Image
+            src={fond2}
             alt="Carte de l&apos;itinéraire de la croisière sur la Seine"
             className="w-full h-auto block"
+            sizes="100vw"
           />
 
           {/* Landmark hotspots */}
@@ -242,7 +243,7 @@ const Croisiere = () => {
             title="Métro Bastille — Lieu d&apos;embarquement"
           >
             <div className="relative">
-              <img src={metroIcon} alt="Métro Bastille" className="w-6 h-6 md:w-8 md:h-8 drop-shadow-lg" />
+              <img src={metroIconImport.src} alt="Métro Bastille" className="w-6 h-6 md:w-8 md:h-8 drop-shadow-lg" />
               <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 whitespace-nowrap">
                 <span className="text-[8px] md:text-xs font-bold text-primary bg-white/90 px-1.5 py-0.5 rounded shadow-sm">
                   Bastille
@@ -258,15 +259,15 @@ const Croisiere = () => {
         <div className="container-custom">
           <div className="text-center mb-12">
             <h2 className="font-heading text-2xl md:text-3xl font-semibold text-primary mb-2">
-              Le Déroulé de la Croisière
+              {t("timelineTitle")}
             </h2>
-            <p className="text-muted-foreground">2 heures de navigation commentée</p>
+            <p className="text-muted-foreground">{t("timelineSubtitle")}</p>
           </div>
 
           <div className="max-w-2xl mx-auto">
             {itinerarySteps.map((step, index) => (
               <motion.div
-                key={index}
+                key={step.label}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -310,17 +311,17 @@ const Croisiere = () => {
       <section className={`py-16 text-center ${isDark ? "bg-[#0a1628] text-blue-100" : "bg-primary text-primary-foreground"}`}>
         <div className="container-custom">
           <h2 className="font-heading text-2xl md:text-3xl font-semibold mb-4">
-            Prêt à embarquer ?
+            {t("ctaTitle")}
           </h2>
           <p className={`mb-8 max-w-xl mx-auto ${isDark ? "text-blue-200/70" : "text-primary-foreground/70"}`}>
-            Réservez votre croisière privée et découvrez Paris comme vous ne l&apos;avez jamais vu.
+            {t("ctaSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="btn-gold text-white" size="lg" asChild>
-              <Link href="/reservation">Réserver ma croisière</Link>
+              <Link href="/reservation">{t("ctaReserve")}</Link>
             </Button>
             <Button variant="outline" size="lg" className={`${isDark ? "border-blue-300/30 text-blue-100 hover:bg-white/10" : "border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"}`} asChild>
-              <Link href="/#tarifs">Voir les tarifs</Link>
+              <Link href="/#tarifs">{t("ctaTarifs")}</Link>
             </Button>
           </div>
         </div>

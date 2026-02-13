@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { galleryImages } from "@/data/galleryImages";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useInstagramFeed } from "@/hooks/useInstagramFeed";
+import { useTranslations } from "next-intl";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
 import Lightbox from "yet-another-react-lightbox";
@@ -30,6 +31,8 @@ const Galerie = () => {
   const [lightboxIndex, setLightboxIndex] = useState(-1);
   const { isDark } = useThemeVariant();
   const { posts: instagramPosts, isLoading: igLoading } = useInstagramFeed(9);
+  const t = useTranslations("gallery");
+  const tCommon = useTranslations("common");
 
   return (
     <div className="min-h-screen bg-background">
@@ -43,17 +46,17 @@ const Galerie = () => {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour à l&apos;accueil
+            {tCommon("backToHome")}
           </Link>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold text-primary mb-4">
-              Galerie Photos
+              {t("title")}
             </h1>
             <p className="text-muted-foreground text-lg max-w-3xl">
-              Découvrez les plus beaux moments capturés lors de nos croisières privées sur la Seine.
+              {t("pageSubtitle")}
             </p>
           </motion.div>
         </div>
@@ -63,7 +66,7 @@ const Galerie = () => {
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
             {galleryImages.map((img, i) => (
               <motion.div
-                key={i}
+                key={img.src}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.03 }}
@@ -112,10 +115,10 @@ const Galerie = () => {
               <a href="https://www.instagram.com/bateau_a_paris/" target="_blank" rel="noopener noreferrer" className="font-heading text-lg text-primary hover:underline">@bateau_a_paris</a>
             </div>
             <h2 className="font-heading text-3xl md:text-4xl font-semibold text-primary mb-3">
-              Suivez-nous sur Instagram
+              {t("instagramTitle")}
             </h2>
             <p className="text-muted-foreground">
-              Les coulisses, les moments forts et l&apos;ambiance à bord du Senang
+              {t("instagramSubtitle")}
             </p>
           </motion.div>
 
@@ -163,7 +166,7 @@ const Galerie = () => {
                 rel="noopener noreferrer"
               >
                 <Instagram className="w-4 h-4 mr-2" />
-                Suivre @bateau_a_paris
+                {t("followInstagram")}
                 <ExternalLink className="w-3.5 h-3.5 ml-2" />
               </a>
             </Button>

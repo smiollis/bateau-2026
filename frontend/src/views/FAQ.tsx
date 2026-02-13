@@ -15,32 +15,32 @@ import {
 
 const faqItems: { question: string; answer: string | React.ReactNode }[] = [
   {
-    question: "Quels types d&apos;événements puis-je organiser à bord du Senang ?",
+    question: "Quels types d\u2019événements puis-je organiser à bord du Senang ?",
     answer:
       "Un Bateau à Paris offre des croisières privées sur la Seine pour diverses occasions telles que des soirées romantiques, des sorties en famille, des réunions entre amis ou entre collègues et de nombreux événements professionnels. Que ce soit pour un anniversaire, un enterrement de vie de jeune fille, des photos de mariage devant la Tour Eiffel, Notre-Dame, la Conciergerie, le Louvre ou la Statue de la Liberté, nous nous efforçons de vous offrir une expérience inoubliable.",
   },
   {
     question: "Comment puis-je réserver une croisière avec Un Bateau à Paris ?",
     answer:
-      "Vous pouvez facilement réserver votre croisière en ligne. Choisissez la date, précisez le nombre de passagers, l&apos;heure de départ souhaitée et la formule qui correspondent à vos préférences, puis validez votre réservation.",
+      "Vous pouvez facilement réserver votre croisière en ligne. Choisissez la date, précisez le nombre de passagers, l\u2019heure de départ souhaitée et la formule qui correspondent à vos préférences, puis validez votre réservation.",
   },
   {
-    question: "Comment se passe l&apos;embarquement ?",
+    question: "Comment se passe l\u2019embarquement ?",
     answer:
-      "Pour que vous profitiez pleinement de votre croisière privée sur la Seine, nous vous donnons rendez-vous 15 minutes avant l&apos;heure du départ au Port de l&apos;Arsenal à Bastille (Paris 12ème).",
+      "Pour que vous profitiez pleinement de votre croisière privée sur la Seine, nous vous donnons rendez-vous 15 minutes avant l\u2019heure du départ au Port de l\u2019Arsenal à Bastille (Paris 12ème).",
   },
   {
     question: "Combien ça coûte ?",
     answer:
-      "Le bateau est exclusivement réservé pour votre soirée romantique, vos retrouvailles entre amis, votre célébration d&apos;anniversaire, votre sortie en famille ou votre événement professionnel. Le coût de la privatisation du bateau est fixe pour 1 à 6 passagers (600 €), puis augmente à 100 € par personne au-delà de 6. Consultez notre section « Tarifs » pour plus de détails.",
+      "Le bateau est exclusivement réservé pour votre soirée romantique, vos retrouvailles entre amis, votre célébration d\u2019anniversaire, votre sortie en famille ou votre événement professionnel. Le coût de la privatisation du bateau est fixe pour 1 à 6 passagers (600 €), puis augmente à 100 € par personne au-delà de 6. Consultez notre section « Tarifs » pour plus de détails.",
   },
   {
     question: "Comment se déroule le paiement ?",
     answer:
-      "Le paiement s&apos;effectue en ligne lors de la réservation de manière complètement sécurisée par l&apos;intermédiaire de PayPal. Nous acceptons les principales cartes de crédit (American Express, MasterCard, Visa). Pour des arrangements spécifiques ou des événements sur mesure, contactez notre équipe pour discuter des modalités.",
+      "Le paiement s\u2019effectue en ligne lors de la réservation de manière complètement sécurisée. Nous acceptons les paiements par carte bancaire (Visa, Mastercard). Pour des arrangements spécifiques ou des événements sur mesure, contactez notre équipe pour discuter des modalités.",
   },
   {
-    question: "Quelle est la politique d&apos;annulation ?",
+    question: "Quelle est la politique d\u2019annulation ?",
     answer: (<>Consultez notre page « <Link href="/cgv" className="text-accent font-semibold hover:underline">Conditions Générales de Vente</Link> » pour connaître notre politique d&apos;annulation détaillée. En cas d&apos;annulation, nous favorisons dans la mesure du possible la modification. Contactez-nous dès que possible pour discuter des options disponibles.</>),
   },
   {
@@ -51,17 +51,17 @@ const faqItems: { question: string; answer: string | React.ReactNode }[] = [
   {
     question: "Le bateau est-il accessible aux personnes handicapées ?",
     answer:
-      "L&apos;embarquement des passagers se fait avec l&apos;assistance du Capitaine et peut présenter quelques difficultés aux personnes à mobilité réduite. Nous nous efforçons d&apos;accueillir tout le monde mais ne pouvons pas garantir que l&apos;embarquement sera possible pour les personnes handicapées qui ne disposent pas d&apos;une aide appropriée.",
+      "L\u2019embarquement des passagers se fait avec l\u2019assistance du Capitaine et peut présenter quelques difficultés aux personnes à mobilité réduite. Nous nous efforçons d\u2019accueillir tout le monde mais ne pouvons pas garantir que l\u2019embarquement sera possible pour les personnes handicapées qui ne disposent pas d\u2019une aide appropriée.",
   },
   {
     question: "Vous acceptez les enfants ?",
     answer:
-      "Les enfants de tous âges sont évidemment les bienvenus à bord, sous la supervision des adultes les accompagnant tout au long de la croisière. Nous vous prions de respecter un ratio d&apos;un adulte pour deux enfants de moins de 11 ans lors des déplacements de l&apos;avant à l&apos;arrière du bateau.",
+      "Les enfants de tous âges sont évidemment les bienvenus à bord, sous la supervision des adultes les accompagnant tout au long de la croisière. Nous vous prions de respecter un ratio d\u2019un adulte pour deux enfants de moins de 11 ans lors des déplacements de l\u2019avant à l\u2019arrière du bateau.",
   },
   {
     question: "Les animaux sont-ils admis ?",
     answer:
-      "Malheureusement, nos croisières ne sont pas adaptées aux compagnons à poils. Nous voulons nous assurer que tous nos passagers profitent d&apos;une expérience confortable et sécurisée, et c&apos;est pourquoi nous ne pouvons pas accueillir d&apos;animaux à bord. Nous espérons que vous comprendrez.",
+      "Malheureusement, nos croisières ne sont pas adaptées aux compagnons à poils. Nous voulons nous assurer que tous nos passagers profitent d\u2019une expérience confortable et sécurisée, et c\u2019est pourquoi nous ne pouvons pas accueillir d\u2019animaux à bord. Nous espérons que vous comprendrez.",
   },
 ];
 
@@ -99,7 +99,7 @@ const FAQ = () => {
           <Accordion type="single" collapsible className="space-y-3">
             {faqItems.map((item, index) => (
               <motion.div
-                key={index}
+                key={`faq-${index}`}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}

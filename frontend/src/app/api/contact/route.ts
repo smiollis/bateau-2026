@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { z } from "zod";
+import { logger } from "@/lib/logger";
 
 // --- Schema validation ---
 const contactSchema = z.object({
@@ -58,7 +59,7 @@ export async function POST(request: Request) {
   const resendKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO;
   if (!resendKey || !to) {
-    console.error("Missing RESEND_API_KEY or CONTACT_EMAIL_TO");
+    logger.error("Missing RESEND_API_KEY or CONTACT_EMAIL_TO", "contact-api");
     return NextResponse.json({ error: "server_error" }, { status: 500 });
   }
 
@@ -86,7 +87,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Resend error:", error);
+    logger.error("Resend email send failed", "contact-api", error);
     return NextResponse.json({ error: "send_failed" }, { status: 500 });
   }
 }

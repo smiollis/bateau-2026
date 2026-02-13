@@ -1,4 +1,5 @@
 import type { CookieConsent } from '@/types/cookie-consent';
+import { logger } from '@/lib/logger';
 
 const STORAGE_KEY = 'bateau-cookie-consent';
 export const CONSENT_VERSION = '1.0';
@@ -15,7 +16,7 @@ export function saveConsent(consent: CookieConsent): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
   } catch (error) {
-    console.error('Failed to save cookie consent:', error);
+    logger.error('Failed to save cookie consent', 'cookie-consent', error);
   }
 }
 
@@ -34,7 +35,7 @@ export function loadConsent(): CookieConsent | null {
 
     return consent;
   } catch (error) {
-    console.error('Failed to load cookie consent:', error);
+    logger.error('Failed to load cookie consent', 'cookie-consent', error);
     return null;
   }
 }
@@ -43,6 +44,6 @@ export function removeConsent(): void {
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch (error) {
-    console.error('Failed to remove cookie consent:', error);
+    logger.error('Failed to remove cookie consent', 'cookie-consent', error);
   }
 }

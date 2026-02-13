@@ -87,9 +87,33 @@ const OffersVariants = () => {
     },
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: offers.map((offer, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "TouristTrip",
+        name: offer.title,
+        description: offer.description,
+        offers: {
+          "@type": "Offer",
+          price: offer.price,
+          priceCurrency: "EUR",
+          url: "https://bateau-a-paris.fr/reservation",
+        },
+      },
+    })),
+  };
+
   // Default: Grid layout for Classic, Nuit
   return (
     <section className={`section-padding ${styles.section}`} id="tarifs">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

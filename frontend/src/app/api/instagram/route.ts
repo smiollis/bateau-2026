@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { logger } from '@/lib/logger';
 
 export interface InstagramPost {
   id: string;
@@ -33,7 +34,7 @@ export async function GET() {
 
     if (!res.ok) {
       const error = await res.json();
-      console.error('Instagram API error:', error);
+      logger.error('Instagram API error', 'instagram-api', error);
       return NextResponse.json(
         { error: 'Failed to fetch Instagram posts' },
         { status: res.status }
@@ -52,7 +53,7 @@ export async function GET() {
       }
     );
   } catch (error) {
-    console.error('Instagram fetch error:', error);
+    logger.error('Instagram fetch error', 'instagram-api', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

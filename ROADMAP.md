@@ -1,6 +1,6 @@
 # Roadmap - bateau-a-paris.fr
 
-> Derniere mise a jour : 2026-02-12
+> Derniere mise a jour : 2026-02-13
 
 ## Legende
 
@@ -140,7 +140,8 @@
 - [x] `src/app/robots.ts`
 - [x] OpenGraph + Twitter cards configures
 - [x] OG Image par defaut (image du bateau)
-- [ ] Canonical URLs + hreflang alternates (a finaliser)
+- [x] Canonical URLs + hreflang alternates (`alternates.languages` en metadata)
+- [x] OpenGraph `alternateLocale` (fr_FR + en_US)
 
 ### [done] 4.2 Performance
 - [x] Import images locales (`public/images/gallery/`, `hero/`, `posts/`)
@@ -149,23 +150,26 @@
 - [x] Migration `<img>` → `next/image` (9 fichiers, 12 occurrences)
 - [x] Migration Google Fonts `<link>` → `next/font/google` (Inter, Playfair Display) avec CSS variables
 - [x] Suppression `export const dynamic = 'force-dynamic'` sur 8 pages statiques
-- [ ] Bundle analysis + code splitting
+- [x] Preconnect + DNS prefetch WordPress (accelere chargement iframe Bookly)
+- [x] Bundle analysis : dynamic imports, tree-shaking verifie
 - [ ] Lighthouse score > 90 / Core Web Vitals (LCP < 2.5s, CLS < 0.1)
 
 ---
 
-## [wip] Phase 5 : Features avancees (Semaine 7-8)
+## [done] Phase 5 : Features avancees (Semaine 7-8)
 
 ### [done] 5.1 Internationalisation (i18n)
 - [x] Setup next-intl (FR/EN) — routing, request config, navigation
-- [x] Structure `messages/fr.json` + `messages/en.json` (~130 cles, 14 namespaces)
+- [x] Structure `messages/fr.json` + `messages/en.json` (~230 cles, 16 namespaces)
 - [x] Middleware + routing localise (`/fr/`, `/en/`) avec defaultLocale `fr`
 - [x] Migration routes vers `src/app/[locale]/` (10 pages + not-found)
 - [x] Extraction strings FR depuis 12 composants (`useTranslations`)
 - [x] Switcher de langue fonctionnel dans le header (next-intl `useRouter`)
 - [x] Metadata i18n via `getTranslations` (8 pages)
-- [ ] SEO hreflang tags
-- [ ] Traduction anglaise (en.json = copie FR placeholder)
+- [x] SEO hreflang tags (`alternates.languages` dans metadata)
+- [x] Traduction anglaise complete (en.json + posts-en.json — 28 articles traduits)
+- [x] Blog bilingue : `posts.json` (FR) + `posts-en.json` (EN), chargement par locale
+- [x] Section CTA reservation en fin d'article (FR/EN)
 
 ### 5.2 Integration Bookly
 - [ ] iFrame Bookly fonctionnel sur la page Reservation
@@ -178,13 +182,17 @@
 ## [wip] Phase 6 : Tests & Deploiement
 
 ### [done] 6.1 Tests
-- [x] Tests unitaires composants critiques (Vitest) — 39 tests, 7 fichiers
+- [x] Tests unitaires composants critiques (Vitest) — 65 tests, 11 fichiers
   - API contact (validation, rate limiting, honeypot, Resend mock)
   - Cookie consent lib (localStorage, versioning)
   - Google Analytics (consent mode, cookie removal)
   - Utils (cn), escapeHtml (XSS prevention)
   - ContactForm (rendu, soumission, erreurs)
   - CookieBanner (affichage, accept, customize)
+  - HeaderVariants (nav, mobile menu, theme toggle, language switch)
+  - HeroVariants (badge, title, CTA, dark mode)
+  - FooterVariants (nav, contact, social, cookie settings)
+  - OffersVariants (4 offres, prix, JSON-LD, CTA)
 - [x] Tests E2E parcours cles (Playwright) — 28 tests, 6 fichiers
   - Home (chargement, sections, toggle theme)
   - Contact (formulaire, soumission avec API interceptee)

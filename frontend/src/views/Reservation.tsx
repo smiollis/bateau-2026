@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
-import { CalendarDays, Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2 } from "lucide-react";
+import { Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2 } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
@@ -53,7 +53,6 @@ const Reservation = () => {
   const reassuranceBadges = [
     { icon: ShieldCheck, label: t("badgeSSL") },
     { icon: Mail, label: t("badgeConfirmation") },
-    { icon: CalendarDays, label: t("badgeCalendar") },
     { icon: CreditCard, label: t("badgePayment") },
   ];
 
@@ -196,7 +195,7 @@ const Reservation = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="max-w-6xl mx-auto mt-8 grid grid-cols-2 md:grid-cols-4 gap-4"
+              className="max-w-6xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-4"
             >
               {reassuranceBadges.map(({ icon: Icon, label }) => (
                 <div

@@ -3,12 +3,13 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Link from "next/link";
+import { logger } from "@/lib/logger";
 
 const NotFound = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", pathname);
+    logger.warn("User attempted to access non-existent route", "404", pathname);
   }, [pathname]);
 
   return (

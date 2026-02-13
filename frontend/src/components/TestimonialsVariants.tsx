@@ -89,6 +89,7 @@ const TestimonialsVariants = () => {
           <button
             onClick={prev}
             className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-10 h-10 rounded-full ${styles.nav} flex items-center justify-center transition-colors`}
+            aria-label={t("prevReview")}
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
@@ -96,6 +97,7 @@ const TestimonialsVariants = () => {
           <button
             onClick={next}
             className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-10 h-10 rounded-full ${styles.nav} flex items-center justify-center transition-colors`}
+            aria-label={t("nextReview")}
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -136,13 +138,14 @@ const TestimonialsVariants = () => {
           </AnimatePresence>
 
           <div className="flex justify-center gap-2 mt-6">
-            {testimonials.map((_, index) => (
+            {testimonials.map((testimonial, index) => (
               <button
-                key={index}
+                key={`review-${testimonial.name}`}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex ? `w-6 ${styles.activeDot}` : styles.dots
                 }`}
+                aria-label={t("viewReview", { index: index + 1 })}
               />
             ))}
           </div>

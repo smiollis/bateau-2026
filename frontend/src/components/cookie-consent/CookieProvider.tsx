@@ -23,13 +23,13 @@ export function CookieProvider({ children }: { children: ReactNode }) {
   const [showBanner, setShowBanner] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  // Charger consentement au mount
+  // Charger consentement au mount — multiple setState calls are
+  // batched by React 18+ into a single re-render.
   useEffect(() => {
     const stored = loadConsent();
 
     if (stored) {
       setConsent(stored);
-      setShowBanner(false);
       // Appliquer le consentement stocké via Consent Mode
       updateAnalyticsConsent(stored.analytics);
       updateMarketingConsent(stored.marketing);
@@ -38,6 +38,7 @@ export function CookieProvider({ children }: { children: ReactNode }) {
     }
 
     setIsLoading(false);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
   }, []);
 
   const acceptAll = () => {

@@ -24,9 +24,10 @@
 | Analytics | GA4 + Google Consent Mode v2 |
 | API | Instagram Graph API, WordPress REST API |
 | Fonts | Playfair Display, Inter |
-| i18n | next-intl (FR/EN) |
-| Tests | Vitest + Playwright + axe-core |
+| i18n | next-intl (FR/EN) — 230+ cles, blog bilingue |
+| Tests | Vitest (65 tests) + Playwright (28 tests) + axe-core |
 | Email | Resend (formulaire de contact) |
+| Logging | Logger structure (JSON en prod, lisible en dev) |
 
 ## Quick Start
 
@@ -52,7 +53,7 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 | `npm run build` | Build production |
 | `npm run start` | Serveur production |
 | `npm run lint` | Linter ESLint |
-| `npm run test` | Tests unitaires (Vitest, 39 tests) |
+| `npm run test` | Tests unitaires (Vitest, 65 tests) |
 | `npm run test:watch` | Tests unitaires en mode watch |
 | `npm run test:e2e` | Tests E2E (Playwright, 28 tests) |
 | `npm run test:e2e:ui` | Tests E2E avec interface Playwright |
@@ -72,11 +73,11 @@ src/
 │   ├── *Variants.tsx     # Composants multi-theme
 │   ├── CookieBanner.tsx  # Banner RGPD
 │   └── CookieModal.tsx   # Modal parametres cookies
-├── contexts/             # ThemeVariantContext (6 themes)
+├── contexts/             # ThemeVariantContext (2 themes: classic/nuit)
 ├── hooks/                # useCookieConsent, useInstagramFeed
 ├── lib/                  # cookie-consent, gtag, utils
 ├── types/                # TypeScript declarations
-├── data/                 # Donnees statiques (galleryImages)
+├── data/                 # Donnees statiques (posts.json, posts-en.json, galleryImages)
 └── assets/               # Images, logo, map
 ```
 

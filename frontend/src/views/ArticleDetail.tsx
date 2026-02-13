@@ -3,15 +3,18 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import DOMPurify from "dompurify";
-import { ArrowLeft, ArrowRight, Calendar } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Wine, MapPin, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
-import allPosts from "@/data/posts.json";
+import { useTranslations, useLocale } from "next-intl";
+import postsFr from "@/data/posts.json";
+import postsEn from "@/data/posts-en.json";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("fr-FR", {
+function formatDate(iso: string, locale: string): string {
+  return new Date(iso).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -19,11 +22,14 @@ function formatDate(iso: string): string {
 }
 
 interface ArticleDetailProps {
-  post: (typeof allPosts)[number];
+  post: (typeof postsFr)[number];
 }
 
 export default function ArticleDetail({ post }: ArticleDetailProps) {
   const { isDark } = useThemeVariant();
+  const t = useTranslations("articleDetail");
+  const locale = useLocale();
+  const allPosts = locale === "en" ? postsEn : postsFr;
 
   const related = allPosts
     .filter((p) => p.category === post.category && p.id !== post.id)
@@ -59,7 +65,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour aux actualites
+            {t("backToNews")}
           </Link>
 
           {/* Meta */}
@@ -75,7 +81,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
               )}
               <span className="text-muted-foreground text-sm flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5" />
-                {formatDate(post.date)}
+                {formatDate(post.date, locale)}
               </span>
             </div>
 
@@ -101,11 +107,53 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
           />
         </article>
 
+        {/* CTA Réservation */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="container-custom max-w-4xl mx-auto mt-16"
+        >
+          <div className={`rounded-2xl p-8 md:p-10 ${isDark ? "bg-white/5 border border-white/10" : "bg-primary/5 border border-primary/10"}`}>
+            <h2 className="font-heading text-2xl md:text-3xl text-primary mb-8 text-center">
+              {t("ctaTitle")}
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="text-center">
+                <div className={`mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-3 ${isDark ? "bg-accent/20" : "bg-accent/10"}`}>
+                  <Wine className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-heading text-lg font-semibold text-primary mb-1">{t("ctaFeature1Title")}</h3>
+                <p className="text-muted-foreground text-sm">{t("ctaFeature1Desc")}</p>
+              </div>
+              <div className="text-center">
+                <div className={`mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-3 ${isDark ? "bg-accent/20" : "bg-accent/10"}`}>
+                  <MapPin className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-heading text-lg font-semibold text-primary mb-1">{t("ctaFeature2Title")}</h3>
+                <p className="text-muted-foreground text-sm">{t("ctaFeature2Desc")}</p>
+              </div>
+              <div className="text-center">
+                <div className={`mx-auto w-12 h-12 rounded-full flex items-center justify-center mb-3 ${isDark ? "bg-accent/20" : "bg-accent/10"}`}>
+                  <Clock className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-heading text-lg font-semibold text-primary mb-1">{t("ctaFeature3Title")}</h3>
+                <p className="text-muted-foreground text-sm">{t("ctaFeature3Desc")}</p>
+              </div>
+            </div>
+            <div className="text-center">
+              <Button className="btn-gold text-white text-base px-8 py-5 h-auto" asChild>
+                <Link href="/reservation">{t("ctaButton")}</Link>
+              </Button>
+            </div>
+          </div>
+        </motion.section>
+
         {/* Articles similaires */}
         {related.length > 0 && (
           <section className="container-custom mt-16 pt-12 border-t border-border">
             <h2 className="font-heading text-2xl text-primary mb-8">
-              Articles similaires
+              {t("relatedArticles")}
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
               {related.map((r) => (
@@ -132,13 +180,13 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
                     </div>
                     <div className="p-5 flex flex-col flex-grow">
                       <span className="text-muted-foreground text-xs mb-2">
-                        {formatDate(r.date)}
+                        {formatDate(r.date, locale)}
                       </span>
                       <h3 className="font-heading text-base text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
                         {r.title}
                       </h3>
                       <div className="flex items-center gap-1 text-primary text-sm font-medium mt-auto">
-                        Lire la suite
+                        {t("readMore")}
                         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                       </div>
                     </div>
