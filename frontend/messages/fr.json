@@ -172,6 +172,21 @@
     "ctaReserve": "Réserver ma croisière",
     "ctaTarifs": "Voir les tarifs"
   },
+  "reservation": {
+    "loading": "Chargement du calendrier des disponibilités…",
+    "title": "Réservez votre croisière",
+    "subtitle": "Choisissez votre formule en quelques clics",
+    "breadcrumbHome": "Accueil",
+    "breadcrumbReservation": "Réservation",
+    "errorTitle": "Le formulaire de réservation n'a pas pu charger.",
+    "errorSubtitle": "Contactez-nous directement pour réserver :",
+    "errorContact": "Contactez-nous",
+    "faq": "Questions fréquentes",
+    "badgeSSL": "Paiement sécurisé SSL",
+    "badgeConfirmation": "Confirmation immédiate",
+    "badgeCalendar": "Synchro Google Calendar",
+    "badgePayment": "CB, PayPal, Virement"
+  },
   "common": {
     "backToHome": "Retour à l'accueil",
     "readMore": "Lire la suite",

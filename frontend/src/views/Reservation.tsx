@@ -3,12 +3,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
-import { CalendarDays, Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard } from "lucide-react";
+import { CalendarDays, Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2 } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useTranslations } from "next-intl";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -22,8 +23,12 @@ type IframeState = "loading" | "loaded" | "error";
 
 const IFRAME_TIMEOUT = 15_000;
 
-const ReservationSkeleton = () => (
+const ReservationSkeleton = ({ loadingText }: { loadingText: string }) => (
   <div className="space-y-6 p-6">
+    <div className="flex flex-col items-center gap-3 py-4">
+      <Loader2 className="w-8 h-8 animate-spin text-accent" />
+      <p className="text-muted-foreground text-sm font-medium">{loadingText}</p>
+    </div>
     <Skeleton className="h-10 w-3/4" />
     <Skeleton className="h-6 w-1/2" />
     <div className="space-y-4 pt-4">
@@ -38,18 +43,19 @@ const ReservationSkeleton = () => (
   </div>
 );
 
-const reassuranceBadges = [
-  { icon: ShieldCheck, label: "Paiement securise SSL" },
-  { icon: Mail, label: "Confirmation immediate" },
-  { icon: CalendarDays, label: "Synchro Google Calendar" },
-  { icon: CreditCard, label: "CB, PayPal, Virement" },
-];
-
 const Reservation = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeState, setIframeState] = useState<IframeState>("loading");
   const [iframeHeight, setIframeHeight] = useState(800);
   const { isDark } = useThemeVariant();
+  const t = useTranslations("reservation");
+
+  const reassuranceBadges = [
+    { icon: ShieldCheck, label: t("badgeSSL") },
+    { icon: Mail, label: t("badgeConfirmation") },
+    { icon: CalendarDays, label: t("badgeCalendar") },
+    { icon: CreditCard, label: t("badgePayment") },
+  ];
 
   const handleIframeLoad = useCallback(() => {
     setIframeState("loaded");
@@ -101,12 +107,12 @@ const Reservation = () => {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href="/">Accueil</Link>
+                    <Link href="/">{t("breadcrumbHome")}</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Reservation</BreadcrumbPage>
+                  <BreadcrumbPage>{t("breadcrumbReservation")}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -117,10 +123,10 @@ const Reservation = () => {
               transition={{ delay: 0.2 }}
             >
               <h1 className="font-heading text-4xl md:text-5xl font-semibold text-primary mb-3">
-                Reservez votre croisiere
+                {t("title")}
               </h1>
               <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
-                Choisissez votre formule en quelques clics
+                {t("subtitle")}
               </p>
             </motion.div>
           </div>
@@ -135,8 +141,8 @@ const Reservation = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="max-w-6xl mx-auto bg-card rounded-2xl shadow-2xl p-4 sm:p-8 md:p-12"
             >
-              {/* Skeleton pendant le chargement */}
-              {iframeState === "loading" && <ReservationSkeleton />}
+              {/* Skeleton + message pendant le chargement */}
+              {iframeState === "loading" && <ReservationSkeleton loadingText={t("loading")} />}
 
               {/* Iframe Bookly — toujours dans le DOM, masque pendant loading */}
               {iframeState !== "error" && (
@@ -149,7 +155,7 @@ const Reservation = () => {
                   }}
                   className="w-full border-0 rounded-xl transition-all duration-300"
                   onLoad={handleIframeLoad}
-                  title="Formulaire de reservation Bookly"
+                  title={t("title")}
                   sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
                 />
               )}
@@ -162,16 +168,16 @@ const Reservation = () => {
                   className="min-h-[400px] flex flex-col items-center justify-center gap-6 text-center px-4"
                 >
                   <p className="text-lg text-foreground font-medium">
-                    Le formulaire de reservation n'a pas pu charger.
+                    {t("errorTitle")}
                   </p>
                   <p className="text-muted-foreground">
-                    Contactez-nous directement pour reserver :
+                    {t("errorSubtitle")}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button asChild>
                       <Link href="/#contact">
                         <Mail className="w-4 h-4 mr-2" />
-                        Contactez-nous
+                        {t("errorContact")}
                       </Link>
                     </Button>
                     <Button variant="outline" asChild>
@@ -213,7 +219,7 @@ const Reservation = () => {
               <Button variant="outline" asChild className="gap-2">
                 <Link href="/faq">
                   <HelpCircle className="w-4 h-4" />
-                  Questions frequentes
+                  {t("faq")}
                   <ChevronRight className="w-4 h-4" />
                 </Link>
               </Button>

@@ -172,6 +172,21 @@
     "ctaReserve": "Book my cruise",
     "ctaTarifs": "See prices"
   },
+  "reservation": {
+    "loading": "Loading availability calendar…",
+    "title": "Book your cruise",
+    "subtitle": "Choose your package in a few clicks",
+    "breadcrumbHome": "Home",
+    "breadcrumbReservation": "Reservation",
+    "errorTitle": "The reservation form could not load.",
+    "errorSubtitle": "Contact us directly to book:",
+    "errorContact": "Contact us",
+    "faq": "Frequently asked questions",
+    "badgeSSL": "Secure SSL payment",
+    "badgeConfirmation": "Instant confirmation",
+    "badgeCalendar": "Google Calendar sync",
+    "badgePayment": "Card, PayPal, Transfer"
+  },
   "common": {
     "backToHome": "Back to home page",
     "readMore": "Read more",

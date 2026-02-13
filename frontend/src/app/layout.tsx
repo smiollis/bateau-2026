@@ -19,6 +19,7 @@ const playfair = Playfair_Display({
 });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://bateau-a-paris.fr"),
@@ -81,6 +82,13 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* Preconnect WordPress (accélère le chargement de l'iframe Bookly) */}
+        {WP_URL && (
+          <>
+            <link rel="dns-prefetch" href={WP_URL} />
+            <link rel="preconnect" href={WP_URL} crossOrigin="anonymous" />
+          </>
+        )}
         {/* Google Consent Mode v2 defaults + GA4 config (avant tout script) */}
         {GA_ID && (
           <script
