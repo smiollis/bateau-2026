@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Wann ist die beste Zeit für eine romantische Fahrt?", answer: "Der Sonnenuntergang ist am beliebtesten: Das goldene Licht auf den Monumenten und der Eiffelturm, der erstrahlt, schaffen einen magischen Moment. Bucht frühzeitig für diesen Slot." },
       { question: "Kann man eine Überraschung organisieren?", answer: "Ja! Kontaktiert uns, um eine Überraschung vorzubereiten: Spezielle Dekoration, Champagner, Rosenblätter... Wir helfen euch, den perfekten Moment zu gestalten." },
       { question: "Kann man ein Essen mitbringen?", answer: "Ja, ihr könnt ein Gourmet-Picknick vorbereiten. Wir bieten auch Aperitif-Platten auf Bestellung an." },
-      { question: "Was kostet eine romantische Bootsfahrt?", answer: "Ab 490€ (Basispaket) oder 540€ (Festpaket mit Champagner) für eine 2-stündige Privatfahrt." },
+      { question: "Was kostet eine romantische Bootsfahrt?", answer: "Ab 480€ (Basispaket) oder 540€ (Festpaket mit Champagner) für eine 2-stündige Privatfahrt." },
     ] },
   ],
 };

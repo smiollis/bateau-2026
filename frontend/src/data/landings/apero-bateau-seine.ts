@@ -63,5 +63,5 @@ export const aperoBateauSeine: LandingPageData = {
     },
   ],
   relatedPages: ["soiree-entre-amis-seine", "evg-seine", "team-building-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 360 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

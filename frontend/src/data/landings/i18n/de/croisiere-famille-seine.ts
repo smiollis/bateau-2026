@@ -13,7 +13,7 @@ const translation: LandingPageTranslation = {
     ] },
     { type: "gallery", title: "Familien auf der Seine", images: [
       { src: "/images/gallery/2025-04-08-a-20.58.31_fcc03538.webp", alt: "Familie genießt Bootsfahrt auf der Seine" },
-      { src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp", alt: "Gesellige Familienmomente an Bord" },
+      { src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp", alt: "Gesellige Familienmomente an Bord" },
       { src: "/images/gallery/2025-03-03-a-16.00.24_c635ba48.webp", alt: "Blick auf die Brücken von Paris vom Boot" },
       { src: "/images/gallery/2025-07-27-a-12.22.05_77ed38c8.webp", alt: "Familienfahrt im Herzen von Paris" },
     ] },

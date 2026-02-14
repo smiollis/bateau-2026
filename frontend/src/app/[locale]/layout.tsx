@@ -1,10 +1,12 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 import { routing } from "@/i18n/routing";
-import CookieBanner from "@/components/CookieBanner";
 import HeaderVariants from "@/components/HeaderVariants";
 import FooterVariants from "@/components/FooterVariants";
+
+const CookieBanner = dynamic(() => import("@/components/CookieBanner"));
 
 export default async function LocaleLayout({
   children,

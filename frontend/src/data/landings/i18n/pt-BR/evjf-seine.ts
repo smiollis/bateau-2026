@@ -23,7 +23,7 @@ const translation: LandingPageTranslation = {
       { question: "Quantas pessoas podem participar da despedida?", answer: "O Senang comporta até 12 pessoas para sua despedida no Sena. A tarifa base cobre de 1 a 6 pessoas, depois 110€ por pessoa adicional." },
       { question: "Pode trazer decoração própria?", answer: "Claro! Vocês são livres para trazer balões, faixas, acessórios de foto e toda a decoração que quiserem." },
       { question: "Pode trazer comida a bordo?", answer: "Sim, vocês podem trazer seu piquenique, bolo ou buffet. Também oferecemos tábuas de frios e queijos por encomenda." },
-      { question: "Quanto custa uma despedida de solteira no Sena?", answer: "A partir de 540€ pelo pacote festivo (champanhe incluso) para um grupo de até 6 pessoas, depois 90€ por pessoa adicional." },
+      { question: "Quanto custa uma despedida de solteira no Sena?", answer: "A partir de 480€ pelo pacote festivo (champanhe incluso) para um grupo de até 6 pessoas, depois 90€ por pessoa adicional." },
       { question: "Quanto tempo dura o cruzeiro?", answer: "O cruzeiro dura 2 horas e passa pelos mais belos monumentos de Paris, da Bastilha à Torre Eiffel." },
     ] },
   ],

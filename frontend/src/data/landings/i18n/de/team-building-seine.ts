@@ -21,10 +21,10 @@ const translation: LandingPageTranslation = {
     { type: "pricing", title: "Unsere Teambuilding-Pakete" },
     { type: "faq", title: "Häufig gestellte Fragen – Teambuilding", items: [
       { question: "Kann man eine Firmenrechnung bekommen?", answer: "Ja, wir stellen eine konforme Rechnung mit MwSt. aus. Kontaktiert uns per E-Mail." },
-      { question: "Welches Format für einen Afterwork?", answer: "Der Slot 18-20 Uhr unter der Woche ist ideal. Basispaket ab 490€ oder Festpaket ab 540€, euer Team bringt den Aperitif mit." },
+      { question: "Welches Format für einen Afterwork?", answer: "Der Slot 18-20 Uhr unter der Woche ist ideal. Basispaket ab 480€ oder Festpaket ab 540€, euer Team bringt den Aperitif mit." },
       { question: "Kann man Aktivitäten an Bord organisieren?", answer: "Das Boot ist ideal für informelle Gespräche, Brainstorming oder ein Team-Quiz. Der Raum ist offen und gesellig." },
       { question: "Wie viele Kollegen maximal?", answer: "Die Senang bietet Platz für bis zu 12 Personen. Für größere Gruppen kontaktiert uns für eine Lösung." },
-      { question: "Was ist der Preis?", answer: "Ab 490€ für 1 bis 6 Personen, +110€ pro weitere Person. Alles-Inklusive-Paket mit Catering auf Anfrage." },
+      { question: "Was ist der Preis?", answer: "Ab 480€ für 1 bis 6 Personen, +110€ pro weitere Person. Alles-Inklusive-Paket mit Catering auf Anfrage." },
     ] },
   ],
 };

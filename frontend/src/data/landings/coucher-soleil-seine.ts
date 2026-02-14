@@ -63,5 +63,5 @@ export const coucherSoleilSeine: LandingPageData = {
     },
   ],
   relatedPages: ["croisiere-romantique-seine", "shooting-photo-seine", "demande-en-mariage-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 360 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

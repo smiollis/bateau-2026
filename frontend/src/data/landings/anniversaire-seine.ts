@@ -66,7 +66,7 @@ export const anniversaireSeine: LandingPageData = {
           alt: "F\u00eate d\u2019anniversaire sur la Seine \u00e0 Paris",
         },
         {
-          src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp",
+          src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp",
           alt: "Groupe c\u00e9l\u00e9brant un anniversaire en bateau",
         },
         {
@@ -123,6 +123,6 @@ export const anniversaireSeine: LandingPageData = {
   relatedPages: ["soiree-entre-amis-seine", "croisiere-famille-seine", "apero-bateau-seine"],
   jsonLd: {
     type: "TouristAttraction",
-    priceFrom: 360,
+    priceFrom: 480,
   },
 };

@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Welcher ist der beste Slot für das Licht?", answer: "Die Golden Hour (1h vor Sonnenuntergang) bietet das schönste Licht. Bucht diesen Slot im Voraus, er ist sehr gefragt." },
       { question: "Ist das Boot stabil genug für Fotos?", answer: "Ja, die Senang fährt langsam und bietet eine stabile Fahrt. Keine störenden Vibrationen für die Aufnahmen." },
       { question: "Kann man ein Mode-/Lookbook-Shooting machen?", answer: "Absolut. Mehrere Marken haben bereits an Bord gedreht (Adidas, Le Slip Français). Die Kulisse wechselt natürlich während der Fahrt." },
-      { question: "Was kostet ein Shooting auf der Seine?", answer: "Ab 490€ (Basispaket, 2h). Der Preis ist gleich wie für eine Standard-Bootsfahrt." },
+      { question: "Was kostet ein Shooting auf der Seine?", answer: "Ab 480€ (Basispaket, 2h). Der Preis ist gleich wie für eine Standard-Bootsfahrt." },
     ] },
   ],
 };

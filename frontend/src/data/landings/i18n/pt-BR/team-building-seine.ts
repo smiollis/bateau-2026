@@ -21,10 +21,10 @@ const translation: LandingPageTranslation = {
     { type: "pricing", title: "Nossos pacotes team building" },
     { type: "faq", title: "Perguntas frequentes – Team building", items: [
       { question: "Pode obter fatura empresarial?", answer: "Sim, emitimos nota fiscal conforme com IVA para dedução em despesas profissionais. Entre em contato por e-mail." },
-      { question: "Qual formato para um afterwork?", answer: "O horário das 18h às 20h durante a semana é ideal. Pacote simples a 360€ ou festivo a 420€, sua equipe traz o aperitivo." },
+      { question: "Qual formato para um afterwork?", answer: "O horário das 18h às 20h durante a semana é ideal. Pacote simples a 480€ ou festivo a 540€, sua equipe traz o aperitivo." },
       { question: "Pode organizar atividades a bordo?", answer: "O barco é ideal para conversas informais, brainstorming ou quiz de equipe. O espaço é aberto e acolhedor." },
       { question: "Quantos colaboradores no máximo?", answer: "O Senang acomoda até 12 pessoas. Para grupos maiores, entre em contato para estudarmos uma solução." },
-      { question: "Qual é o valor?", answer: "A partir de 360€ para 1 a 6 pessoas, +100€ por pessoa adicional. Pacote Tudo Incluso com buffet sob orçamento." },
+      { question: "Qual é o valor?", answer: "A partir de 480€ para 1 a 6 pessoas, +110€ por pessoa adicional. Pacote Tudo Incluso com buffet sob orçamento." },
     ] },
   ],
 };

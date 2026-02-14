@@ -5,7 +5,7 @@ export const seminaireSeine: LandingPageData = {
   meta: {
     title: "Séminaire sur la Seine \u2013 Événement entreprise en bateau à Paris",
     description:
-      "Organisez votre séminaire sur la Seine. Bateau privatisé pour 2 à 12 collaborateurs, cadre inspirant, facturation entreprise. Dès 360\u00a0€.",
+      "Organisez votre séminaire sur la Seine. Bateau privatisé pour 2 à 12 collaborateurs, cadre inspirant, facturation entreprise. Dès 480\u00a0€.",
   },
   hero: {
     title: "Séminaire sur la Seine",
@@ -58,10 +58,10 @@ export const seminaireSeine: LandingPageData = {
         { question: "Peut-on projeter une présentation ?", answer: "Il n\u2019y a pas de vidéoprojecteur, mais vous pouvez diffuser l\u2019audio via l\u2019enceinte Bluetooth. Pour les visuels, nous recommandons une tablette ou un écran portable." },
         { question: "Quel format pour un brainstorming ?", answer: "Le créneau de 2h est idéal : 30 min d\u2019installation et ice-breaker, 1h de travail, 30 min de débrief et apéritif." },
         { question: "Peut-on prolonger la durée ?", answer: "Oui, contactez-nous pour un créneau étendu. Supplément horaire sur devis." },
-        { question: "Quel est le tarif pour 10 personnes ?", answer: "360\u00a0€ (base 1-6) + 4 × 100\u00a0€ = 760\u00a0€ pour 10 personnes (formule simple). Formule festive et Tout Inclus sur devis." },
+        { question: "Quel est le tarif pour 10 personnes ?", answer: "480\u00a0€ (base 1-6) + 4 × 110\u00a0€ = 920\u00a0€ pour 10 personnes (formule simple). Formule festive et Tout Inclus sur devis." },
       ],
     },
   ],
   relatedPages: ["team-building-seine", "apero-bateau-seine", "shooting-photo-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 360 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

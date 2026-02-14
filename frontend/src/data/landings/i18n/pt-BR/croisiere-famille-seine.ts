@@ -13,7 +13,7 @@ const translation: LandingPageTranslation = {
     ] },
     { type: "gallery", title: "Famílias no Sena", images: [
       { src: "/images/gallery/2025-04-08-a-20.58.31_fcc03538.webp", alt: "Família aproveitando cruzeiro no Sena" },
-      { src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp", alt: "Momentos em família a bordo" },
+      { src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp", alt: "Momentos em família a bordo" },
       { src: "/images/gallery/2025-03-03-a-16.00.24_c635ba48.webp", alt: "Vista das pontes de Paris do barco" },
       { src: "/images/gallery/2025-07-27-a-12.22.05_77ed38c8.webp", alt: "Navegação em família no coração de Paris" },
     ] },
@@ -23,7 +23,7 @@ const translation: LandingPageTranslation = {
       { question: "As crianças estão seguras a bordo?", answer: "Sim, o Senang é equipado com coletes salva-vidas para adultos e crianças. O barco é estável e o capitão zela pela segurança de todos." },
       { question: "A partir de que idade pode embarcar?", answer: "Não há idade mínima. Bebês e crianças pequenas são bem-vindos. Crianças menores de 3 anos são gratuitas." },
       { question: "Pode trazer carrinho de bebê?", answer: "Sim, o Port de l'Arsenal é acessível com carrinho. O carrinho pode ficar no cais durante o cruzeiro." },
-      { question: "Quantas pessoas no máximo?", answer: "O Senang acomoda até 12 pessoas (crianças incluídas). Tarifa base para 1 a 6 pessoas, +100€ por pessoa adicional." },
+      { question: "Quantas pessoas no máximo?", answer: "O Senang acomoda até 12 pessoas (crianças incluídas). Tarifa base para 1 a 6 pessoas, +110€ por pessoa adicional." },
       { question: "Pode trazer comida para as crianças?", answer: "Com certeza! Lanches, mamadeira, bolo... Tragam tudo o que precisarem. Temos uma mesinha a bordo." },
     ] },
   ],

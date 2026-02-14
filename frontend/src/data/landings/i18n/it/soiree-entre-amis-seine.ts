@@ -4,7 +4,7 @@ const translation: LandingPageTranslation = {
   meta: {
     title: "Serata tra amici sulla Senna – Aperitivo in barca a Parigi",
     description:
-      "Organizza una serata tra amici sulla Senna. Barca privata fino a 12 persone, aperitivo libero, playlist personale. 2 ore di crociera da 490€.",
+      "Organizza una serata tra amici sulla Senna. Barca privata fino a 12 persone, aperitivo libero, playlist personale. 2 ore di crociera da 480€.",
   },
   hero: {
     title: "Serata tra amici sulla Senna",
@@ -22,7 +22,7 @@ const translation: LandingPageTranslation = {
 
 <p>Il concetto è semplice: la barca è <strong>100% privatizzata per il vostro gruppo</strong> da 2 a 12 persone. Portate quello che volete: birre, vino, pizza, picnic, torta... È la vostra serata, zero vincoli. Collegate la vostra playlist alla cassa Bluetooth e si parte.</p>
 
-<p>La <strong>formula semplice a 490€</strong> (per 1 a 6 persone) è l'opzione più accessibile per un afterwork tra colleghi, un aperitivo tra amici o un'uscita rilassata. Voglia di champagne? La formula festiva a 540€ include una coppa per persona.</p>
+<p>La <strong>formula semplice a 480€</strong> (per 1 a 6 persone) è l'opzione più accessibile per un afterwork tra colleghi, un aperitivo tra amici o un'uscita rilassata. Voglia di champagne? La formula festiva a 540€ include una coppa per persona.</p>
 
 <p>La partenza è dal <strong>Port de l'Arsenal a Bastille</strong>, in piena Parigi. Dopo la crociera, siete a due passi da bar e ristoranti del quartiere per continuare la serata.</p>
 
@@ -49,8 +49,8 @@ const translation: LandingPageTranslation = {
         },
         {
           icon: "wallet",
-          title: "Da 82€/pers.",
-          text: "490€ per 6 persone = 82€ ciascuno. Imbattibile a Parigi.",
+          title: "Da 80€/pers.",
+          text: "480€ per 6 persone = 80€ ciascuno. Imbattibile a Parigi.",
         },
       ],
     },
@@ -97,7 +97,7 @@ const translation: LandingPageTranslation = {
         {
           question: "Quanto costa a persona?",
           answer:
-            "La formula semplice a 490€ copre fino a 6 persone, ovvero 82€ per persona. Oltre, 110€ per persona aggiuntiva (max 12).",
+            "La formula semplice a 480€ copre fino a 6 persone, ovvero 80€ per persona. Oltre, 110€ per persona aggiuntiva (max 12).",
         },
         {
           question: "Si può prenotare per un afterwork?",

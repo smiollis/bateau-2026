@@ -63,5 +63,5 @@ export const shootingPhotoSeine: LandingPageData = {
     },
   ],
   relatedPages: ["evjf-seine", "croisiere-romantique-seine", "coucher-soleil-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 360 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

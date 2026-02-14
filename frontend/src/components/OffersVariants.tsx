@@ -52,8 +52,8 @@ const OffersVariants = () => {
   const offers = [
     {
       title: t("offer1Title"),
-      price: 420,
-      priceExtra: 70,
+      price: 480,
+      priceExtra: 80,
       description: t("offer1Desc"),
       image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [t("feature_2h"), t("feature_6pers"), t("feature_comments"), t("feature_music")],
@@ -61,8 +61,8 @@ const OffersVariants = () => {
     },
     {
       title: t("offer2Title"),
-      price: 480,
-      priceExtra: 80,
+      price: 540,
+      priceExtra: 90,
       description: t("offer2Desc"),
       image: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [t("feature_2h"), t("feature_6pers"), t("feature_champagne"), t("feature_music")],
@@ -70,8 +70,8 @@ const OffersVariants = () => {
     },
     {
       title: t("offer3Title"),
-      price: 600,
-      priceExtra: 100,
+      price: 660,
+      priceExtra: 110,
       description: t("offer3Desc"),
       image: formuleImage,
       features: [t("feature_2h"), t("feature_6pers"), t("feature_champagnePremium"), t("feature_food")],
@@ -79,8 +79,8 @@ const OffersVariants = () => {
     },
     {
       title: t("offer4Title"),
-      price: 600,
-      priceExtra: 100,
+      price: 660,
+      priceExtra: 110,
       description: t("offer4Desc"),
       image: "https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       features: [t("feature_2h"), t("feature_6pers"), t("feature_guide"), t("feature_anecdotes")],

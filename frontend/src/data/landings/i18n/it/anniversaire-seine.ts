@@ -63,7 +63,7 @@ const translation: LandingPageTranslation = {
           alt: "Festa di compleanno sulla Senna a Parigi",
         },
         {
-          src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp",
+          src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp",
           alt: "Gruppo che festeggia un compleanno in barca",
         },
         {
@@ -112,7 +112,7 @@ const translation: LandingPageTranslation = {
         {
           question: "Quanto costa un compleanno sulla Senna?",
           answer:
-            "A partire da 490€ (formula semplice) o 540€ (formula festiva con champagne) per un gruppo fino a 6 persone. +110€ per persona oltre.",
+            "A partire da 480€ (formula semplice) o 540€ (formula festiva con champagne) per un gruppo fino a 6 persone. +110€ per persona oltre.",
         },
       ],
     },

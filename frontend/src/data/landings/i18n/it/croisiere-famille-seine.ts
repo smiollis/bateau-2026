@@ -13,7 +13,7 @@ const translation: LandingPageTranslation = {
     ] },
     { type: "gallery", title: "Famiglie sulla Senna", images: [
       { src: "/images/gallery/2025-04-08-a-20.58.31_fcc03538.webp", alt: "Famiglia che si gode una crociera sulla Senna" },
-      { src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp", alt: "Momenti di convivialità in famiglia a bordo" },
+      { src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp", alt: "Momenti di convivialità in famiglia a bordo" },
       { src: "/images/gallery/2025-03-03-a-16.00.24_c635ba48.webp", alt: "Vista sui ponti di Parigi dalla barca" },
       { src: "/images/gallery/2025-07-27-a-12.22.05_77ed38c8.webp", alt: "Navigazione familiare nel cuore di Parigi" },
     ] },

@@ -58,7 +58,7 @@ const translation: LandingPageTranslation = {
         { question: "Wie viele Personen für einen JGA auf dem Boot?", answer: "Die Senang bietet Platz für 2 bis 12 Personen. Der Grundpreis gilt für 1 bis 6 Personen, dann 110€ pro zusätzliche Person." },
         { question: "Kann man eigene Musik anschließen?", answer: "Absolut! Ein Bluetooth-Lautsprecher steht zur Verfügung. Bereitet eure JGA-Playlist vor und sorgt für Stimmung." },
         { question: "Wo ist der Abfahrtspunkt?", answer: "Abfahrt vom Port de l'Arsenal, neben der Place de la Bastille (Paris 12.). Metro Bastille (Linien 1, 5, 8)." },
-        { question: "Was kostet ein JGA auf der Seine?", answer: "Ab 490€ für das Basispaket (1 bis 6 Personen) oder 540€ für das Festpaket mit Champagner. +90€ pro Person über 6." },
+        { question: "Was kostet ein JGA auf der Seine?", answer: "Ab 480€ für das Basispaket (1 bis 6 Personen) oder 540€ für das Festpaket mit Champagner. +90€ pro Person über 6." },
       ],
     },
   ],

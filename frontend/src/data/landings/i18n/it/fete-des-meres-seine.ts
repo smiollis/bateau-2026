@@ -1,7 +1,7 @@
 import type { LandingPageTranslation } from "../../types";
 
 const translation: LandingPageTranslation = {
-  meta: { title: "Festa della Mamma sulla Senna – Crociera regalo a Parigi", description: "Regala a tua madre una crociera privata sulla Senna per la Festa della Mamma. Champagne, Torre Eiffel, momento in famiglia. Da 490€." },
+  meta: { title: "Festa della Mamma sulla Senna – Crociera regalo a Parigi", description: "Regala a tua madre una crociera privata sulla Senna per la Festa della Mamma. Champagne, Torre Eiffel, momento in famiglia. Da 480€." },
   hero: { title: "Festa della Mamma sulla Senna", subtitle: "Il regalo più bello per la mamma — una crociera privata nel cuore di Parigi", cta: { text: "Regala la crociera" } },
   sections: [
     { type: "richtext", title: "Il regalo perfetto per la Festa della Mamma", content: `<p>Quest'anno, dimenticate fiori e profumo. Regalate a vostra madre un <strong>momento indimenticabile sulla Senna</strong>. Il Senang, barca di 12 metri privatizzata per la vostra famiglia, naviga 2 ore tra i più bei monumenti di Parigi.</p><p>Immaginate la sua sorpresa: una <strong>barca tutta per lei</strong>, una coppa di champagne, la Torre Eiffel che sfila e tutta la famiglia riunita. È molto più di un regalo — è un ricordo che resterà inciso per sempre.</p><p>Il Senang accoglie <strong>da 2 a 12 persone</strong>. Offriamo <strong>buoni regalo</strong> personalizzati. Partenza dal Port de l'Arsenal a Bastille.</p>` },
@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Si può venire con bambini piccoli?", answer: "Certo! Giubbotti di salvataggio per bambini forniti, passeggino custodito sulla banchina. Sotto i 3 anni gratuiti." },
       { question: "Si può portare una torta?", answer: "Assolutamente! Torta, fiori, regali, brunch... Portate tutto ciò che renderà felice la mamma." },
       { question: "Quale fascia consigliate?", answer: "Il tramonto (variabile secondo la stagione) offre la luce più bella per le foto." },
-      { question: "Quante persone al massimo?", answer: "Il Senang accoglie fino a 12 persone. Tariffa base 1 a 6 persone (490€ semplice), +110€ per persona oltre." },
+      { question: "Quante persone al massimo?", answer: "Il Senang accoglie fino a 12 persone. Tariffa base 1 a 6 persone (480€ semplice), +110€ per persona oltre." },
     ] },
   ],
 };

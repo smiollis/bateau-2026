@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Si può portare una torta o un pasto?", answer: "Sì, siete liberi di portare torta, pasto del catering o picnic gourmet. Abbiamo un tavolino a bordo." },
       { question: "Qual è la fascia migliore?", answer: "Il tramonto è la più romantica. In inverno, la crociera notturna offre i monumenti illuminati." },
       { question: "Si può venire con i bambini?", answer: "Sì, i bambini sono i benvenuti. Giubbotti di salvataggio adatti disponibili. Bambini sotto i 3 anni gratuiti." },
-      { question: "Quanto costa la crociera?", answer: "A partire da 490€ (formula semplice) o 540€ (formula festiva con champagne) per 1 a 6 persone." },
+      { question: "Quanto costa la crociera?", answer: "A partire da 480€ (formula semplice) o 540€ (formula festiva con champagne) per 1 a 6 persone." },
     ] },
   ],
 };

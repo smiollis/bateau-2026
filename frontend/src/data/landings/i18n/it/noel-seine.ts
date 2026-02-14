@@ -1,7 +1,7 @@
 import type { LandingPageTranslation } from "../../types";
 
 const translation: LandingPageTranslation = {
-  meta: { title: "Crociera di Natale sulla Senna – Feste in barca a Parigi", description: "Vivete la magia del Natale sulla Senna. Crociera privata, Parigi illuminata, atmosfera fiabesca. Barca privata da 2 a 12 persone. Da 490€." },
+  meta: { title: "Crociera di Natale sulla Senna – Feste in barca a Parigi", description: "Vivete la magia del Natale sulla Senna. Crociera privata, Parigi illuminata, atmosfera fiabesca. Barca privata da 2 a 12 persone. Da 480€." },
   hero: { title: "Crociera di Natale sulla Senna", subtitle: "La magia delle feste vista dalla Senna — Parigi brilla per voi", cta: { text: "Prenota la crociera di Natale" } },
   sections: [
     { type: "richtext", title: "La magia natalizia sulla Senna", content: `<p>A dicembre, Parigi brilla di mille luci. E non c'è posto migliore per ammirare questo spettacolo che <strong>dalla Senna</strong>. Il Senang vi offre una crociera privata di 2 ore nel cuore della capitale illuminata per le feste.</p><p>Navigate tra le <strong>decorazioni natalizie dei grandi magazzini</strong>, le ghirlande dei ponti, gli alberi illuminati. Il concetto è perfetto: portate la vostra <strong>cioccolata calda, il vin brulé, le caldarroste</strong>... oppure scegliete la formula festiva con champagne.</p><p>Ideale come <strong>regalo di Natale originale</strong>, uscita in famiglia durante le vacanze o serata natalizia tra amici. Partenza dal <strong>Port de l'Arsenal a Bastille</strong>. Forniamo coperte per le serate fresche.</p>` },

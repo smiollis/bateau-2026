@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Kann man Kuchen oder Essen mitbringen?", answer: "Ja, ihr könnt Kuchen, Catering oder Gourmet-Picknick mitbringen. Wir haben einen Tisch an Bord." },
       { question: "Welcher ist der beste Slot?", answer: "Der Sonnenuntergang ist am romantischsten. Im Winter bietet die Nachtfahrt die beleuchteten Monumente." },
       { question: "Kann man mit Kindern kommen?", answer: "Ja, Kinder sind willkommen. Passende Rettungswesten verfügbar. Kinder unter 3 Jahren kostenlos." },
-      { question: "Was kostet die Bootsfahrt?", answer: "Ab 490€ (Basispaket) oder 540€ (Festpaket mit Champagner) für 1 bis 6 Personen." },
+      { question: "Was kostet die Bootsfahrt?", answer: "Ab 480€ (Basispaket) oder 540€ (Festpaket mit Champagner) für 1 bis 6 Personen." },
     ] },
   ],
 };

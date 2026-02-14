@@ -13,7 +13,7 @@ const translation: LandingPageTranslation = {
     ] },
     { type: "gallery", title: "Festas de aniversário no Sena", images: [
       { src: "/images/gallery/2025-04-08-a-20.58.31_fcc03538.webp", alt: "Festa de aniversário no Sena em Paris" },
-      { src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp", alt: "Grupo comemorando aniversário no barco" },
+      { src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp", alt: "Grupo comemorando aniversário no barco" },
       { src: "/images/gallery/2025-04-08-a-22.20.47_261af646.webp", alt: "O Senang navegando para um aniversário" },
       { src: "/images/gallery/2025-03-03-a-16.00.24_c635ba48.webp", alt: "Vista das pontes de Paris do barco" },
     ] },
@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Quantas pessoas podem ser convidadas?", answer: "O Senang comporta até 12 pessoas. A tarifa base cobre de 1 a 6 pessoas, depois 110€ por pessoa adicional." },
       { question: "Crianças são aceitas a bordo?", answer: "Sim, crianças são bem-vindas. Coletes salva-vidas infantis estão disponíveis a bordo. Crianças menores de 3 anos são gratuitas." },
       { question: "Pode trazer decoração?", answer: "Com certeza! Balões, faixas, guirlandas... Vocês são livres para decorar o barco. Pedimos apenas que não usem confete." },
-      { question: "Quanto custa um aniversário no Sena?", answer: "A partir de 490€ (pacote simples) ou 540€ (pacote festivo com champanhe) para um grupo de até 6 pessoas. +110€ por pessoa adicional." },
+      { question: "Quanto custa um aniversário no Sena?", answer: "A partir de 480€ (pacote simples) ou 540€ (pacote festivo com champanhe) para um grupo de até 6 pessoas. +110€ por pessoa adicional." },
     ] },
   ],
 };

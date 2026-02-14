@@ -1,7 +1,7 @@
 import type { LandingPageTranslation } from "../../types";
 
 const translation: LandingPageTranslation = {
-  meta: { title: "Seminário no Sena – Evento corporativo no barco em Paris", description: "Organize seu seminário no Sena. Barco privatizado para 2 a 12 colaboradores, cenário inspirador, faturamento empresarial. A partir de 360€." },
+  meta: { title: "Seminário no Sena – Evento corporativo no barco em Paris", description: "Organize seu seminário no Sena. Barco privatizado para 2 a 12 colaboradores, cenário inspirador, faturamento empresarial. A partir de 480€." },
   hero: { title: "Seminário no Sena", subtitle: "Um cenário inspirador para suas reuniões de equipe — longe do escritório, sobre a água", cta: { text: "Reserve seu seminário" } },
   sections: [
     { type: "richtext", title: "Um seminário fora de sede, no Sena", content: `<p>Mudem de cenário para <strong>liberar a criatividade</strong> da sua equipe. O Senang, barco de 12 metros privatizado, oferece um espaço único para organizar um seminário no coração de Paris. Durante 2 horas de navegação, seus colaboradores trocam ideias em um ambiente inspirador e isolado.</p><p>A atmosfera no Sena favorece as <strong>conversas informais e ideias novas</strong>. Longe das salas de reunião, as discussões são mais livres, os laços mais fortes. O panorama parisiense — Torre Eiffel, Notre-Dame, pontes históricas — oferece um cenário estimulante para brainstorming.</p><p>O formato é flexível: <strong>reunião de trabalho</strong> pela manhã, brainstorming criativo à tarde, ou afterwork de integração à noite. A caixa de som Bluetooth permite reproduzir uma apresentação em áudio. O barco dispõe de um espaço aberto propício para trocas em grupo.</p><p><strong>Faturamento empresarial</strong> disponível: emitimos nota fiscal conforme com IVA para dedução em despesas profissionais. Para grupos acima de 6 pessoas, entre em contato para um orçamento Tudo Incluso com buffet (marmitas, buffet frio...).</p><p>O Senang já recebeu <strong>eventos corporativos</strong> de marcas como Adidas e Le Slip Français, e foi o barco oficial da delegação da Mauritânia nos Jogos Olímpicos de Paris 2024. Um cenário comprovado para seus eventos empresariais. Saída do Port de l'Arsenal em Bastille.</p>` },
@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Pode projetar uma apresentação?", answer: "Não há projetor, mas vocês podem reproduzir áudio pela caixa Bluetooth. Para visuais, recomendamos um tablet ou tela portátil." },
       { question: "Qual formato para um brainstorming?", answer: "O bloco de 2h é ideal: 30 min de acolhida e quebra-gelo, 1h de trabalho concentrado, 30 min de resumo e aperitivo." },
       { question: "Pode estender a duração?", answer: "Sim, entre em contato para um bloco estendido. Suplemento por hora sob consulta." },
-      { question: "Qual o valor para 10 pessoas?", answer: "360€ (base 1-6 pessoas) + 4 x 100€ = 760€ para 10 pessoas (pacote simples). Pacote festivo e Tudo Incluso sob consulta." },
+      { question: "Qual o valor para 10 pessoas?", answer: "480€ (base 1-6 pessoas) + 4 x 110€ = 920€ para 10 pessoas (pacote simples). Pacote festivo e Tudo Incluso sob consulta." },
     ] },
   ],
 };

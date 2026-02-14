@@ -5,7 +5,7 @@ export const noelSeine: LandingPageData = {
   meta: {
     title: "Croisière de Noël sur la Seine \u2013 Fêtes en bateau à Paris",
     description:
-      "Vivez la magie de Noël sur la Seine. Croisière privée, Paris illuminé, ambiance féerique. Bateau privatisé de 2 à 12 personnes. Dès 360\u00a0€.",
+      "Vivez la magie de Noël sur la Seine. Croisière privée, Paris illuminé, ambiance féerique. Bateau privatisé de 2 à 12 personnes. Dès 480\u00a0€.",
   },
   hero: {
     title: "Croisière de Noël sur la Seine",
@@ -63,5 +63,5 @@ export const noelSeine: LandingPageData = {
     },
   ],
   relatedPages: ["nouvel-an-seine", "croisiere-famille-seine", "coucher-soleil-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 360 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

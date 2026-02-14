@@ -112,7 +112,7 @@ const translation: LandingPageTranslation = {
         {
           question: "Quanto costa un addio al celibato sulla Senna?",
           answer:
-            "A partire da 490€ per la formula semplice (1 a 6 persone) o 540€ per la formula festiva con champagne. +90€ per persona oltre 6.",
+            "A partire da 480€ per la formula semplice (1 a 6 persone) o 540€ per la formula festiva con champagne. +90€ per persona oltre 6.",
         },
       ],
     },

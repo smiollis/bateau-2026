@@ -1,7 +1,18 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+// Helper to generate Next.js image optimizer URL for responsive loading
+function nextImageUrl(src: string, width: number, quality = 75): string {
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${quality}`;
+}
+
+function makeSrcSet(src: string): string {
+  return [640, 1080, 1920]
+    .map((w) => `${nextImageUrl(src, w)} ${w}w`)
+    .join(", ");
+}
 
 const heroImages = [
   {
@@ -9,7 +20,7 @@ const heroImages = [
     alt: "Le Senang naviguant sous les ponts de Paris",
   },
   {
-    src: "/images/hero/2025-03-03-a-16.00.24_13d1702e.jpg",
+    src: "/images/hero/2025-03-03-a-16.00.24_13d1702e.webp",
     alt: "Panorama des monuments parisiens depuis la Seine",
   },
   {
@@ -34,24 +45,6 @@ const INTERVAL = 6000;
 
 const HeroCinemaSlideshow = () => {
   const [current, setCurrent] = useState(0);
-  const preloadedRef = useRef(false);
-
-  // Preload all images on mount
-  useEffect(() => {
-    if (preloadedRef.current) return;
-    preloadedRef.current = true;
-    heroImages.forEach((img) => {
-      const link = document.createElement("link");
-      link.rel = "preload";
-      link.as = "image";
-      link.href = img.src;
-      // Use fetchpriority for the first image
-      if (img === heroImages[0]) {
-        link.setAttribute("fetchpriority", "high");
-      }
-      document.head.appendChild(link);
-    });
-  }, []);
 
   const advance = useCallback(() => {
     setCurrent((prev) => (prev + 1) % heroImages.length);
@@ -70,6 +63,8 @@ const HeroCinemaSlideshow = () => {
         <motion.img
           key={current}
           src={heroImages[current]?.src}
+          srcSet={heroImages[current]?.src ? makeSrcSet(heroImages[current].src) : undefined}
+          sizes="100vw"
           alt={heroImages[current]?.alt ?? ""}
           initial={{ opacity: 0, scale: kb.scale[0], x: kb.x[0], y: kb.y[0] }}
           animate={{
@@ -88,6 +83,7 @@ const HeroCinemaSlideshow = () => {
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
           decoding="async"
+          fetchPriority={current === 0 ? "high" : "auto"}
         />
       </AnimatePresence>
     </div>

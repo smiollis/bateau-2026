@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Qual o melhor horário para a luz?", answer: "A golden hour (1h antes do pôr do sol) oferece a luz mais bonita. Reserve esse horário com antecedência pois é muito procurado." },
       { question: "O barco é estável para as fotos?", answer: "Sim, o Senang navega lentamente e oferece navegação estável. Sem vibrações incômodas para as tomadas." },
       { question: "Pode fazer um ensaio de moda/lookbook?", answer: "Com certeza. Várias marcas já filmaram a bordo (Adidas, Le Slip Français). O cenário varia naturalmente ao longo da navegação." },
-      { question: "Quanto custa um ensaio no Sena?", answer: "A partir de 360€ (pacote simples, 2h). A tarifa é a mesma de um cruzeiro padrão." },
+      { question: "Quanto custa um ensaio no Sena?", answer: "A partir de 480€ (pacote simples, 2h). A tarifa é a mesma de um cruzeiro padrão." },
     ] },
   ],
 };

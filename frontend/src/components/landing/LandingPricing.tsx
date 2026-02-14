@@ -13,7 +13,7 @@ interface LandingPricingProps {
 const formulas = [
   {
     name: "Formule Simple",
-    price: "360",
+    price: "480",
     unit: "1-6 pers.",
     features: [
       "Bateau privatise 2h",
@@ -24,7 +24,7 @@ const formulas = [
   },
   {
     name: "Formule Festive",
-    price: "420",
+    price: "540",
     unit: "1-6 pers.",
     highlight: true,
     features: [
@@ -63,7 +63,7 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
           {title}
         </motion.h2>
         <p className="text-center text-muted-foreground mb-10">
-          +100 &euro;/pers. supplementaire au-dela de 6 (max 12)
+          +110 &euro;/pers. supplementaire au-dela de 6 (max 12)
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {formulas.map((formula, i) => (

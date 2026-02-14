@@ -13,7 +13,7 @@ const translation: LandingPageTranslation = {
     ] },
     { type: "gallery", title: "Geburtstagsfeiern auf der Seine", images: [
       { src: "/images/gallery/2025-04-08-a-20.58.31_fcc03538.webp", alt: "Geburtstagsfeier auf der Seine in Paris" },
-      { src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp", alt: "Gruppe feiert Geburtstag auf dem Boot" },
+      { src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp", alt: "Gruppe feiert Geburtstag auf dem Boot" },
       { src: "/images/gallery/2025-04-08-a-22.20.47_261af646.webp", alt: "Die Senang auf Geburtstagsfahrt" },
       { src: "/images/gallery/2025-03-03-a-16.00.24_c635ba48.webp", alt: "Blick auf die Brücken von Paris vom Boot aus" },
     ] },
@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Wie viele Personen können eingeladen werden?", answer: "Die Senang bietet Platz für bis zu 12 Personen. Der Grundpreis gilt für 1 bis 6 Personen, dann 110€ pro zusätzliche Person." },
       { question: "Sind Kinder an Bord erlaubt?", answer: "Ja, Kinder sind willkommen. Passende Rettungswesten sind an Bord verfügbar. Kinder unter 3 Jahren sind kostenlos." },
       { question: "Kann man Dekoration mitbringen?", answer: "Absolut! Luftballons, Banner, Girlanden... Ihr könnt das Boot für den Anlass dekorieren. Wir bitten nur darum, kein Konfetti zu verwenden." },
-      { question: "Was kostet ein Geburtstag auf der Seine?", answer: "Ab 490€ (Basispaket) oder 540€ (Festpaket mit Champagner) für eine Gruppe bis zu 6 Personen. +110€ pro weitere Person." },
+      { question: "Was kostet ein Geburtstag auf der Seine?", answer: "Ab 480€ (Basispaket) oder 540€ (Festpaket mit Champagner) für eine Gruppe bis zu 6 Personen. +110€ pro weitere Person." },
     ] },
   ],
 };

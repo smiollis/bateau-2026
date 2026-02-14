@@ -21,7 +21,7 @@ const translation: LandingPageTranslation = {
     { type: "pricing", title: "Unsere Valentinstag-Pakete" },
     { type: "faq", title: "Häufig gestellte Fragen – Valentinstag", items: [
       { question: "Muss man weit im Voraus buchen?", answer: "Ja! Die Slots im Februar sind sehr gefragt. Bucht mindestens 2-3 Wochen im Voraus." },
-      { question: "Kann man nur zu zweit kommen?", answer: "Absolut! Der Grundpreis (490€ Basis, 540€ Fest) gilt für 1 bis 6 Personen. Zu zweit ist es totale Intimität." },
+      { question: "Kann man nur zu zweit kommen?", answer: "Absolut! Der Grundpreis (480€ Basis, 540€ Fest) gilt für 1 bis 6 Personen. Zu zweit ist es totale Intimität." },
       { question: "Kann man Kuchen oder Blumen mitbringen?", answer: "Natürlich! Kuchen, Rosen, Kerzen, Dekoration... Bereitet die Überraschung vor, wir helfen beim Einrichten an Bord." },
       { question: "Ist das Boot im Februar beheizt?", answer: "Die Senang ist ein halboffenes Boot. Wir stellen Decken bereit, aber zieht euch warm an. Die gemütliche Atmosphäre gehört zum Charme!" },
       { question: "Kann man an Bord einen Heiratsantrag machen?", answer: "Das ist unsere Spezialität! Kontaktiert uns, um den perfekten Moment zu organisieren. Wir bewahren das Geheimnis." },

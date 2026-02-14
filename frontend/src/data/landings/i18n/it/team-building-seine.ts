@@ -21,10 +21,10 @@ const translation: LandingPageTranslation = {
     { type: "pricing", title: "Le nostre formule team building" },
     { type: "faq", title: "Domande frequenti – Team building", items: [
       { question: "Si può ottenere una fattura aziendale?", answer: "Sì, emettiamo una fattura conforme con IVA per il passaggio in spese professionali. Contattateci via email." },
-      { question: "Quale formato per un afterwork?", answer: "La fascia 18h-20h infrasettimanale è ideale. Formula semplice a 490€ o festiva a 540€, il vostro team porta l'aperitivo." },
+      { question: "Quale formato per un afterwork?", answer: "La fascia 18h-20h infrasettimanale è ideale. Formula semplice a 480€ o festiva a 540€, il vostro team porta l'aperitivo." },
       { question: "Si possono organizzare attività a bordo?", answer: "La barca è ideale per discussioni informali, un brainstorming o un quiz di squadra. Lo spazio è aperto e conviviale." },
       { question: "Quanti collaboratori al massimo?", answer: "Il Senang accoglie fino a 12 persone. Per gruppi più grandi, contattateci per studiare una soluzione." },
-      { question: "Qual è la tariffa?", answer: "A partire da 490€ per 1 a 6 persone, +110€ per persona oltre. Formula Tutto Incluso con catering su preventivo." },
+      { question: "Qual è la tariffa?", answer: "A partire da 480€ per 1 a 6 persone, +110€ per persona oltre. Formula Tutto Incluso con catering su preventivo." },
     ] },
   ],
 };

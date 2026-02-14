@@ -12,7 +12,7 @@ import {
   Gift,
   CalendarHeart,
   Beer,
-  GlassWater,
+  Diamond,
   Crown,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -61,7 +61,7 @@ const occasions: OccasionItem[] = [
   { slug: "evjf-seine", icon: Crown, labelKey: "evjf" },
   { slug: "evg-seine", icon: PartyPopper, labelKey: "evg" },
   { slug: "croisiere-romantique-seine", icon: Heart, labelKey: "romantique" },
-  { slug: "demande-en-mariage-seine", icon: GlassWater, labelKey: "mariage" },
+  { slug: "demande-en-mariage-seine", icon: Diamond, labelKey: "demande" },
   { slug: "anniversaire-seine", icon: Gift, labelKey: "anniversaire" },
   { slug: "soiree-entre-amis-seine", icon: Users, labelKey: "amis" },
   { slug: "team-building-seine", icon: Briefcase, labelKey: "teamBuilding" },

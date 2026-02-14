@@ -123,6 +123,6 @@ export const soireeEntreAmisSeine: LandingPageData = {
   relatedPages: ["anniversaire-seine", "apero-bateau-seine", "evg-seine"],
   jsonLd: {
     type: "TouristAttraction",
-    priceFrom: 360,
+    priceFrom: 480,
   },
 };

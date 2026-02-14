@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations } from "next-intl";
 import { Link, useRouter, usePathname } from "@/i18n/navigation";
-import logo from "@/assets/logo.png";
+import logoDay from "@/assets/logo-day.svg";
+import logoNight from "@/assets/logo-night.svg";
 import LanguageSelector from "@/components/LanguageSelector";
 import HeaderThemeToggle from "@/components/HeaderThemeToggle";
 import MobileMenu from "@/components/MobileMenu";
@@ -30,7 +31,7 @@ const variantStyles: Record<ThemeVariant, {
   },
   nuit: {
     header: "bg-[#0a1628]/95 backdrop-blur-md border-b border-gold/20",
-    logoClass: "h-14 md:h-16 w-auto brightness-0 invert",
+    logoClass: "h-14 md:h-16 w-auto",
     nav: "text-sm font-medium text-blue-100/80 hover:text-accent transition-colors duration-200",
     cta: "btn-gold text-white",
     mobileMenuBg: "bg-[#0a1628]",
@@ -40,8 +41,9 @@ const variantStyles: Record<ThemeVariant, {
 
 const HeaderVariants = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { variant } = useThemeVariant();
+  const { variant, isDark } = useThemeVariant();
   const styles = variantStyles[variant];
+  const logo = isDark ? logoNight : logoDay;
   const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("nav");
@@ -95,7 +97,6 @@ const HeaderVariants = () => {
               src={logo}
               alt="Un Bateau à Paris"
               className={styles.logoClass}
-              priority
             />
           </Link>
 

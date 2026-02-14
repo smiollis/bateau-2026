@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Pode ter um fotógrafo a bordo?", answer: "Sim! Vocês podem convidar um fotógrafo profissional a bordo para capturar o momento. Ajudamos a organizar sua presença discreta." },
       { question: "Qual o melhor momento para o pedido?", answer: "O horário do pôr do sol é o mais romântico. A passagem diante da Torre Eiffel iluminada (à noite) é o momento mais popular." },
       { question: "Pode personalizar a decoração do barco?", answer: "Com certeza! Pétalas de rosa, velas LED, balões, faixas... Vocês podem trazer sua decoração ou confiar a preparação ao nosso pacote Tudo Incluso." },
-      { question: "Quanto custa um pedido de casamento no Sena?", answer: "A partir de 540€ pelo pacote festivo (champanhe incluso). O pacote Tudo Incluso com decoração e buffet está disponível sob consulta." },
+      { question: "Quanto custa um pedido de casamento no Sena?", answer: "A partir de 480€ pelo pacote festivo (champanhe incluso). O pacote Tudo Incluso com decoração e buffet está disponível sob consulta." },
     ] },
   ],
 };

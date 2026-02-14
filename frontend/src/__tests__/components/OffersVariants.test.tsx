@@ -57,9 +57,9 @@ describe("OffersVariants", () => {
 
   it("renders prices for each offer", () => {
     render(<OffersVariants />);
-    expect(screen.getByText("420€")).toBeInTheDocument();
     expect(screen.getByText("480€")).toBeInTheDocument();
-    expect(screen.getAllByText("600€")).toHaveLength(2);
+    expect(screen.getByText("540€")).toBeInTheDocument();
+    expect(screen.getAllByText("660€")).toHaveLength(2);
   });
 
   it("shows popular badge on second offer", () => {

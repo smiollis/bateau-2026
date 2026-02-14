@@ -112,7 +112,7 @@ const translation: LandingPageTranslation = {
         {
           question: "Quanto costa una crociera romantica?",
           answer:
-            "A partire da 490€ (formula semplice) o 540€ (formula festiva con champagne) per una crociera privata di 2 ore.",
+            "A partire da 480€ (formula semplice) o 540€ (formula festiva con champagne) per una crociera privata di 2 ore.",
         },
       ],
     },

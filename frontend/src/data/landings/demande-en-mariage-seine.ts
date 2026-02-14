@@ -123,6 +123,6 @@ export const demandeEnMariageSeine: LandingPageData = {
   relatedPages: ["croisiere-romantique-seine", "anniversaire-mariage-seine", "coucher-soleil-seine"],
   jsonLd: {
     type: "TouristAttraction",
-    priceFrom: 420,
+    priceFrom: 480,
   },
 };

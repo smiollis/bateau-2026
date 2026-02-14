@@ -124,6 +124,6 @@ export const evgSeine: LandingPageData = {
   relatedPages: ["evjf-seine", "soiree-entre-amis-seine", "apero-bateau-seine"],
   jsonLd: {
     type: "TouristAttraction",
-    priceFrom: 360,
+    priceFrom: 480,
   },
 };

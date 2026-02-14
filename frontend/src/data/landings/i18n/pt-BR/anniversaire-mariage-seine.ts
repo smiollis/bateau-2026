@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Pode trazer bolo ou refeição?", answer: "Sim, vocês são livres para trazer bolo, refeição de buffet ou piquenique gourmet. Temos uma mesinha a bordo." },
       { question: "Qual o melhor horário?", answer: "O pôr do sol é o mais romântico. No inverno, o cruzeiro noturno oferece os monumentos iluminados." },
       { question: "Pode trazer crianças?", answer: "Sim, crianças são bem-vindas. Coletes salva-vidas adaptados disponíveis. Crianças menores de 3 anos são gratuitas." },
-      { question: "Quanto custa o cruzeiro?", answer: "A partir de 360€ (pacote simples) ou 420€ (pacote festivo com champanhe) para 1 a 6 pessoas." },
+      { question: "Quanto custa o cruzeiro?", answer: "A partir de 480€ (pacote simples) ou 540€ (pacote festivo com champanhe) para 1 a 6 pessoas." },
     ] },
   ],
 };

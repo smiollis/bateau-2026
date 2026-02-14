@@ -21,7 +21,7 @@ const translation: LandingPageTranslation = {
     { type: "pricing", title: "Le nostre formule San Valentino" },
     { type: "faq", title: "Domande frequenti – San Valentino", items: [
       { question: "Bisogna prenotare con molto anticipo?", answer: "Sì! Le fasce di febbraio sono molto richieste. Prenotate almeno 2-3 settimane prima." },
-      { question: "Si può venire solo in coppia?", answer: "Assolutamente! La tariffa base (490€ semplice, 540€ festiva) copre da 1 a 6 persone. In coppia, è intimità totale." },
+      { question: "Si può venire solo in coppia?", answer: "Assolutamente! La tariffa base (480€ semplice, 540€ festiva) copre da 1 a 6 persone. In coppia, è intimità totale." },
       { question: "Si può portare torta o fiori?", answer: "Certo! Torta, rose, candele, decorazioni... Preparate la sorpresa, vi aiutiamo a sistemare tutto a bordo." },
       { question: "La barca è riscaldata a febbraio?", answer: "Il Senang è una barca semi-aperta. Forniamo coperte, ma vestitevi caldi. L'atmosfera accogliente fa parte del fascino!" },
       { question: "Si può fare una proposta di matrimonio a bordo?", answer: "È la nostra specialità! Contattateci per organizzare il momento perfetto. Manteniamo il segreto." },

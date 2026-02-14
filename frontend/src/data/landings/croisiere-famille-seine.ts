@@ -43,7 +43,7 @@ export const croisiereFamilleSeine: LandingPageData = {
       title: "Familles sur la Seine",
       images: [
         { src: "/images/gallery/2025-04-08-a-20.58.31_fcc03538.webp", alt: "Famille profitant d\u2019une croisi\u00e8re sur la Seine" },
-        { src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp", alt: "Moments de convivialit\u00e9 en famille \u00e0 bord" },
+        { src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp", alt: "Moments de convivialit\u00e9 en famille \u00e0 bord" },
         { src: "/images/gallery/2025-03-03-a-16.00.24_c635ba48.webp", alt: "Vue sur les ponts de Paris depuis le bateau" },
         { src: "/images/gallery/2025-07-27-a-12.22.05_77ed38c8.webp", alt: "Navigation familiale au c\u0153ur de Paris" },
       ],
@@ -63,5 +63,5 @@ export const croisiereFamilleSeine: LandingPageData = {
     },
   ],
   relatedPages: ["anniversaire-seine", "croisiere-romantique-seine", "coucher-soleil-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 360 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

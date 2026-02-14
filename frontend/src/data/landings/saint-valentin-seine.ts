@@ -5,7 +5,7 @@ export const saintValentinSeine: LandingPageData = {
   meta: {
     title: "Saint-Valentin sur la Seine \u2013 Croisière romantique à Paris",
     description:
-      "Offrez une croisière privée sur la Seine pour la Saint-Valentin. Champagne, Tour Eiffel illuminée, 2h en amoureux. À partir de 420\u00a0€.",
+      "Offrez une croisière privée sur la Seine pour la Saint-Valentin. Champagne, Tour Eiffel illuminée, 2h en amoureux. À partir de 480\u00a0€.",
   },
   hero: {
     title: "Saint-Valentin sur la Seine",
@@ -55,7 +55,7 @@ export const saintValentinSeine: LandingPageData = {
       title: "Questions fréquentes \u2013 Saint-Valentin",
       items: [
         { question: "Faut-il réserver longtemps à l\u2019avance ?", answer: "Oui ! Les créneaux de février sont très demandés. Réservez au moins 2 à 3 semaines à l\u2019avance pour être sûr d\u2019avoir votre date." },
-        { question: "Peut-on venir à 2 seulement ?", answer: "Absolument ! Le tarif de base (360\u00a0€ simple, 420\u00a0€ festive) couvre de 1 à 6 personnes. À deux, c\u2019est l\u2019intimité totale." },
+        { question: "Peut-on venir à 2 seulement ?", answer: "Absolument ! Le tarif de base (480\u00a0€ simple, 540\u00a0€ festive) couvre de 1 à 6 personnes. À deux, c\u2019est l\u2019intimité totale." },
         { question: "Peut-on apporter un gâteau ou des fleurs ?", answer: "Bien sûr ! Gâteau, roses, bougies, décorations\u2026 Préparez la surprise, on vous aide à installer à bord." },
         { question: "Le bateau est-il chauffé en février ?", answer: "Le Senang est un bateau semi-ouvert. Nous fournissons des plaids, mais prévoyez des vêtements chauds. L\u2019ambiance cocooning fait partie du charme !" },
         { question: "Peut-on faire une demande en mariage à bord ?", answer: "C\u2019est notre spécialité ! Contactez-nous pour organiser le moment parfait : lieu, timing, décoration. On garde le secret." },
@@ -63,5 +63,5 @@ export const saintValentinSeine: LandingPageData = {
     },
   ],
   relatedPages: ["croisiere-romantique-seine", "demande-en-mariage-seine", "coucher-soleil-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 420 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

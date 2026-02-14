@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Quantas pessoas para uma despedida no barco?", answer: "O Senang comporta de 2 a 12 pessoas. A tarifa base cobre de 1 a 6 pessoas, depois 110€ por pessoa adicional." },
       { question: "Pode conectar sua música?", answer: "Com certeza! Uma caixa de som Bluetooth está à disposição. Preparem a playlist e criem o clima." },
       { question: "Onde fica o ponto de saída?", answer: "Saída do Port de l'Arsenal, ao lado da Place de la Bastille (Paris 12°). Metrô Bastille (linhas 1, 5, 8)." },
-      { question: "Quanto custa uma despedida de solteiro no Sena?", answer: "A partir de 490€ pelo pacote simples (1 a 6 pessoas) ou 540€ pelo pacote festivo com champanhe. +90€ por pessoa além de 6." },
+      { question: "Quanto custa uma despedida de solteiro no Sena?", answer: "A partir de 480€ pelo pacote simples (1 a 6 pessoas) ou 540€ pelo pacote festivo com champanhe. +90€ por pessoa além de 6." },
     ] },
   ],
 };

@@ -63,5 +63,5 @@ export const anniversaireMariageSeine: LandingPageData = {
     },
   ],
   relatedPages: ["croisiere-romantique-seine", "demande-en-mariage-seine", "coucher-soleil-seine"],
-  jsonLd: { type: "TouristAttraction", priceFrom: 360 },
+  jsonLd: { type: "TouristAttraction", priceFrom: 480 },
 };

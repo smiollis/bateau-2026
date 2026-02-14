@@ -61,7 +61,7 @@ const translation: LandingPageTranslation = {
           alt: "Familie vereint auf der Seine zum Muttertag",
         },
         {
-          src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp",
+          src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp",
           alt: "Gem\u00fctliche Familienmomente an Bord",
         },
         {

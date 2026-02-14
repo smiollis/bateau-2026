@@ -12,7 +12,7 @@ export const evjfSeine: LandingPageData = {
     title: "Enterrement de vie de jeune fille sur la Seine",
     subtitle:
       "Offrez \u00e0 la future mari\u00e9e une croisi\u00e8re priv\u00e9e inoubliable au c\u0153ur de Paris",
-    backgroundImage: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp",
+    backgroundImage: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp",
     cta: { text: "R\u00e9server votre EVJF", href: "/reservation?occasion=evjf" },
   },
   sections: [
@@ -62,7 +62,7 @@ export const evjfSeine: LandingPageData = {
       title: "Vos moments EVJF sur la Seine",
       images: [
         {
-          src: "/images/gallery/2025-04-08-a-20.56.56_3b100d69.webp",
+          src: "/images/gallery/2025-04-08-a-21.50.25_ac11bce0.webp",
           alt: "Groupe de femmes c\u00e9l\u00e9brant un EVJF sur la Seine",
         },
         {
@@ -124,6 +124,6 @@ export const evjfSeine: LandingPageData = {
   relatedPages: ["evg-seine", "croisiere-romantique-seine", "shooting-photo-seine"],
   jsonLd: {
     type: "TouristAttraction",
-    priceFrom: 420,
+    priceFrom: 480,
   },
 };

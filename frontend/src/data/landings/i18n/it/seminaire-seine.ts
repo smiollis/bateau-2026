@@ -1,7 +1,7 @@
 import type { LandingPageTranslation } from "../../types";
 
 const translation: LandingPageTranslation = {
-  meta: { title: "Seminario sulla Senna – Evento aziendale in barca a Parigi", description: "Organizza il tuo seminario sulla Senna. Barca privata per 2 a 12 collaboratori, ambiente ispirante, fatturazione aziendale. Da 490€." },
+  meta: { title: "Seminario sulla Senna – Evento aziendale in barca a Parigi", description: "Organizza il tuo seminario sulla Senna. Barca privata per 2 a 12 collaboratori, ambiente ispirante, fatturazione aziendale. Da 480€." },
   hero: { title: "Seminario sulla Senna", subtitle: "Un ambiente ispirante per le tue riunioni di team — lontano dall'ufficio, sull'acqua", cta: { text: "Prenota il tuo seminario" } },
   sections: [
     { type: "richtext", title: "Un seminario fuori dall'ufficio, sulla Senna", content: `<p>Cambia ambiente per <strong>liberare la creatività</strong> del tuo team. Il Senang, barca di 12 metri privatizzata, offre uno spazio unico per organizzare un seminario nel cuore di Parigi. Durante 2 ore di navigazione, i tuoi collaboratori scambiano idee in un ambiente ispirante e disconnesso.</p><p>Il formato è flessibile: <strong>riunione di lavoro</strong> al mattino, brainstorming creativo nel pomeriggio, o afterwork di coesione alla sera. <strong>Fatturazione aziendale</strong> disponibile.</p><p>Il Senang ha ospitato <strong>eventi corporate</strong> per marchi come Adidas e Le Slip Français, ed è stato la barca ufficiale della Mauritania alle Olimpiadi di Parigi 2024. Partenza dal Port de l'Arsenal a Bastille.</p>` },
@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Si può proiettare una presentazione?", answer: "Non c'è proiettore, ma si può trasmettere audio tramite la cassa Bluetooth. Per i contenuti visivi, consigliamo un tablet o uno schermo portatile." },
       { question: "Quale formato per un brainstorming?", answer: "La fascia di 2h è ideale: 30 min di installazione e ice-breaking, 1h di lavoro, 30 min di conclusioni e aperitivo." },
       { question: "Si può prolungare la durata?", answer: "Sì, contattateci per una fascia estesa. Supplemento orario su preventivo." },
-      { question: "Qual è la tariffa per 10 persone?", answer: "490€ (base 1-6) + 4 × 110€ = 930€ per 10 persone (formula semplice). Festiva e Tutto Incluso su preventivo." },
+      { question: "Qual è la tariffa per 10 persone?", answer: "480€ (base 1-6) + 4 × 110€ = 920€ per 10 persone (formula semplice). Festiva e Tutto Incluso su preventivo." },
     ] },
   ],
 };

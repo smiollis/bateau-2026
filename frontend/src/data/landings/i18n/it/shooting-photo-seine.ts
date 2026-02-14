@@ -24,7 +24,7 @@ const translation: LandingPageTranslation = {
       { question: "Qual è la fascia migliore per la luce?", answer: "La golden hour (1h prima del tramonto) offre la luce più bella. Prenotate questa fascia in anticipo perché è molto richiesta." },
       { question: "La barca è stabile per le foto?", answer: "Sì, il Senang naviga lentamente e offre una navigazione stabile. Niente vibrazioni fastidiose per le riprese." },
       { question: "Si può fare uno shooting di moda/lookbook?", answer: "Assolutamente. Diversi brand hanno già girato a bordo (Adidas, Le Slip Français). Lo sfondo varia naturalmente durante la navigazione." },
-      { question: "Quanto costa uno shooting sulla Senna?", answer: "A partire da 490€ (formula semplice, 2h). La tariffa è la stessa di una crociera standard." },
+      { question: "Quanto costa uno shooting sulla Senna?", answer: "A partire da 480€ (formula semplice, 2h). La tariffa è la stessa di una crociera standard." },
     ] },
   ],
 };
