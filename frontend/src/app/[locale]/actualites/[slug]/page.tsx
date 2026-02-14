@@ -2,11 +2,22 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import postsFr from '@/data/posts.json';
 import postsEn from '@/data/posts-en.json';
+import postsEs from '@/data/posts-es.json';
+import postsIt from '@/data/posts-it.json';
+import postsDe from '@/data/posts-de.json';
+import postsPtBR from '@/data/posts-pt-BR.json';
 import { getAlternates, getOgLocale } from '@/lib/metadata';
 import ArticleDetail from '@/views/ArticleDetail';
 
 function getPostsByLocale(locale: string) {
-  return locale === 'en' ? postsEn : postsFr;
+  switch (locale) {
+    case 'en': return postsEn;
+    case 'es': return postsEs;
+    case 'it': return postsIt;
+    case 'de': return postsDe;
+    case 'pt-BR': return postsPtBR;
+    default: return postsFr;
+  }
 }
 
 export function generateStaticParams() {

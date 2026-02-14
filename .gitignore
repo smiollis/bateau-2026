@@ -1,0 +1,8 @@
+# SQL dumps
+*.sql
+
+# SVG sources (logos originaux)
+/*.svg
+
+# Fichiers temporaires
+liste_tables.txt

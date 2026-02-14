@@ -10,13 +10,32 @@ import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations, useLocale } from "next-intl";
 import postsFr from "@/data/posts.json";
 import postsEn from "@/data/posts-en.json";
+import postsEs from "@/data/posts-es.json";
+import postsIt from "@/data/posts-it.json";
+import postsDe from "@/data/posts-de.json";
+import postsPtBR from "@/data/posts-pt-BR.json";
+
+const localeMap: Record<string, string> = {
+  fr: "fr-FR", en: "en-US", es: "es-ES", it: "it-IT", de: "de-DE", "pt-BR": "pt-BR",
+};
 
 function formatDate(iso: string, locale: string): string {
-  return new Date(iso).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
+  return new Date(iso).toLocaleDateString(localeMap[locale] || "fr-FR", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
+}
+
+function getPostsByLocale(locale: string) {
+  switch (locale) {
+    case "en": return postsEn;
+    case "es": return postsEs;
+    case "it": return postsIt;
+    case "de": return postsDe;
+    case "pt-BR": return postsPtBR;
+    default: return postsFr;
+  }
 }
 
 interface ArticleDetailProps {
@@ -27,7 +46,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
   const { isDark } = useThemeVariant();
   const t = useTranslations("articleDetail");
   const locale = useLocale();
-  const allPosts = locale === "en" ? postsEn : postsFr;
+  const allPosts = getPostsByLocale(locale);
 
   const related = allPosts
     .filter((p) => p.category === post.category && p.id !== post.id)
