@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2 } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
-import HeaderVariants from "@/components/HeaderVariants";
-import FooterVariants from "@/components/FooterVariants";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
@@ -85,10 +83,7 @@ const Reservation = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
-      <HeaderVariants />
-
-      <main id="main" className="pt-24">
+    <div className="min-h-screen bg-background pt-24">
         {/* HERO SECTION */}
         <motion.section
           initial={{ opacity: 0 }}
@@ -225,9 +220,6 @@ const Reservation = () => {
             </motion.div>
           </div>
         </section>
-      </main>
-
-      <FooterVariants />
     </div>
   );
 };

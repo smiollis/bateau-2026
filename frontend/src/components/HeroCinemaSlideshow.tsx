@@ -62,15 +62,15 @@ const HeroCinemaSlideshow = () => {
     return () => clearInterval(timer);
   }, [advance]);
 
-  const kb = kenBurnsVariants[current % kenBurnsVariants.length];
+  const kb = kenBurnsVariants[current % kenBurnsVariants.length]!;
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
       <AnimatePresence mode="sync">
         <motion.img
           key={current}
-          src={heroImages[current].src}
-          alt={heroImages[current].alt}
+          src={heroImages[current]?.src}
+          alt={heroImages[current]?.alt ?? ""}
           initial={{ opacity: 0, scale: kb.scale[0], x: kb.x[0], y: kb.y[0] }}
           animate={{
             opacity: 1,

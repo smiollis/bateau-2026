@@ -1,110 +1,68 @@
-"use client";
-
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import HeaderVariants from "@/components/HeaderVariants";
-import FooterVariants from "@/components/FooterVariants";
+import { getTranslations } from "next-intl/server";
 
-const MentionsLegales = () => {
+export default async function MentionsLegales() {
+  const t = await getTranslations("mentions");
+
   return (
-    <div className="min-h-screen bg-background">
-      <HeaderVariants />
-      <main id="main" className="pt-24 pb-16">
-        <div className="container-custom max-w-4xl">
+    <div className="min-h-screen bg-background pt-24 pb-16">
+      <div className="container-custom max-w-4xl">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
-            Retour à l&apos;accueil
+            {t("backToHome")}
           </Link>
 
           <h1 className="font-heading text-4xl md:text-5xl font-semibold text-primary mb-8">
-            Informations légales
+            {t("title")}
           </h1>
 
           <div className="prose prose-lg max-w-none text-foreground/80 space-y-8">
-            <p>
-              En vertu de l&apos;article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l&apos;économie numérique, il est précisé aux utilisateurs du site https://bateau-a-paris.fr/ l&apos;identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
-            </p>
+            <p>{t("intro")}</p>
 
-            <p>
-              <strong>Propriétaire :</strong> VIVALIS – SARL au capital de 10 000,00 € – 9 Rue Dauphin 94800 Villejuif – Registre du Commerce et des Sociétés de Créteil immatriculé sous le n° 480 018 464
-            </p>
-            <p><strong>Responsable publication :</strong> VIVALIS – capitaine@bateau-a-paris.fr</p>
-            <p>Le responsable publication est une personne morale.</p>
-            <p><strong>Hébergeur :</strong> OVH – 2 rue Kellermann, 59100 Roubaix</p>
+            <p><strong>{t("ownerLabel")}</strong> {t("ownerContent")}</p>
+            <p><strong>{t("publisherLabel")}</strong> {t("publisherContent")}</p>
+            <p>{t("publisherNote")}</p>
+            <p><strong>{t("hostLabel")}</strong> {t("hostContent")}</p>
 
-            <p>
-              L&apos;utilisation du site https://bateau-a-paris.fr implique l&apos;acceptation pleine et entière des conditions générales d&apos;utilisation ci-après décrites. Ces conditions d&apos;utilisation sont susceptibles d&apos;être modifiées ou complétées à tout moment, les utilisateurs du site sont donc invités à les consulter de manière régulière.
-            </p>
+            <p>{t("usageTerms")}</p>
+            <p>{t("availability")}</p>
 
-            <p>
-              Ce site est normalement accessible à tout moment aux utilisateurs. Une interruption pour raison de maintenance technique peut être toutefois décidée par VIVALIS, qui s&apos;efforcera alors de communiquer préalablement aux utilisateurs les dates et heures de l&apos;intervention.
-            </p>
+            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("servicesTitle")}</h2>
+            <p>{t("servicesContent")}</p>
 
-            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">Description des services fournis</h2>
-            <p>
-              Les renseignements figurant sur le site https://bateau-a-paris.fr ne sont pas exhaustifs. Ils sont donnés sous réserve de modifications ayant été apportées depuis leur mise en ligne.
-            </p>
+            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("technicalTitle")}</h2>
+            <p>{t("technicalContent1")}</p>
+            <p>{t("technicalContent2")}</p>
+            <p>{t("technicalContent3")}</p>
 
-            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">Limitations contractuelles sur les données techniques</h2>
-            <p>
-              VIVALIS est propriétaire des droits de propriété intellectuelle ou détient les droits d&apos;usage sur tous les éléments accessibles sur le site, notamment les textes, images, graphismes, logo, icônes, sons, logiciels.
-            </p>
-            <p>
-              VIVALIS ne pourra être tenue responsable des dommages directs et indirects causés au matériel de l&apos;utilisateur, lors de l&apos;utilisation du site, soit de l&apos;apparition d&apos;un bug ou d&apos;une incompatibilité.
-            </p>
-            <p>
-              Des espaces interactifs (possibilité de poser des questions dans l&apos;espace contact) sont à la disposition des utilisateurs. VIVALIS se réserve le droit de supprimer, sans mise en demeure préalable, tout contenu déposé dans cet espace qui contreviendrait à la législation applicable en France, en particulier aux dispositions relatives à la protection des données.
-            </p>
+            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("personalDataTitle")}</h2>
+            <p>{t("personalDataContent1")}</p>
+            <p>{t("personalDataContent2")}</p>
+            <p>{t("personalDataContent3")}</p>
+            <p>{t("personalDataContent4")}</p>
 
-            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">Gestion des données personnelles</h2>
-            <p>
-              En France, les données personnelles sont notamment protégées par la loi n° 78-87 du 6 janvier 1978, la loi n° 2004-801 du 6 août 2004, l&apos;article L226-13 du Code pénal et la Directive Européenne du 24 octobre 1995.
-            </p>
-            <p>
-              À l&apos;occasion de l&apos;utilisation du site https://bateau-a-paris.fr, peuvent être recueillies : l&apos;URL des liens par l&apos;intermédiaire desquels l&apos;utilisateur a accédé au site, le fournisseur d&apos;accès de l&apos;utilisateur, l&apos;adresse de protocole Internet (IP) de l&apos;utilisateur.
-            </p>
-            <p>
-              Conformément aux dispositions des articles 38 et suivants de la loi 78-17 du 6 janvier 1978 relative à l&apos;informatique, aux fichiers et aux libertés, tout utilisateur dispose d&apos;un droit d&apos;accès, de rectification et d&apos;opposition aux données personnelles le concernant.
-            </p>
-            <p>
-              Aucune information personnelle de l&apos;utilisateur du site https://bateau-a-paris.fr n&apos;est publiée à l&apos;insu de l&apos;utilisateur, échangée, transférée, cédée ou vendue sur un support quelconque à des tiers.
-            </p>
+            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("cookiesTitle")}</h2>
+            <p>{t("cookiesContent1")}</p>
+            <p>{t("cookiesContent2")}</p>
 
-            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">Liens hypertextes et cookies</h2>
-            <p>
-              La navigation sur le site https://bateau-a-paris.fr est susceptible de provoquer l&apos;installation de cookie(s) sur l&apos;ordinateur de l&apos;utilisateur. Ces cookies ont également vocation à permettre diverses mesures de fréquentation.
-            </p>
-            <p>
-              Le refus d&apos;installation d&apos;un cookie peut entraîner l&apos;impossibilité d&apos;accéder à certains services. L&apos;utilisateur peut toutefois configurer son ordinateur pour refuser l&apos;installation des cookies.
-            </p>
+            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("jurisdictionTitle")}</h2>
+            <p>{t("jurisdictionContent")}</p>
 
-            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">Droit applicable et attribution de juridiction</h2>
-            <p>
-              Tout litige en relation avec l&apos;utilisation du site https://bateau-a-paris.fr est soumis au droit français. Il est fait attribution exclusive de juridiction aux tribunaux compétents de Créteil.
-            </p>
-
-            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">Les principales lois concernées</h2>
+            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("lawsTitle")}</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Loi n° 78-87 du 6 janvier 1978, notamment modifiée par la loi n° 2004-801 du 6 août 2004 relative à l&apos;informatique, aux fichiers et aux libertés.</li>
-              <li>Loi n° 2004-575 du 21 juin 2004 pour la confiance dans l&apos;économie numérique.</li>
+              <li>{t("lawsItem1")}</li>
+              <li>{t("lawsItem2")}</li>
             </ul>
 
-            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">Lexique</h2>
-            <p>
-              <strong>Utilisateur :</strong> Internaute se connectant, utilisant le site susnommé.
-            </p>
-            <p>
-              <strong>Informations personnelles :</strong> « les informations qui permettent, sous quelque forme que ce soit, directement ou non, l&apos;identification des personnes physiques auxquelles elles s&apos;appliquent » (article 4 de la loi n° 78-17 du 6 janvier 1978).
-            </p>
+            <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("glossaryTitle")}</h2>
+            <p><strong>{t("glossaryUserLabel")}</strong> {t("glossaryUserContent")}</p>
+            <p><strong>{t("glossaryPersonalInfoLabel")}</strong> {t("glossaryPersonalInfoContent")}</p>
           </div>
-        </div>
-      </main>
-      <FooterVariants />
+      </div>
     </div>
   );
-};
-
-export default MentionsLegales;
+}

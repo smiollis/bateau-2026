@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ const loopImages = [...previewImages, ...previewImages];
 const GalleryPreview = () => {
   const { isDark } = useThemeVariant();
   const t = useTranslations("gallery");
+  const prefersReducedMotion = useReducedMotion();
 
   const sectionBg = isDark ? "bg-[#0d1d35]" : "bg-secondary/30";
   const titleClass = isDark
@@ -30,9 +31,10 @@ const GalleryPreview = () => {
     <section className={`section-padding ${sectionBg}`} id="galerie">
       <div className="container-custom mb-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center"
         >
           <h2 className={`${titleClass} mb-4`}>

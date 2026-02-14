@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -14,42 +14,47 @@ interface LandingFAQProps {
   items: FAQItem[];
 }
 
-const LandingFAQ = ({ title, items }: LandingFAQProps) => (
-  <section className="section-padding">
-    <div className="container-custom max-w-3xl">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-10"
-      >
-        {title}
-      </motion.h2>
-      <Accordion type="single" collapsible className="space-y-3">
-        {items.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-          >
-            <AccordionItem
-              value={`faq-${i}`}
-              className="border rounded-lg px-4 bg-background"
+const LandingFAQ = ({ title, items }: LandingFAQProps) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  return (
+    <section className="section-padding">
+      <div className="container-custom max-w-3xl">
+        <motion.h2
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
+          className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-10"
+        >
+          {title}
+        </motion.h2>
+        <Accordion type="single" collapsible className="space-y-3">
+          {items.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: prefersReducedMotion ? 0 : i * 0.05, duration: prefersReducedMotion ? 0 : undefined }}
             >
-              <AccordionTrigger className="text-left font-medium text-primary hover:no-underline">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          </motion.div>
-        ))}
-      </Accordion>
-    </div>
-  </section>
-);
+              <AccordionItem
+                value={`faq-${i}`}
+                className="border rounded-lg px-4 bg-background"
+              >
+                <AccordionTrigger className="text-left font-medium text-primary hover:no-underline">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+};
 
 export default LandingFAQ;

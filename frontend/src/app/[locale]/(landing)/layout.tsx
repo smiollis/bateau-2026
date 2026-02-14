@@ -1,6 +1,3 @@
-import HeaderVariants from "@/components/HeaderVariants";
-import FooterVariants from "@/components/FooterVariants";
-
 export default function LandingLayout({
   children,
 }: {
@@ -8,9 +5,7 @@ export default function LandingLayout({
 }) {
   return (
     <div className="min-h-screen bg-background">
-      <HeaderVariants />
       {children}
-      <FooterVariants />
     </div>
   );
 }

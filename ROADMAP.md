@@ -14,13 +14,14 @@
 | 3. Contact + Conformite | **Termine** | Formulaire Resend, page confidentialite |
 | 4. SEO + Performance | **Termine** | Canonical, hreflang, JSON-LD, next/image, AVIF, Lighthouse CI |
 | 5. i18n FR/EN | **Termine** | next-intl, 230+ cles, blog bilingue |
-| 6. Tests + Deploy | **Termine** | 65 unit + 28 E2E, Vercel production |
+| 6. Tests + Deploy | **Termine** | 303 unit + 28 E2E, Vercel production |
 | Sprint 5-6 Audit | **Termine** | Score 6/10 → 9/10 |
+| Sprint Correctif | **Termine** | Score 7.5/10 → 9.2/10 (30 actions, 9/10 problemes) |
 | 7. Redirections WP→NJS | **Planifie** | Mapping 70+ URLs pret, attente bascule DNS |
 | 8. Landing Pages SEO | **Termine** | 17 pages (6 Tier 1 + 6 Tier 2 + 5 Tier 3) + grille occasions homepage |
 | 9. i18n Multilingue | **En cours** | Lot 1 termine (ES, IT, DE, PT-BR), Lot 2 planifie (AR, JA, KO) |
 
-**Score audit : 9/10** — 0 priorite haute/moyenne restante, 5 items basse priorite.
+**Score audit : 9.2/10** (audit approfondi 10 dimensions) — 0 priorite haute/moyenne restante.
 
 ---
 

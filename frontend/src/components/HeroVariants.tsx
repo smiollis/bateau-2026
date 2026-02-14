@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import HeroCinemaSlideshow from "@/components/HeroCinemaSlideshow";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 const HeroVariants = () => {
   const { isDark } = useThemeVariant();
   const t = useTranslations("hero");
+  const prefersReducedMotion = useReducedMotion();
 
   const config = isDark
     ? {
@@ -32,16 +33,16 @@ const HeroVariants = () => {
       {/* Content */}
       <div className="relative z-10 container-custom text-primary-foreground text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: prefersReducedMotion ? 0 : 0.2 }}
           className="max-w-4xl mx-auto"
         >
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.4 }}
             className="inline-flex items-center gap-2 bg-accent/90 text-white px-4 py-2 rounded-full text-sm font-medium mb-6"
           >
             <span>{t("badge")}</span>
@@ -61,9 +62,9 @@ const HeroVariants = () => {
 
           {/* Price Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.6 }}
             className={`inline-flex items-center gap-3 backdrop-blur-sm rounded-full px-6 py-3 mb-10 ${
               isDark
                 ? "bg-white/10 border border-white/30"
@@ -79,9 +80,9 @@ const HeroVariants = () => {
 
           {/* CTA Button */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 0.8 }}
           >
             <Button className="btn-gold text-white text-lg px-10 py-6 h-auto" asChild>
               <Link href="/reservation">{t("cta")}</Link>
@@ -95,10 +96,13 @@ const HeroVariants = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.2 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: prefersReducedMotion ? 0 : 1.2 }}
         className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20"
       >
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+        <motion.div
+          animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
+          transition={prefersReducedMotion ? {} : { duration: 1.5, repeat: Infinity }}
+        >
           <ChevronDown className="w-8 h-8 text-primary-foreground/60" />
         </motion.div>
       </motion.div>

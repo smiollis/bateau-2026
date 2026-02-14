@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import capitaineMichel from "@/assets/capitaine-michel.jpg";
@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 const CaptainSection = () => {
   const { isDark } = useThemeVariant();
   const t = useTranslations("captain");
+  const prefersReducedMotion = useReducedMotion();
 
   const styles = isDark
     ? {
@@ -33,9 +34,10 @@ const CaptainSection = () => {
       <div className="container-custom">
         <div className="grid lg:grid-cols-[300px_1fr] gap-12 items-center max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0 : undefined }}
             className="flex justify-center"
           >
             <Image
@@ -46,10 +48,10 @@ const CaptainSection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: prefersReducedMotion ? 0 : 0.2, duration: prefersReducedMotion ? 0 : undefined }}
           >
             <h3 className={`${styles.title} mb-4`}>{t("title")}</h3>
             <p className={`${styles.quote} mb-6`}>

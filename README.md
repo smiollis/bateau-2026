@@ -39,8 +39,8 @@ bateau-2026/
 | Analytics | GA4 + Google Consent Mode v2 |
 | API | Instagram Graph API, WordPress REST API |
 | Fonts | Playfair Display, Inter |
-| i18n | next-intl (FR/EN) |
-| Tests | Vitest + Playwright + axe-core |
+| i18n | next-intl (FR, EN, ES, IT, DE, PT-BR) |
+| Tests | Vitest (303 tests) + Playwright (28 E2E) + axe-core |
 | Email | Resend (formulaire de contact) |
 
 ## Quick Start
@@ -66,15 +66,17 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 ## Fonctionnalites
 
 - **2 themes visuels** — classic (jour) + nuit (sombre), toggle en temps reel
-- **i18n** — Francais / Anglais (next-intl), switcher de langue dans le header
+- **i18n** — 6 langues (FR, EN, ES, IT, DE, PT-BR) via next-intl, switcher de langue dans le header
 - **Cookie consent RGPD** — conforme, Google Consent Mode v2, 3 categories, aucun tracking avant consentement
 - **Google Analytics 4** — defaults "denied" pour 33 regions EU/EEA, mise a jour apres consentement
 - **Formulaire de contact** — validation zod, rate limiting, honeypot antispam, envoi via Resend
 - **Instagram feed** — API route server-side avec cache 1h, 9 derniers posts
 - **Pages** — Accueil, Galerie, Croisiere, FAQ, CGV, Mentions Legales, Reservation, Actualites, Confidentialite
-- **SEO** — metadata i18n, sitemap multi-locale, robots.txt, JSON-LD (LocalBusiness + Article)
+- **17 landing pages SEO** — route dynamique SSG, 7 schemas JSON-LD, traduites en 5 langues
+- **SEO** — metadata i18n, sitemap multi-locale, robots.txt, JSON-LD (LocalBusiness, Article, FAQPage, TouristAttraction, Breadcrumb)
 - **Lightbox galerie** — navigation clavier, grille masonry responsive
-- **Tests** — 39 tests unitaires (Vitest) + 28 E2E (Playwright) + accessibilite (axe-core)
+- **Tests** — 303 tests unitaires (Vitest) + 28 E2E (Playwright) + accessibilite (axe-core)
+- **Accessibilite** — WCAG 2.1 AA, prefers-reduced-motion, focus trap, skip-to-content
 - **Animations** — Framer Motion sur tous les composants (scroll, hover, transitions)
 
 ## Variables d'environnement

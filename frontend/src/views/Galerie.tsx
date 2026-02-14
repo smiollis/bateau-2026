@@ -11,8 +11,6 @@ import { galleryImages } from "@/data/galleryImages";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import { useTranslations } from "next-intl";
-import HeaderVariants from "@/components/HeaderVariants";
-import FooterVariants from "@/components/FooterVariants";
 
 const GalleryLightbox = dynamic(() => import("@/components/GalleryLightbox"), {
   ssr: false,
@@ -33,10 +31,7 @@ const Galerie = () => {
   const tCommon = useTranslations("common");
 
   return (
-    <div className="min-h-screen bg-background">
-      <HeaderVariants />
-
-      <main id="main" className="pt-24 pb-16">
+    <div className="min-h-screen bg-background pt-24 pb-16">
         {/* Header */}
         <div className="container-custom mb-12">
           <Link
@@ -86,7 +81,6 @@ const Galerie = () => {
             ))}
           </div>
         </div>
-      </main>
 
       {/* Lightbox (lazy-loaded) */}
       <GalleryLightbox
@@ -170,7 +164,6 @@ const Galerie = () => {
         </div>
       </section>
 
-      <FooterVariants />
     </div>
   );
 };

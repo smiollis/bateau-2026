@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Clock, MapPin, Users, Sparkles, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,7 @@ const FeaturesVariants = () => {
   const { variant } = useThemeVariant();
   const t = useTranslations("features");
   const styles = variantStyles[variant];
+  const prefersReducedMotion = useReducedMotion();
 
   const features = [
     { icon: Clock, title: t("feature1Title"), description: t("feature1Desc") },
@@ -53,9 +54,10 @@ const FeaturesVariants = () => {
     <section className={`section-padding ${styles.section}`} id="croisiere">
       <div className="container-custom">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center mb-16"
         >
           <h2 className={`${styles.title} mb-4`}>{t("title")}</h2>
@@ -66,10 +68,10 @@ const FeaturesVariants = () => {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: prefersReducedMotion ? 0 : index * 0.1, duration: prefersReducedMotion ? 0 : undefined }}
               className="group"
             >
               <div className={`${styles.card} h-full`}>
@@ -86,9 +88,10 @@ const FeaturesVariants = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center mt-10"
         >
           <Button className="btn-gold text-white" asChild>

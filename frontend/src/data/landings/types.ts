@@ -72,3 +72,22 @@ export interface FAQItem {
   question: string;
   answer: string;
 }
+
+/**
+ * Translation-only shape for i18n landing pages.
+ * Mirrors LandingPageData but omits non-translatable fields
+ * (slug, relatedPages, jsonLd, hero.backgroundImage, hero.cta.href).
+ */
+export interface LandingPageTranslation {
+  meta: {
+    title: string;
+    description: string;
+    ogImage?: string;
+  };
+  hero: {
+    title: string;
+    subtitle: string;
+    cta: { text: string };
+  };
+  sections: LandingSection[];
+}

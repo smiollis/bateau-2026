@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -14,6 +14,7 @@ const TestimonialsVariants = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { isDark } = useThemeVariant();
   const t = useTranslations("testimonials");
+  const prefersReducedMotion = useReducedMotion();
 
   const styles = isDark
     ? {
@@ -50,9 +51,10 @@ const TestimonialsVariants = () => {
     <section className={`section-padding ${styles.section}`} id="temoignages">
       <div className="container-custom">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center mb-12"
         >
           {isDark ? (
@@ -105,35 +107,35 @@ const TestimonialsVariants = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 50 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, x: prefersReducedMotion ? 0 : -50 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
               className={styles.card}
             >
               <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
                 <Image
-                  src={testimonials[currentIndex].avatar}
-                  alt={testimonials[currentIndex].name}
+                  src={testimonials[currentIndex]?.avatar ?? ""}
+                  alt={testimonials[currentIndex]?.name ?? ""}
                   width={64}
                   height={64}
                   className="w-16 h-16 rounded-full object-cover"
                 />
                 <div className="flex-grow">
-                  <h4 className={styles.name}>{testimonials[currentIndex].name}</h4>
+                  <h4 className={styles.name}>{testimonials[currentIndex]?.name}</h4>
                   <div className="flex items-center gap-2">
                     <div className="flex">
-                      {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
+                      {[...Array(testimonials[currentIndex]?.rating ?? 0)].map((_, i) => (
                         <Star key={i} className={`w-4 h-4 ${styles.starColor}`} />
                       ))}
                     </div>
                     <span className={`text-sm ${styles.dateColor}`}>
-                      {testimonials[currentIndex].date}
+                      {testimonials[currentIndex]?.date}
                     </span>
                   </div>
                 </div>
               </div>
-              <p className={styles.text}>&ldquo;{testimonials[currentIndex].text}&rdquo;</p>
+              <p className={styles.text}>&ldquo;{testimonials[currentIndex]?.text}&rdquo;</p>
             </motion.div>
           </AnimatePresence>
 

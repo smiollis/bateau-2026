@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 import bateau1 from "@/assets/bateau-1.jpg";
 import bateau2 from "@/assets/bateau-2.jpg";
@@ -29,6 +29,7 @@ const BoatImageSlideshow = ({
   overlay = "bg-gradient-to-t from-black/30 to-transparent",
 }: BoatImageSlideshowProps) => {
   const [current, setCurrent] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -42,12 +43,12 @@ const BoatImageSlideshow = ({
       <AnimatePresence mode="wait">
         <motion.img
           key={current}
-          src={images[current].src}
-          alt={images[current].alt}
+          src={images[current]?.src}
+          alt={images[current]?.alt ?? ""}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          transition={{ duration: prefersReducedMotion ? 0 : 1.2, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full object-cover"
         />
       </AnimatePresence>

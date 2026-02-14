@@ -21,5 +21,17 @@ export default defineConfig({
         inline: ["next-intl"],
       },
     },
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "text-summary", "lcov"],
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: ["src/__tests__/**", "src/components/ui/**", "src/**/*.d.ts"],
+      thresholds: {
+        statements: 40,
+        branches: 30,
+        functions: 35,
+        lines: 40,
+      },
+    },
   },
 });

@@ -32,6 +32,7 @@ vi.mock("framer-motion", () => ({
     },
   },
   AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
+  useReducedMotion: () => false,
 }));
 
 vi.mock("next/image", () => ({
@@ -103,7 +104,8 @@ describe("HeaderVariants", () => {
     const user = userEvent.setup();
     render(<HeaderVariants />);
     const ctaButtons = screen.getAllByText("reservation");
-    await user.click(ctaButtons[0]);
+    expect(ctaButtons[0]).toBeDefined();
+    await user.click(ctaButtons[0]!);
     expect(mockPush).toHaveBeenCalledWith("/reservation");
   });
 });

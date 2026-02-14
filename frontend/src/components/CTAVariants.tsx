@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 const CTAVariants = () => {
   const { isDark } = useThemeVariant();
   const t = useTranslations("cta");
+  const prefersReducedMotion = useReducedMotion();
 
   const styles = isDark
     ? {
@@ -40,9 +41,10 @@ const CTAVariants = () => {
 
       <div className="relative z-10 container-custom text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="max-w-3xl mx-auto"
         >
           <h2 className={`${styles.title} mb-6`}>
@@ -56,10 +58,10 @@ const CTAVariants = () => {
           </p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: prefersReducedMotion ? 0 : 0.2, duration: prefersReducedMotion ? 0 : undefined }}
           >
             <Button className={styles.cta} asChild>
               <Link href="/reservation">{t("button")}</Link>

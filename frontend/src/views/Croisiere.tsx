@@ -8,146 +8,24 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations } from "next-intl";
-import HeaderVariants from "@/components/HeaderVariants";
-import FooterVariants from "@/components/FooterVariants";
+import { landmarks, itineraryStepCount } from "@/data/landmarks";
 
 import fond2 from "@/assets/map/fond2.webp";
 import metroIconImport from "@/assets/map/metro.png";
-import trocadero from "@/assets/map/trocadero.svg";
-import tourEiffel from "@/assets/map/tour-eiffel.svg";
-import invalides from "@/assets/map/invalides.svg";
-import assemblee from "@/assets/map/assemblee.svg";
-import orsay from "@/assets/map/orsay.svg";
-import louvre from "@/assets/map/louvre.svg";
-import notreDame from "@/assets/map/notre-dame.svg";
-import hotelDeVille from "@/assets/map/hotel-de-ville.svg";
-import liberte from "@/assets/map/liberte.svg";
-
-interface Landmark {
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-  top: string;
-  left: string;
-  width: string;
-  tooltipSide: "top" | "bottom" | "left" | "right";
-}
-
-const landmarks: Landmark[] = [
-  {
-    id: "liberte",
-    name: "Statue de la Liberté",
-    icon: liberte.src,
-    description: "Réplique de la statue offerte par les États-Unis, point de départ de votre croisière.",
-    top: "62%",
-    left: "2.3%",
-    width: "30px",
-    tooltipSide: "right",
-  },
-  {
-    id: "trocadero",
-    name: "Trocadéro",
-    icon: trocadero.src,
-    description: "Palais de Chaillot et ses jardins, une vue imprenable sur la Tour Eiffel.",
-    top: "32%",
-    left: "10%",
-    width: "80px",
-    tooltipSide: "bottom",
-  },
-  {
-    id: "tour-eiffel",
-    name: "Tour Eiffel",
-    icon: tourEiffel.src,
-    description: "Le monument le plus emblématique de Paris, illuminé la nuit pour un spectacle inoubliable.",
-    top: "34%",
-    left: "20%",
-    width: "30px",
-    tooltipSide: "right",
-  },
-  {
-    id: "invalides",
-    name: "Invalides",
-    icon: invalides.src,
-    description: "Le Dôme doré des Invalides abrite le tombeau de Napoléon Bonaparte.",
-    top: "40%",
-    left: "35%",
-    width: "40px",
-    tooltipSide: "bottom",
-  },
-  {
-    id: "assemblee",
-    name: "Assemblée Nationale",
-    icon: assemblee.src,
-    description: "Palais Bourbon, siège de l&apos;Assemblée nationale française depuis 1798.",
-    top: "34%",
-    left: "40%",
-    width: "65px",
-    tooltipSide: "top",
-  },
-  {
-    id: "orsay",
-    name: "Musée d&apos;Orsay",
-    icon: orsay.src,
-    description: "Ancienne gare reconvertie en musée, abritant la plus grande collection d&apos;art impressionniste au monde.",
-    top: "44%",
-    left: "51%",
-    width: "65px",
-    tooltipSide: "bottom",
-  },
-  {
-    id: "louvre",
-    name: "Louvre",
-    icon: louvre.src,
-    description: "Le plus grand musée du monde et sa célèbre pyramide de verre.",
-    top: "29%",
-    left: "55%",
-    width: "45px",
-    tooltipSide: "top",
-  },
-  {
-    id: "notre-dame",
-    name: "Notre-Dame",
-    icon: notreDame.src,
-    description: "Cathédrale gothique emblématique, restaurée après l&apos;incendie de 2019.",
-    top: "43%",
-    left: "70%",
-    width: "50px",
-    tooltipSide: "bottom",
-  },
-  {
-    id: "hotel-de-ville",
-    name: "Hôtel de Ville",
-    icon: hotelDeVille.src,
-    description: "Siège de la municipalité parisienne, chef-d&apos;œuvre de l&apos;architecture néo-Renaissance.",
-    top: "47%",
-    left: "81%",
-    width: "60px",
-    tooltipSide: "top",
-  },
-];
-
-const itinerarySteps = [
-  { time: "Départ", label: "Port de Javel (15ème)", detail: "Embarquement et accueil à bord du Senang" },
-  { time: "10 min", label: "Statue de la Liberté", detail: "Réplique parisienne sur l&apos;Île aux Cygnes" },
-  { time: "15 min", label: "Tour Eiffel & Trocadéro", detail: "Le monument iconique vu depuis la Seine" },
-  { time: "25 min", label: "Invalides & Assemblée Nationale", detail: "Le Dôme doré et le Palais Bourbon" },
-  { time: "35 min", label: "Musée d&apos;Orsay", detail: "L&apos;ancienne gare devenue temple de l&apos;impressionnisme" },
-  { time: "45 min", label: "Le Louvre", detail: "La pyramide de verre et le Pont des Arts" },
-  { time: "55 min", label: "Notre-Dame & Hôtel de Ville", detail: "Le cœur historique de Paris" },
-  { time: "1h15", label: "Demi-tour & retour", detail: "Retour par la rive opposée pour de nouvelles perspectives" },
-  { time: "2h", label: "Retour au port", detail: "Fin de la croisière au Port de Javel" },
-];
 
 const Croisiere = () => {
   const [activeLandmark, setActiveLandmark] = useState<string | null>(null);
   const { isDark } = useThemeVariant();
   const t = useTranslations("croisiere");
 
+  const itinerarySteps = Array.from({ length: itineraryStepCount }, (_, i) => ({
+    time: t(`itinerary${i + 1}Time`),
+    label: t(`itinerary${i + 1}Label`),
+    detail: t(`itinerary${i + 1}Detail`),
+  }));
+
   return (
     <div className="min-h-screen bg-background">
-      <HeaderVariants />
-
       {/* Page header */}
       <div className={`py-6 pt-24 ${isDark ? "bg-[#0a1628] text-blue-100" : "bg-primary text-primary-foreground"}`}>
         <div className="container-custom">
@@ -177,58 +55,62 @@ const Croisiere = () => {
         <div className="relative w-full overflow-hidden">
           <Image
             src={fond2}
-            alt="Carte de l&apos;itinéraire de la croisière sur la Seine"
+            alt={t("mapAlt")}
             className="w-full h-auto block"
             sizes="100vw"
           />
 
           {/* Landmark hotspots */}
-          {landmarks.map((landmark, index) => (
-            <motion.div
-              key={landmark.id}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 + index * 0.15, type: "spring", stiffness: 200 }}
-              className="absolute cursor-pointer group"
-              style={{ top: landmark.top, left: landmark.left }}
-              onClick={() => setActiveLandmark(activeLandmark === landmark.id ? null : landmark.id)}
-            >
-              <motion.img
-                src={landmark.icon}
-                alt={landmark.name}
-                style={{ width: landmark.width }}
-                className="drop-shadow-lg transition-transform duration-300 hover:scale-110"
-                whileHover={{ y: -5 }}
-              />
+          {landmarks.map((landmark, index) => {
+            const name = t(`landmark_${landmark.id}_name`);
+            const description = t(`landmark_${landmark.id}_description`);
+            return (
+              <motion.div
+                key={landmark.id}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 + index * 0.15, type: "spring", stiffness: 200 }}
+                className="absolute cursor-pointer group"
+                style={{ top: landmark.top, left: landmark.left }}
+                onClick={() => setActiveLandmark(activeLandmark === landmark.id ? null : landmark.id)}
+              >
+                <motion.img
+                  src={landmark.icon}
+                  alt={name}
+                  style={{ width: landmark.width }}
+                  className="drop-shadow-lg transition-transform duration-300 hover:scale-110"
+                  whileHover={{ y: -5 }}
+                />
 
-              <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 whitespace-nowrap">
-                <span className="text-[8px] md:text-xs font-bold text-primary bg-white/90 px-1.5 py-0.5 rounded shadow-sm">
-                  {landmark.name}
-                </span>
-              </div>
+                <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 whitespace-nowrap">
+                  <span className="text-[8px] md:text-xs font-bold text-primary bg-white/90 px-1.5 py-0.5 rounded shadow-sm">
+                    {name}
+                  </span>
+                </div>
 
-              <AnimatePresence>
-                {activeLandmark === landmark.id && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                    className={`absolute z-50 w-56 rounded-xl shadow-2xl border p-4 ${
-                      isDark ? "bg-[#0d1d35] border-blue-400/20 text-blue-100" : "bg-white border-border"
-                    } ${
-                      landmark.tooltipSide === "top" ? "bottom-full mb-8 left-1/2 -translate-x-1/2" :
-                      landmark.tooltipSide === "bottom" ? "top-full mt-8 left-1/2 -translate-x-1/2" :
-                      landmark.tooltipSide === "left" ? "right-full mr-4 top-1/2 -translate-y-1/2" :
-                      "left-full ml-4 top-1/2 -translate-y-1/2"
-                    }`}
-                  >
-                    <h3 className={`font-heading text-sm font-semibold mb-1 ${isDark ? "text-accent" : "text-primary"}`}>{landmark.name}</h3>
-                    <p className={`text-xs leading-relaxed ${isDark ? "text-blue-200/70" : "text-muted-foreground"}`}>{landmark.description}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                <AnimatePresence>
+                  {activeLandmark === landmark.id && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                      className={`absolute z-50 w-56 rounded-xl shadow-2xl border p-4 ${
+                        isDark ? "bg-[#0d1d35] border-blue-400/20 text-blue-100" : "bg-white border-border"
+                      } ${
+                        landmark.tooltipSide === "top" ? "bottom-full mb-8 left-1/2 -translate-x-1/2" :
+                        landmark.tooltipSide === "bottom" ? "top-full mt-8 left-1/2 -translate-x-1/2" :
+                        landmark.tooltipSide === "left" ? "right-full mr-4 top-1/2 -translate-y-1/2" :
+                        "left-full ml-4 top-1/2 -translate-y-1/2"
+                      }`}
+                    >
+                      <h3 className={`font-heading text-sm font-semibold mb-1 ${isDark ? "text-accent" : "text-primary"}`}>{name}</h3>
+                      <p className={`text-xs leading-relaxed ${isDark ? "text-blue-200/70" : "text-muted-foreground"}`}>{description}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
 
           {/* Metro Bastille */}
           <motion.a
@@ -240,10 +122,10 @@ const Croisiere = () => {
             transition={{ delay: 1.8, type: "spring", stiffness: 200 }}
             className="absolute cursor-pointer group"
             style={{ top: "52%", left: "92%" }}
-            title="Métro Bastille — Lieu d&apos;embarquement"
+            title={t("metroBastilleTitle")}
           >
             <div className="relative">
-              <img src={metroIconImport.src} alt="Métro Bastille" className="w-6 h-6 md:w-8 md:h-8 drop-shadow-lg" />
+              <img src={metroIconImport.src} alt={t("metroBastilleAlt")} className="w-6 h-6 md:w-8 md:h-8 drop-shadow-lg" />
               <div className="absolute left-1/2 -translate-x-1/2 -bottom-5 whitespace-nowrap">
                 <span className="text-[8px] md:text-xs font-bold text-primary bg-white/90 px-1.5 py-0.5 rounded shadow-sm">
                   Bastille
@@ -327,7 +209,6 @@ const Croisiere = () => {
         </div>
       </section>
 
-      <FooterVariants />
     </div>
   );
 };

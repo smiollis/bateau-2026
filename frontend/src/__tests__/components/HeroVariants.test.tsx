@@ -24,6 +24,7 @@ vi.mock("framer-motion", () => ({
       return <div {...domProps}>{children}</div>;
     },
   },
+  useReducedMotion: () => false,
 }));
 
 vi.mock("@/components/HeroCinemaSlideshow", () => ({

@@ -64,7 +64,7 @@ export function removeGACookies(): void {
 
   // Supprimer aussi les cookies _ga_* (GA4 measurement)
   document.cookie.split(';').forEach((c) => {
-    const cookieName = c.trim().split('=')[0];
+    const cookieName = c.trim().split('=')[0] ?? '';
     if (cookieName.startsWith('_ga_')) {
       domains.forEach((domain) => {
         document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain}`;

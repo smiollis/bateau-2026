@@ -1,7 +1,7 @@
 "use client";
 
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Palette, X } from "lucide-react";
 import { useState } from "react";
 
@@ -23,14 +23,17 @@ const themes: { id: ThemeVariant; name: string; description: string; preview: st
 const ThemeSwitcher = () => {
   const { variant, setVariant } = useThemeVariant();
   const [isOpen, setIsOpen] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
 
   if (!isOpen) {
     return (
       <motion.button
-        initial={{ scale: 0 }}
+        initial={{ scale: prefersReducedMotion ? 1 : 0 }}
         animate={{ scale: 1 }}
+        transition={{ duration: prefersReducedMotion ? 0 : undefined }}
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl flex items-center justify-center hover:bg-primary/90 transition-colors"
+        aria-label="Ouvrir le sélecteur de thème"
       >
         <Palette className="w-6 h-6" />
       </motion.button>
@@ -39,8 +42,9 @@ const ThemeSwitcher = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: prefersReducedMotion ? 0 : undefined }}
       className="fixed bottom-6 left-6 z-50 bg-card/98 backdrop-blur-xl border border-border rounded-2xl p-5 shadow-2xl w-80"
     >
       <div className="flex items-center justify-between mb-4">
@@ -53,6 +57,7 @@ const ThemeSwitcher = () => {
         <button
           onClick={() => setIsOpen(false)}
           className="w-8 h-8 rounded-full hover:bg-secondary flex items-center justify-center transition-colors"
+          aria-label="Fermer le sélecteur de thème"
         >
           <X className="w-4 h-4 text-muted-foreground" />
         </button>
@@ -63,8 +68,8 @@ const ThemeSwitcher = () => {
           <motion.button
             key={theme.id}
             onClick={() => setVariant(theme.id)}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+            whileHover={prefersReducedMotion ? {} : { scale: 1.01 }}
+            whileTap={prefersReducedMotion ? {} : { scale: 0.99 }}
             className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 flex items-center gap-3 ${
               variant === theme.id
                 ? "bg-primary text-primary-foreground ring-2 ring-primary ring-offset-2"

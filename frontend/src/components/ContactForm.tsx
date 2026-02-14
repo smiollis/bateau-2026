@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,6 +20,7 @@ const ContactForm = () => {
   const { isDark } = useThemeVariant();
   const { toast } = useToast();
   const t = useTranslations("contact");
+  const prefersReducedMotion = useReducedMotion();
 
   const styles = isDark
     ? {
@@ -88,9 +89,10 @@ const ContactForm = () => {
     <section className={`section-padding ${styles.section}`} id="contact">
       <div className="container-custom">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center mb-12"
         >
           <h2 className={`${styles.title} mb-4`}>{t("title")}</h2>
@@ -102,9 +104,10 @@ const ContactForm = () => {
         <div className="grid lg:grid-cols-[1fr_380px] gap-8 max-w-5xl mx-auto">
           {/* Form */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           >
             <form onSubmit={handleSubmit} className={styles.card}>
               {/* Honeypot antispam — invisible pour les humains */}
@@ -181,10 +184,10 @@ const ContactForm = () => {
 
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
+            transition={{ delay: prefersReducedMotion ? 0 : 0.15, duration: prefersReducedMotion ? 0 : undefined }}
             className="flex flex-col gap-6"
           >
             <div className={styles.card}>

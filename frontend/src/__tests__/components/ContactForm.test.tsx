@@ -27,6 +27,7 @@ vi.mock("framer-motion", () => ({
     },
   },
   AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
+  useReducedMotion: () => false,
 }));
 
 import ContactForm from "@/components/ContactForm";

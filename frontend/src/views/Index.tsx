@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import HeaderVariants from "@/components/HeaderVariants";
 import HeroVariants from "@/components/HeroVariants";
 
 const FeaturesVariants = dynamic(() => import("@/components/FeaturesVariants"));
@@ -13,25 +12,20 @@ const OccasionsGrid = dynamic(() => import("@/components/OccasionsGrid"));
 const TestimonialsVariants = dynamic(() => import("@/components/TestimonialsVariants"));
 const CTAVariants = dynamic(() => import("@/components/CTAVariants"));
 const ContactForm = dynamic(() => import("@/components/ContactForm"));
-const FooterVariants = dynamic(() => import("@/components/FooterVariants"));
 
 const Index = () => {
   return (
     <div className="min-h-screen">
-      <HeaderVariants />
-      <main id="main">
-        <HeroVariants />
-        <FeaturesVariants />
-        <BoatVariants />
-        <CaptainSection />
-        <GalleryPreview />
-        <OffersVariants />
-        <OccasionsGrid />
-        <TestimonialsVariants />
-        <CTAVariants />
-        <ContactForm />
-      </main>
-      <FooterVariants />
+      <HeroVariants />
+      <FeaturesVariants />
+      <BoatVariants />
+      <CaptainSection />
+      <GalleryPreview />
+      <OffersVariants />
+      <OccasionsGrid />
+      <TestimonialsVariants />
+      <CTAVariants />
+      <ContactForm />
     </div>
   );
 };

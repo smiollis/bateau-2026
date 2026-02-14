@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   Heart,
   PartyPopper,
@@ -80,14 +80,16 @@ const OccasionsGrid = () => {
   const { variant } = useThemeVariant();
   const t = useTranslations("occasions");
   const styles = variantStyles[variant];
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section className={`section-padding ${styles.section}`}>
       <div className="container-custom">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="mb-12 text-center"
         >
           <h2 className={styles.title}>{t("title")}</h2>
@@ -100,10 +102,10 @@ const OccasionsGrid = () => {
           {occasions.map((occasion, i) => (
             <motion.div
               key={occasion.slug}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
+              transition={{ delay: prefersReducedMotion ? 0 : i * 0.05, duration: prefersReducedMotion ? 0 : undefined }}
             >
               <Link href={`/${occasion.slug}`} className={styles.card}>
                 <div

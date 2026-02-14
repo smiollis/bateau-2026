@@ -10,8 +10,6 @@ import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations, useLocale } from "next-intl";
 import postsFr from "@/data/posts.json";
 import postsEn from "@/data/posts-en.json";
-import HeaderVariants from "@/components/HeaderVariants";
-import FooterVariants from "@/components/FooterVariants";
 
 function formatDate(iso: string, locale: string): string {
   return new Date(iso).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
@@ -36,10 +34,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-background">
-      <HeaderVariants />
-
-      <main id="main" className="pt-24 pb-16">
+    <div className="min-h-screen bg-background pt-24 pb-16">
         {/* Hero image */}
         {post.image && (
           <motion.div
@@ -196,9 +191,6 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
             </div>
           </section>
         )}
-      </main>
-
-      <FooterVariants />
     </div>
   );
 }

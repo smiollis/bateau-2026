@@ -4,6 +4,48 @@
 
 ---
 
+## [0.9.0] - 2026-02-14 — Sprint Correctif Complet (Score 7.5 → 9.2/10)
+
+**9/10 problemes critiques resolus — 30 actions sur 4 sprints**
+
+### Securite & Config
+- Header HSTS (max-age=63072000, includeSubDomains, preload)
+- `global-error.tsx` : message generique (plus de `error.message` expose)
+- `noUncheckedIndexedAccess` dans tsconfig.json (TypeScript strict++)
+- Suppression page `/test` (debug orpheline)
+- Manifest PWA (`public/manifest.json`) + apple-touch-icon
+
+### Dead Code & Dependencies
+- Supprime 8 composants base obsoletes (Hero, Header, Footer, Offers, Features, Testimonials, Boat, CallToAction — 893 lignes)
+- Supprime 35 composants shadcn/ui inutilises (3 288 lignes)
+- Desinstalle 8 packages npm (recharts, react-day-picker, cmdk, vaul, embla-carousel, input-otp, react-resizable-panels, next-themes)
+
+### Accessibilite
+- `useReducedMotion` sur tous les composants animes (WCAG 2.3.1)
+- Focus trap + Escape dans CookieModal
+- Accessibilite renforcee sur composants landing
+
+### Performance & Images
+- `motion.img` → `motion.create(Image)` sur HeroCinemaSlideshow (LCP optimise)
+- `placeholder="blur"` sur CaptainSection, HeaderVariants, OffersVariants
+- `escapeHtml` extrait dans `src/lib/escape-html.ts`
+
+### Architecture
+- Header/Footer migres dans `[locale]/layout.tsx` (retires de 10 vues)
+- Header decompose : HeaderThemeToggle + LanguageSelector + MobileMenu
+
+### i18n Multilingue (6 langues)
+- Messages complets ES/IT/DE/PT-BR (460 cles x 6 langues)
+- Landing pages traduites : 17 pages x EN/ES/IT/DE
+- Architecture `getLandingData(slug, locale)` async avec deep merge
+- Type `LandingPageTranslation` pour overlays partiels par locale
+- Blog : +31 articles ES, +31 IT, +20 DE
+
+### Tests
+- Installe `@vitest/coverage-v8` avec seuils (40/30/35/40)
+- 238 nouveaux tests : landing-data, jsonld, metadata, logger, instagram-hook, LandingComponents
+- **303 tests unitaires OK** (65 → 303)
+
 ## [0.8.0] - 2026-02-14 — Landing Pages Tier 1
 
 **6 landing pages SEO + infrastructure complete**

@@ -34,6 +34,7 @@ vi.mock("framer-motion", () => ({
       return <div {...domProps}>{children}</div>;
     },
   },
+  useReducedMotion: () => false,
 }));
 
 vi.mock("@/i18n/navigation", () => ({

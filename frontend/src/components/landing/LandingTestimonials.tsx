@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import reviewsData from "@/data/reviews.json";
@@ -11,6 +11,7 @@ interface LandingTestimonialsProps {
 }
 
 const LandingTestimonials = ({ title }: LandingTestimonialsProps) => {
+  const prefersReducedMotion = useReducedMotion();
   // Use all reviews (filter by tag can be added later when reviews are tagged)
   const reviews = reviewsData.reviews.slice(0, 3);
 
@@ -18,9 +19,10 @@ const LandingTestimonials = ({ title }: LandingTestimonialsProps) => {
     <section className="section-padding">
       <div className="container-custom">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-4"
         >
           {title}
@@ -32,10 +34,10 @@ const LandingTestimonials = ({ title }: LandingTestimonialsProps) => {
           {reviews.map((review, i) => (
             <motion.div
               key={review.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: prefersReducedMotion ? 0 : i * 0.1, duration: prefersReducedMotion ? 0 : undefined }}
               className="p-6 rounded-xl bg-background shadow-sm border"
             >
               <div className="flex items-center gap-3 mb-3">

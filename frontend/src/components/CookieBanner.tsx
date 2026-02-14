@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { useCookieConsent } from "@/hooks/useCookieConsent";
 import CookieModal from "./CookieModal";
@@ -18,6 +18,7 @@ const CookieBanner = () => {
     updateConsent,
   } = useCookieConsent();
   const t = useTranslations("cookie");
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <>
@@ -25,10 +26,10 @@ const CookieBanner = () => {
         {showBanner && !showModal && (
           <motion.div
             className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-primary bg-card/95 backdrop-blur-md shadow-2xl"
-            initial={{ y: 100, opacity: 0 }}
+            initial={{ y: prefersReducedMotion ? 0 : 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            exit={{ y: prefersReducedMotion ? 0 : 100, opacity: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { type: "spring", damping: 25, stiffness: 200 }}
           >
             <div className="container-custom p-4 md:p-6">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-4">

@@ -66,7 +66,7 @@ export function getAllLandingSlugs(): string[] {
 export function getRelatedPages(slugs: string[]) {
   return slugs
     .map((slug) => landingPages[slug])
-    .filter(Boolean)
+    .filter((page): page is LandingPageData => page != null)
     .map(({ slug, hero, meta }) => ({ slug, hero, meta }));
 }
 

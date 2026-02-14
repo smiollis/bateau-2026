@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -13,6 +13,7 @@ interface LandingGalleryProps {
 
 const LandingGallery = ({ title, images }: LandingGalleryProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -27,9 +28,10 @@ const LandingGallery = ({ title, images }: LandingGalleryProps) => {
     <section className="section-padding bg-secondary/30">
       <div className="container-custom">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-10"
         >
           {title}
@@ -42,10 +44,10 @@ const LandingGallery = ({ title, images }: LandingGalleryProps) => {
             {images.map((img, i) => (
               <motion.div
                 key={img.src}
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: prefersReducedMotion ? 0 : i * 0.05, duration: prefersReducedMotion ? 0 : undefined }}
                 className="flex-shrink-0 w-72 md:w-80 aspect-[4/3] relative rounded-xl overflow-hidden snap-center"
               >
                 <Image

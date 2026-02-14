@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Switch } from "@/components/ui/switch";
 import { X } from "lucide-react";
 
@@ -24,6 +24,8 @@ const CookieModal = ({
   onRejectAll,
 }: CookieModalProps) => {
   const t = useTranslations("cookie");
+  const prefersReducedMotion = useReducedMotion();
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const sections = [
     {
@@ -57,6 +59,54 @@ const CookieModal = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
+  // Escape key to close + focus trap
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      // Focus trap: Tab / Shift+Tab
+      if (e.key === "Tab" && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement?.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement?.focus();
+          }
+        }
+      }
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    if (open) {
+      document.addEventListener("keydown", handleKeyDown);
+      // Focus first focusable element when modal opens
+      requestAnimationFrame(() => {
+        const firstFocusable = modalRef.current?.querySelector<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        firstFocusable?.focus();
+      });
+    }
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open, handleKeyDown]);
+
   const getToggleProps = (id: string) => {
     switch (id) {
       case "analytics":
@@ -80,17 +130,19 @@ const CookieModal = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           onClick={onClose}
         >
           <motion.div
+            ref={modalRef}
             className="relative w-full max-w-2xl bg-card rounded-2xl shadow-2xl p-6 md:p-8"
             role="dialog"
             aria-modal="true"
             aria-labelledby="cookie-modal-title"
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.25 }}
             onClick={(e) => e.stopPropagation()}
           >
             <button

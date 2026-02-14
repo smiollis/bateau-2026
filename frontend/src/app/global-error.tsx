@@ -15,7 +15,7 @@ export default function GlobalError({
             Une erreur est survenue
           </h2>
           <p style={{ color: "#6b7280", maxWidth: "28rem" }}>
-            {error.message || "Erreur inattendue. Veuillez réessayer."}
+            Une erreur inattendue s&apos;est produite. Veuillez réessayer ou revenir à la page d&apos;accueil.
           </p>
           <button
             onClick={reset}

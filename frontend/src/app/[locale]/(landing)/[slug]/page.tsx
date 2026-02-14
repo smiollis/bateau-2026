@@ -20,6 +20,7 @@ import {
   LandingStickyBar,
   LandingRelated,
 } from "@/components/landing";
+import { locales } from "@/i18n/routing";
 import type { FAQSection, LandingSection } from "@/data/landings/types";
 
 interface PageProps {
@@ -27,7 +28,10 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return getAllLandingSlugs().map((slug) => ({ slug }));
+  const slugs = getAllLandingSlugs();
+  return locales.flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug }))
+  );
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

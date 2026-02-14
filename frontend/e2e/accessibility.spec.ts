@@ -1,8 +1,11 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
-// Known a11y issues to fix separately (pre-existing in imported Lovable components)
-const disabledRules = ["color-contrast", "link-name", "button-name"];
+// color-contrast kept disabled: dynamic theme variants (classic/nuit) make automated
+// contrast checks unreliable — contrast is manually verified per variant.
+// link-name and button-name re-enabled: all links have text/alt and all icon-only
+// buttons have aria-label attributes.
+const disabledRules = ["color-contrast"];
 
 test.describe("Accessibility (WCAG 2.1 AA)", () => {
   test("home page has no critical accessibility violations", async ({

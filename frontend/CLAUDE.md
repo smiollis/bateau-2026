@@ -27,8 +27,12 @@ bateau-2026/
 │   │   │   └── seo/          # jsonld.ts (FAQPage, TouristAttraction, Breadcrumb)
 │   │   ├── data/
 │   │   │   ├── landings/     # Donnees par landing page (types.ts, index.ts, {slug}.ts)
+│   │   │   ├── landings/i18n/ # Traductions landing pages (en/, es/, it/, de/)
 │   │   │   ├── posts.json    # Articles blog FR
 │   │   │   ├── posts-en.json # Articles blog EN
+│   │   │   ├── posts-es.json # Articles blog ES
+│   │   │   ├── posts-it.json # Articles blog IT
+│   │   │   ├── posts-de.json # Articles blog DE
 │   │   │   └── reviews.json  # Avis Google
 │   │   ├── i18n/             # next-intl config (request.ts, navigation.ts, routing.ts)
 │   │   └── assets/           # Images statiques, logo, map/
@@ -39,23 +43,23 @@ bateau-2026/
 │   └── themes/bateau-headless/        # Theme minimal Bookly iframe
 ├── ROADMAP.md
 ├── CHANGELOG.md
-└── AUDIT-2026-02-12.md       # Audit qualite (9/10)
+└── AUDIT-2026-02-14.md       # Audit qualite approfondi (9.2/10)
 ```
 
 ## Stack technique
 
 - **Framework**: Next.js 16.1.6 (App Router, Turbopack)
-- **UI**: Tailwind CSS v4 (`@theme inline` pour les tokens), shadcn/ui, Radix UI
-- **Animations**: Framer Motion 12
-- **TypeScript**: strict mode
-- **i18n**: next-intl 4 (FR/EN) — 230+ cles, 16 namespaces, blog bilingue
+- **UI**: Tailwind CSS v4 (`@theme inline` pour les tokens), shadcn/ui (epure), Radix UI
+- **Animations**: Framer Motion 12 (avec `useReducedMotion` WCAG 2.3.1)
+- **TypeScript**: strict mode + `noUncheckedIndexedAccess`
+- **i18n**: next-intl 4 (FR/EN/ES/IT/DE/PT-BR) — 460 cles, 19 namespaces, blog multilingue
 - **Analytics**: GA4 (G-N20S788YDW) + Google Consent Mode v2
 - **API**: Instagram Graph API, WordPress REST API (reservation Bookly)
 - **Logging**: `src/lib/logger.ts` — JSON structure en production, lisible en dev
 - **Fonts**: Playfair Display (headings), Inter (body) via `next/font/google`
-- **Securite**: CSP (12 directives), DOMPurify, 5 security headers
+- **Securite**: CSP (12 directives), HSTS, DOMPurify, 6 security headers
 - **SEO**: Canonical + hreflang + JSON-LD (4 schemas base + 3 par landing page)
-- **Landing pages**: 6 pages Tier 1 SSG (route dynamique `[slug]`), 11 pages restantes
+- **Landing pages**: 17 pages SSG (route dynamique `[slug]`), traduites EN/ES/IT/DE
 
 ## Systeme de themes
 
@@ -70,6 +74,7 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - Pages App Router : `src/app/[locale]/<route>/page.tsx` (wrappers simples)
 - Landing pages : `src/app/[locale]/(landing)/[slug]/page.tsx` (route dynamique SSG)
 - Landing data : `src/data/landings/<slug>.ts` (une par page, importee dans `index.ts`)
+- Landing i18n : `src/data/landings/i18n/<locale>/<slug>.ts` (traduction partielle par locale)
 - Landing composants : `src/components/landing/<LandingNom>.tsx` (11 composants)
 - Vues : `src/views/<NomPage>.tsx` (composants de page complets)
 - Composants variantes : `src/components/<Nom>Variants.tsx`
@@ -91,6 +96,9 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **Code splitting** : utiliser `next/dynamic` avec `ssr: false` pour les composants lourds client-only (ex: GalleryLightbox)
 - **JSON-LD** : 4 schemas en place (LocalBusiness, FAQPage, Offers/TouristTrip, Article) — ajouter de nouveaux schemas dans les `page.tsx` server components
 - **Metadata** : utiliser `getAlternates(locale, path)` et `getOgLocale(locale)` de `@/lib/metadata` pour les `generateMetadata`
+- **Landing i18n** : `getLandingData(slug, locale)` dans `src/data/landings/index.ts` fait un deep merge FR base + overlay locale. Les fichiers `i18n/<locale>/<slug>.ts` exportent un type `LandingPageTranslation` (partiel)
+- **Animations** : TOUJOURS utiliser `useReducedMotion()` de framer-motion et conditionner les animations avec `shouldReduceMotion` pour WCAG 2.3.1
+- **Header/Footer** : dans `[locale]/layout.tsx` uniquement — NE PAS les ajouter dans les vues
 
 ## Commandes
 
@@ -107,9 +115,11 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 
 ## Tests
 
-- **Vitest** : 65 tests unitaires dans `src/__tests__/` (unit/ + components/)
-  - Composants : Header, Hero, Footer, Offers, CookieBanner, ContactForm
-  - Libs : cookie-consent, gtag, utils, escapeHtml
+- **Vitest** : 303 tests unitaires dans `src/__tests__/` (unit/ + components/)
+  - Composants : Header, Hero, Footer, Offers, CookieBanner, ContactForm, LandingComponents
+  - Libs : cookie-consent, gtag, utils, escapeHtml, jsonld, metadata, logger, instagram-hook
+  - Data : landing-data (158 tests)
+  - Coverage : `@vitest/coverage-v8` avec seuils (40/30/35/40)
 - **Playwright** : 28 tests E2E dans `e2e/` (chromium, firefox, webkit, mobile)
 - **axe-core** : audits accessibilite WCAG 2.1 AA integres aux E2E
 - Config : `vitest.config.ts`, `playwright.config.ts`
@@ -133,6 +143,7 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 ## Securite
 
 - **Headers** (dans `next.config.ts headers()`) :
+  - Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   - X-Content-Type-Options: nosniff
   - X-Frame-Options: DENY
   - Referrer-Policy: strict-origin-when-cross-origin
@@ -174,19 +185,22 @@ Le token est valide 60 jours. Renouveler au moins 10 jours avant expiration.
 
 ## Score audit
 
-**Score actuel : 9/10** (voir `AUDIT-2026-02-12.md`)
+**Score actuel : 9.2/10** (voir `AUDIT-2026-02-14.md`)
 
-| Categorie | Statut |
-|-----------|--------|
-| Build + TypeScript | OK (0 erreur) |
-| Tests | 65/65 unitaires + 28/28 E2E |
-| SEO | 10/10 pages, 4 JSON-LD |
-| Securite | 5/5 headers, 0 XSS |
-| Accessibilite | WCAG 2.1 AA substantiel |
-| Images | 100% next/image |
-| Performance | AVIF, code splitting |
+| Categorie | Score | Statut |
+|-----------|-------|--------|
+| Securite | 9.5/10 | HSTS, CSP, 6 headers, 0 XSS |
+| Performance | 9/10 | next/image partout, blur placeholders, deps nettoyees |
+| SEO | 9/10 | 10+ pages, 7 JSON-LD, OG images |
+| Accessibilite | 9/10 | WCAG 2.1 AA, reduced-motion, focus trap |
+| Qualite code | 9/10 | 0 code mort, escapeHtml extrait |
+| Tests | 9/10 | 303/303 unitaires + 28/28 E2E, coverage ~40% |
+| TypeScript | 9.5/10 | strict + noUncheckedIndexedAccess |
+| i18n | 9/10 | 6 langues actives, 460 cles, 17 landing pages |
+| Images | 9/10 | next/image, blur, OG, AVIF |
+| Architecture | 9.5/10 | layout.tsx unique, composants decomposes |
 
-Reste a faire (basse priorite) : middleware next-intl proxy, couverture tests, composants monolithiques.
+Reste a faire (basse priorite) : contrastes gold/blanc, blog PT-BR, landing PT-BR, middleware proxy.
 
 ## Briefs de reference
 

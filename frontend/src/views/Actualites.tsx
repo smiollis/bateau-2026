@@ -11,8 +11,6 @@ import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import { useTranslations, useLocale } from "next-intl";
 import postsFr from "@/data/posts.json";
 import postsEn from "@/data/posts-en.json";
-import HeaderVariants from "@/components/HeaderVariants";
-import FooterVariants from "@/components/FooterVariants";
 
 function formatDate(iso: string, locale: string): string {
   return new Date(iso).toLocaleDateString(locale === "fr" ? "fr-FR" : "en-US", {
@@ -50,10 +48,7 @@ const Actualites = () => {
   const hasMore = activeCategory === ALL_CATEGORY && filteredPosts.length > 1 + visibleCount;
 
   return (
-    <div className="min-h-screen bg-background">
-      <HeaderVariants />
-
-      <main id="main" className="pt-24 pb-16">
+    <div className="min-h-screen bg-background pt-24 pb-16">
         {/* Page Header */}
         <div className="container-custom mb-12">
           <Link
@@ -107,9 +102,11 @@ const Actualites = () => {
           )}
 
           {/* Featured Post */}
-          {filteredPosts.length > 0 && (
+          {filteredPosts.length > 0 && filteredPosts[0] != null && (() => {
+            const featured = filteredPosts[0];
+            return (
             <Link
-              href={`/actualites/${filteredPosts[0].slug}`}
+              href={`/actualites/${featured.slug}`}
               className="block mb-12 group"
             >
               <motion.div
@@ -118,10 +115,10 @@ const Actualites = () => {
               >
                 <div className="grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden bg-card border border-border card-hover">
                   <div className="h-64 md:h-96 overflow-hidden relative">
-                    {filteredPosts[0].image ? (
+                    {featured.image ? (
                       <Image
-                        src={filteredPosts[0].image}
-                        alt={filteredPosts[0].title}
+                        src={featured.image}
+                        alt={featured.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -134,21 +131,21 @@ const Actualites = () => {
                   </div>
                   <div className="p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center gap-3 mb-4">
-                      {filteredPosts[0].category && (
+                      {featured.category && (
                         <span className="bg-accent/20 text-primary text-xs font-semibold px-3 py-1 rounded-full">
-                          {filteredPosts[0].category}
+                          {featured.category}
                         </span>
                       )}
                       <span className="text-muted-foreground text-sm flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
-                        {formatDate(filteredPosts[0].date, locale)}
+                        {formatDate(featured.date, locale)}
                       </span>
                     </div>
                     <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-4 group-hover:text-primary transition-colors">
-                      {filteredPosts[0].title}
+                      {featured.title}
                     </h2>
                     <p className="text-muted-foreground leading-relaxed mb-6 line-clamp-4">
-                      {filteredPosts[0].excerpt}
+                      {featured.excerpt}
                     </p>
                     <div className="flex items-center gap-2 text-primary font-medium">
                       {t("readArticle")}
@@ -158,7 +155,8 @@ const Actualites = () => {
                 </div>
               </motion.div>
             </Link>
-          )}
+            );
+          })()}
 
           {/* Blog Grid */}
           {gridPosts.length > 0 && (
@@ -305,9 +303,6 @@ const Actualites = () => {
             </div>
           </div>
         </section>
-      </main>
-
-      <FooterVariants />
     </div>
   );
 };

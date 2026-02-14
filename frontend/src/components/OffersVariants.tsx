@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
@@ -47,6 +47,7 @@ const OffersVariants = () => {
   const { variant } = useThemeVariant();
   const t = useTranslations("offers");
   const styles = variantStyles[variant];
+  const prefersReducedMotion = useReducedMotion();
 
   const offers = [
     {
@@ -116,9 +117,10 @@ const OffersVariants = () => {
       />
       <div className="container-custom">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="text-center mb-16"
         >
           <h2 className={`${styles.title} mb-4`}>{t("title")}</h2>
@@ -129,10 +131,10 @@ const OffersVariants = () => {
           {offers.map((offer, index) => (
             <motion.div
               key={offer.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: prefersReducedMotion ? 0 : index * 0.1, duration: prefersReducedMotion ? 0 : undefined }}
               className="group relative"
             >
               <div className={`${styles.card} overflow-hidden card-hover h-full flex flex-col ${offer.popular ? 'ring-2 ring-accent' : ''}`}>
