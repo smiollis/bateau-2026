@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Globe, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useLocale } from "next-intl";
@@ -15,6 +15,15 @@ const localeLabels: Record<string, string> = {
   it: "IT",
   de: "DE",
   "pt-BR": "PT",
+};
+
+const localeFlags: Record<string, string> = {
+  fr: "\u{1F1EB}\u{1F1F7}",
+  en: "\u{1F1EC}\u{1F1E7}",
+  es: "\u{1F1EA}\u{1F1F8}",
+  it: "\u{1F1EE}\u{1F1F9}",
+  de: "\u{1F1E9}\u{1F1EA}",
+  "pt-BR": "\u{1F1E7}\u{1F1F7}",
 };
 
 const variantDropdownStyles: Record<ThemeVariant, {
@@ -66,7 +75,7 @@ const LanguageSelector = ({ iconColor }: LanguageSelectorProps) => {
         aria-expanded={langOpen}
         aria-haspopup="listbox"
       >
-        <Globe className="w-4 h-4" />
+        <span className="text-base leading-none">{localeFlags[locale]}</span>
         {localeLabels[locale] ?? locale.toUpperCase()}
         <ChevronDown className="w-3 h-3" />
       </button>
@@ -89,12 +98,13 @@ const LanguageSelector = ({ iconColor }: LanguageSelectorProps) => {
                     router.replace(pathname, { locale: loc });
                     setLangOpen(false);
                   }}
-                  className={`w-full px-4 py-1.5 text-sm text-left transition-colors ${
+                  className={`w-full px-4 py-1.5 text-sm text-left transition-colors flex items-center gap-2 ${
                     locale === loc
                       ? "font-semibold " + dropdownStyles.optionActive
                       : dropdownStyles.option
                   }`}
                 >
+                  <span className="text-base leading-none">{localeFlags[loc]}</span>
                   {localeLabels[loc]}
                 </button>
               </li>
@@ -106,5 +116,5 @@ const LanguageSelector = ({ iconColor }: LanguageSelectorProps) => {
   );
 };
 
-export { localeLabels };
+export { localeLabels, localeFlags };
 export default LanguageSelector;

@@ -6,7 +6,7 @@ import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { locales } from "@/i18n/routing";
-import { localeLabels } from "@/components/LanguageSelector";
+import { localeLabels, localeFlags } from "@/components/LanguageSelector";
 import HeaderThemeToggle from "@/components/HeaderThemeToggle";
 
 interface NavItem {
@@ -75,12 +75,13 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
                     <button
                       key={loc}
                       onClick={() => { router.replace(pathname, { locale: loc }); onClose(); }}
-                      className={`px-2 py-1 text-xs rounded transition-colors ${
+                      className={`px-2 py-1 text-xs rounded transition-colors flex items-center gap-1 ${
                         locale === loc
                           ? "font-bold " + styles.iconColor
                           : mobileStyles.localeInactive
                       }`}
                     >
+                      <span className="text-sm leading-none">{localeFlags[loc]}</span>
                       {localeLabels[loc]}
                     </button>
                   ))}
