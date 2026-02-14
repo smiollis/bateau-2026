@@ -100,10 +100,12 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
                   {post.category}
                 </span>
               )}
+              {/* Date masquee temporairement
               <span className="text-muted-foreground text-sm flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5" />
                 {formatDate(post.date, locale)}
               </span>
+              */}
             </div>
 
             {/* Titre */}
@@ -200,9 +202,11 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
                       )}
                     </div>
                     <div className="p-5 flex flex-col flex-grow">
+                      {/* Date masquee temporairement
                       <span className="text-muted-foreground text-xs mb-2">
                         {formatDate(r.date, locale)}
                       </span>
+                      */}
                       <h3 className="font-heading text-base text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
                         {r.title}
                       </h3>

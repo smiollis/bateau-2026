@@ -155,10 +155,12 @@ const Actualites = () => {
                           {featured.category}
                         </span>
                       )}
+                      {/* Date masquee temporairement
                       <span className="text-muted-foreground text-sm flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
                         {formatDate(featured.date, locale)}
                       </span>
+                      */}
                     </div>
                     <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-4 group-hover:text-primary transition-colors">
                       {featured.title}
@@ -211,10 +213,12 @@ const Actualites = () => {
                               {post.category}
                             </span>
                           )}
+                          {/* Date masquee temporairement
                           <span className="text-muted-foreground text-xs flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             {formatDate(post.date, locale)}
                           </span>
+                          */}
                         </div>
                         <h3 className="font-heading text-lg text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
                           {post.title}
