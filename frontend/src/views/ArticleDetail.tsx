@@ -3,6 +3,13 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import DOMPurify from "dompurify";
+
+function sanitizeHtml(html: string): string {
+  if (typeof window !== "undefined") {
+    return DOMPurify.sanitize(html);
+  }
+  return html;
+}
 import { ArrowLeft, ArrowRight, Calendar, Wine, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
@@ -117,7 +124,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
               prose-p:text-muted-foreground prose-p:leading-relaxed
               prose-li:text-muted-foreground
               ${isDark ? "prose-invert" : ""}`}
-            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+            dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
           />
         </article>
 

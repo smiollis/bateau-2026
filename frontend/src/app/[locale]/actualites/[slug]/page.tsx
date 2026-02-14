@@ -7,6 +7,7 @@ import postsIt from '@/data/posts-it.json';
 import postsDe from '@/data/posts-de.json';
 import postsPtBR from '@/data/posts-pt-BR.json';
 import { getAlternates, getOgLocale } from '@/lib/metadata';
+import { locales } from '@/i18n/routing';
 import ArticleDetail from '@/views/ArticleDetail';
 
 function getPostsByLocale(locale: string) {
@@ -21,7 +22,9 @@ function getPostsByLocale(locale: string) {
 }
 
 export function generateStaticParams() {
-  return postsFr.map((post) => ({ slug: post.slug }));
+  return locales.flatMap((locale) =>
+    postsFr.map((post) => ({ locale, slug: post.slug }))
+  );
 }
 
 export async function generateMetadata({
