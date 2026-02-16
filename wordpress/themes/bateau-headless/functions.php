@@ -11,18 +11,24 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Dequeue all front-end scripts and styles except Bookly.
- * This drastically reduces the iframe page weight.
+ * Helper: check if we're on the reservation-embed page.
+ */
+function bateau_is_reservation_embed(): bool {
+    return is_page('reservation-embed') || is_page_template('page-reservation-embed.php');
+}
+
+/**
+ * Dequeue ALL front-end scripts and styles except Bookly.
+ * Priority 9999 ensures we run after all plugins have enqueued their assets.
  */
 add_action('wp_enqueue_scripts', function () {
     global $wp_scripts, $wp_styles;
 
-    // Only strip on the reservation-embed page
-    if (!is_page('reservation-embed')) {
+    if (!bateau_is_reservation_embed()) {
         return;
     }
 
-    // Dequeue all registered styles except Bookly and this theme
+    // Dequeue all registered styles except Bookly
     if ($wp_styles instanceof WP_Styles) {
         foreach ($wp_styles->registered as $handle => $style) {
             if (strpos($handle, 'bookly') === false && $handle !== 'bateau-headless-style') {
@@ -52,7 +58,7 @@ add_action('wp_enqueue_scripts', function () {
  * Remove WordPress admin bar on the iframe page.
  */
 add_filter('show_admin_bar', function ($show) {
-    if (is_page('reservation-embed')) {
+    if (bateau_is_reservation_embed()) {
         return false;
     }
     return $show;
@@ -60,21 +66,56 @@ add_filter('show_admin_bar', function ($show) {
 
 /**
  * Remove all <head> clutter on the iframe page.
+ * Disables output from WPML, Rank Math, ACF, and WP core.
  */
 add_action('wp', function () {
-    if (is_page('reservation-embed')) {
-        remove_action('wp_head', 'wp_generator');
-        remove_action('wp_head', 'wlwmanifest_link');
-        remove_action('wp_head', 'rsd_link');
-        remove_action('wp_head', 'wp_shortlink_wp_head');
-        remove_action('wp_head', 'rest_output_link_wp_head');
-        remove_action('wp_head', 'wp_oembed_add_discovery_links');
-        remove_action('wp_head', 'feed_links', 2);
-        remove_action('wp_head', 'feed_links_extra', 3);
-        remove_action('wp_head', 'print_emoji_detection_script', 7);
-        remove_action('wp_print_styles', 'print_emoji_styles');
+    if (!bateau_is_reservation_embed()) {
+        return;
+    }
+
+    // Core WP head cleanup
+    remove_action('wp_head', 'wp_generator');
+    remove_action('wp_head', 'wlwmanifest_link');
+    remove_action('wp_head', 'rsd_link');
+    remove_action('wp_head', 'wp_shortlink_wp_head');
+    remove_action('wp_head', 'rest_output_link_wp_head');
+    remove_action('wp_head', 'wp_oembed_add_discovery_links');
+    remove_action('wp_head', 'feed_links', 2);
+    remove_action('wp_head', 'feed_links_extra', 3);
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+
+    // Disable WP block library CSS (Gutenberg)
+    remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+    remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
+
+    // Disable WPML front-end output on this page
+    if (defined('ICL_SITEPRESS_VERSION')) {
+        // Remove WPML language switcher and meta tags
+        global $sitepress;
+        if ($sitepress && method_exists($sitepress, 'remove_filters')) {
+            remove_action('wp_head', [$sitepress, 'meta_generator_tag']);
+        }
+    }
+
+    // Disable Rank Math SEO output on this page
+    if (class_exists('RankMath')) {
+        remove_all_actions('rank_math/head');
     }
 });
+
+/**
+ * Disable WP global styles and SVG filters on the iframe page.
+ * These add ~30KB of inline CSS that Bookly doesn't need.
+ */
+add_action('wp_enqueue_scripts', function () {
+    if (bateau_is_reservation_embed()) {
+        wp_dequeue_style('global-styles');
+        wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('wp-block-library-theme');
+        wp_dequeue_style('classic-theme-styles');
+    }
+}, 100);
 
 /**
  * Theme support (minimal).

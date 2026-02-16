@@ -61,7 +61,9 @@ if (!defined('ABSPATH')) {
     <div id="bookly-container">
         <?php
         // Render the Bookly shortcode if the plugin is active
-        if (shortcode_exists('bookly-form')) {
+        if (shortcode_exists('bookly-search-form')) {
+            echo do_shortcode('[bookly-search-form my-form]');
+        } elseif (shortcode_exists('bookly-form')) {
             echo do_shortcode('[bookly-form]');
         } else {
             echo '<p class="bookly-loading">Le module de reservation est temporairement indisponible.</p>';
@@ -74,7 +76,7 @@ if (!defined('ABSPATH')) {
         (function() {
             function sendHeight() {
                 var height = document.getElementById('bookly-container').scrollHeight + 32;
-                window.parent.postMessage({ type: 'bookly-resize', height: height }, '*');
+                window.parent.postMessage({ type: 'bookly-height', height: height }, '*');
             }
             // Send height on load and on resize
             window.addEventListener('load', sendHeight);
