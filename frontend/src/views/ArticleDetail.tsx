@@ -172,6 +172,35 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
           </div>
         </motion.section>
 
+        {/* Landing pages contextuelles */}
+        <section className="container-custom max-w-4xl mx-auto mt-12">
+          <h3 className="font-heading text-lg text-primary mb-4 text-center">
+            {t("discoverOccasions")}
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { slug: "croisiere-romantique-seine", label: "Romantique" },
+              { slug: "evjf-seine", label: "EVJF" },
+              { slug: "anniversaire-seine", label: "Anniversaire" },
+              { slug: "team-building-seine", label: "Team building" },
+              { slug: "coucher-soleil-seine", label: "Coucher de soleil" },
+              { slug: "apero-bateau-seine", label: "Apéro bateau" },
+            ].map((item) => (
+              <Link
+                key={item.slug}
+                href={`/${item.slug}`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  isDark
+                    ? "bg-white/5 border border-white/10 text-blue-100 hover:border-accent/40 hover:text-accent"
+                    : "bg-primary/5 border border-primary/20 text-primary hover:bg-primary/10"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* Articles similaires */}
         {related.length > 0 && (
           <section className="container-custom mt-16 pt-12 border-t border-border">

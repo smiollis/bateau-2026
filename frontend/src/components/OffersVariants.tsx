@@ -185,6 +185,41 @@ const OffersVariants = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Contextual links to landing pages */}
+        <div className="mt-12 text-center">
+          <p className={`${styles.subtitle} mb-4`}>{t("occasionsTitle")}</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { slug: "croisiere-romantique-seine", label: t("occasionsRomantique") },
+              { slug: "evjf-seine", label: t("occasionsEvjf") },
+              { slug: "anniversaire-seine", label: t("occasionsAnniversaire") },
+              { slug: "team-building-seine", label: t("occasionsTeamBuilding") },
+            ].map((item) => (
+              <Link
+                key={item.slug}
+                href={`/${item.slug}`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  variant === "nuit"
+                    ? "bg-white/5 border border-blue-400/20 text-blue-100 hover:border-accent/40 hover:text-accent"
+                    : "bg-primary/5 border border-primary/20 text-primary hover:bg-primary/10"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link
+              href="/#occasions"
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                variant === "nuit"
+                  ? "bg-accent/20 text-accent hover:bg-accent/30"
+                  : "bg-accent/10 text-accent hover:bg-accent/20"
+              }`}
+            >
+              {t("occasionsAll")}
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

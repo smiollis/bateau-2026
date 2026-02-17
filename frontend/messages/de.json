@@ -60,7 +60,13 @@
     "feature_champagnePremium": "Premium-Champagner",
     "feature_food": "Wurst- und Käseplatten",
     "feature_guide": "Diplomierter Reiseleiter",
-    "feature_anecdotes": "Exklusive Anekdoten"
+    "feature_anecdotes": "Exklusive Anekdoten",
+    "occasionsTitle": "Unsere Pakete passen zu jedem Anlass",
+    "occasionsRomantique": "Romantische Kreuzfahrt",
+    "occasionsEvjf": "Junggesellinnenabschied",
+    "occasionsAnniversaire": "Geburtstag",
+    "occasionsTeamBuilding": "Teambuilding",
+    "occasionsAll": "Alle unsere Anlässe"
   },
   "boat": {
     "title": "Willkommen an Bord der Senang",
@@ -269,7 +275,8 @@
     "ctaFeature2Desc": "Die Route Ihrer privaten Rundfahrt führt Sie zu den schönsten Sehenswürdigkeiten von Paris an der Seine.",
     "ctaFeature3Title": "2-stündige private Rundfahrt",
     "ctaFeature3Desc": "5 Mal täglich, ab dem Port de l'Arsenal, genießen Sie eine private Rundfahrt auf der Seine.",
-    "ctaButton": "Gönnen Sie sich eine private Rundfahrt auf der Seine"
+    "ctaButton": "Gönnen Sie sich eine private Rundfahrt auf der Seine",
+    "discoverOccasions": "Entdecken Sie unsere Themenkreuzfahrten"
   },
   "breadcrumb": {
     "home": "Startseite",

@@ -60,7 +60,13 @@
     "feature_champagnePremium": "Champagne premium",
     "feature_food": "Taglieri di salumi e formaggi",
     "feature_guide": "Guida storica diplomata",
-    "feature_anecdotes": "Aneddoti esclusivi"
+    "feature_anecdotes": "Aneddoti esclusivi",
+    "occasionsTitle": "Le nostre formule si adattano a ogni occasione",
+    "occasionsRomantique": "Crociera romantica",
+    "occasionsEvjf": "Addio al nubilato",
+    "occasionsAnniversaire": "Compleanno",
+    "occasionsTeamBuilding": "Team building",
+    "occasionsAll": "Tutte le nostre occasioni"
   },
   "boat": {
     "title": "Benvenuti sul Senang",
@@ -269,7 +275,8 @@
     "ctaFeature2Desc": "Il percorso della vostra crociera privata vi permetterà di scoprire Parigi dalla Senna.",
     "ctaFeature3Title": "2 ore di crociera privata",
     "ctaFeature3Desc": "5 volte al giorno, partendo dal Port de l'Arsenal, godetevi una crociera privata sulla Senna.",
-    "ctaButton": "Regalatevi una crociera privata sulla Senna"
+    "ctaButton": "Regalatevi una crociera privata sulla Senna",
+    "discoverOccasions": "Scopri le nostre crociere tematiche"
   },
   "breadcrumb": {
     "home": "Home",

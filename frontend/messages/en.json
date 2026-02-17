@@ -60,7 +60,13 @@
     "feature_champagnePremium": "Premium champagne",
     "feature_food": "Charcuterie & cheese boards",
     "feature_guide": "Certified historical guide",
-    "feature_anecdotes": "Exclusive anecdotes"
+    "feature_anecdotes": "Exclusive anecdotes",
+    "occasionsTitle": "Our packages fit every occasion",
+    "occasionsRomantique": "Romantic cruise",
+    "occasionsEvjf": "Hen party on the Seine",
+    "occasionsAnniversaire": "Birthday",
+    "occasionsTeamBuilding": "Team building",
+    "occasionsAll": "All our occasions"
   },
   "boat": {
     "title": "Welcome to Senang",
@@ -269,7 +275,8 @@
     "ctaFeature2Desc": "Your private cruise route lets you discover Paris from the Seine.",
     "ctaFeature3Title": "2-hour private cruise",
     "ctaFeature3Desc": "5 times a day, departing from Port de l'Arsenal, enjoy a private cruise on the Seine.",
-    "ctaButton": "Treat yourself to a private cruise on the Seine"
+    "ctaButton": "Treat yourself to a private cruise on the Seine",
+    "discoverOccasions": "Discover our themed cruises"
   },
   "breadcrumb": {
     "home": "Home",

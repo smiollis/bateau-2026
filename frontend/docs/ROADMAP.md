@@ -44,7 +44,7 @@
 
 ### Landing Pages — finitions
 
-- [ ] Liens contextuels depuis Croisiere, Tarifs, Blog
+- [x] Liens contextuels depuis Croisiere, Tarifs, Blog
 - [ ] Verification Rich Results Test Google
 - [ ] Lighthouse > 90 sur toutes les landings
 

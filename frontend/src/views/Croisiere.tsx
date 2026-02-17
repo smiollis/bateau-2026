@@ -9,6 +9,7 @@ import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations } from "next-intl";
 import { landmarks, itineraryStepCount } from "@/data/landmarks";
+import OccasionsGrid from "@/components/OccasionsGrid";
 
 import fond2 from "@/assets/map/fond2.webp";
 import metroIconImport from "@/assets/map/metro.png";
@@ -188,6 +189,9 @@ const Croisiere = () => {
           </div>
         </div>
       </section>
+
+      {/* Occasions Grid */}
+      <OccasionsGrid />
 
       {/* CTA */}
       <section className={`py-16 text-center ${isDark ? "bg-[#0a1628] text-blue-100" : "bg-primary text-primary-foreground"}`}>

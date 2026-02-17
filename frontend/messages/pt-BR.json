@@ -60,7 +60,13 @@
     "feature_champagnePremium": "Champagne premium",
     "feature_food": "Tabuas de frios e queijos",
     "feature_guide": "Guia historico certificado",
-    "feature_anecdotes": "Curiosidades exclusivas"
+    "feature_anecdotes": "Curiosidades exclusivas",
+    "occasionsTitle": "Nossas fórmulas se adaptam a todas as suas ocasiões",
+    "occasionsRomantique": "Cruzeiro romântico",
+    "occasionsEvjf": "Despedida de solteira",
+    "occasionsAnniversaire": "Aniversário",
+    "occasionsTeamBuilding": "Team building",
+    "occasionsAll": "Todas as nossas ocasiões"
   },
   "boat": {
     "title": "Bem-vindo ao Senang",
@@ -269,7 +275,8 @@
     "ctaFeature2Desc": "O percurso do seu cruzeiro privativo permitira que voce descubra Paris pelo Sena.",
     "ctaFeature3Title": "2h de cruzeiro privativo",
     "ctaFeature3Desc": "5 vezes por dia, partindo do Port de l'Arsenal, aproveite um cruzeiro privativo no Sena.",
-    "ctaButton": "Presenteie-se com um cruzeiro privativo no Sena"
+    "ctaButton": "Presenteie-se com um cruzeiro privativo no Sena",
+    "discoverOccasions": "Descubra nossos cruzeiros temáticos"
   },
   "breadcrumb": {
     "home": "Inicio",

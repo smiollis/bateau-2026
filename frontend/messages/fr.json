@@ -60,7 +60,13 @@
     "feature_champagnePremium": "Champagne premium",
     "feature_food": "Planches charcuterie & fromages",
     "feature_guide": "Guide historique diplômé",
-    "feature_anecdotes": "Anecdotes exclusives"
+    "feature_anecdotes": "Anecdotes exclusives",
+    "occasionsTitle": "Nos formules s'adaptent à toutes vos occasions",
+    "occasionsRomantique": "Croisière romantique",
+    "occasionsEvjf": "EVJF sur la Seine",
+    "occasionsAnniversaire": "Anniversaire",
+    "occasionsTeamBuilding": "Team building",
+    "occasionsAll": "Toutes nos occasions"
   },
   "boat": {
     "title": "Bienvenue sur le Senang",
@@ -269,7 +275,8 @@
     "ctaFeature2Desc": "Le parcours de votre croisière privée vous permettra de découvrir Paris depuis la Seine.",
     "ctaFeature3Title": "2h de croisière privée",
     "ctaFeature3Desc": "5 fois par jour, au départ du Port de l'Arsenal, profitez d'une croisière privée sur la Seine.",
-    "ctaButton": "Offrez-vous une croisière privée sur la Seine"
+    "ctaButton": "Offrez-vous une croisière privée sur la Seine",
+    "discoverOccasions": "Découvrez nos croisières thématiques"
   },
   "breadcrumb": {
     "home": "Accueil",
