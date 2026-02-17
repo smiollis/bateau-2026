@@ -3,7 +3,7 @@
  * Plugin Name: Bateau Headless Mode
  * Plugin URI:  https://bateau-a-paris.fr
  * Description: Transforms WordPress into a headless CMS — redirects all front-end URLs to the Next.js site, enables CORS for REST API, disables unnecessary front-end features.
- * Version:     2.0.0
+ * Version:     2.1.0
  * Author:      Un Bateau à Paris
  * License:     GPL-2.0-or-later
  * Text Domain: bateau-headless
@@ -344,6 +344,12 @@ add_action('admin_notices', function () {
     echo '<strong>Bateau Headless Mode</strong> — ';
     echo 'Le front-end WordPress est desactive. ';
     echo 'Toutes les URLs publiques redirigent vers <a href="' . esc_url(BATEAU_NEXTJS_URL) . '" target="_blank">' . esc_html(BATEAU_NEXTJS_URL) . '</a>.';
+
+    $last_sync = get_option('bateau_last_sync');
+    if ($last_sync) {
+        echo '<br><small>Derniere publication : ' . esc_html($last_sync['timestamp']) . ' par ' . esc_html($last_sync['user']) . '</small>';
+    }
+
     echo '</p></div>';
 });
 
@@ -720,56 +726,149 @@ add_action('rest_api_init', function () {
 
 /**
  * ============================================================
- * 7. ISR REVALIDATION WEBHOOK
+ * 7. SYNC TO NEXT.JS — "Publier sur le site" BUTTON
  * ============================================================
  *
- * When content is saved in WordPress, notify the Next.js site
- * to purge its ISR cache for the affected page.
+ * Adds a button in the WP admin bar that triggers a GitHub Actions
+ * workflow via repository_dispatch. This rebuilds the Next.js site
+ * with fresh data (articles + landing pages, all 6 locales).
  *
- * Requires BATEAU_REVALIDATE_SECRET in wp-config.php.
+ * Requires in wp-config.php:
+ *   define('BATEAU_GITHUB_TOKEN', 'ghp_...');  // Fine-grained PAT with Actions:write
+ *   define('BATEAU_GITHUB_REPO',  'owner/repo');
  */
-add_action('save_post', function (int $post_id, \WP_Post $post, bool $update) {
-    // Skip autosaves, revisions, and non-published posts
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (wp_is_post_revision($post_id)) return;
-    if ($post->post_status !== 'publish') return;
 
-    $secret = defined('BATEAU_REVALIDATE_SECRET') ? BATEAU_REVALIDATE_SECRET : '';
-    if (empty($secret)) return;
-
-    $revalidate_url = BATEAU_NEXTJS_URL . '/api/revalidate';
-
-    // Determine which locale-agnostic paths to revalidate based on post type.
-    // The Next.js /api/revalidate endpoint expands a single path across ALL
-    // locales (fr, en, es, it, de, pt-BR), so we only need to send one
-    // locale-prefixed path per resource.
-    $paths = [];
-
-    if ($post->post_type === 'post') {
-        // Blog article — revalidate the article page and the listing
-        $paths[] = '/fr/actualites/' . $post->post_name;
-        $paths[] = '/fr/actualites';
-    } elseif ($post->post_type === 'landing_page') {
-        // Landing page — revalidate the landing page
-        $slug = get_field('slug', $post_id) ?: $post->post_name;
-        $paths[] = '/fr/' . $slug;
+// --- Admin bar button ---
+add_action('admin_bar_menu', function (\WP_Admin_Bar $admin_bar) {
+    if (!current_user_can('publish_posts')) {
+        return;
     }
 
-    // Fire revalidation requests (non-blocking).
-    // Each request triggers revalidation for all 6 locales on the Next.js side.
-    foreach ($paths as $path) {
-        $url = add_query_arg([
-            'secret' => $secret,
-            'path'   => $path,
-        ], $revalidate_url);
+    $admin_bar->add_node([
+        'id'    => 'bateau-sync',
+        'title' => '<span class="ab-icon dashicons dashicons-update" style="margin-top:2px"></span> Publier sur le site',
+        'meta'  => [
+            'title' => 'Synchroniser articles + landing pages vers bateau-a-paris.fr',
+            'class' => 'bateau-sync-btn',
+        ],
+    ]);
+}, 100);
 
-        wp_remote_get($url, [
-            'timeout'   => 5,
-            'blocking'  => false,
-            'sslverify' => true,
+// --- Admin bar inline styles + JS ---
+add_action('admin_head', function () {
+    if (!current_user_can('publish_posts')) {
+        return;
+    }
+    ?>
+    <style>
+        #wp-admin-bar-bateau-sync .ab-item { cursor: pointer !important; }
+        #wp-admin-bar-bateau-sync .ab-item:hover { background: #2271b1 !important; color: #fff !important; }
+        #wp-admin-bar-bateau-sync.syncing .ab-icon { animation: bateau-spin 1s linear infinite; }
+        #wp-admin-bar-bateau-sync.sync-ok .ab-item { background: #00a32a !important; color: #fff !important; }
+        #wp-admin-bar-bateau-sync.sync-err .ab-item { background: #d63638 !important; color: #fff !important; }
+        @keyframes bateau-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.getElementById('wp-admin-bar-bateau-sync');
+        if (!btn) return;
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (btn.classList.contains('syncing')) return;
+            if (!confirm('Publier les modifications (articles + landing pages) sur bateau-a-paris.fr ?')) return;
+
+            btn.classList.remove('sync-ok', 'sync-err');
+            btn.classList.add('syncing');
+            btn.querySelector('.ab-item').lastChild.textContent = ' Publication en cours…';
+
+            fetch(ajaxurl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'action=bateau_sync_site&_wpnonce=' + encodeURIComponent('<?php echo wp_create_nonce('bateau_sync_site'); ?>'),
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                btn.classList.remove('syncing');
+                if (data.success) {
+                    btn.classList.add('sync-ok');
+                    btn.querySelector('.ab-item').lastChild.textContent = ' Publie !';
+                } else {
+                    btn.classList.add('sync-err');
+                    btn.querySelector('.ab-item').lastChild.textContent = ' Erreur : ' + (data.data || 'inconnue');
+                }
+                setTimeout(function() {
+                    btn.classList.remove('sync-ok', 'sync-err');
+                    btn.querySelector('.ab-item').lastChild.textContent = ' Publier sur le site';
+                }, 5000);
+            })
+            .catch(function() {
+                btn.classList.remove('syncing');
+                btn.classList.add('sync-err');
+                btn.querySelector('.ab-item').lastChild.textContent = ' Erreur reseau';
+                setTimeout(function() {
+                    btn.classList.remove('sync-err');
+                    btn.querySelector('.ab-item').lastChild.textContent = ' Publier sur le site';
+                }, 5000);
+            });
+        });
+    });
+    </script>
+    <?php
+});
+
+// --- AJAX handler: trigger GitHub Actions ---
+add_action('wp_ajax_bateau_sync_site', function () {
+    check_ajax_referer('bateau_sync_site');
+
+    if (!current_user_can('publish_posts')) {
+        wp_send_json_error('Permission refusee', 403);
+    }
+
+    $token = defined('BATEAU_GITHUB_TOKEN') ? BATEAU_GITHUB_TOKEN : '';
+    $repo  = defined('BATEAU_GITHUB_REPO')  ? BATEAU_GITHUB_REPO  : '';
+
+    if (empty($token) || empty($repo)) {
+        wp_send_json_error('BATEAU_GITHUB_TOKEN ou BATEAU_GITHUB_REPO non defini dans wp-config.php');
+    }
+
+    $url = 'https://api.github.com/repos/' . $repo . '/dispatches';
+
+    $response = wp_remote_post($url, [
+        'timeout' => 15,
+        'headers' => [
+            'Authorization' => 'Bearer ' . $token,
+            'Accept'        => 'application/vnd.github+json',
+            'Content-Type'  => 'application/json',
+            'User-Agent'    => 'WordPress/bateau-headless-mode',
+        ],
+        'body' => wp_json_encode([
+            'event_type'     => 'wp_post_updated',
+            'client_payload' => [
+                'triggered_by' => wp_get_current_user()->user_login,
+                'timestamp'    => gmdate('c'),
+            ],
+        ]),
+    ]);
+
+    if (is_wp_error($response)) {
+        wp_send_json_error($response->get_error_message());
+    }
+
+    $code = wp_remote_retrieve_response_code($response);
+
+    // GitHub returns 204 No Content on success
+    if ($code === 204) {
+        // Store last sync info for admin display
+        update_option('bateau_last_sync', [
+            'user'      => wp_get_current_user()->display_name,
+            'timestamp' => current_time('mysql'),
         ]);
+        wp_send_json_success('Publication declenchee');
     }
-}, 10, 3);
+
+    $body = wp_remote_retrieve_body($response);
+    wp_send_json_error("GitHub API {$code}: {$body}");
+});
 
 /**
  * ============================================================
