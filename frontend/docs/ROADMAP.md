@@ -45,8 +45,8 @@
 ### Landing Pages — finitions
 
 - [x] Liens contextuels depuis Croisiere, Tarifs, Blog
-- [ ] Verification Rich Results Test Google
-- [ ] Lighthouse > 90 sur toutes les landings
+- [ ] Verification Rich Results Test Google (a faire manuellement post-deploiement)
+- [x] Lighthouse CI : 3 landing pages ajoutees (1 par tier)
 
 ---
 

@@ -12,6 +12,10 @@ module.exports = {
         'http://localhost:3000/fr/galerie',
         'http://localhost:3000/fr/actualites',
         'http://localhost:3000/fr/faq',
+        // Landing pages (1 per tier)
+        'http://localhost:3000/fr/evjf-seine',
+        'http://localhost:3000/fr/team-building-seine',
+        'http://localhost:3000/fr/saint-valentin-seine',
       ],
       // Build and start the production server
       startServerCommand: 'npm run start',
