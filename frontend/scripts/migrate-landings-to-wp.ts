@@ -2,8 +2,8 @@
  * Migration Script: Landing Pages + Translations → WordPress + Polylang
  *
  * Reads the 17 static landing page TS files (FR) and 85 i18n translations,
- * creates them as `landing_page` CPT entries in WordPress via REST API,
- * and links translations via Polylang.
+ * uploads images to the WP media library, creates `landing_page` CPT entries
+ * via REST API, and links translations via Polylang.
  *
  * Usage:
  *   WP_USER=admin WP_APP_PASSWORD=xxxx npx tsx scripts/migrate-landings-to-wp.ts
@@ -22,7 +22,7 @@
 
 import { landingPages } from "../src/data/landings";
 import type { LandingPageData, LandingSection, LandingPageTranslation } from "../src/data/landings/types";
-import { readdirSync, existsSync } from "fs";
+import { existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -46,7 +46,7 @@ const POLYLANG_LOCALE_MAP: Record<string, string> = {
   es: "es",
   it: "it",
   de: "de",
-  "pt-BR": "pt-br",
+  "pt-BR": "pt",
 };
 
 if (!WP_APP_PASSWORD && !DRY_RUN) {
@@ -57,6 +57,8 @@ if (!WP_APP_PASSWORD && !DRY_RUN) {
 
 const AUTH_HEADER =
   "Basic " + Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString("base64");
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // --- Helpers ---
 
@@ -83,8 +85,11 @@ async function wpRequest<T>(
   return res.json();
 }
 
+// --- ACF Conversion ---
+
 /**
  * Convert LandingSection[] to ACF flexible content format.
+ * Image fields are stored as URL strings (ACF url type).
  */
 function sectionsToACF(sections: LandingSection[]) {
   return sections
@@ -102,7 +107,10 @@ function sectionsToACF(sections: LandingSection[]) {
           return {
             acf_fc_layout: "gallery",
             title: section.title,
-            images: section.images.map((img) => ({ src: img.src, alt: img.alt })),
+            images: section.images.map((img) => ({
+              src: img.src,
+              alt: img.alt,
+            })),
           };
         case "testimonials":
           return { acf_fc_layout: "testimonials", title: section.title, filter: section.filter };
@@ -144,7 +152,6 @@ function mergeTranslation(base: LandingPageData, translation: LandingPageTransla
  * Dynamically import a translation file.
  */
 async function loadTranslation(locale: string, slug: string): Promise<LandingPageTranslation | null> {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
   const filePath = resolve(__dirname, `../src/data/landings/i18n/${locale}/${slug}.ts`);
 
   if (!existsSync(filePath)) return null;
@@ -210,29 +217,18 @@ async function linkTranslations(
   frId: number,
   translationIds: Record<string, number>
 ) {
-  // Polylang Pro REST API: PUT /pll/v1/posts/{id} with translations map
-  // Format: { fr: frId, en: enId, es: esId, ... }
+  // Link translations via standard WP REST API with Polylang's "translations" parameter
   const translations: Record<string, number> = { fr: frId, ...translationIds };
 
   try {
-    await wpRequest("PUT", `/pll/v1/posts/${frId}`, { translations });
+    await wpRequest("POST", `/wp/v2/landing_page/${frId}`, { translations });
     console.log(
       `  [LINK] FR #${frId} ↔ ${Object.entries(translationIds)
         .map(([lang, id]) => `${lang}:#${id}`)
         .join(", ")}`
     );
   } catch (err) {
-    // Fallback: try linking via standard WP REST API with Polylang params
-    // Some Polylang versions use a different endpoint
-    console.log(`  [WARN] PLL API failed, trying alternative method...`);
-    try {
-      await wpRequest("POST", `/wp/v2/landing_page/${frId}`, {
-        pll_translations: translations,
-      });
-      console.log(`  [LINK OK via pll_translations]`);
-    } catch (err2) {
-      console.error(`  [ERROR] Could not link translations for FR #${frId}: ${err2}`);
-    }
+    console.error(`  [ERROR] Could not link translations for FR #${frId}: ${err}`);
   }
 }
 
@@ -253,8 +249,12 @@ async function linkRelatedPages(
 
   if (relatedIds.length === 0) return;
 
+  // Include hero_title (required field) when updating ACF via REST API
   await wpRequest("POST", `/wp/v2/landing_page/${postId}`, {
-    acf: { related_pages: relatedIds },
+    acf: {
+      hero_title: data.hero.title,
+      related_pages: relatedIds,
+    },
   });
 
   console.log(`  [RELATED] ${data.slug} → ${data.relatedPages.join(", ")}`);
@@ -294,7 +294,7 @@ async function main() {
   console.log();
 
   // ===== Pass 1: Create FR landing pages =====
-  console.log("=== Pass 1: Creating FR landing pages ===\n");
+  console.log("\n=== Pass 1: Creating FR landing pages ===\n");
   const slugToFrId = new Map<string, number>();
 
   for (const [slug, data] of entries) {
@@ -307,7 +307,6 @@ async function main() {
   }
 
   // ===== Pass 2: Create translations =====
-  // { slug -> { en: id, es: id, ... } }
   const slugToTranslationIds = new Map<string, Record<string, number>>();
 
   if (!FR_ONLY) {

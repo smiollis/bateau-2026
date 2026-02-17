@@ -392,10 +392,9 @@ add_action('acf/init', function () {
             ],
             [
                 'key'   => 'field_hero_background_image',
-                'label' => 'Image de fond',
+                'label' => 'Image de fond (URL)',
                 'name'  => 'hero_background_image',
-                'type'  => 'image',
-                'return_format' => 'url',
+                'type'  => 'url',
             ],
             [
                 'key'   => 'field_hero_cta_text',
@@ -418,6 +417,7 @@ add_action('acf/init', function () {
         'position' => 'normal',
         'style'    => 'default',
         'menu_order' => 0,
+        'show_in_rest' => 1,
     ]);
 
     // --- Landing Page: Sections (Flexible Content) ---
@@ -479,7 +479,7 @@ add_action('acf/init', function () {
                                 'type'       => 'repeater',
                                 'layout'     => 'table',
                                 'sub_fields' => [
-                                    ['key' => 'field_gal_img_src', 'label' => 'Image', 'name' => 'src', 'type' => 'image', 'return_format' => 'url'],
+                                    ['key' => 'field_gal_img_src', 'label' => 'Image (URL)', 'name' => 'src', 'type' => 'url'],
                                     ['key' => 'field_gal_img_alt', 'label' => 'Texte alternatif', 'name' => 'alt', 'type' => 'text'],
                                 ],
                             ],
@@ -536,6 +536,7 @@ add_action('acf/init', function () {
         'position' => 'normal',
         'style'    => 'default',
         'menu_order' => 10,
+        'show_in_rest' => 1,
     ]);
 
     // --- Landing Page: JSON-LD & Relations ---
@@ -579,6 +580,33 @@ add_action('acf/init', function () {
         'position' => 'side',
         'style'    => 'default',
         'menu_order' => 20,
+        'show_in_rest' => 1,
+    ]);
+});
+
+/**
+ * ============================================================
+ * 6b. EXPOSE ACF FIELDS IN REST API
+ * ============================================================
+ *
+ * ACF free does not expose acf_add_local_field_group data in
+ * the REST API response. Manually register 'acf' rest field
+ * that reads from get_fields().
+ */
+add_action('rest_api_init', function () {
+    register_rest_field('landing_page', 'acf', [
+        'get_callback' => function ($post) {
+            if (!function_exists('get_fields')) return [];
+            $fields = get_fields($post['id']);
+            return $fields ?: [];
+        },
+        'update_callback' => function ($value, $post) {
+            if (!function_exists('update_field') || !is_array($value)) return;
+            foreach ($value as $key => $val) {
+                update_field($key, $val, $post->ID);
+            }
+        },
+        'schema' => ['type' => 'object'],
     ]);
 });
 
