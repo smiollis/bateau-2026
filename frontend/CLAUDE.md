@@ -60,7 +60,8 @@ bateau-2026/
 - **Securite**: CSP (12 directives), HSTS, DOMPurify, 6 security headers
 - **SEO**: Canonical + hreflang 6 locales + JSON-LD (4 schemas base + 3 par landing page), Rank Math sur WP
 - **Landing pages**: 17 pages SSG (route dynamique `[slug]`), traduites EN/ES/IT/DE/PT-BR
-- **ISR**: revalidate 3600s + webhook `save_post` → `/api/revalidate` (6 locales)
+- **Data pipeline**: JSON-only (pas d'appels API WP au runtime). Import via GitHub Actions + bouton WP "Publier sur le site"
+- **CI/CD**: 4 workflows GitHub Actions (import-posts, import-reviews, refresh-instagram, lighthouse)
 
 ## Systeme de themes
 
@@ -89,7 +90,7 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **Pages Router conflit** : ne PAS creer de fichiers dans `src/pages/` — utiliser `src/views/` a la place
 - **Cookie consent** : le tracking GA4 ne demarre qu'apres consentement (Consent Mode v2 defaults "denied" pour EU)
 - **Instagram token** : expire le 2026-04-04 — voir section "Renouvellement token Instagram" ci-dessous
-- **Blog multilingue** : `posts.json` (FR) + `posts-{locale}.json` (EN/ES/IT/DE/PT-BR), chargement par locale dans views et pages
+- **Blog multilingue** : `posts.json` (FR) + `posts-{locale}.json` (EN/ES/IT/DE/PT-BR), JSON statique uniquement (pas d'appel API WP au runtime), importe via GitHub Actions
 - **Logger** : utiliser `logger.error/warn/info` de `@/lib/logger` au lieu de `console.error`
 - **Images** : TOUJOURS utiliser `next/image` (pas de `<img>`) — toutes les images sont migrees
 - **CSP** : le header Content-Security-Policy est dans `next.config.ts` — penser a ajouter les domaines si on integre un nouveau service
@@ -104,14 +105,17 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 ## Commandes
 
 ```bash
-npm run dev          # Dev server (port 3000)
-npm run build        # Production build
-npm run start        # Production server
-npm run lint         # ESLint
-npm run test         # Tests unitaires (Vitest)
-npm run test:watch   # Tests unitaires en mode watch
-npm run test:e2e     # Tests E2E (Playwright, build + start auto)
-npm run test:e2e:ui  # Tests E2E avec interface Playwright
+npm run dev              # Dev server (port 3000)
+npm run build            # Production build
+npm run start            # Production server
+npm run lint             # ESLint
+npm run test             # Tests unitaires (Vitest)
+npm run test:watch       # Tests unitaires en mode watch
+npm run test:e2e         # Tests E2E (Playwright, build + start auto)
+npm run test:e2e:ui      # Tests E2E avec interface Playwright
+npm run import:posts     # Import articles WP (6 locales → posts*.json)
+npm run import:reviews   # Import avis Google Places → reviews.json
+npm run import:instagram # Import Instagram → instagram.json + images
 ```
 
 ## Tests
@@ -169,17 +173,19 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 - **BDD** : `wp_clone` (prefix `9Ju5UF_`) — 11 Mo, ~90 tables
 - **DB user** : `wp_clone_user`
 - **Theme** : `bateau-headless` (minimal, Bookly iframe only)
-- **Plugin** : `bateau-headless-mode` (redirects 301, CORS, front-end disabled)
-- **Plugins actifs** : 19 (ACF, Bookly x9, WPML x3, Loco Translate, Rank Math, etc.)
+- **Plugin** : `bateau-headless-mode` v2.1.0 (redirects 301, CORS, front-end disabled, bouton "Publier sur le site" → GitHub Actions)
+- **Plugins actifs** : 20 (ACF, Bookly x9, Polylang Pro, Loco Translate, Rank Math, etc.)
 - **API** : `https://admin.bateau-a-paris.fr/wp-json/`
 - **Reservation iframe** : `https://admin.bateau-a-paris.fr/reservation-embed/` (template `page-reservation-embed.php`)
 - **PostMessage** : type `bookly-height` (iframe -> parent Next.js)
 
 ### Deploiement
 
-- **Frontend** : Vercel (auto-deploy on push to main) — bascule DNS en cours
+- **Frontend** : Vercel (auto-deploy on push to main)
 - **WordPress** : Plesk-managed sur OVH (admin.bateau-a-paris.fr)
-- **SFTP WordPress** : `lftp -u '<user>' sftp://admin.bateau-a-paris.fr` → `httpdocs/wp-content/`
+- **SSH WordPress** : `ssh admin.bateau-a-paris_k1a2a2s0xbj@admin.bateau-a-paris.fr` → `httpdocs/`
+- **GitHub Actions** : 4 workflows (import-posts, import-reviews, refresh-instagram, lighthouse)
+- **WP → Site** : bouton admin "Publier sur le site" → `repository_dispatch` → import-posts workflow → commit JSON → Vercel rebuild
 
 ## Variables d'environnement (.env.local)
 
@@ -206,9 +212,9 @@ Le token Instagram Graph API expire le **2026-04-04**. Pour renouveler :
 
 2. **Methode Smash Balloon** : renouveler depuis le panel Smash Balloon sur le WordPress.
 
-3. **Vercel/production** : mettre a jour la variable d'environnement dans le dashboard Vercel/Coolify.
+3. **Automatique** : GitHub Actions `refresh-instagram.yml` renouvelle le token les 1er et 15 du mois et met a jour le secret GitHub automatiquement.
 
-Le token est valide 60 jours. Renouveler au moins 10 jours avant expiration.
+Le token est valide 60 jours. Le workflow automatique le renouvelle toutes les 2 semaines.
 
 ## Score audit
 
@@ -227,7 +233,23 @@ Le token est valide 60 jours. Renouveler au moins 10 jours avant expiration.
 | Images | 9/10 | next/image, blur, OG, AVIF |
 | Architecture | 9.5/10 | layout.tsx unique, composants decomposes |
 
-Reste a faire (basse priorite) : contrastes gold/blanc, middleware proxy, bascule DNS Vercel.
+Reste a faire (basse priorite) : contrastes gold/blanc, middleware proxy.
+
+## GitHub Actions Secrets
+
+| Secret | Workflow | Description |
+|--------|----------|-------------|
+| `NEXT_PUBLIC_WP_API_URL` | import-posts | URL API WordPress |
+| `GOOGLE_PLACES_API_KEY` | import-reviews | Cle API Google Places |
+| `INSTAGRAM_ACCESS_TOKEN` | refresh-instagram | Token Instagram (auto-renouvele) |
+| `GH_PAT` | refresh-instagram | PAT GitHub (scope: secrets read/write) |
+
+## wp-config.php (serveur OVH)
+
+```php
+define('BATEAU_GITHUB_TOKEN', 'ghp_...');  // Fine-grained PAT (scope: contents read/write)
+define('BATEAU_GITHUB_REPO',  'smiollis/bateau-2026');
+```
 
 ## Briefs de reference
 

@@ -4,6 +4,30 @@
 
 ---
 
+## [0.13.0] - 2026-02-17 — Data Pipeline + Automatisation + Liens contextuels
+
+### Data Pipeline
+- Architecture JSON-only : suppression appels API WP au runtime sur `/actualites`
+- Import multilingue `import-posts.ts` : 6 locales via Polylang `?lang=`
+- 3 workflows GitHub Actions : import-posts (hebdo + bouton WP), import-reviews (hebdo), refresh-instagram (bimensuel)
+
+### WordPress Plugin v2.1.0
+- Bouton "Publier sur le site" dans barre admin (remplace webhook auto `save_post`)
+- `repository_dispatch` → GitHub Actions → import JSON → commit → Vercel rebuild
+- Feedback visuel + notification derniere synchro
+
+### Liens contextuels Landing Pages
+- OccasionsGrid sur page Croisiere (12 occasions)
+- Liens landing pages sur Tarifs (4+1) et detail article blog (6)
+- 7 cles i18n ajoutees dans 6 langues
+
+### Infrastructure
+- Lighthouse CI : +3 landing pages (1 par tier)
+- 4 secrets GitHub Actions configures
+- ROADMAP : chantier "Centralisation contenu WP" ajoute au backlog
+
+---
+
 ## [0.12.0] - 2026-02-17 — Performance + SEO multilingue + WordPress admin
 
 ### Performance (Desktop RES 89 → 95+, Mobile 77 → 85+)

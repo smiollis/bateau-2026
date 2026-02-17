@@ -51,6 +51,7 @@ bateau-2026/
 | SEO | JSON-LD (7 schemas), hreflang, sitemap multi-locale, Rank Math |
 | Tests | Vitest (303 tests) + Playwright (28 E2E) + axe-core |
 | Email | Resend (formulaire de contact) |
+| CI/CD | GitHub Actions (import posts, reviews, Instagram) + Vercel auto-deploy |
 | Deploy | Vercel (frontend) + OVH Plesk (WordPress) |
 
 ## Quick Start
@@ -119,12 +120,16 @@ CONTACT_EMAIL_TO=contact@example.com
 | `npm run lint` | Linter ESLint |
 | `npm run test` | Tests unitaires (Vitest) |
 | `npm run test:e2e` | Tests E2E (Playwright) |
+| `npm run import:posts` | Import articles WordPress (6 locales) |
+| `npm run import:reviews` | Import avis Google Places |
+| `npm run import:instagram` | Import posts Instagram |
 
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
 | [ROADMAP.md](frontend/docs/ROADMAP.md) | Roadmap priorisee et backlog |
-| [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.12.0) |
+| [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.13.0) |
 | [frontend/CLAUDE.md](frontend/CLAUDE.md) | Contexte projet pour Claude Code |
 | [brief/](brief/) | Specifications et briefs du projet |
+| [frontend/docs/](frontend/docs/) | Audits, release notes, plans |
