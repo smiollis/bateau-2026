@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import capitaineMichel from "@/assets/capitaine-michel.jpg";
@@ -33,7 +33,7 @@ const CaptainSection = () => {
     <section className={`py-16 lg:py-24 ${styles.section}`}>
       <div className="container-custom">
         <div className="grid lg:grid-cols-[300px_1fr] gap-12 items-center max-w-5xl mx-auto">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -45,9 +45,9 @@ const CaptainSection = () => {
               alt="Capitaine Michel"
               className={`w-56 h-56 lg:w-72 lg:h-72 rounded-full object-cover ${styles.imageBorder}`}
             />
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -61,7 +61,7 @@ const CaptainSection = () => {
               <p className={styles.name}>{t("name")}</p>
               <p className={styles.role}>{t("role")}</p>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

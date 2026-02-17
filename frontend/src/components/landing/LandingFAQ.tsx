@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -20,7 +20,7 @@ const LandingFAQ = ({ title, items }: LandingFAQProps) => {
   return (
     <section className="section-padding">
       <div className="container-custom max-w-3xl">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -28,10 +28,10 @@ const LandingFAQ = ({ title, items }: LandingFAQProps) => {
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-10"
         >
           {title}
-        </motion.h2>
+        </m.h2>
         <Accordion type="single" collapsible className="space-y-3">
           {items.map((item, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ const LandingFAQ = ({ title, items }: LandingFAQProps) => {
                   {item.answer}
                 </AccordionContent>
               </AccordionItem>
-            </motion.div>
+            </m.div>
           ))}
         </Accordion>
       </div>

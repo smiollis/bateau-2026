@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -34,7 +34,7 @@ const FAQ = () => {
             {t("backToHome")}
           </Link>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -47,11 +47,11 @@ const FAQ = () => {
             <p className="text-muted-foreground mb-12 max-w-2xl">
               {t("intro")}
             </p>
-          </motion.div>
+          </m.div>
 
           <Accordion type="single" collapsible className="space-y-3">
             {faqItems.map((item, index) => (
-              <motion.div
+              <m.div
                 key={`faq-${index}`}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -68,11 +68,11 @@ const FAQ = () => {
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
-              </motion.div>
+              </m.div>
             ))}
           </Accordion>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
@@ -87,7 +87,7 @@ const FAQ = () => {
             <p className="text-muted-foreground text-sm">
               {t("contactCtaSub")}
             </p>
-          </motion.div>
+          </m.div>
         </div>
     </div>
   );

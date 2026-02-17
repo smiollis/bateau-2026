@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import DOMPurify from "dompurify";
 
@@ -63,7 +63,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
     <div className="min-h-screen bg-background pt-24 pb-16">
         {/* Hero image */}
         {post.image && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="w-full h-64 md:h-[28rem] overflow-hidden relative"
@@ -77,7 +77,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
               quality={85}
               className="object-cover"
             />
-          </motion.div>
+          </m.div>
         )}
 
         <article className="container-custom max-w-3xl mx-auto mt-8">
@@ -91,7 +91,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
           </Link>
 
           {/* Meta */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -113,10 +113,10 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
             <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-primary mb-8 leading-tight">
               {post.title}
             </h1>
-          </motion.div>
+          </m.div>
 
           {/* Contenu */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -133,7 +133,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
         </article>
 
         {/* CTA Réservation */}
-        <motion.section
+        <m.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -172,7 +172,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
               </Button>
             </div>
           </div>
-        </motion.section>
+        </m.section>
 
         {/* Landing pages contextuelles */}
         <section className="container-custom max-w-4xl mx-auto mt-12">

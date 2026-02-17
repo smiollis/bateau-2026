@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -50,7 +50,7 @@ const TestimonialsVariants = () => {
   return (
     <section className={`section-padding ${styles.section}`} id="temoignages">
       <div className="container-custom">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -85,7 +85,7 @@ const TestimonialsVariants = () => {
             ))}
             <span className={`ml-2 ${styles.subtitle} font-medium`}>{t("ratingLabel", { rating: reviewsData.placeRating, count: reviewsData.totalReviews })}</span>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="relative max-w-4xl mx-auto">
           <button
@@ -105,7 +105,7 @@ const TestimonialsVariants = () => {
           </button>
 
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={currentIndex}
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -136,7 +136,7 @@ const TestimonialsVariants = () => {
                 </div>
               </div>
               <p className={styles.text}>&ldquo;{testimonials[currentIndex]?.text}&rdquo;</p>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
 
           <div className="flex justify-center gap-2 mt-6">

@@ -116,6 +116,9 @@ npm run test:e2e:ui      # Tests E2E avec interface Playwright
 npm run import:posts     # Import articles WP (6 locales → posts*.json)
 npm run import:reviews   # Import avis Google Places → reviews.json
 npm run import:instagram # Import Instagram → instagram.json + images
+npm run fix:images       # Corriger images manquantes dans posts traduits
+npm run fix:links        # Corriger liens hardcodés vers admin WP
+npm run fix:all          # Corriger images + liens (combo)
 ```
 
 ## Tests
@@ -218,7 +221,8 @@ Le token est valide 60 jours. Le workflow automatique le renouvelle toutes les 2
 
 ## Score audit
 
-**Score actuel : 9.2/10** (voir `AUDIT-2026-02-14.md`)
+### Audit Général (Code & Architecture) : 9.2/10
+Voir `AUDIT-2026-02-14.md`
 
 | Categorie | Score | Statut |
 |-----------|-------|--------|
@@ -234,6 +238,24 @@ Le token est valide 60 jours. Le workflow automatique le renouvelle toutes les 2
 | Architecture | 9.5/10 | layout.tsx unique, composants decomposes |
 
 Reste a faire (basse priorite) : contrastes gold/blanc, middleware proxy.
+
+### Audit Qualité des Données : 6.5/10 → 8.5/10 (après fix)
+Voir `docs/AUDIT-2026-02-17-data-quality.md`
+
+**Problèmes identifiés :**
+- ❌ 118 images manquantes dans posts traduits (EN/ES/IT/DE)
+- ❌ 36 liens hardcodés vers `admin.bateau-a-paris.fr`
+- ⚠️ Contenu HTML non traduit (ES/IT/DE)
+
+**Scripts de correction :**
+- `npm run fix:images` — Copie les images FR vers toutes les locales
+- `npm run fix:links` — Remplace les URLs admin par des chemins relatifs
+- `npm run fix:all` — Combo des 2 scripts
+
+**Documentation :**
+- Rapport complet : `docs/AUDIT-2026-02-17-data-quality.md`
+- Guide de fix : `scripts/README-FIX.md`
+- Résumé : `docs/AUDIT-2026-02-17-summary.md`
 
 ## GitHub Actions Secrets
 

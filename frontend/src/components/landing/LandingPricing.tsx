@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
@@ -55,7 +55,7 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
   return (
     <section className="section-padding bg-secondary/30">
       <div className="container-custom">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -63,13 +63,13 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-4"
         >
           {title}
-        </motion.h2>
+        </m.h2>
         <p className="text-center text-muted-foreground mb-10">
           {t("extraPersonNote")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {formulas.map((formula, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
                   {t("cta")}
                 </Link>
               </Button>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

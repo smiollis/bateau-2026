@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import {
   Heart,
   PartyPopper,
@@ -85,7 +85,7 @@ const OccasionsGrid = () => {
   return (
     <section className={`section-padding ${styles.section}`}>
       <div className="container-custom">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -96,11 +96,11 @@ const OccasionsGrid = () => {
           <p className={`mt-4 max-w-2xl mx-auto ${styles.subtitle}`}>
             {t("subtitle")}
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {occasions.map((occasion, i) => (
-            <motion.div
+            <m.div
               key={occasion.slug}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +117,7 @@ const OccasionsGrid = () => {
                   {t(occasion.labelKey)}
                 </span>
               </Link>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

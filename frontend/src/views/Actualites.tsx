@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Calendar, Instagram, ExternalLink, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -74,7 +74,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
             <ArrowLeft className="w-4 h-4" />
             {tCommon("backToHome")}
           </Link>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -84,7 +84,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
             <p className="text-muted-foreground text-lg max-w-3xl">
               {t("subtitle")}
             </p>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Blog Section */}
@@ -125,7 +125,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
               href={`/actualites/${featured.slug}`}
               className="block mb-12 group"
             >
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
               >
@@ -172,7 +172,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             </Link>
             );
           })()}
@@ -181,7 +181,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
           {gridPosts.length > 0 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {gridPosts.map((post, i) => (
-                <motion.div
+                <m.div
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -231,7 +231,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
                       </div>
                     </div>
                   </Link>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           )}
@@ -254,7 +254,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
         {/* Instagram Section */}
         <section className={`section-padding ${isDark ? "bg-[#0d1d35]" : "bg-secondary/30"}`}>
           <div className="container-custom">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -270,7 +270,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
               <p className="text-muted-foreground">
                 {t("instagramSubtitle")}
               </p>
-            </motion.div>
+            </m.div>
 
             {igLoading ? (
               <div className="flex justify-center py-12">
@@ -279,7 +279,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
             ) : (
               <div className="grid grid-cols-3 gap-2 md:gap-4 max-w-4xl mx-auto">
                 {instagramPosts.map((post, i) => (
-                  <motion.a
+                  <m.a
                     key={post.id}
                     href={post.permalink}
                     target="_blank"
@@ -304,7 +304,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
                         </div>
                       )}
                     </div>
-                  </motion.a>
+                  </m.a>
                 ))}
               </div>
             )}

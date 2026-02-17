@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -40,7 +40,7 @@ const CTAVariants = () => {
       </div>
 
       <div className="relative z-10 container-custom text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -57,7 +57,7 @@ const CTAVariants = () => {
             {t("subtitle")}
           </p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -66,8 +66,8 @@ const CTAVariants = () => {
             <Button className={styles.cta} asChild>
               <Link href="/reservation">{t("button")}</Link>
             </Button>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 
 interface LandingRichtextProps {
@@ -15,7 +15,7 @@ const LandingRichtext = ({ title, content }: LandingRichtextProps) => {
   return (
     <section className="section-padding">
       <div className="container-custom max-w-3xl">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -23,8 +23,8 @@ const LandingRichtext = ({ title, content }: LandingRichtextProps) => {
           className={`font-heading text-3xl md:text-4xl font-semibold mb-6 ${isDark ? "text-blue-100" : "text-primary"}`}
         >
           {title}
-        </motion.h2>
-        <motion.div
+        </m.h2>
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

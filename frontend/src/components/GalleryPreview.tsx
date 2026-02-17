@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,7 +30,7 @@ const GalleryPreview = () => {
   return (
     <section className={`section-padding ${sectionBg}`} id="galerie">
       <div className="container-custom mb-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -43,7 +43,7 @@ const GalleryPreview = () => {
           <p className={subtitleClass}>
             {t("subtitle")}
           </p>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Infinite auto-scroll slider */}

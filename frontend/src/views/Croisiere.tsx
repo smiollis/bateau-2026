@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ArrowLeft, MapPin, Clock, Ship } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -66,7 +66,7 @@ const Croisiere = () => {
             const name = t(`landmark_${landmark.id}_name`);
             const description = t(`landmark_${landmark.id}_description`);
             return (
-              <motion.div
+              <m.div
                 key={landmark.id}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -75,7 +75,7 @@ const Croisiere = () => {
                 style={{ top: landmark.top, left: landmark.left }}
                 onClick={() => setActiveLandmark(activeLandmark === landmark.id ? null : landmark.id)}
               >
-                <motion.img
+                <m.img
                   src={landmark.icon}
                   alt={name}
                   style={{ width: landmark.width }}
@@ -91,7 +91,7 @@ const Croisiere = () => {
 
                 <AnimatePresence>
                   {activeLandmark === landmark.id && (
-                    <motion.div
+                    <m.div
                       initial={{ opacity: 0, y: 10, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.9 }}
@@ -106,15 +106,15 @@ const Croisiere = () => {
                     >
                       <h3 className={`font-heading text-sm font-semibold mb-1 ${isDark ? "text-accent" : "text-primary"}`}>{name}</h3>
                       <p className={`text-xs leading-relaxed ${isDark ? "text-blue-200/70" : "text-muted-foreground"}`}>{description}</p>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </m.div>
             );
           })}
 
           {/* Metro Bastille */}
-          <motion.a
+          <m.a
             href="https://www.google.com/maps/@48.8515009,2.3687565,3a,75y,349.11h,79.12t/data=!3m6!1e1!3m4!1s7r6mIOhANE3SwkssTly2vw!2e0!7i16384!8i8192?entry=ttu"
             target="_blank"
             rel="noopener noreferrer"
@@ -133,7 +133,7 @@ const Croisiere = () => {
                 </span>
               </div>
             </div>
-          </motion.a>
+          </m.a>
         </div>
       </section>
 
@@ -149,7 +149,7 @@ const Croisiere = () => {
 
           <div className="max-w-2xl mx-auto">
             {itinerarySteps.map((step, index) => (
-              <motion.div
+              <m.div
                 key={step.label}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -184,7 +184,7 @@ const Croisiere = () => {
                   <h3 className="font-heading text-base font-semibold text-primary">{step.label}</h3>
                   <p className="text-muted-foreground text-sm">{step.detail}</p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>

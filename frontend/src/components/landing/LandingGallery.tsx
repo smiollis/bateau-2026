@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +27,7 @@ const LandingGallery = ({ title, images }: LandingGalleryProps) => {
   return (
     <section className="section-padding bg-secondary/30">
       <div className="container-custom">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -35,14 +35,14 @@ const LandingGallery = ({ title, images }: LandingGalleryProps) => {
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-10"
         >
           {title}
-        </motion.h2>
+        </m.h2>
         <div className="relative">
           <div
             ref={scrollRef}
             className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4"
           >
             {images.map((img, i) => (
-              <motion.div
+              <m.div
                 key={img.src}
                 initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -57,7 +57,7 @@ const LandingGallery = ({ title, images }: LandingGalleryProps) => {
                   sizes="(max-width: 768px) 288px, 320px"
                   className="object-cover"
                 />
-              </motion.div>
+              </m.div>
             ))}
           </div>
           {images.length > 3 && (

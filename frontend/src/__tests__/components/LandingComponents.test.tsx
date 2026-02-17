@@ -2,37 +2,39 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 // Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    h1: ({
-      children,
-      ...props
-    }: React.PropsWithChildren<Record<string, unknown>>) => {
-      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-      return <h1 {...domProps}>{children}</h1>;
-    },
-    h2: ({
-      children,
-      ...props
-    }: React.PropsWithChildren<Record<string, unknown>>) => {
-      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-      return <h2 {...domProps}>{children}</h2>;
-    },
-    p: ({
-      children,
-      ...props
-    }: React.PropsWithChildren<Record<string, unknown>>) => {
-      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-      return <p {...domProps}>{children}</p>;
-    },
-    div: ({
-      children,
-      ...props
-    }: React.PropsWithChildren<Record<string, unknown>>) => {
-      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-      return <div {...domProps}>{children}</div>;
-    },
+const motionProxy = {
+  h1: ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Record<string, unknown>>) => {
+    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+    return <h1 {...domProps}>{children}</h1>;
   },
+  h2: ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Record<string, unknown>>) => {
+    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+    return <h2 {...domProps}>{children}</h2>;
+  },
+  p: ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Record<string, unknown>>) => {
+    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+    return <p {...domProps}>{children}</p>;
+  },
+  div: ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Record<string, unknown>>) => {
+    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+    return <div {...domProps}>{children}</div>;
+  },
+};
+vi.mock("framer-motion", () => ({
+  motion: motionProxy,
+  m: motionProxy,
   useReducedMotion: () => false,
 }));
 

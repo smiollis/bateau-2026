@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -20,7 +20,7 @@ const LandingRelated = ({
   return (
     <section className="section-padding">
       <div className="container-custom">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -28,10 +28,10 @@ const LandingRelated = ({
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-10"
         >
           {title}
-        </motion.h2>
+        </m.h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {pages.map((page, i) => (
-            <motion.div
+            <m.div
               key={page.slug}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ const LandingRelated = ({
                   </h3>
                 </div>
               </Link>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

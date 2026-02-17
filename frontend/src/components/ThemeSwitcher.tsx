@@ -1,7 +1,7 @@
 "use client";
 
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Palette, X } from "lucide-react";
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ const ThemeSwitcher = () => {
 
   if (!isOpen) {
     return (
-      <motion.button
+      <m.button
         initial={{ scale: prefersReducedMotion ? 1 : 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: prefersReducedMotion ? 0 : undefined }}
@@ -36,12 +36,12 @@ const ThemeSwitcher = () => {
         aria-label="Ouvrir le sélecteur de thème"
       >
         <Palette className="w-6 h-6" />
-      </motion.button>
+      </m.button>
     );
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: prefersReducedMotion ? 0 : undefined }}
@@ -65,7 +65,7 @@ const ThemeSwitcher = () => {
 
       <div className="space-y-2">
         {themes.map((theme) => (
-          <motion.button
+          <m.button
             key={theme.id}
             onClick={() => setVariant(theme.id)}
             whileHover={prefersReducedMotion ? {} : { scale: 1.01 }}
@@ -83,14 +83,14 @@ const ThemeSwitcher = () => {
                 {theme.description}
               </span>
             </div>
-          </motion.button>
+          </m.button>
         ))}
       </div>
 
       <p className="text-xs text-muted-foreground mt-4 text-center">
         Cliquez pour prévisualiser chaque style
       </p>
-    </motion.div>
+    </m.div>
   );
 };
 

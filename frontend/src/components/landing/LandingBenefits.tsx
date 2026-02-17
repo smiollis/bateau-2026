@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import {
   Ship, GlassWater, Camera, Sparkles, Users, Heart,
   Music, Utensils, Sun, Briefcase, PartyPopper, Star,
@@ -33,7 +33,7 @@ const LandingBenefits = ({ title, items }: LandingBenefitsProps) => {
   return (
     <section className="section-padding bg-secondary/30">
       <div className="container-custom">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -41,12 +41,12 @@ const LandingBenefits = ({ title, items }: LandingBenefitsProps) => {
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-12"
         >
           {title}
-        </motion.h2>
+        </m.h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {items.map((item, i) => {
             const Icon = iconMap[item.icon] || Star;
             return (
-              <motion.div
+              <m.div
                 key={item.title}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +61,7 @@ const LandingBenefits = ({ title, items }: LandingBenefitsProps) => {
                   {item.title}
                 </h3>
                 <p className="text-muted-foreground text-sm">{item.text}</p>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>

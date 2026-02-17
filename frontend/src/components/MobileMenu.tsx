@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations, useLocale } from "next-intl";
@@ -50,7 +50,7 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0, height: prefersReducedMotion ? "auto" : 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: prefersReducedMotion ? "auto" : 0 }}
@@ -93,7 +93,7 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
               </Button>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

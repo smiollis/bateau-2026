@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
@@ -81,7 +81,7 @@ const LanguageSelector = ({ iconColor }: LanguageSelectorProps) => {
       </button>
       <AnimatePresence>
         {langOpen && (
-          <motion.ul
+          <m.ul
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -4 }}
@@ -109,7 +109,7 @@ const LanguageSelector = ({ iconColor }: LanguageSelectorProps) => {
                 </button>
               </li>
             ))}
-          </motion.ul>
+          </m.ul>
         )}
       </AnimatePresence>
     </div>

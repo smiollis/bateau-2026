@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 
 import bateau1 from "@/assets/bateau-1.jpg";
 import bateau2 from "@/assets/bateau-2.jpg";
@@ -41,7 +41,7 @@ const BoatImageSlideshow = ({
   return (
     <div className={`relative overflow-hidden ${rounded} ${className}`}>
       <AnimatePresence mode="wait">
-        <motion.img
+        <m.img
           key={current}
           src={images[current]?.src}
           alt={images[current]?.alt ?? ""}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Switch } from "@/components/ui/switch";
 import { X } from "lucide-react";
 
@@ -125,7 +125,7 @@ const CookieModal = ({
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -133,7 +133,7 @@ const CookieModal = ({
           transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           onClick={onClose}
         >
-          <motion.div
+          <m.div
             ref={modalRef}
             className="relative w-full max-w-2xl bg-card rounded-2xl shadow-2xl p-6 md:p-8"
             role="dialog"
@@ -203,8 +203,8 @@ const CookieModal = ({
                 {t("saveChoices")}
               </button>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

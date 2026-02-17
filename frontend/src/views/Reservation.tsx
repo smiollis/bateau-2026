@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2 } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -91,7 +91,7 @@ const Reservation = () => {
   return (
     <div className="min-h-screen bg-background pt-24">
         {/* HERO SECTION */}
-        <motion.section
+        <m.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -117,7 +117,7 @@ const Reservation = () => {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -128,14 +128,14 @@ const Reservation = () => {
               <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
                 {t("subtitle")}
               </p>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.section>
+        </m.section>
 
         {/* CONTAINER IFRAME */}
         <section className="pb-16 md:pb-24 -mt-4">
           <div className="container-custom">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
@@ -162,7 +162,7 @@ const Reservation = () => {
 
               {/* Fallback erreur */}
               {iframeState === "error" && (
-                <motion.div
+                <m.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   className="min-h-[400px] flex flex-col items-center justify-center gap-6 text-center px-4"
@@ -187,12 +187,12 @@ const Reservation = () => {
                       </a>
                     </Button>
                   </div>
-                </motion.div>
+                </m.div>
               )}
-            </motion.div>
+            </m.div>
 
             {/* BADGES REASSURANCE */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 }}
@@ -207,10 +207,10 @@ const Reservation = () => {
                   <span className="text-sm text-muted-foreground">{label}</span>
                 </div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* FAQ LINK */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -223,7 +223,7 @@ const Reservation = () => {
                   <ChevronRight className="w-4 h-4" />
                 </Link>
               </Button>
-            </motion.div>
+            </m.div>
           </div>
         </section>
     </div>

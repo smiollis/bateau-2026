@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
@@ -116,7 +116,7 @@ const OffersVariants = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="container-custom">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -125,11 +125,11 @@ const OffersVariants = () => {
         >
           <h2 className={`${styles.title} mb-4`}>{t("title")}</h2>
           <p className={styles.subtitle}>{t("subtitle")}</p>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {offers.map((offer, index) => (
-            <motion.div
+            <m.div
               key={offer.title}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -182,7 +182,7 @@ const OffersVariants = () => {
                   </Button>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 

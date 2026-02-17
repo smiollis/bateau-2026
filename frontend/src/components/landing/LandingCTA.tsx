@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
@@ -23,7 +23,7 @@ const LandingCTA = ({
   return (
     <section className="section-padding bg-primary text-white">
       <div className="container-custom text-center">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -31,8 +31,8 @@ const LandingCTA = ({
           className="font-heading text-3xl md:text-4xl font-semibold mb-4"
         >
           {title}
-        </motion.h2>
-        <motion.p
+        </m.h2>
+        <m.p
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -40,8 +40,8 @@ const LandingCTA = ({
           className="text-white/80 text-lg mb-8 max-w-xl mx-auto"
         >
           {subtitle}
-        </motion.p>
-        <motion.div
+        </m.p>
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -57,7 +57,7 @@ const LandingCTA = ({
               06 70 34 25 43
             </a>
           </Button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

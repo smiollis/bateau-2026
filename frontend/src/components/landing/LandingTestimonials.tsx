@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import reviewsData from "@/data/reviews.json";
@@ -18,7 +18,7 @@ const LandingTestimonials = ({ title }: LandingTestimonialsProps) => {
   return (
     <section className="section-padding">
       <div className="container-custom">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -26,13 +26,13 @@ const LandingTestimonials = ({ title }: LandingTestimonialsProps) => {
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-4"
         >
           {title}
-        </motion.h2>
+        </m.h2>
         <p className="text-center text-muted-foreground mb-10">
           {reviewsData.placeRating}/5 sur {reviewsData.totalReviews} avis Google
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((review, i) => (
-            <motion.div
+            <m.div
               key={review.id}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ const LandingTestimonials = ({ title }: LandingTestimonialsProps) => {
               <p className="text-muted-foreground text-sm line-clamp-4">
                 {review.text}
               </p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

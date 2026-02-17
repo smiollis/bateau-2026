@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { ArrowLeft, Instagram, ExternalLink, Loader2 } from "lucide-react";
@@ -41,7 +41,7 @@ const Galerie = () => {
             <ArrowLeft className="w-4 h-4" />
             {tCommon("backToHome")}
           </Link>
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -51,14 +51,14 @@ const Galerie = () => {
             <p className="text-muted-foreground text-lg max-w-3xl">
               {t("pageSubtitle")}
             </p>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Masonry grid */}
         <div className="container-custom">
           <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
             {galleryImages.map((img, i) => (
-              <motion.div
+              <m.div
                 key={img.src}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ const Galerie = () => {
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -93,7 +93,7 @@ const Galerie = () => {
       {/* Instagram Section */}
       <section className={`section-padding ${isDark ? "bg-[#0d1d35]" : "bg-secondary/30"}`}>
         <div className="container-custom">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -109,7 +109,7 @@ const Galerie = () => {
             <p className="text-muted-foreground">
               {t("instagramSubtitle")}
             </p>
-          </motion.div>
+          </m.div>
 
           {igLoading ? (
             <div className="flex justify-center py-12">
@@ -118,7 +118,7 @@ const Galerie = () => {
           ) : (
             <div className="grid grid-cols-3 gap-2 md:gap-4 max-w-4xl mx-auto">
               {instagramPosts.map((post, i) => (
-                <motion.a
+                <m.a
                   key={post.id}
                   href={post.permalink}
                   target="_blank"
@@ -143,7 +143,7 @@ const Galerie = () => {
                       </div>
                     )}
                   </div>
-                </motion.a>
+                </m.a>
               ))}
             </div>
           )}

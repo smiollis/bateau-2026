@@ -21,16 +21,25 @@ vi.mock("next-intl", () => ({
   useLocale: () => "fr",
 }));
 
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({
-      children,
-      ...props
-    }: React.PropsWithChildren<Record<string, unknown>>) => {
-      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-      return <div {...domProps}>{children}</div>;
-    },
+const motionProxy = {
+  div: ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Record<string, unknown>>) => {
+    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+    return <div {...domProps}>{children}</div>;
   },
+  ul: ({
+    children,
+    ...props
+  }: React.PropsWithChildren<Record<string, unknown>>) => {
+    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+    return <ul {...domProps}>{children}</ul>;
+  },
+};
+vi.mock("framer-motion", () => ({
+  motion: motionProxy,
+  m: motionProxy,
   AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
   useReducedMotion: () => false,
 }));

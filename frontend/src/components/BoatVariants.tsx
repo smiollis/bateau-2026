@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Ruler, Users, Sun, Anchor, Shield, ArrowRight, Map } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -55,7 +55,7 @@ const BoatVariants = () => {
     <section className={`section-padding ${styles.section}`} id="bateau">
       <div className="container-custom">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -70,9 +70,9 @@ const BoatVariants = () => {
             <div className={`absolute -bottom-4 -right-4 md:bottom-8 md:right-8 ${styles.badge} px-6 py-3 rounded-xl shadow-lg z-10`}>
               <span className="font-heading text-lg font-semibold">{t("badge")}</span>
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -85,7 +85,7 @@ const BoatVariants = () => {
 
             <div className="space-y-4 mb-8">
               {highlights.map((item, index) => (
-                <motion.div
+                <m.div
                   key={item.title}
                   initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ const BoatVariants = () => {
                     <h3 className={`${styles.highlightTitle} mb-1`}>{item.title}</h3>
                     <p className={styles.highlightText}>{item.description}</p>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
@@ -115,7 +115,7 @@ const BoatVariants = () => {
                 </Link>
               </Button>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

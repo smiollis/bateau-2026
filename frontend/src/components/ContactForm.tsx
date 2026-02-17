@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -88,7 +88,7 @@ const ContactForm = () => {
   return (
     <section className={`section-padding ${styles.section}`} id="contact">
       <div className="container-custom">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -99,11 +99,11 @@ const ContactForm = () => {
           <p className={`${styles.text} max-w-2xl mx-auto`}>
             {t("subtitle")} <br/>{t("subtitleDetail")}
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid lg:grid-cols-[1fr_380px] gap-8 max-w-5xl mx-auto">
           {/* Form */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -180,10 +180,10 @@ const ContactForm = () => {
                 <Send className="w-4 h-4 ml-2" />
               </Button>
             </form>
-          </motion.div>
+          </m.div>
 
           {/* Contact Info */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -210,7 +210,7 @@ const ContactForm = () => {
                 ))}
               </p>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

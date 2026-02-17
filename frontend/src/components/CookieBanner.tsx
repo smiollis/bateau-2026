@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import { useCookieConsent } from "@/hooks/useCookieConsent";
 import CookieModal from "./CookieModal";
@@ -24,7 +24,7 @@ const CookieBanner = () => {
     <>
       <AnimatePresence>
         {showBanner && !showModal && (
-          <motion.div
+          <m.div
             className="fixed bottom-0 left-0 right-0 z-50 border-t-2 border-primary bg-card/95 backdrop-blur-md shadow-2xl"
             initial={{ y: prefersReducedMotion ? 0 : 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -61,7 +61,7 @@ const CookieBanner = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
