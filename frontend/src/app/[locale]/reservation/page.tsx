@@ -3,6 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import { getAlternates, getOgLocale } from '@/lib/metadata';
 import Page from '@/views/Reservation';
 
+const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
@@ -14,8 +16,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export const dynamic = 'force-dynamic';
-
 export default function RouteWrapper() {
-  return <Page />;
+  return (
+    <>
+      {/* Prefetch iframe HTML so browser starts loading before component mounts */}
+      {WP_URL && <link rel="prefetch" href={`${WP_URL}/reservation-embed/`} />}
+      <Page />
+    </>
+  );
 }

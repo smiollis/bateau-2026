@@ -1,6 +1,10 @@
 # SQL dumps
 *.sql
 
+# WordPress zip packages (installés via Plesk)
+wordpress/plugins/*.zip
+wordpress/themes/*.zip
+
 # SVG sources (logos originaux)
 /*.svg
 

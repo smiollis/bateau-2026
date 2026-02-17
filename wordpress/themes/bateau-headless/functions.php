@@ -118,6 +118,18 @@ add_action('wp_enqueue_scripts', function () {
 }, 100);
 
 /**
+ * Allow iframe embedding for reservation-embed page.
+ * WP-Rocket handles Cache-Control headers for page caching.
+ */
+add_action('template_redirect', function () {
+    if (!bateau_is_reservation_embed()) {
+        return;
+    }
+    // Override X-Frame-Options so Next.js can embed this page as iframe
+    header('X-Frame-Options: ALLOWALL');
+});
+
+/**
  * Theme support (minimal).
  */
 add_action('after_setup_theme', function () {

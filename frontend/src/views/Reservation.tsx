@@ -130,9 +130,9 @@ const Reservation = () => {
         <section className="pb-16 md:pb-24 -mt-4">
           <div className="container-custom">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ duration: 0.3 }}
               className="max-w-6xl mx-auto bg-card rounded-2xl shadow-2xl p-4 sm:p-8 md:p-12"
             >
               {/* Skeleton + message pendant le chargement */}
@@ -147,7 +147,7 @@ const Reservation = () => {
                     height: `${iframeHeight}px`,
                     display: iframeState === "loaded" ? "block" : "none",
                   }}
-                  className="w-full border-0 rounded-xl transition-all duration-300"
+                  className="w-full border-0 rounded-xl transition-opacity duration-300"
                   onLoad={handleIframeLoad}
                   title={t("title")}
                   sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
@@ -189,7 +189,7 @@ const Reservation = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.15 }}
               className="max-w-6xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-3 gap-4"
             >
               {reassuranceBadges.map(({ icon: Icon, label }) => (
@@ -207,7 +207,7 @@ const Reservation = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.2 }}
               className="max-w-6xl mx-auto mt-8 text-center"
             >
               <Button variant="outline" asChild className="gap-2">

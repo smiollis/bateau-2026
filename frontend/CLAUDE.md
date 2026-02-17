@@ -154,6 +154,31 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 - **Error boundaries** : `error.tsx` + `global-error.tsx`
 - **Anti-spam** : rate limiting 3 req/min + honeypot + escapeHtml
 
+## Infrastructure serveur
+
+- **Serveur** : OVH Public Cloud (hr3314558908.reseller.mis.ovh.net) — IP 51.77.228.195
+- **OS** : Debian 12 (bookworm)
+- **Panel** : Plesk Obsidian 18.0
+- **MariaDB** : 10.11.14
+- **PHP** : 8.3 (admin.bateau-a-paris.fr)
+- **Apache** : 2.4 (Plesk-managed)
+
+### WordPress headless (admin.bateau-a-paris.fr)
+
+- **BDD** : `wp_clone` (prefix `9Ju5UF_`) — 11 Mo, ~90 tables
+- **DB user** : `wp_clone_user`
+- **Theme** : `bateau-headless` (minimal, Bookly iframe only)
+- **Plugin** : `bateau-headless-mode` (redirects 301, CORS, front-end disabled)
+- **Plugins actifs** : 19 (ACF, Bookly x9, WPML x3, Loco Translate, Rank Math, etc.)
+- **API** : `https://admin.bateau-a-paris.fr/wp-json/`
+- **Reservation iframe** : `https://admin.bateau-a-paris.fr/reservation-embed/` (template `page-reservation-embed.php`)
+- **PostMessage** : type `bookly-height` (iframe -> parent Next.js)
+
+### Deploiement
+
+- **Frontend** : Vercel (auto-deploy on push to main)
+- **WordPress** : Plesk-managed sur OVH
+
 ## Variables d'environnement (.env.local)
 
 ```
