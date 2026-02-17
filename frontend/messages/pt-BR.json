@@ -280,7 +280,8 @@
   },
   "breadcrumb": {
     "home": "Inicio",
-    "cruises": "Cruzeiros"
+    "cruises": "Cruzeiros",
+    "ariaLabel": "Navegacao estrutural"
   },
   "common": {
     "backToHome": "Voltar ao inicio",
@@ -463,6 +464,14 @@
     "formulaAllInclusiveFeature2": "Buffet a bordo (tábuas, buffet)",
     "formulaAllInclusiveFeature3": "Decoração personalizada",
     "formulaAllInclusiveFeature4": "Fotógrafo opcional"
+  },
+  "landing": {
+    "reserve": "Reservar",
+    "call": "Ligar",
+    "ctaTitle": "Pronto para embarcar?",
+    "ctaSubtitle": "Reserve seu cruzeiro privativo no Sena em poucos cliques.",
+    "ctaButton": "Reservar agora",
+    "relatedTitle": "Descubra também"
   },
   "confidentialite": {
     "backToHome": "Voltar ao inicio",

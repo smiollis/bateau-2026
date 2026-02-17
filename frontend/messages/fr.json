@@ -280,7 +280,8 @@
   },
   "breadcrumb": {
     "home": "Accueil",
-    "cruises": "Croisières"
+    "cruises": "Croisières",
+    "ariaLabel": "Fil d'Ariane"
   },
   "common": {
     "backToHome": "Retour à l'accueil",
@@ -463,6 +464,14 @@
     "formulaAllInclusiveFeature2": "Traiteur à bord (planches, buffet)",
     "formulaAllInclusiveFeature3": "Décoration personnalisée",
     "formulaAllInclusiveFeature4": "Photographe en option"
+  },
+  "landing": {
+    "reserve": "Réserver",
+    "call": "Appeler",
+    "ctaTitle": "Prêt à embarquer ?",
+    "ctaSubtitle": "Réservez votre croisière privée sur la Seine en quelques clics.",
+    "ctaButton": "Réserver maintenant",
+    "relatedTitle": "Découvrez aussi"
   },
   "confidentialite": {
     "backToHome": "Retour à l'accueil",

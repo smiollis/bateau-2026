@@ -1,7 +1,15 @@
 "use client";
 
 import { m, useReducedMotion } from "framer-motion";
+import DOMPurify from "dompurify";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
+
+function sanitizeHtml(html: string): string {
+  if (typeof window !== "undefined") {
+    return DOMPurify.sanitize(html);
+  }
+  return html;
+}
 
 interface LandingRichtextProps {
   title: string;
@@ -33,7 +41,7 @@ const LandingRichtext = ({ title, content }: LandingRichtextProps) => {
             ? "prose-invert prose-strong:text-blue-100 prose-p:text-blue-200/70 prose-li:text-blue-200/70"
             : "text-muted-foreground"
           }`}
-          dangerouslySetInnerHTML={{ __html: content }}
+          dangerouslySetInnerHTML={{ __html: sanitizeHtml(content) }}
         />
       </div>
     </section>

@@ -280,7 +280,8 @@
   },
   "breadcrumb": {
     "home": "Inicio",
-    "cruises": "Cruceros"
+    "cruises": "Cruceros",
+    "ariaLabel": "Migas de pan"
   },
   "common": {
     "backToHome": "Volver al inicio",
@@ -463,6 +464,14 @@
     "formulaAllInclusiveFeature2": "Catering a bordo (tablas, buffet)",
     "formulaAllInclusiveFeature3": "Decoración personalizada",
     "formulaAllInclusiveFeature4": "Fotógrafo opcional"
+  },
+  "landing": {
+    "reserve": "Reservar",
+    "call": "Llamar",
+    "ctaTitle": "¿Listo para embarcar?",
+    "ctaSubtitle": "Reserve su crucero privado por el Sena en unos pocos clics.",
+    "ctaButton": "Reservar ahora",
+    "relatedTitle": "Descubra también"
   },
   "confidentialite": {
     "backToHome": "Volver al inicio",

@@ -280,7 +280,8 @@
   },
   "breadcrumb": {
     "home": "Home",
-    "cruises": "Cruises"
+    "cruises": "Cruises",
+    "ariaLabel": "Breadcrumb"
   },
   "common": {
     "backToHome": "Back to home page",
@@ -463,6 +464,14 @@
     "formulaAllInclusiveFeature2": "Catering on board (platters, buffet)",
     "formulaAllInclusiveFeature3": "Custom decoration",
     "formulaAllInclusiveFeature4": "Photographer optional"
+  },
+  "landing": {
+    "reserve": "Book",
+    "call": "Call",
+    "ctaTitle": "Ready to board?",
+    "ctaSubtitle": "Book your private cruise on the Seine in just a few clicks.",
+    "ctaButton": "Book now",
+    "relatedTitle": "Discover more"
   },
   "confidentialite": {
     "backToHome": "Back to home page",

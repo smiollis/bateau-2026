@@ -280,7 +280,8 @@
   },
   "breadcrumb": {
     "home": "Home",
-    "cruises": "Crociere"
+    "cruises": "Crociere",
+    "ariaLabel": "Percorso di navigazione"
   },
   "common": {
     "backToHome": "Torna alla home",
@@ -463,6 +464,14 @@
     "formulaAllInclusiveFeature2": "Catering a bordo (taglieri, buffet)",
     "formulaAllInclusiveFeature3": "Decorazione personalizzata",
     "formulaAllInclusiveFeature4": "Fotografo opzionale"
+  },
+  "landing": {
+    "reserve": "Prenota",
+    "call": "Chiama",
+    "ctaTitle": "Pronti a salpare?",
+    "ctaSubtitle": "Prenotate la vostra crociera privata sulla Senna in pochi clic.",
+    "ctaButton": "Prenota ora",
+    "relatedTitle": "Scoprite anche"
   },
   "confidentialite": {
     "backToHome": "Torna alla home",

@@ -2,11 +2,9 @@
 
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations } from "next-intl";
 
 const CGV = () => {
-  const { isDark } = useThemeVariant();
   const t = useTranslations("cgv");
 
   return (
@@ -88,7 +86,7 @@ const CGV = () => {
 
             <h2 className="font-heading text-2xl font-semibold text-primary mt-10">{t("dataTitle")}</h2>
             <p>{t("dataContent")}</p>
-            <address className={`not-italic p-4 rounded-lg ${isDark ? "bg-white/5" : "bg-secondary/50"}`}>
+            <address className="not-italic p-4 rounded-lg bg-secondary/50">
               {t("dataAddress")}
             </address>
           </div>

@@ -4,6 +4,7 @@ import { m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import type { LandingPageData } from "@/data/landings/types";
 
 interface LandingRelatedProps {
@@ -12,9 +13,10 @@ interface LandingRelatedProps {
 }
 
 const LandingRelated = ({
-  title = "Decouvrez aussi",
+  title,
   pages,
 }: LandingRelatedProps) => {
+  const t = useTranslations("landing");
   const prefersReducedMotion = useReducedMotion();
 
   return (
@@ -27,7 +29,7 @@ const LandingRelated = ({
           transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           className="font-heading text-3xl md:text-4xl font-semibold text-primary text-center mb-10"
         >
-          {title}
+          {title ?? t("relatedTitle")}
         </m.h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {pages.map((page, i) => (

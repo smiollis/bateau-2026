@@ -52,6 +52,7 @@ interface ArticleDetailProps {
 export default function ArticleDetail({ post }: ArticleDetailProps) {
   const { isDark } = useThemeVariant();
   const t = useTranslations("articleDetail");
+  const tOccasions = useTranslations("occasions");
   const locale = useLocale();
   const allPosts = getPostsByLocale(locale);
 
@@ -181,12 +182,12 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { slug: "croisiere-romantique-seine", label: "Romantique" },
-              { slug: "evjf-seine", label: "EVJF" },
-              { slug: "anniversaire-seine", label: "Anniversaire" },
-              { slug: "team-building-seine", label: "Team building" },
-              { slug: "coucher-soleil-seine", label: "Coucher de soleil" },
-              { slug: "apero-bateau-seine", label: "Apéro bateau" },
+              { slug: "croisiere-romantique-seine", labelKey: "romantique" as const },
+              { slug: "evjf-seine", labelKey: "evjf" as const },
+              { slug: "anniversaire-seine", labelKey: "anniversaire" as const },
+              { slug: "team-building-seine", labelKey: "teamBuilding" as const },
+              { slug: "coucher-soleil-seine", labelKey: "coucherSoleil" as const },
+              { slug: "apero-bateau-seine", labelKey: "apero" as const },
             ].map((item) => (
               <Link
                 key={item.slug}
@@ -197,7 +198,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
                     : "bg-primary/5 border border-primary/20 text-primary hover:bg-primary/10"
                 }`}
               >
-                {item.label}
+                {tOccasions(item.labelKey)}
               </Link>
             ))}
           </div>

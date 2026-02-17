@@ -280,7 +280,8 @@
   },
   "breadcrumb": {
     "home": "Startseite",
-    "cruises": "Rundfahrten"
+    "cruises": "Rundfahrten",
+    "ariaLabel": "Brotkrümel-Navigation"
   },
   "common": {
     "backToHome": "Zurück zur Startseite",
@@ -463,6 +464,14 @@
     "formulaAllInclusiveFeature2": "Catering an Bord (Platten, Buffet)",
     "formulaAllInclusiveFeature3": "Individuelle Dekoration",
     "formulaAllInclusiveFeature4": "Fotograf optional"
+  },
+  "landing": {
+    "reserve": "Reservieren",
+    "call": "Anrufen",
+    "ctaTitle": "Bereit zum Ablegen?",
+    "ctaSubtitle": "Reservieren Sie Ihre private Rundfahrt auf der Seine in nur wenigen Klicks.",
+    "ctaButton": "Jetzt reservieren",
+    "relatedTitle": "Entdecken Sie auch"
   },
   "confidentialite": {
     "backToHome": "Zurück zur Startseite",

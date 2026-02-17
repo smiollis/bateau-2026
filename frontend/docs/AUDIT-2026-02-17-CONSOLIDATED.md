@@ -44,54 +44,33 @@ Classées par impact/effort (ROI maximal) :
 ### 1. ~~Fixer 118 images manquantes articles~~ ✅ FAIT
 **Domaine** : Data Quality — Corrigé le 17/02 (slug matching + position fallback)
 
-### 2. Créer 11 images OG manquantes (SEO)
-**Domaine** : SEO
-**Impact** : Élevé (CTR social +25%)
-**Effort** : M (2h)
-**Action** : Générer les OG images 1200×630px pour landing pages Tier 2/3
-**Statut** : Backlog (nécessite design graphique)
+### 2. Créer 11 images OG manquantes (SEO) — ⏳ PARTIEL
+**Domaine** : SEO — OG fallback blog ajouté le 17/02 + priceRange corrigé + aggregateRating dynamique
+**Reste** : Générer 11 OG images 1200×630px pour landing pages Tier 2/3 (nécessite design graphique)
 
 ### 3. ~~Corriger contraste bouton .btn-gold~~ ⏭️ SKIP
 **Domaine** : Accessibilité — Compensé par le mode nuit contrasté
 
-### 4. Implémenter retry loop git push (CI/CD) 🔧 EN COURS
-**Domaine** : CI/CD
-**Impact** : Critique (race conditions)
-**Effort** : S (10 min)
-**Action** : Ajouter `git pull --rebase && git push` avec retry 3x dans workflows
+### 4. ~~Implémenter retry loop git push (CI/CD)~~ ✅ FAIT
+**Domaine** : CI/CD — Corrigé le 17/02 (retry 3x avec `git pull --rebase` dans 3 workflows)
 
 ### 5. ~~Remplacer 36 liens admin.bateau-a-paris.fr~~ ✅ FAIT
 **Domaine** : Data Quality — 54 URLs remplacées le 17/02 (fix:links)
 
-### 6. Sécuriser curl Instagram token (CI/CD) 🔧 EN COURS
-**Domaine** : CI/CD
-**Impact** : Élevé (sécurité token)
-**Effort** : S (15 min)
-**Action** : Validation réponse API + masquage token dans logs
+### 6. ~~Sécuriser curl Instagram token (CI/CD)~~ ✅ FAIT
+**Domaine** : CI/CD — Corrigé le 17/02 (Authorization header + validation JSON + masquage token)
 
-### 7. Basculer vers LazyMotion strict (Performance) 🔧 EN COURS
-**Domaine** : Performance
-**Impact** : Élevé (-20 KB bundle)
-**Effort** : M (1h)
-**Action** : Remplacer `motion` → `m` dans 37 fichiers
+### 7. ~~Basculer vers LazyMotion strict (Performance)~~ ✅ FAIT
+**Domaine** : Performance — Corrigé le 17/02 (29 composants + 7 mocks migrés `motion` → `m`, -20 KB)
 
-### 8. Ajouter useReducedMotion HeroCinemaSlideshow (Accessibilité) 🔧 EN COURS
-**Domaine** : Accessibilité
-**Impact** : Important (WCAG 2.3.1)
-**Effort** : S (15 min)
-**Action** : Conditionner animations Ken Burns avec `prefersReducedMotion`
+### 8. ~~Ajouter useReducedMotion HeroCinemaSlideshow (Accessibilité)~~ ✅ FAIT
+**Domaine** : Accessibilité — Corrigé le 17/02 (Ken Burns conditionné + scroll-behavior media query)
 
-### 9. Définir permissions GitHub Actions (CI/CD) 🔧 EN COURS
-**Domaine** : CI/CD
-**Impact** : Élevé (principe moindre privilège)
-**Effort** : S (20 min)
-**Action** : Ajouter `permissions:` explicites dans les 4 workflows
+### 9. ~~Définir permissions GitHub Actions (CI/CD)~~ ✅ FAIT
+**Domaine** : CI/CD — Corrigé le 17/02 (permissions + timeout + concurrency dans 4 workflows)
 
-### 10. Internationaliser LandingPricing.tsx (i18n) 🔧 EN COURS
-**Domaine** : i18n
-**Impact** : Élevé (visible sur toutes les landings)
-**Effort** : M (2h)
-**Action** : Créer namespace `landingPricing` et traduire 3 formules × 6 langues
+### 10. ~~Internationaliser LandingPricing.tsx (i18n)~~ ✅ FAIT
+**Domaine** : i18n — Corrigé le 17/02 (24 clés × 6 locales, namespace `landingPricing`)
 
 ---
 
