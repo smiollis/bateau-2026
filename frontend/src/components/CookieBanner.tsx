@@ -39,7 +39,7 @@ const CookieBanner = () => {
                   {t("bannerText")}{" "}
                   <Link
                     href="/confidentialite"
-                    className="text-primary font-medium hover:underline"
+                    className="text-primary font-medium hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
                   >
                     {t("privacyLink")}
                   </Link>
@@ -48,13 +48,13 @@ const CookieBanner = () => {
                 <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto shrink-0">
                   <button
                     onClick={openModal}
-                    className="border-2 border-primary text-primary font-semibold px-6 py-2 rounded-lg hover:bg-primary/5 transition-colors text-sm"
+                    className="border-2 border-primary text-primary font-semibold px-6 py-2 rounded-lg hover:bg-primary/5 transition-colors text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   >
                     {t("customize")}
                   </button>
                   <button
                     onClick={acceptAll}
-                    className="btn-gold text-white text-sm"
+                    className="btn-gold text-white text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   >
                     {t("acceptAll")}
                   </button>

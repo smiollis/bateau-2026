@@ -26,7 +26,7 @@ const variantStyles: Record<ThemeVariant, {
     cardText: "text-foreground/75",
   },
   nuit: {
-    section: "bg-[#0d1d35]",
+    section: "bg-nuit-800",
     title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100",
     subtitle: "text-blue-200/70 text-lg",
     card: "bg-white/5 backdrop-blur-sm rounded-xl p-6 lg:p-8 border border-blue-400/10 hover:border-accent/30 transition-colors text-center",

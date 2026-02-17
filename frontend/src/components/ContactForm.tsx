@@ -24,7 +24,7 @@ const ContactForm = () => {
 
   const styles = isDark
     ? {
-        section: "bg-[#0a1628]",
+        section: "bg-nuit-900",
         title: "font-heading text-3xl md:text-4xl font-semibold text-blue-100",
         text: "text-blue-200/70 text-lg",
         card: "bg-white/5 border border-blue-400/10 rounded-2xl p-8 md:p-10",

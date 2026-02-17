@@ -16,21 +16,23 @@ vi.mock("next-intl", () => ({
   useTranslations: () => (key: string) => key,
 }));
 
-const motionProxy = {
-  div: ({
-    children,
-    ...props
-  }: React.PropsWithChildren<Record<string, unknown>>) => {
-    const { initial, whileInView, viewport, transition, ...domProps } = props;
-    return <div {...domProps}>{children}</div>;
-  },
-};
-vi.mock("framer-motion", () => ({
-  motion: motionProxy,
-  m: motionProxy,
-  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
-  useReducedMotion: () => false,
-}));
+vi.mock("framer-motion", () => {
+  const proxy = {
+    div: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<Record<string, unknown>>) => {
+      const { initial, whileInView, viewport, transition, ...domProps } = props;
+      return <div {...domProps}>{children}</div>;
+    },
+  };
+  return {
+    motion: proxy,
+    m: proxy,
+    AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
+    useReducedMotion: () => false,
+  };
+});
 
 import ContactForm from "@/components/ContactForm";
 

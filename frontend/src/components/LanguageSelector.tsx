@@ -37,7 +37,7 @@ const variantDropdownStyles: Record<ThemeVariant, {
     optionActive: "text-primary",
   },
   nuit: {
-    dropdown: "bg-[#0a1628] border-gold/20",
+    dropdown: "bg-nuit-900 border-gold/20",
     option: "text-blue-100/70 hover:text-accent",
     optionActive: "text-accent",
   },
@@ -71,7 +71,7 @@ const LanguageSelector = ({ iconColor }: LanguageSelectorProps) => {
     <div className="relative" ref={langRef}>
       <button
         onClick={() => setLangOpen(!langOpen)}
-        className={`flex items-center gap-1 text-sm ${iconColor} opacity-70 hover:opacity-100 transition-opacity`}
+        className={`flex items-center gap-1 text-sm ${iconColor} opacity-70 hover:opacity-100 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm`}
         aria-expanded={langOpen}
         aria-haspopup="listbox"
       >
@@ -98,7 +98,7 @@ const LanguageSelector = ({ iconColor }: LanguageSelectorProps) => {
                     router.replace(pathname, { locale: loc });
                     setLangOpen(false);
                   }}
-                  className={`w-full px-4 py-1.5 text-sm text-left transition-colors flex items-center gap-2 ${
+                  className={`w-full px-4 py-1.5 text-sm text-left transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                     locale === loc
                       ? "font-semibold " + dropdownStyles.optionActive
                       : dropdownStyles.option

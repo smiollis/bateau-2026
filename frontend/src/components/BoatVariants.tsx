@@ -23,7 +23,7 @@ const BoatVariants = () => {
 
   const styles = isDark
     ? {
-        section: "bg-[#0a1628]",
+        section: "bg-nuit-900",
         title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100",
         subtitle: "text-accent font-heading text-lg",
         text: "text-blue-200/70 text-lg leading-relaxed",
@@ -34,7 +34,7 @@ const BoatVariants = () => {
         iconColor: "text-accent",
         cta: "btn-gold text-white",
         badge: "bg-accent text-white",
-        slideOverlay: "bg-gradient-to-t from-[#0a1628]/50 to-transparent",
+        slideOverlay: "bg-gradient-to-t from-nuit-900/50 to-transparent",
       }
     : {
         section: "bg-background",

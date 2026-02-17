@@ -32,7 +32,7 @@ const variantStyles: Record<ThemeVariant, {
     popularBadge: "bg-accent text-white",
   },
   nuit: {
-    section: "bg-[#0a1628]",
+    section: "bg-nuit-900",
     title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100",
     subtitle: "text-blue-200/70 text-lg",
     card: "bg-white/5 backdrop-blur-sm border border-blue-400/10 rounded-2xl overflow-hidden hover:border-accent/30 transition-all",
@@ -148,7 +148,7 @@ const OffersVariants = () => {
 
                 <div className="relative h-48 overflow-hidden">
                   <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw" className="object-cover transition-transform duration-500 group-hover:scale-110" />
-                  <div className={`absolute inset-0 ${variant === "nuit" ? "bg-[#0a1628]/50" : "bg-gradient-to-t from-primary/40 to-transparent"}`} />
+                  <div className={`absolute inset-0 ${variant === "nuit" ? "bg-nuit-900/50" : "bg-gradient-to-t from-primary/40 to-transparent"}`} />
                 </div>
 
                 <div className="p-6 flex flex-col flex-grow">

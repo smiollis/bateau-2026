@@ -13,7 +13,7 @@ const CaptainSection = () => {
 
   const styles = isDark
     ? {
-        section: "bg-[#0d1d35]",
+        section: "bg-nuit-800",
         title: "font-heading text-2xl md:text-3xl font-semibold text-blue-100",
         name: "font-heading text-lg font-semibold text-blue-100",
         role: "text-accent text-sm",

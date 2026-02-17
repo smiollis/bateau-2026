@@ -64,6 +64,10 @@
   --sidebar-accent-foreground: 240 5.9% 10%;
   --sidebar-border: 220 13% 91%;
   --sidebar-ring: 224 64% 33%;
+
+  /* Nuit (night) theme palette */
+  --nuit-900: #0a1628;
+  --nuit-800: #0d1d35;
 }
 
 .dark {
@@ -139,6 +143,9 @@
   --color-gold: hsl(var(--gold));
   --color-gold-light: hsl(var(--gold-light));
   --color-gold-dark: hsl(var(--gold-dark));
+
+  --color-nuit-900: var(--nuit-900);
+  --color-nuit-800: var(--nuit-800);
 
   --border-border: hsl(var(--border));
 

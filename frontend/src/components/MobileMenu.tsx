@@ -63,7 +63,7 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
               <button
                 key={item.label}
                 onClick={() => { onNavClick(item.href); onClose(); }}
-                className={`block py-2 ${styles.nav}`}
+                className={`block py-2 ${styles.nav} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm`}
               >
                 {item.label}
               </button>
@@ -75,7 +75,7 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
                     <button
                       key={loc}
                       onClick={() => { router.replace(pathname, { locale: loc }); onClose(); }}
-                      className={`px-2 py-1 text-xs rounded transition-colors flex items-center gap-1 ${
+                      className={`px-2 py-1 text-xs rounded transition-colors flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                         locale === loc
                           ? "font-bold " + styles.iconColor
                           : mobileStyles.localeInactive

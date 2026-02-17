@@ -147,7 +147,7 @@ const CookieModal = ({
           >
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
               aria-label={t("close")}
             >
               <X className="h-5 w-5" />
@@ -192,13 +192,13 @@ const CookieModal = ({
             <div className="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 mt-6">
               <button
                 onClick={onRejectAll}
-                className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors px-4 py-2"
+                className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors px-4 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
               >
                 {t("rejectAll")}
               </button>
               <button
                 onClick={handleSave}
-                className="btn-gold text-white w-full sm:w-auto text-center"
+                className="btn-gold text-white w-full sm:w-auto text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg"
               >
                 {t("saveChoices")}
               </button>

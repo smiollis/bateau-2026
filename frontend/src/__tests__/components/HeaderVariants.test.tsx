@@ -21,28 +21,30 @@ vi.mock("next-intl", () => ({
   useLocale: () => "fr",
 }));
 
-const motionProxy = {
-  div: ({
-    children,
-    ...props
-  }: React.PropsWithChildren<Record<string, unknown>>) => {
-    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-    return <div {...domProps}>{children}</div>;
-  },
-  ul: ({
-    children,
-    ...props
-  }: React.PropsWithChildren<Record<string, unknown>>) => {
-    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-    return <ul {...domProps}>{children}</ul>;
-  },
-};
-vi.mock("framer-motion", () => ({
-  motion: motionProxy,
-  m: motionProxy,
-  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
-  useReducedMotion: () => false,
-}));
+vi.mock("framer-motion", () => {
+  const proxy = {
+    div: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<Record<string, unknown>>) => {
+      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+      return <div {...domProps}>{children}</div>;
+    },
+    ul: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<Record<string, unknown>>) => {
+      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+      return <ul {...domProps}>{children}</ul>;
+    },
+  };
+  return {
+    motion: proxy,
+    m: proxy,
+    AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
+    useReducedMotion: () => false,
+  };
+});
 
 vi.mock("next/image", () => ({
   default: (props: Record<string, unknown>) => <img {...props} />,

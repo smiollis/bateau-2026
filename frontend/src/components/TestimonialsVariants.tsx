@@ -18,7 +18,7 @@ const TestimonialsVariants = () => {
 
   const styles = isDark
     ? {
-        section: "bg-[#0d1d35]",
+        section: "bg-nuit-800",
         title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100",
         subtitle: "text-blue-200/70",
         card: "bg-white/5 backdrop-blur-sm border border-blue-400/10 rounded-2xl p-8 md:p-10",

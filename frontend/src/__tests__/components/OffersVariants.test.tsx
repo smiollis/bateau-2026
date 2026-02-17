@@ -15,20 +15,22 @@ vi.mock("next-intl", () => ({
   },
 }));
 
-const motionProxy = {
-  div: ({
-    children,
-    ...props
-  }: React.PropsWithChildren<Record<string, unknown>>) => {
-    const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
-    return <div {...domProps}>{children}</div>;
-  },
-};
-vi.mock("framer-motion", () => ({
-  motion: motionProxy,
-  m: motionProxy,
-  useReducedMotion: () => false,
-}));
+vi.mock("framer-motion", () => {
+  const proxy = {
+    div: ({
+      children,
+      ...props
+    }: React.PropsWithChildren<Record<string, unknown>>) => {
+      const { initial, animate, exit, transition, whileInView, viewport, ...domProps } = props;
+      return <div {...domProps}>{children}</div>;
+    },
+  };
+  return {
+    motion: proxy,
+    m: proxy,
+    useReducedMotion: () => false,
+  };
+});
 
 vi.mock("next/image", () => ({
   default: (props: Record<string, unknown>) => <img {...props} />,

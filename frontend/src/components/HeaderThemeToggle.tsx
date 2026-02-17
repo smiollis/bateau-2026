@@ -15,7 +15,7 @@ const HeaderThemeToggle = ({ className }: HeaderThemeToggleProps) => {
   return (
     <button
       onClick={() => setVariant(variant === "nuit" ? "classic" : "nuit")}
-      className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors ${
+      className={`flex items-center justify-center w-9 h-9 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
         variant === "nuit"
           ? "bg-accent/20 text-accent hover:bg-accent/30"
           : "bg-primary/10 text-primary hover:bg-primary/20"

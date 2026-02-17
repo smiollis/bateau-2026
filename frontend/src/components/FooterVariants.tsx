@@ -87,10 +87,10 @@ const FooterVariants = () => {
               {t("description")}
             </p>
             <div className="flex gap-3">
-              <a href="https://www.instagram.com/bateau_a_paris/" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${styles.icon} flex items-center justify-center transition-colors`} aria-label={t("instagramLabel")}>
+              <a href="https://www.instagram.com/bateau_a_paris/" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${styles.icon} flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent`} aria-label={t("instagramLabel")}>
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="https://www.facebook.com/profile.php?id=61557848940884" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${styles.icon} flex items-center justify-center transition-colors`} aria-label={t("facebookLabel")}>
+              <a href="https://www.facebook.com/profile.php?id=61557848940884" target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-full ${styles.icon} flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent`} aria-label={t("facebookLabel")}>
                 <Facebook className="w-5 h-5" />
               </a>
             </div>
@@ -101,7 +101,7 @@ const FooterVariants = () => {
             <ul className="space-y-3">
               {navItems.map((item) => (
                 <li key={item.label}>
-                  <Link href={item.to} onClick={(e) => handleNavClick(item.to, e)} className={styles.link}>{item.label}</Link>
+                  <Link href={item.to} onClick={(e) => handleNavClick(item.to, e)} className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{item.label}</Link>
                 </li>
               ))}
             </ul>
@@ -116,11 +116,11 @@ const FooterVariants = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0" />
-                <a href="tel:+33670342543" className={styles.link}>+33 6 70 34 25 43</a>
+                <a href="tel:+33670342543" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>+33 6 70 34 25 43</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
-                <a href="mailto:capitaine@bateau-a-paris.fr" className={styles.link}>capitaine@bateau-a-paris.fr</a>
+                <a href="mailto:capitaine@bateau-a-paris.fr" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>capitaine@bateau-a-paris.fr</a>
               </li>
             </ul>
           </div>
@@ -128,11 +128,11 @@ const FooterVariants = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">{t("infoTitle")}</h4>
             <ul className="space-y-3">
-              <li><Link href="/mentions-legales" className={styles.link}>{t("mentionsLegales")}</Link></li>
-              <li><Link href="/cgv" className={styles.link}>{t("cgv")}</Link></li>
-              <li><Link href="/confidentialite" className={styles.link}>{t("confidentialite")}</Link></li>
-              <li><Link href="/faq" className={styles.link}>{t("faq")}</Link></li>
-              <li><button onClick={openCookieSettings} className={styles.link}>{t("cookieSettings")}</button></li>
+              <li><Link href="/mentions-legales" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("mentionsLegales")}</Link></li>
+              <li><Link href="/cgv" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("cgv")}</Link></li>
+              <li><Link href="/confidentialite" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("confidentialite")}</Link></li>
+              <li><Link href="/faq" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("faq")}</Link></li>
+              <li><button onClick={openCookieSettings} className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("cookieSettings")}</button></li>
             </ul>
           </div>
         </div>

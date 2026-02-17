@@ -18,14 +18,14 @@ const GalleryPreview = () => {
   const t = useTranslations("gallery");
   const prefersReducedMotion = useReducedMotion();
 
-  const sectionBg = isDark ? "bg-[#0d1d35]" : "bg-secondary/30";
+  const sectionBg = isDark ? "bg-nuit-800" : "bg-secondary/30";
   const titleClass = isDark
     ? "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100"
     : "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-primary";
   const subtitleClass = isDark
     ? "text-blue-200/70 text-lg"
     : "text-muted-foreground text-lg";
-  const fadeBg = isDark ? "from-[#0d1d35]" : "from-secondary/30";
+  const fadeBg = isDark ? "from-nuit-800" : "from-secondary/30";
 
   return (
     <section className={`section-padding ${sectionBg}`} id="galerie">

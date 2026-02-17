@@ -17,7 +17,7 @@ const HeroVariants = () => {
     ? {
         titleClass: "font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight text-white",
         subtitleClass: "text-lg md:text-xl text-blue-200/90",
-        overlayClass: "bg-gradient-to-b from-[#0a1628]/70 via-[#0a1628]/50 to-[#0a1628]/80",
+        overlayClass: "bg-gradient-to-b from-nuit-900/70 via-nuit-900/50 to-nuit-900/80",
       }
     : {
         titleClass: "font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight",

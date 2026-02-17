@@ -14,7 +14,7 @@ const CTAVariants = () => {
 
   const styles = isDark
     ? {
-        overlay: "bg-gradient-to-b from-[#0a1628]/80 via-[#0a1628]/70 to-[#0a1628]/90",
+        overlay: "bg-gradient-to-b from-nuit-900/80 via-nuit-900/70 to-nuit-900/90",
         title: "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100",
         text: "text-blue-200/80 text-lg md:text-xl",
         cta: "btn-gold text-white text-lg px-12 py-6 h-auto",

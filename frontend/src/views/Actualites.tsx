@@ -252,7 +252,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
         </section>
 
         {/* Instagram Section */}
-        <section className={`section-padding ${isDark ? "bg-[#0d1d35]" : "bg-secondary/30"}`}>
+        <section className={`section-padding ${isDark ? "bg-nuit-800" : "bg-secondary/30"}`}>
           <div className="container-custom">
             <m.div
               initial={{ opacity: 0, y: 20 }}

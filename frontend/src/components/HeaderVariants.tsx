@@ -30,11 +30,11 @@ const variantStyles: Record<ThemeVariant, {
     iconColor: "text-primary",
   },
   nuit: {
-    header: "bg-[#0a1628]/95 backdrop-blur-md border-b border-gold/20",
+    header: "bg-nuit-900/95 backdrop-blur-md border-b border-gold/20",
     logoClass: "h-14 md:h-16 w-auto",
     nav: "text-sm font-medium text-blue-100/80 hover:text-accent transition-colors duration-200",
     cta: "btn-gold text-white",
-    mobileMenuBg: "bg-[#0a1628]",
+    mobileMenuBg: "bg-nuit-900",
     iconColor: "text-accent",
   },
 };
@@ -92,7 +92,7 @@ const HeaderVariants = () => {
       <div className="container-custom">
         <nav className="flex items-center justify-between h-16 md:h-20" aria-label={t("mainNav")}>
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm">
             <Image
               src={logo}
               alt="Un Bateau à Paris"
@@ -106,7 +106,7 @@ const HeaderVariants = () => {
               <button
                 key={item.label}
                 onClick={() => handleNavClick(item.href)}
-                className={styles.nav}
+                className={`${styles.nav} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm`}
               >
                 {item.label}
               </button>
@@ -124,7 +124,7 @@ const HeaderVariants = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
             onClick={() => setIsOpen(!isOpen)}
             aria-label={t("toggleMenu")}
             aria-expanded={isOpen}

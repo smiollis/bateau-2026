@@ -41,7 +41,7 @@ const variantStyles: Record<
     cardTitle: "font-heading text-sm lg:text-base font-semibold text-primary",
   },
   nuit: {
-    section: "bg-[#0d1d35]",
+    section: "bg-nuit-800",
     title:
       "font-heading text-3xl md:text-4xl lg:text-5xl font-semibold text-blue-100",
     subtitle: "text-blue-200/70 text-lg",

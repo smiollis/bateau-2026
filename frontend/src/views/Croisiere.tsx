@@ -28,7 +28,7 @@ const Croisiere = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Page header */}
-      <div className={`py-6 pt-24 ${isDark ? "bg-[#0a1628] text-blue-100" : "bg-primary text-primary-foreground"}`}>
+      <div className={`py-6 pt-24 ${isDark ? "bg-nuit-900 text-blue-100" : "bg-primary text-primary-foreground"}`}>
         <div className="container-custom">
           <Link href="/" className={`inline-flex items-center gap-2 ${isDark ? "text-blue-200/70 hover:text-blue-100" : "text-primary-foreground/70 hover:text-primary-foreground"} transition-colors mb-4`}>
             <ArrowLeft className="w-4 h-4" />
@@ -96,7 +96,7 @@ const Croisiere = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.9 }}
                       className={`absolute z-50 w-56 rounded-xl shadow-2xl border p-4 ${
-                        isDark ? "bg-[#0d1d35] border-blue-400/20 text-blue-100" : "bg-white border-border"
+                        isDark ? "bg-nuit-800 border-blue-400/20 text-blue-100" : "bg-white border-border"
                       } ${
                         landmark.tooltipSide === "top" ? "bottom-full mb-8 left-1/2 -translate-x-1/2" :
                         landmark.tooltipSide === "bottom" ? "top-full mt-8 left-1/2 -translate-x-1/2" :
@@ -138,7 +138,7 @@ const Croisiere = () => {
       </section>
 
       {/* Itinerary Timeline */}
-      <section className={`py-12 md:py-16 ${isDark ? "bg-[#0d1d35]" : "bg-secondary/30"}`}>
+      <section className={`py-12 md:py-16 ${isDark ? "bg-nuit-800" : "bg-secondary/30"}`}>
         <div className="container-custom">
           <div className="text-center mb-12">
             <h2 className="font-heading text-2xl md:text-3xl font-semibold text-primary mb-2">
@@ -194,7 +194,7 @@ const Croisiere = () => {
       <OccasionsGrid />
 
       {/* CTA */}
-      <section className={`py-16 text-center ${isDark ? "bg-[#0a1628] text-blue-100" : "bg-primary text-primary-foreground"}`}>
+      <section className={`py-16 text-center ${isDark ? "bg-nuit-900 text-blue-100" : "bg-primary text-primary-foreground"}`}>
         <div className="container-custom">
           <h2 className="font-heading text-2xl md:text-3xl font-semibold mb-4">
             {t("ctaTitle")}
