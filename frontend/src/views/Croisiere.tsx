@@ -206,7 +206,7 @@ const Croisiere = () => {
             <Button className="btn-gold text-white" size="lg" asChild>
               <Link href="/reservation">{t("ctaReserve")}</Link>
             </Button>
-            <Button variant="outline" size="lg" className={`${isDark ? "border-blue-300/30 text-blue-100 hover:bg-white/10" : "border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"}`} asChild>
+            <Button variant="outline" size="lg" className={`bg-transparent ${isDark ? "border-blue-300/30 text-blue-100 hover:bg-white/10" : "border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"}`} asChild>
               <Link href="/#tarifs">{t("ctaTarifs")}</Link>
             </Button>
           </div>

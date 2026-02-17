@@ -51,7 +51,7 @@ const LandingCTA = ({
           <Button asChild size="lg" className="btn-gold text-white text-lg px-8">
             <Link href={ctaHref}>{ctaText}</Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10">
+          <Button asChild variant="outline" size="lg" className="bg-transparent border-white/30 text-white hover:bg-white/10">
             <a href="tel:+33670342543">
               <Phone className="w-4 h-4 mr-2" />
               06 70 34 25 43

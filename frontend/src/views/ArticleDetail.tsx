@@ -74,6 +74,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
               fill
               sizes="100vw"
               priority
+              quality={85}
               className="object-cover"
             />
           </motion.div>
@@ -122,10 +123,11 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
             className={`prose prose-lg max-w-none
               prose-headings:font-heading prose-headings:text-primary
               prose-a:text-primary prose-a:underline hover:prose-a:text-primary/80
-              prose-strong:text-foreground
-              prose-p:text-muted-foreground prose-p:leading-relaxed
-              prose-li:text-muted-foreground
-              ${isDark ? "prose-invert" : ""}`}
+              prose-p:leading-relaxed
+              ${isDark
+                ? "prose-invert prose-strong:text-blue-100 prose-p:text-blue-200/70 prose-li:text-blue-200/70 prose-headings:text-blue-100"
+                : "prose-strong:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground"
+              }`}
             dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.content) }}
           />
         </article>

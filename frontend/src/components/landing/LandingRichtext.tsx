@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 
 interface LandingRichtextProps {
   title: string;
@@ -9,6 +10,7 @@ interface LandingRichtextProps {
 
 const LandingRichtext = ({ title, content }: LandingRichtextProps) => {
   const prefersReducedMotion = useReducedMotion();
+  const { isDark } = useThemeVariant();
 
   return (
     <section className="section-padding">
@@ -18,7 +20,7 @@ const LandingRichtext = ({ title, content }: LandingRichtextProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : undefined }}
-          className="font-heading text-3xl md:text-4xl font-semibold text-primary mb-6"
+          className={`font-heading text-3xl md:text-4xl font-semibold mb-6 ${isDark ? "text-blue-100" : "text-primary"}`}
         >
           {title}
         </motion.h2>
@@ -27,7 +29,10 @@ const LandingRichtext = ({ title, content }: LandingRichtextProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : undefined }}
-          className="prose prose-lg text-muted-foreground max-w-none"
+          className={`prose prose-lg max-w-none ${isDark
+            ? "prose-invert prose-strong:text-blue-100 prose-p:text-blue-200/70 prose-li:text-blue-200/70"
+            : "text-muted-foreground"
+          }`}
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>
