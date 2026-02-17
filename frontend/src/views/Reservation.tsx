@@ -142,7 +142,7 @@ const Reservation = () => {
               {iframeState !== "error" && (
                 <iframe
                   ref={iframeRef}
-                  src={`${process.env.NEXT_PUBLIC_WP_URL}/reservation-embed`}
+                  src={`${process.env.NEXT_PUBLIC_WP_URL}/reservation-embed/`}
                   style={{
                     height: `${iframeHeight}px`,
                     display: iframeState === "loaded" ? "block" : "none",

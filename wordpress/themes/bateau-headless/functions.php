@@ -118,8 +118,9 @@ add_action('wp_enqueue_scripts', function () {
 }, 100);
 
 /**
- * Allow iframe embedding for reservation-embed page.
- * WP-Rocket handles Cache-Control headers for page caching.
+ * Allow iframe embedding and enable caching for reservation-embed page.
+ * Bookly renders client-side via AJAX, so the HTML shell is safe to cache.
+ * We close the PHP session early so WP-Rocket doesn't skip caching.
  */
 add_action('template_redirect', function () {
     if (!bateau_is_reservation_embed()) {
@@ -127,6 +128,12 @@ add_action('template_redirect', function () {
     }
     // Override X-Frame-Options so Next.js can embed this page as iframe
     header('X-Frame-Options: ALLOWALL');
+
+    // Close any PHP session started by Bookly so WP-Rocket can cache this page.
+    // Bookly form works entirely via AJAX — the initial HTML is static.
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        session_write_close();
+    }
 });
 
 /**
