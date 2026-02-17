@@ -1,5 +1,6 @@
-# SQL dumps
+# SQL dumps & BDD
 *.sql
+bdd-sql/
 
 # WordPress zip packages (installés via Plesk)
 wordpress/plugins/*.zip
@@ -7,6 +8,12 @@ wordpress/themes/*.zip
 
 # SVG sources (logos originaux)
 /*.svg
+
+# Credentials (NE JAMAIS committer)
+credentials.md
+
+# Briefs projet (docs internes, pas dans le repo)
+brief/
 
 # Fichiers temporaires
 liste_tables.txt
