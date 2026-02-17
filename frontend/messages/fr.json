@@ -138,7 +138,8 @@
     "errorValidation": "Veuillez vérifier les informations saisies.",
     "errorServer": "Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.",
     "successTitle": "Message envoyé !",
-    "successDesc": "Nous vous répondrons dans les plus brefs délais."
+    "successDesc": "Merci pour votre message. Nous vous répondrons dans les plus brefs délais.",
+    "sendAnother": "Envoyer un autre message"
   },
   "footer": {
     "brandName": "Un Bateau à Paris",

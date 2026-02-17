@@ -138,7 +138,8 @@
     "errorValidation": "Si prega di verificare le informazioni inserite.",
     "errorServer": "Si è verificato un errore. Si prega di riprovare o di contattarci telefonicamente.",
     "successTitle": "Messaggio inviato!",
-    "successDesc": "Vi risponderemo il prima possibile."
+    "successDesc": "Grazie per il vostro messaggio. Vi risponderemo il prima possibile.",
+    "sendAnother": "Invia un altro messaggio"
   },
   "footer": {
     "brandName": "Un Bateau à Paris",

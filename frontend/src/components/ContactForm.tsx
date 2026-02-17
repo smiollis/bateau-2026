@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
-import { Send, Phone, Mail, MapPin } from "lucide-react";
+import { Send, Phone, Mail, MapPin, CheckCircle } from "lucide-react";
 
 const contactInfo = [
   { icon: Phone, label: "+33 6 70 34 25 43" },
@@ -51,6 +51,7 @@ const ContactForm = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [honeypot, setHoneypot] = useState("");
   const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,8 +77,8 @@ const ContactForm = () => {
         }
         return;
       }
-      toast({ title: t("successTitle"), description: t("successDesc") });
       setForm({ name: "", email: "", phone: "", message: "" });
+      setSent(true);
     } catch {
       toast({ title: t("errorServer"), variant: "destructive" });
     } finally {
@@ -109,6 +110,20 @@ const ContactForm = () => {
             viewport={{ once: true }}
             transition={{ duration: prefersReducedMotion ? 0 : undefined }}
           >
+            {sent ? (
+              <div className={`${styles.card} flex flex-col items-center justify-center text-center min-h-[400px] gap-4`} role="status">
+                <CheckCircle className="w-16 h-16 text-green-500" />
+                <h3 className={`${styles.title} !text-2xl`}>{t("successTitle")}</h3>
+                <p className={`${styles.text} max-w-md`}>{t("successDesc")}</p>
+                <Button
+                  variant="outline"
+                  className="mt-4"
+                  onClick={() => setSent(false)}
+                >
+                  {t("sendAnother")}
+                </Button>
+              </div>
+            ) : (
             <form onSubmit={handleSubmit} className={styles.card}>
               {/* Honeypot antispam — invisible pour les humains */}
               <input
@@ -180,6 +195,7 @@ const ContactForm = () => {
                 <Send className="w-4 h-4 ml-2" />
               </Button>
             </form>
+            )}
           </m.div>
 
           {/* Contact Info */}
