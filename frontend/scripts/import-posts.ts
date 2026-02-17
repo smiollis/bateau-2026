@@ -1,5 +1,8 @@
 /**
- * Import WordPress posts to local JSON file.
+ * Import WordPress posts to local JSON files (all locales).
+ *
+ * Fetches posts for 6 locales via Polylang ?lang= parameter
+ * and writes one JSON file per locale under src/data/.
  *
  * Usage:
  *   npx tsx scripts/import-posts.ts
@@ -10,7 +13,24 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
-const WP_API = 'https://bateau-a-paris.fr/wp-json';
+const WP_API =
+  process.env.NEXT_PUBLIC_WP_API_URL?.replace(/\/+$/, '') ||
+  'https://admin.bateau-a-paris.fr/wp-json';
+
+/**
+ * Locale configuration.
+ *   key   = internal locale code
+ *   lang  = Polylang ?lang= value (lowercase)
+ *   file  = output filename under src/data/
+ */
+const LOCALES: { key: string; lang: string; file: string }[] = [
+  { key: 'fr',    lang: 'fr',    file: 'posts.json' },
+  { key: 'en',    lang: 'en',    file: 'posts-en.json' },
+  { key: 'es',    lang: 'es',    file: 'posts-es.json' },
+  { key: 'it',    lang: 'it',    file: 'posts-it.json' },
+  { key: 'de',    lang: 'de',    file: 'posts-de.json' },
+  { key: 'pt-BR', lang: 'pt-br', file: 'posts-pt-BR.json' },
+];
 
 interface BlogPost {
   id: number;
@@ -91,12 +111,12 @@ function cleanContent(html: string): string {
   return blocks.join('\n');
 }
 
-async function fetchAllPosts(): Promise<BlogPost[]> {
+async function fetchAllPosts(lang: string): Promise<BlogPost[]> {
   const allPosts: BlogPost[] = [];
   let page = 1;
 
   while (true) {
-    const url = `${WP_API}/wp/v2/posts?_embed=wp:featuredmedia,wp:term&per_page=100&page=${page}`;
+    const url = `${WP_API}/wp/v2/posts?lang=${lang}&_embed=wp:featuredmedia,wp:term&per_page=100&page=${page}`;
     console.log(`  Fetching page ${page}...`);
 
     const res = await fetch(url);
@@ -133,21 +153,46 @@ async function fetchAllPosts(): Promise<BlogPost[]> {
 // --- Main ---
 
 async function main() {
-  console.log('Importing WordPress posts...\n');
-
-  const posts = await fetchAllPosts();
-  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  console.log('Importing WordPress posts (all locales)...\n');
+  console.log(`WP API: ${WP_API}\n`);
 
   const __dirname = dirname(fileURLToPath(import.meta.url));
-  const outPath = resolve(__dirname, '../src/data/posts.json');
-  mkdirSync(dirname(outPath), { recursive: true });
-  writeFileSync(outPath, JSON.stringify(posts, null, 2), 'utf-8');
+  const dataDir = resolve(__dirname, '../src/data');
+  mkdirSync(dataDir, { recursive: true });
 
-  const categories = [...new Set(posts.map((p) => p.category).filter(Boolean))];
-  const totalContentSize = posts.reduce((sum, p) => sum + p.content.length, 0);
-  console.log(`\nDone! ${posts.length} posts imported to src/data/posts.json`);
-  console.log(`Categories: ${categories.join(', ')}`);
-  console.log(`Total content size: ${(totalContentSize / 1024).toFixed(1)} KB`);
+  const summary: { locale: string; count: number; file: string }[] = [];
+
+  for (const locale of LOCALES) {
+    console.log(`[${locale.key}] Fetching posts (lang=${locale.lang})...`);
+
+    try {
+      const posts = await fetchAllPosts(locale.lang);
+      posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      const outPath = resolve(dataDir, locale.file);
+      writeFileSync(outPath, JSON.stringify(posts, null, 2), 'utf-8');
+
+      summary.push({ locale: locale.key, count: posts.length, file: locale.file });
+      console.log(`[${locale.key}] ${posts.length} posts -> ${locale.file}\n`);
+    } catch (err: any) {
+      console.error(`[${locale.key}] Failed: ${err.message}\n`);
+      summary.push({ locale: locale.key, count: 0, file: locale.file });
+    }
+  }
+
+  // --- Summary ---
+  console.log('='.repeat(45));
+  console.log('Import summary:');
+  console.log('-'.repeat(45));
+  let total = 0;
+  for (const s of summary) {
+    const status = s.count > 0 ? `${s.count} posts` : 'FAILED';
+    console.log(`  ${s.locale.padEnd(6)} -> ${s.file.padEnd(20)} ${status}`);
+    total += s.count;
+  }
+  console.log('-'.repeat(45));
+  console.log(`  Total: ${total} posts across ${summary.filter((s) => s.count > 0).length} locales`);
+  console.log('='.repeat(45));
 }
 
 main().catch((err) => {

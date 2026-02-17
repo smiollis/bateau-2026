@@ -30,8 +30,8 @@
 ### [next] Phase 7 : Bascule DNS + Config Vercel
 
 #### Bascule DNS
-- [ ] Configurer projet Vercel (import repo, variables d'env, domaine)
-- [ ] Pointer DNS `bateau-a-paris.fr` → Vercel (front Next.js)
+- [x] Configurer projet Vercel (import repo, variables d'env, domaine)
+- [x] Pointer DNS `bateau-a-paris.fr` → Vercel (front Next.js)
 - [ ] Verifier que `admin.bateau-a-paris.fr` reste sur serveur OVH (WordPress headless)
 - [ ] Tester toutes les pages post-bascule (regression)
 - [ ] Crawl test : verifier 0 erreurs 404 sur les anciennes URLs
@@ -61,9 +61,10 @@
 
 ### Automatisation (crons)
 
-- [ ] Cron import articles (GitHub Actions — quotidien ou webhook `save_post` → dispatch)
-- [ ] Cron avis Google (GitHub Actions — hebdomadaire)
-- [ ] Cron refresh token Instagram (tous les 50 jours)
+- [x] Cron import articles (GitHub Actions — quotidien + webhook `save_post` → dispatch)
+- [x] Cron avis Google (GitHub Actions — hebdomadaire, lundi 06:00 UTC)
+- [x] Cron refresh token Instagram (1er et 15 du mois + auto-update secret GitHub)
+- [x] Import articles multilingue (6 locales : FR, EN, ES, IT, DE, PT-BR)
 
 ---
 
@@ -86,8 +87,9 @@
 - [ ] Validation client finale + configuration domaine
 
 #### Data pipeline
-- [ ] Migration page liste articles (`/actualites`) vers API WP live + fallback JSON statique (pattern identique aux landing pages — `getPosts(locale)` existe deja dans `client.ts`)
-- [ ] Automatiser `import-posts` via GitHub Actions (cron quotidien ou webhook `save_post` → dispatch)
+- [x] Migration page liste articles (`/actualites`) vers API WP live + fallback JSON statique (pattern identique aux landing pages — `getPosts(locale)` existe deja dans `client.ts`)
+- [x] Automatiser `import-posts` via GitHub Actions (cron quotidien + webhook `save_post` → dispatch)
+- [x] Import multilingue 6 locales (posts.json, posts-en/es/it/de/pt-BR.json)
 
 #### Qualite (basse priorite)
 - [ ] Middleware next-intl → proxy (attente API compatible)

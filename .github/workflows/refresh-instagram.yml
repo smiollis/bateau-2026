@@ -1,0 +1,54 @@
+name: Refresh Instagram Token & Import
+
+on:
+  schedule:
+    - cron: '0 8 1,15 * *'  # 1st and 15th of each month at 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  refresh-and-import:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+
+      - name: Refresh Instagram long-lived token
+        id: refresh
+        run: |
+          RESPONSE=$(curl -sf "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${{ secrets.INSTAGRAM_ACCESS_TOKEN }}")
+          NEW_TOKEN=$(echo "$RESPONSE" | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8');console.log(JSON.parse(d).access_token)")
+          EXPIRES=$(echo "$RESPONSE" | node -e "const d=require('fs').readFileSync('/dev/stdin','utf8');console.log(JSON.parse(d).expires_in)")
+          echo "::add-mask::$NEW_TOKEN"
+          echo "new_token=$NEW_TOKEN" >> "$GITHUB_OUTPUT"
+          echo "Token refreshed — expires in $((EXPIRES / 86400)) days"
+
+      - name: Update GitHub secret via gh CLI
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          cd ..
+          echo "${{ steps.refresh.outputs.new_token }}" | gh secret set INSTAGRAM_ACCESS_TOKEN
+
+      - name: Import Instagram posts
+        run: npm run import:instagram
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ steps.refresh.outputs.new_token }}
+
+      - name: Commit and push if changed
+        run: |
+          cd ..
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add frontend/src/data/instagram.json frontend/public/images/instagram/
+          git diff --staged --quiet || git commit -m "chore: refresh Instagram token + import $(date -u +%Y-%m-%d)"
+          git push

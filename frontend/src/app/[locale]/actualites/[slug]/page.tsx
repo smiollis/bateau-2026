@@ -9,33 +9,21 @@ import postsPtBR from '@/data/posts-pt-BR.json';
 import { getAlternates, getOgLocale } from '@/lib/metadata';
 import { locales } from '@/i18n/routing';
 import ArticleDetail from '@/views/ArticleDetail';
-import { getPost as wpGetPost } from '@/lib/wordpress/client';
-import { transformToPost } from '@/lib/wordpress/transformers';
 import type { BlogPost } from '@/lib/wordpress/transformers';
 
-function getPostsByLocale(locale: string) {
-  switch (locale) {
-    case 'en': return postsEn;
-    case 'es': return postsEs;
-    case 'it': return postsIt;
-    case 'de': return postsDe;
-    case 'pt-BR': return postsPtBR;
-    default: return postsFr;
-  }
-}
+// Static JSON — refreshed by GitHub Actions cron + WP webhook
+const postsMap: Record<string, typeof postsFr> = {
+  fr: postsFr,
+  en: postsEn,
+  es: postsEs,
+  it: postsIt,
+  de: postsDe,
+  "pt-BR": postsPtBR,
+};
 
-/**
- * Fetch a single post: API first, then static JSON fallback.
- */
-async function fetchPost(slug: string, locale: string): Promise<BlogPost | undefined> {
-  try {
-    const wp = await wpGetPost(slug, locale);
-    if (wp) return transformToPost(wp);
-  } catch {
-    // API unavailable — fall through to static data
-  }
-  const allPosts = getPostsByLocale(locale);
-  return allPosts.find((p) => p.slug === slug);
+function getPost(slug: string, locale: string): BlogPost | undefined {
+  const posts = postsMap[locale] ?? postsFr;
+  return posts.find((p) => p.slug === slug);
 }
 
 export function generateStaticParams() {
@@ -50,7 +38,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = await fetchPost(slug, locale);
+  const post = getPost(slug, locale);
   if (!post) return {};
 
   const seoTitle = post.seo?.title || post.title;
@@ -78,7 +66,7 @@ export default async function ArticlePage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const post = await fetchPost(slug, locale);
+  const post = getPost(slug, locale);
   if (!post) notFound();
 
   const seoTitle = post.seo?.title || post.title;

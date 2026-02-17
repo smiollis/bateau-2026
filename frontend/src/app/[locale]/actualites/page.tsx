@@ -4,10 +4,8 @@ import { getAlternates, getOgLocale } from '@/lib/metadata';
 import { locales } from '@/i18n/routing';
 import Page from '@/views/Actualites';
 import type { PostSummary } from '@/views/Actualites';
-import { getPosts } from '@/lib/wordpress/client';
-import { transformToPost } from '@/lib/wordpress/transformers';
 
-// Fallback JSON (used when WP API is unavailable)
+// Static JSON — refreshed by GitHub Actions cron + WP webhook
 import postsFr from "@/data/posts.json";
 import postsEn from "@/data/posts-en.json";
 import postsEs from "@/data/posts-es.json";
@@ -15,7 +13,7 @@ import postsIt from "@/data/posts-it.json";
 import postsDe from "@/data/posts-de.json";
 import postsPtBR from "@/data/posts-pt-BR.json";
 
-const fallbackMap: Record<string, typeof postsFr> = {
+const postsMap: Record<string, typeof postsFr> = {
   fr: postsFr,
   en: postsEn,
   es: postsEs,
@@ -49,18 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function RouteWrapper({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-
-  let posts: PostSummary[];
-  try {
-    // API-first: fetch WP REST with ISR (1h cache + webhook revalidation)
-    const wpPosts = await getPosts(locale);
-    const transformed = wpPosts.map(transformToPost);
-    posts = stripContent(transformed);
-  } catch {
-    // Fallback: static JSON if API is unavailable
-    const fallback = fallbackMap[locale] ?? postsFr;
-    posts = stripContent(fallback);
-  }
+  const posts = stripContent(postsMap[locale] ?? postsFr);
 
   return <Page posts={posts} />;
 }
