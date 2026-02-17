@@ -26,7 +26,7 @@ const variantStyles: Record<ThemeVariant, {
     copyright: "text-primary-foreground/60",
   },
   nuit: {
-    footer: "bg-[#060f1e] text-blue-100",
+    footer: "bg-nuit-950 text-blue-100",
     title: "font-heading text-2xl font-semibold text-blue-100",
     text: "text-blue-200/60",
     link: "text-blue-200/60 hover:text-accent transition-colors",

@@ -66,6 +66,7 @@
   --sidebar-ring: 224 64% 33%;
 
   /* Nuit (night) theme palette */
+  --nuit-950: #060f1e;
   --nuit-900: #0a1628;
   --nuit-800: #0d1d35;
 }
@@ -144,6 +145,7 @@
   --color-gold-light: hsl(var(--gold-light));
   --color-gold-dark: hsl(var(--gold-dark));
 
+  --color-nuit-950: var(--nuit-950);
   --color-nuit-900: var(--nuit-900);
   --color-nuit-800: var(--nuit-800);
 
@@ -198,6 +200,11 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
+.btn-gold:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--gold));
+}
+
 /* Premium button outline style */
 .btn-gold-outline {
   background: transparent;
@@ -215,6 +222,11 @@ h1, h2, h3, h4, h5, h6 {
   background: hsl(var(--gold));
   color: #fff;
   transform: scale(1.05);
+}
+
+.btn-gold-outline:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--gold));
 }
 
 /* Card hover effect */

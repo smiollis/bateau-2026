@@ -60,7 +60,26 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        headers,
+        headers: [
+          ...headers,
+          // Preconnect hints for critical external origins
+          {
+            key: "Link",
+            value: "<https://admin.bateau-a-paris.fr>; rel=preconnect",
+          },
+          {
+            key: "Link",
+            value: "<https://fonts.googleapis.com>; rel=preconnect",
+          },
+          {
+            key: "Link",
+            value: "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
+          },
+          {
+            key: "Link",
+            value: "<https://www.googletagmanager.com>; rel=dns-prefetch",
+          },
+        ],
       },
       // Cache static assets aggressively (fonts, images, JS/CSS bundles)
       {
@@ -74,6 +93,16 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // Cache font files aggressively
+      {
+        source: "/fonts/:path*",
         headers: [
           {
             key: "Cache-Control",

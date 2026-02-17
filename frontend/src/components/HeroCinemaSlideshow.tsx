@@ -9,9 +9,9 @@ function nextImageUrl(src: string, width: number, quality = 75): string {
   return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${quality}`;
 }
 
-function makeSrcSet(src: string): string {
+function makeSrcSet(src: string, quality = 75): string {
   return [640, 1080, 1920]
-    .map((w) => `${nextImageUrl(src, w)} ${w}w`)
+    .map((w) => `${nextImageUrl(src, w, quality)} ${w}w`)
     .join(", ");
 }
 
@@ -33,6 +33,10 @@ const heroImages = [
     alt: "Coucher de soleil sur la Seine et ses monuments",
   },
 ];
+
+// Tiny 16x9 blurred placeholder for the LCP image (perceived instant load)
+const HERO_BLUR_DATA_URL =
+  "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAACwAQCdASoQAAkAAUAmJZQCdAEOuwSAAP73Q3T+i1Am4dU/yr8+m38B8By6UPqXakwtfAAA";
 
 // Ken Burns: each image gets a unique pan/zoom direction
 const kenBurnsVariants = [
@@ -63,9 +67,12 @@ const HeroCinemaSlideshow = () => {
 
   const kb = kenBurnsVariants[current % kenBurnsVariants.length]!;
 
+  // Compute which slide index comes next (for preloading)
+  const nextIndex = (current + 1) % heroImages.length;
+
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
-      {/* SSR-rendered first image for instant LCP — visible until slideshow advances */}
+      {/* SSR-rendered first image for instant LCP -- visible until slideshow advances */}
       {!hasAdvanced && (
         <Image
           src={heroImages[0]!.src}
@@ -73,50 +80,77 @@ const HeroCinemaSlideshow = () => {
           fill
           sizes="100vw"
           priority
+          fetchPriority="high"
+          quality={75}
+          placeholder="blur"
+          blurDataURL={HERO_BLUR_DATA_URL}
           className="object-cover"
         />
       )}
 
-      {/* Animated slideshow layer — takes over once JS has hydrated */}
+      {/* Animated slideshow layer -- takes over once JS has hydrated.
+          On initial render (current === 0, !hasAdvanced), the <Image> above
+          handles the LCP element, so we skip the duplicate <m.img> for slide 0
+          to avoid a double download that wastes mobile bandwidth. */}
       <AnimatePresence mode="sync">
-        <m.img
-          key={current}
-          src={heroImages[current]?.src}
-          srcSet={heroImages[current]?.src ? makeSrcSet(heroImages[current].src) : undefined}
-          sizes="100vw"
-          alt={heroImages[current]?.alt ?? ""}
-          initial={
-            prefersReducedMotion
-              ? { opacity: 0 }
-              : { opacity: 0, scale: kb.scale[0], x: kb.x[0], y: kb.y[0] }
-          }
-          animate={
-            prefersReducedMotion
-              ? { opacity: 1 }
-              : {
-                  opacity: 1,
-                  scale: kb.scale[1],
-                  x: kb.x[1],
-                  y: kb.y[1],
-                }
-          }
-          exit={{ opacity: 0 }}
-          transition={
-            prefersReducedMotion
-              ? { opacity: { duration: 0.5, ease: "easeInOut" } }
-              : {
-                  opacity: { duration: 1.5, ease: "easeInOut" },
-                  scale: { duration: INTERVAL / 1000, ease: "linear" },
-                  x: { duration: INTERVAL / 1000, ease: "linear" },
-                  y: { duration: INTERVAL / 1000, ease: "linear" },
-                }
-          }
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-          decoding="async"
-          fetchPriority={current === 0 ? "high" : "auto"}
-        />
+        {(hasAdvanced || current !== 0) && (
+          <m.img
+            key={current}
+            src={heroImages[current]?.src}
+            srcSet={heroImages[current]?.src ? makeSrcSet(heroImages[current].src) : undefined}
+            sizes="100vw"
+            alt={heroImages[current]?.alt ?? ""}
+            initial={
+              prefersReducedMotion
+                ? { opacity: 0 }
+                : { opacity: 0, scale: kb.scale[0], x: kb.x[0], y: kb.y[0] }
+            }
+            animate={
+              prefersReducedMotion
+                ? { opacity: 1 }
+                : {
+                    opacity: 1,
+                    scale: kb.scale[1],
+                    x: kb.x[1],
+                    y: kb.y[1],
+                  }
+            }
+            exit={{ opacity: 0 }}
+            transition={
+              prefersReducedMotion
+                ? { opacity: { duration: 0.5, ease: "easeInOut" } }
+                : {
+                    opacity: { duration: 1.5, ease: "easeInOut" },
+                    scale: { duration: INTERVAL / 1000, ease: "linear" },
+                    x: { duration: INTERVAL / 1000, ease: "linear" },
+                    y: { duration: INTERVAL / 1000, ease: "linear" },
+                  }
+            }
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+            fetchPriority="auto"
+          />
+        )}
       </AnimatePresence>
+
+      {/* Preload the next slide so the transition is seamless.
+          Hidden img element lets the browser fetch and cache the upcoming image
+          without affecting layout or LCP measurement. */}
+      {heroImages[nextIndex] && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          aria-hidden="true"
+          alt=""
+          src={nextImageUrl(heroImages[nextIndex].src, 1080)}
+          srcSet={makeSrcSet(heroImages[nextIndex].src)}
+          sizes="100vw"
+          className="absolute w-0 h-0 opacity-0 pointer-events-none"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      )}
     </div>
   );
 };

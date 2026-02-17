@@ -16,7 +16,7 @@ const themes: { id: ThemeVariant; name: string; description: string; preview: st
     id: "nuit",
     name: "Nuit",
     description: "Classique · Bleu profond & Or",
-    preview: "bg-gradient-to-r from-nuit-900 to-[#1e3a8a]"
+    preview: "bg-gradient-to-r from-nuit-900 to-blue-900"
   },
 ];
 

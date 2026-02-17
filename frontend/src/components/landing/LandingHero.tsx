@@ -22,7 +22,9 @@ const LandingHero = ({ title, subtitle, backgroundImage, cta }: LandingHeroProps
         alt={title}
         fill
         priority
+        fetchPriority="high"
         sizes="100vw"
+        quality={75}
         className="object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
