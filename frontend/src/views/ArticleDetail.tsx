@@ -57,7 +57,7 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
   const allPosts = getPostsByLocale(locale);
 
   const related = allPosts
-    .filter((p) => p.category === post.category && p.id !== post.id)
+    .filter((p) => p.id !== post.id && p.categories.some((c) => post.categories.includes(c)))
     .slice(0, 3);
 
   return (
@@ -97,11 +97,11 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
             animate={{ opacity: 1, y: 0 }}
           >
             <div className="flex items-center gap-3 mb-4">
-              {post.category && (
-                <span className="bg-accent/20 text-primary text-xs font-semibold px-3 py-1 rounded-full">
-                  {post.category}
+              {post.categories.map((cat) => (
+                <span key={cat} className="bg-accent/20 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+                  {cat}
                 </span>
-              )}
+              ))}
               {/* Date masquee temporairement
               <span className="text-muted-foreground text-sm flex items-center gap-1">
                 <Calendar className="w-3.5 h-3.5" />

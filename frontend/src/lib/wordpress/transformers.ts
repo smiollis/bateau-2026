@@ -83,7 +83,7 @@ export interface BlogPost {
   image: string;
   date: string;
   modified?: string;
-  category: string;
+  categories: string[];
   link: string;
   slug: string;
   seo?: {
@@ -106,7 +106,7 @@ export function transformToPost(wp: WPPost): BlogPost {
     image: wp._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? "",
     date: wp.date,
     modified: wp.modified,
-    category: wp._embedded?.["wp:term"]?.[0]?.[0]?.name ?? "",
+    categories: (wp._embedded?.["wp:term"]?.[0] ?? []).map((t: { name: string }) => t.name).filter(Boolean),
     link: wp.link,
     slug: wp.slug,
     seo: wp.seo

@@ -17,7 +17,7 @@ export interface PostSummary {
   excerpt: string;
   image: string;
   date: string;
-  category: string;
+  categories: string[];
   slug: string;
 }
 
@@ -51,13 +51,13 @@ const Actualites = ({ posts }: ActualitesProps) => {
   const locale = useLocale();
 
   const categories = useMemo(
-    () => [ALL_CATEGORY, ...Array.from(new Set(posts.map((p) => p.category).filter(Boolean)))],
+    () => [ALL_CATEGORY, ...Array.from(new Set(posts.flatMap((p) => p.categories).filter(Boolean)))],
     [posts]
   );
 
   const filteredPosts = activeCategory === ALL_CATEGORY
     ? posts
-    : posts.filter((p) => p.category === activeCategory);
+    : posts.filter((p) => p.categories.includes(activeCategory));
 
   // 1 featured + up to visibleCount in grid
   const gridPosts = filteredPosts.slice(1, 1 + visibleCount);
@@ -148,11 +148,11 @@ const Actualites = ({ posts }: ActualitesProps) => {
                   </div>
                   <div className="p-8 md:p-12 flex flex-col justify-center">
                     <div className="flex items-center gap-3 mb-4">
-                      {featured.category && (
-                        <span className="bg-accent/20 text-primary text-xs font-semibold px-3 py-1 rounded-full">
-                          {featured.category}
+                      {featured.categories.map((cat) => (
+                        <span key={cat} className="bg-accent/20 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+                          {cat}
                         </span>
-                      )}
+                      ))}
                       {/* Date masquee temporairement
                       <span className="text-muted-foreground text-sm flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
@@ -206,11 +206,11 @@ const Actualites = ({ posts }: ActualitesProps) => {
                       </div>
                       <div className="p-6 flex flex-col flex-grow">
                         <div className="flex items-center gap-3 mb-3">
-                          {post.category && (
-                            <span className="bg-accent/20 text-primary text-xs font-semibold px-2.5 py-0.5 rounded-full">
-                              {post.category}
+                          {post.categories.map((cat) => (
+                            <span key={cat} className="bg-accent/20 text-primary text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                              {cat}
                             </span>
-                          )}
+                          ))}
                           {/* Date masquee temporairement
                           <span className="text-muted-foreground text-xs flex items-center gap-1">
                             <Calendar className="w-3 h-3" />

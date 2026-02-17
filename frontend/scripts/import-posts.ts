@@ -29,7 +29,7 @@ const LOCALES: { key: string; lang: string; file: string }[] = [
   { key: 'es',    lang: 'es',    file: 'posts-es.json' },
   { key: 'it',    lang: 'it',    file: 'posts-it.json' },
   { key: 'de',    lang: 'de',    file: 'posts-de.json' },
-  { key: 'pt-BR', lang: 'pt-br', file: 'posts-pt-BR.json' },
+  { key: 'pt-BR', lang: 'pt',    file: 'posts-pt-BR.json' },
 ];
 
 interface BlogPost {
@@ -39,7 +39,7 @@ interface BlogPost {
   content: string;
   image: string;
   date: string;
-  category: string;
+  categories: string[];
   link: string;
   slug: string;
 }
@@ -136,7 +136,7 @@ async function fetchAllPosts(lang: string): Promise<BlogPost[]> {
         content: cleanContent(wp.content?.rendered ?? ''),
         image: wp._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? '',
         date: wp.date,
-        category: wp._embedded?.['wp:term']?.[0]?.[0]?.name ?? '',
+        categories: (wp._embedded?.['wp:term']?.[0] ?? []).map((t: { name: string }) => t.name).filter(Boolean),
         link: wp.link,
         slug: wp.slug,
       });
