@@ -91,6 +91,16 @@
 - [x] Automatiser `import-posts` via GitHub Actions (cron quotidien + webhook `save_post` → dispatch)
 - [x] Import multilingue 6 locales (posts.json, posts-en/es/it/de/pt-BR.json)
 
+#### Centralisation contenu dans WordPress (chantier futur)
+
+Objectif : tout le contenu editable passe par WP (back-office unique), le front Next.js ne contient plus de donnees en dur.
+
+- [ ] **Landing pages → WP** : les 17 landing pages sont actuellement en fichiers TS (`src/data/landings/*.ts`). Le CPT `landing_page` + champs ACF existent deja dans le plugin WP. Reste a : creer les contenus dans WP, ecrire un script `import-landings.ts` (similaire a `import-posts.ts`), ajouter au workflow GitHub Actions.
+- [ ] **Tarifs / Offres → WP** : actuellement en dur dans `OffersVariants.tsx`. Creer un CPT `offer` (titre, prix, description, image, features) ou une page Options ACF.
+- [ ] **Traductions i18n → Polylang** : les 460+ cles sont dans `messages/*.json`. Migrer vers des chaines WP traduites via Polylang, ou garder le systeme actuel avec un script d'export WP → JSON.
+- [ ] **Avis Google → WP** (optionnel) : actuellement `reviews.json` importe depuis Google Places API. Pourrait passer par un CPT `review` pour permettre la moderation manuelle.
+- [ ] **FAQ → WP** : actuellement en dur dans les composants. Creer un CPT `faq` ou une page Options.
+
 #### Qualite (basse priorite)
 - [ ] Middleware next-intl → proxy (attente API compatible)
 - [ ] Decouper composants monolithiques (Croisiere.tsx, Actualites.tsx)
