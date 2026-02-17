@@ -89,13 +89,13 @@ const Reservation = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background pt-24">
+    <div className="min-h-screen bg-background pt-16 md:pt-20">
         {/* HERO SECTION */}
         <m.section
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="py-12 md:py-20"
+          className="py-4 md:py-8"
           style={{
             background: isDark
               ? "linear-gradient(to bottom, hsl(224 64% 10%), hsl(var(--background)))"
@@ -125,7 +125,7 @@ const Reservation = () => {
               <h1 className="font-heading text-4xl md:text-5xl font-semibold text-primary mb-3">
                 {t("title")}
               </h1>
-              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl">
+              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-0">
                 {t("subtitle")}
               </p>
             </m.div>
@@ -133,7 +133,7 @@ const Reservation = () => {
         </m.section>
 
         {/* CONTAINER IFRAME */}
-        <section className="pb-16 md:pb-24 -mt-4">
+        <section className="pb-16 md:pb-24 -mt-8">
           <div className="container-custom">
             <m.div
               initial={{ opacity: 0, y: 20 }}
