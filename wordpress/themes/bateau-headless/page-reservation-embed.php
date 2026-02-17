@@ -66,11 +66,36 @@ if (!defined('ABSPATH')) {
         } elseif (shortcode_exists('bookly-form')) {
             echo do_shortcode('[bookly-form]');
         } else {
-            echo '<p class="bookly-loading">Le module de reservation est temporairement indisponible.</p>';
+            $fallback_messages = [
+                'fr' => 'Le module de réservation est temporairement indisponible.',
+                'en' => 'The booking module is temporarily unavailable.',
+                'es' => 'El módulo de reservas no está disponible temporalmente.',
+                'it' => 'Il modulo di prenotazione è temporaneamente non disponibile.',
+                'de' => 'Das Buchungsmodul ist vorübergehend nicht verfügbar.',
+                'pt' => 'O módulo de reserva está temporariamente indisponível.',
+            ];
+            $fb_lang = isset($_GET['bl']) ? sanitize_key($_GET['bl']) : 'fr';
+            $fallback = $fallback_messages[$fb_lang] ?? $fallback_messages['fr'];
+            echo '<p class="bookly-loading">' . esc_html($fallback) . '</p>';
         }
         ?>
     </div>
     <?php wp_footer(); ?>
+    <script>
+        // Inject lang parameter into Bookly AJAX requests (subsequent form steps)
+        (function() {
+            var lang = new URLSearchParams(window.location.search).get('bl');
+            if (!lang || lang === 'fr') return;
+            if (window.jQuery) {
+                jQuery(document).ajaxSend(function(e, xhr, settings) {
+                    if (settings.url && settings.url.indexOf('admin-ajax.php') !== -1
+                        && settings.data && typeof settings.data === 'string') {
+                        settings.data += '&bookly_lang=' + encodeURIComponent(lang);
+                    }
+                });
+            }
+        })();
+    </script>
     <script>
         // Notify the parent Next.js window of height changes for responsive iframe
         (function() {

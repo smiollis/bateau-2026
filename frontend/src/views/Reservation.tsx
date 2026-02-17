@@ -7,7 +7,7 @@ import { Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -16,6 +16,10 @@ import {
   BreadcrumbSeparator,
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
+
+const LOCALE_TO_PLL: Record<string, string> = {
+  fr: "fr", en: "en", es: "es", it: "it", de: "de", "pt-BR": "pt",
+};
 
 type IframeState = "loading" | "loaded" | "error";
 
@@ -47,6 +51,8 @@ const Reservation = () => {
   const [iframeHeight, setIframeHeight] = useState(1200);
   const { isDark } = useThemeVariant();
   const t = useTranslations("reservation");
+  const locale = useLocale();
+  const pllLang = LOCALE_TO_PLL[locale] || "fr";
 
   const reassuranceBadges = [
     { icon: ShieldCheck, label: t("badgeSSL") },
@@ -142,7 +148,7 @@ const Reservation = () => {
               {iframeState !== "error" && (
                 <iframe
                   ref={iframeRef}
-                  src={`${process.env.NEXT_PUBLIC_WP_URL}/reservation-embed/`}
+                  src={`${process.env.NEXT_PUBLIC_WP_URL}/reservation-embed/?bl=${pllLang}`}
                   style={{
                     height: `${iframeHeight}px`,
                     display: iframeState === "loaded" ? "block" : "none",
