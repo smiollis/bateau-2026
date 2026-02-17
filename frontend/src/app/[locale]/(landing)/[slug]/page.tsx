@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLandingData, getAllLandingSlugs, getRelatedPages } from "@/data/landings";
+import { fetchLandingData, fetchAllLandingSlugs, getRelatedPages } from "@/data/landings";
 import { getAlternates, getOgLocale } from "@/lib/metadata";
 import {
   generateFAQPageJsonLd,
@@ -28,7 +28,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllLandingSlugs();
+  const slugs = await fetchAllLandingSlugs();
   return locales.flatMap((locale) =>
     slugs.map((slug) => ({ locale, slug }))
   );
@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
-  const landing = getLandingData(slug);
+  const landing = await fetchLandingData(slug, locale);
   if (!landing) return {};
 
   return {
@@ -75,7 +75,7 @@ function SectionRenderer({ section }: { section: LandingSection }) {
 
 export default async function LandingPage({ params }: PageProps) {
   const { locale, slug } = await params;
-  const landing = getLandingData(slug);
+  const landing = await fetchLandingData(slug, locale);
   if (!landing) notFound();
 
   const faqSection = landing.sections.find(

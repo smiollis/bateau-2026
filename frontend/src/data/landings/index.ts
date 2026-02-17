@@ -18,9 +18,15 @@ import { nouvelAnSeine } from "./nouvel-an-seine";
 import { noelSeine } from "./noel-seine";
 import { feteDesMeresSeine } from "./fete-des-meres-seine";
 import { seminaireSeine } from "./seminaire-seine";
+// WordPress API
+import {
+  getLandingPage as wpGetLandingPage,
+  getAllLandingSlugs as wpGetAllLandingSlugs,
+} from "@/lib/wordpress/client";
+import { transformToLandingData } from "@/lib/wordpress/transformers";
 
 /**
- * Registry of all landing pages.
+ * Registry of all landing pages (static fallback data).
  * Each new landing file should be imported and added here.
  */
 const landingPages: Record<string, LandingPageData> = {
@@ -47,15 +53,45 @@ const landingPages: Record<string, LandingPageData> = {
 };
 
 /**
- * Get a landing page by slug. Returns undefined if not found.
+ * Get a landing page by slug (sync, static data only).
+ * Used as fallback when the API is unavailable.
  */
 export function getLandingData(slug: string): LandingPageData | undefined {
   return landingPages[slug];
 }
 
 /**
- * Get all landing page slugs (for generateStaticParams / sitemap).
+ * Get a landing page by slug and locale (async, API-first with static fallback).
+ * Tries WordPress REST API first, falls back to static TS files.
  */
+export async function fetchLandingData(
+  slug: string,
+  locale = "fr"
+): Promise<LandingPageData | undefined> {
+  try {
+    const wp = await wpGetLandingPage(slug, locale);
+    if (wp) return transformToLandingData(wp);
+  } catch {
+    // API unavailable — fall through to static data
+  }
+  return landingPages[slug];
+}
+
+/**
+ * Get all landing page slugs (for generateStaticParams / sitemap).
+ * Tries WordPress API first, falls back to static registry.
+ */
+export async function fetchAllLandingSlugs(): Promise<string[]> {
+  try {
+    const slugs = await wpGetAllLandingSlugs();
+    if (slugs.length > 0) return slugs;
+  } catch {
+    // API unavailable — fall through to static data
+  }
+  return Object.keys(landingPages);
+}
+
+/** Sync version for contexts that can't be async. */
 export function getAllLandingSlugs(): string[] {
   return Object.keys(landingPages);
 }

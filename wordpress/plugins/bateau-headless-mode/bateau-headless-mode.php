@@ -3,7 +3,7 @@
  * Plugin Name: Bateau Headless Mode
  * Plugin URI:  https://bateau-a-paris.fr
  * Description: Transforms WordPress into a headless CMS — redirects all front-end URLs to the Next.js site, enables CORS for REST API, disables unnecessary front-end features.
- * Version:     1.0.0
+ * Version:     2.0.0
  * Author:      Un Bateau à Paris
  * License:     GPL-2.0-or-later
  * Text Domain: bateau-headless
@@ -312,4 +312,359 @@ add_action('admin_notices', function () {
     echo 'Le front-end WordPress est desactive. ';
     echo 'Toutes les URLs publiques redirigent vers <a href="' . esc_url(BATEAU_NEXTJS_URL) . '" target="_blank">' . esc_html(BATEAU_NEXTJS_URL) . '</a>.';
     echo '</p></div>';
+});
+
+/**
+ * ============================================================
+ * 5. CUSTOM POST TYPE: LANDING PAGES
+ * ============================================================
+ *
+ * Headless CPT for SEO landing pages (evjf-seine, etc.).
+ * Managed via ACF field groups, consumed by Next.js REST API.
+ */
+add_action('init', function () {
+    register_post_type('landing_page', [
+        'labels' => [
+            'name'               => 'Landing Pages',
+            'singular_name'      => 'Landing Page',
+            'add_new'            => 'Ajouter',
+            'add_new_item'       => 'Ajouter une Landing Page',
+            'edit_item'          => 'Modifier la Landing Page',
+            'view_item'          => 'Voir la Landing Page',
+            'search_items'       => 'Rechercher',
+            'not_found'          => 'Aucune landing page trouvee',
+        ],
+        'public'              => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'show_in_rest'        => true,  // Required for REST API + Gutenberg
+        'menu_icon'           => 'dashicons-megaphone',
+        'menu_position'       => 5,
+        'supports'            => ['title', 'thumbnail', 'custom-fields', 'revisions'],
+        'has_archive'         => false,
+        'rewrite'             => false, // No front-end URLs (headless)
+        'capability_type'     => 'post',
+    ]);
+});
+
+/**
+ * Register landing_page CPT with Polylang.
+ * Required because `public => false` prevents auto-detection.
+ */
+add_filter('pll_get_post_types', function (array $post_types): array {
+    $post_types['landing_page'] = 'landing_page';
+    return $post_types;
+});
+
+/**
+ * ============================================================
+ * 6. ACF FIELD GROUPS FOR LANDING PAGES
+ * ============================================================
+ *
+ * Maps exactly to the LandingPageData TypeScript interface:
+ * src/data/landings/types.ts
+ *
+ * Requires ACF Pro (already installed).
+ */
+add_action('acf/init', function () {
+    if (!function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    // --- Landing Page: Hero Section ---
+    acf_add_local_field_group([
+        'key'      => 'group_landing_hero',
+        'title'    => 'Hero Section',
+        'fields'   => [
+            [
+                'key'   => 'field_hero_title',
+                'label' => 'Titre Hero',
+                'name'  => 'hero_title',
+                'type'  => 'text',
+                'required' => 1,
+            ],
+            [
+                'key'   => 'field_hero_subtitle',
+                'label' => 'Sous-titre Hero',
+                'name'  => 'hero_subtitle',
+                'type'  => 'textarea',
+                'rows'  => 3,
+            ],
+            [
+                'key'   => 'field_hero_background_image',
+                'label' => 'Image de fond',
+                'name'  => 'hero_background_image',
+                'type'  => 'image',
+                'return_format' => 'url',
+            ],
+            [
+                'key'   => 'field_hero_cta_text',
+                'label' => 'Texte du bouton CTA',
+                'name'  => 'hero_cta_text',
+                'type'  => 'text',
+                'default_value' => 'Reserver',
+            ],
+            [
+                'key'   => 'field_hero_cta_href',
+                'label' => 'Lien du bouton CTA',
+                'name'  => 'hero_cta_href',
+                'type'  => 'text',
+                'default_value' => '/reservation',
+            ],
+        ],
+        'location' => [
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'landing_page']],
+        ],
+        'position' => 'normal',
+        'style'    => 'default',
+        'menu_order' => 0,
+    ]);
+
+    // --- Landing Page: Sections (Flexible Content) ---
+    acf_add_local_field_group([
+        'key'      => 'group_landing_sections',
+        'title'    => 'Sections de contenu',
+        'fields'   => [
+            [
+                'key'    => 'field_sections',
+                'label'  => 'Sections',
+                'name'   => 'sections',
+                'type'   => 'flexible_content',
+                'layouts' => [
+                    // Richtext Section
+                    [
+                        'key'        => 'layout_richtext',
+                        'name'       => 'richtext',
+                        'label'      => 'Texte riche',
+                        'display'    => 'block',
+                        'sub_fields' => [
+                            ['key' => 'field_rt_title', 'label' => 'Titre', 'name' => 'title', 'type' => 'text'],
+                            ['key' => 'field_rt_content', 'label' => 'Contenu', 'name' => 'content', 'type' => 'wysiwyg', 'toolbar' => 'full', 'media_upload' => 0],
+                        ],
+                    ],
+                    // Benefits Section
+                    [
+                        'key'        => 'layout_benefits',
+                        'name'       => 'benefits',
+                        'label'      => 'Avantages',
+                        'display'    => 'block',
+                        'sub_fields' => [
+                            ['key' => 'field_ben_title', 'label' => 'Titre', 'name' => 'title', 'type' => 'text'],
+                            [
+                                'key'        => 'field_ben_items',
+                                'label'      => 'Items',
+                                'name'       => 'items',
+                                'type'       => 'repeater',
+                                'layout'     => 'row',
+                                'sub_fields' => [
+                                    ['key' => 'field_ben_icon', 'label' => 'Icone', 'name' => 'icon', 'type' => 'text', 'instructions' => 'Nom Lucide icon (ship, champagne-glass, camera, sparkles, heart, users, etc.)'],
+                                    ['key' => 'field_ben_item_title', 'label' => 'Titre', 'name' => 'title', 'type' => 'text'],
+                                    ['key' => 'field_ben_item_text', 'label' => 'Texte', 'name' => 'text', 'type' => 'textarea', 'rows' => 2],
+                                ],
+                            ],
+                        ],
+                    ],
+                    // Gallery Section
+                    [
+                        'key'        => 'layout_gallery',
+                        'name'       => 'gallery',
+                        'label'      => 'Galerie photos',
+                        'display'    => 'block',
+                        'sub_fields' => [
+                            ['key' => 'field_gal_title', 'label' => 'Titre', 'name' => 'title', 'type' => 'text'],
+                            [
+                                'key'        => 'field_gal_images',
+                                'label'      => 'Images',
+                                'name'       => 'images',
+                                'type'       => 'repeater',
+                                'layout'     => 'table',
+                                'sub_fields' => [
+                                    ['key' => 'field_gal_img_src', 'label' => 'Image', 'name' => 'src', 'type' => 'image', 'return_format' => 'url'],
+                                    ['key' => 'field_gal_img_alt', 'label' => 'Texte alternatif', 'name' => 'alt', 'type' => 'text'],
+                                ],
+                            ],
+                        ],
+                    ],
+                    // Testimonials Section
+                    [
+                        'key'        => 'layout_testimonials',
+                        'name'       => 'testimonials',
+                        'label'      => 'Temoignages',
+                        'display'    => 'block',
+                        'sub_fields' => [
+                            ['key' => 'field_test_title', 'label' => 'Titre', 'name' => 'title', 'type' => 'text'],
+                            ['key' => 'field_test_filter', 'label' => 'Filtre (mot-cle)', 'name' => 'filter', 'type' => 'text', 'instructions' => 'Mot-cle pour filtrer les avis Google (ex: "evjf", "romantique")'],
+                        ],
+                    ],
+                    // Pricing Section
+                    [
+                        'key'        => 'layout_pricing',
+                        'name'       => 'pricing',
+                        'label'      => 'Tarifs',
+                        'display'    => 'block',
+                        'sub_fields' => [
+                            ['key' => 'field_price_title', 'label' => 'Titre', 'name' => 'title', 'type' => 'text'],
+                        ],
+                    ],
+                    // FAQ Section
+                    [
+                        'key'        => 'layout_faq',
+                        'name'       => 'faq',
+                        'label'      => 'FAQ',
+                        'display'    => 'block',
+                        'sub_fields' => [
+                            ['key' => 'field_faq_title', 'label' => 'Titre', 'name' => 'title', 'type' => 'text'],
+                            [
+                                'key'        => 'field_faq_items',
+                                'label'      => 'Questions',
+                                'name'       => 'items',
+                                'type'       => 'repeater',
+                                'layout'     => 'row',
+                                'sub_fields' => [
+                                    ['key' => 'field_faq_question', 'label' => 'Question', 'name' => 'question', 'type' => 'text'],
+                                    ['key' => 'field_faq_answer', 'label' => 'Reponse', 'name' => 'answer', 'type' => 'textarea', 'rows' => 3],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'location' => [
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'landing_page']],
+        ],
+        'position' => 'normal',
+        'style'    => 'default',
+        'menu_order' => 10,
+    ]);
+
+    // --- Landing Page: JSON-LD & Relations ---
+    acf_add_local_field_group([
+        'key'      => 'group_landing_jsonld',
+        'title'    => 'SEO / JSON-LD',
+        'fields'   => [
+            [
+                'key'     => 'field_jsonld_type',
+                'label'   => 'Type JSON-LD',
+                'name'    => 'jsonld_type',
+                'type'    => 'select',
+                'choices' => [
+                    'TouristAttraction' => 'TouristAttraction',
+                    'Event'             => 'Event',
+                    'Product'           => 'Product',
+                ],
+                'default_value' => 'TouristAttraction',
+            ],
+            [
+                'key'   => 'field_jsonld_price_from',
+                'label' => 'Prix a partir de (EUR)',
+                'name'  => 'jsonld_price_from',
+                'type'  => 'number',
+                'default_value' => 420,
+            ],
+            [
+                'key'       => 'field_related_pages',
+                'label'     => 'Pages liees',
+                'name'      => 'related_pages',
+                'type'      => 'relationship',
+                'post_type' => ['landing_page'],
+                'filters'   => ['search'],
+                'max'       => 4,
+                'return_format' => 'object',
+            ],
+        ],
+        'location' => [
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'landing_page']],
+        ],
+        'position' => 'side',
+        'style'    => 'default',
+        'menu_order' => 20,
+    ]);
+});
+
+/**
+ * ============================================================
+ * 7. ISR REVALIDATION WEBHOOK
+ * ============================================================
+ *
+ * When content is saved in WordPress, notify the Next.js site
+ * to purge its ISR cache for the affected page.
+ *
+ * Requires BATEAU_REVALIDATE_SECRET in wp-config.php.
+ */
+add_action('save_post', function (int $post_id, \WP_Post $post, bool $update) {
+    // Skip autosaves, revisions, and non-published posts
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (wp_is_post_revision($post_id)) return;
+    if ($post->post_status !== 'publish') return;
+
+    $secret = defined('BATEAU_REVALIDATE_SECRET') ? BATEAU_REVALIDATE_SECRET : '';
+    if (empty($secret)) return;
+
+    $revalidate_url = BATEAU_NEXTJS_URL . '/api/revalidate';
+
+    // Determine which paths to revalidate based on post type
+    $paths = [];
+
+    if ($post->post_type === 'post') {
+        // Blog article — revalidate the article page and the listing
+        $paths[] = '/fr/actualites/' . $post->post_name;
+        $paths[] = '/fr/actualites';
+    } elseif ($post->post_type === 'landing_page') {
+        // Landing page — revalidate the landing page
+        $slug = get_field('slug', $post_id) ?: $post->post_name;
+        $paths[] = '/fr/' . $slug;
+    }
+
+    // Fire revalidation requests (non-blocking)
+    foreach ($paths as $path) {
+        $url = add_query_arg([
+            'secret' => $secret,
+            'path'   => $path,
+        ], $revalidate_url);
+
+        wp_remote_get($url, [
+            'timeout'   => 5,
+            'blocking'  => false,
+            'sslverify' => true,
+        ]);
+    }
+}, 10, 3);
+
+/**
+ * ============================================================
+ * 8. EXPOSE RANKMATH SEO DATA IN REST API
+ * ============================================================
+ *
+ * Add RankMath SEO fields to the REST API response for posts
+ * and landing pages, so Next.js can use them in generateMetadata().
+ */
+add_action('rest_api_init', function () {
+    $post_types = ['post', 'landing_page', 'page'];
+
+    foreach ($post_types as $type) {
+        register_rest_field($type, 'seo', [
+            'get_callback' => function ($post) {
+                if (!class_exists('RankMath')) {
+                    return null;
+                }
+                $post_id = $post['id'];
+                return [
+                    'title'         => get_post_meta($post_id, 'rank_math_title', true) ?: null,
+                    'description'   => get_post_meta($post_id, 'rank_math_description', true) ?: null,
+                    'focus_keyword' => get_post_meta($post_id, 'rank_math_focus_keyword', true) ?: null,
+                    'robots'        => get_post_meta($post_id, 'rank_math_robots', true) ?: [],
+                ];
+            },
+            'schema' => [
+                'type'       => 'object',
+                'properties' => [
+                    'title'         => ['type' => 'string'],
+                    'description'   => ['type' => 'string'],
+                    'focus_keyword' => ['type' => 'string'],
+                    'robots'        => ['type' => 'array'],
+                ],
+            ],
+        ]);
+    }
 });
