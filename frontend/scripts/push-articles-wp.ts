@@ -5,13 +5,19 @@
  *   1. Create a WP Application Password:
  *      WP Admin → Users → Edit → Application Passwords
  *   2. Run with env vars:
- *      WP_USERNAME=admin WP_APP_PASSWORD=xxxx npx tsx scripts/push-articles-wp.ts
+ *      WP_USERNAME=admin WP_APP_PASSWORD=xxxx npx tsx scripts/push-articles-wp.ts <category-prefix>
+ *
+ * Examples:
+ *   npx tsx scripts/push-articles-wp.ts histoire
+ *   npx tsx scripts/push-articles-wp.ts actualites
+ *   npx tsx scripts/push-articles-wp.ts decouverte
  *
  * This script:
- *   - Creates the "Histoire" category if it doesn't exist (per locale)
+ *   - Reads articles from scripts/articles-{prefix}-{locale}.json
+ *   - Creates categories if they don't exist (per locale)
  *   - Creates posts in FR first, then translations linked via Polylang
- *   - Sets featured image from URL if provided
- *   - Uploads articles from scripts/articles-histoire-{locale}.json
+ *   - Supports multiple categories per article
+ *   - Supports explicit date field for post ordering
  */
 
 const WP_API =
@@ -38,19 +44,22 @@ interface Article {
   content: string;
   categories: string[];
   image?: string;
+  date?: string;
   seo?: {
     title: string | null;
     description: string | null;
   };
 }
 
+const CATEGORY_PREFIX = process.argv[2] || 'histoire';
+
 const LOCALES: { key: string; lang: string; file: string }[] = [
-  { key: 'fr', lang: 'fr', file: 'articles-histoire-fr.json' },
-  { key: 'en', lang: 'en', file: 'articles-histoire-en.json' },
-  { key: 'es', lang: 'es', file: 'articles-histoire-es.json' },
-  { key: 'it', lang: 'it', file: 'articles-histoire-it.json' },
-  { key: 'de', lang: 'de', file: 'articles-histoire-de.json' },
-  { key: 'pt-BR', lang: 'pt', file: 'articles-histoire-pt-BR.json' },
+  { key: 'fr', lang: 'fr', file: `articles-${CATEGORY_PREFIX}-fr.json` },
+  { key: 'en', lang: 'en', file: `articles-${CATEGORY_PREFIX}-en.json` },
+  { key: 'es', lang: 'es', file: `articles-${CATEGORY_PREFIX}-es.json` },
+  { key: 'it', lang: 'it', file: `articles-${CATEGORY_PREFIX}-it.json` },
+  { key: 'de', lang: 'de', file: `articles-${CATEGORY_PREFIX}-de.json` },
+  { key: 'pt-BR', lang: 'pt', file: `articles-${CATEGORY_PREFIX}-pt-BR.json` },
 ];
 
 // --- Helpers ---
@@ -94,16 +103,21 @@ async function getOrCreateCategory(name: string, lang: string): Promise<number> 
 }
 
 /** Create a WordPress post. */
-async function createPost(article: Article, categoryId: number, lang: string): Promise<number> {
+async function createPost(article: Article, categoryIds: number[], lang: string): Promise<number> {
   const body: Record<string, unknown> = {
     title: article.title,
     slug: article.slug,
     content: article.content,
     excerpt: article.excerpt,
     status: 'publish',
-    categories: [categoryId],
+    categories: categoryIds,
     lang,
   };
+
+  // Set explicit date if provided (controls post ordering)
+  if (article.date) {
+    body.date = article.date;
+  }
 
   // Add Yoast SEO fields if available
   if (article.seo) {
@@ -162,7 +176,7 @@ async function linkTranslations(translationMap: Record<string, number>) {
 // --- Main ---
 
 async function main() {
-  console.log('Pushing articles to WordPress...\n');
+  console.log(`Pushing articles to WordPress (prefix: ${CATEGORY_PREFIX})...\n`);
   console.log(`WP API: ${WP_API}`);
   console.log(`User: ${WP_USERNAME}\n`);
 
@@ -171,15 +185,17 @@ async function main() {
   const { fileURLToPath } = await import('url');
   const __dirname = dirname(fileURLToPath(import.meta.url));
 
-  // For each article (3 articles), create in all locales and link
+  // Read FR articles to determine count
+  const frFile = `articles-${CATEGORY_PREFIX}-fr.json`;
   const frArticles: Article[] = JSON.parse(
-    readFileSync(resolve(__dirname, 'articles-histoire-fr.json'), 'utf-8')
+    readFileSync(resolve(__dirname, frFile), 'utf-8')
   );
+  console.log(`Found ${frArticles.length} articles in ${frFile}\n`);
 
   for (let i = 0; i < frArticles.length; i++) {
     const slug = frArticles[i].slug;
     console.log(`\n${'='.repeat(60)}`);
-    console.log(`Article ${i + 1}/3: ${slug}`);
+    console.log(`Article ${i + 1}/${frArticles.length}: ${slug}`);
     console.log('='.repeat(60));
 
     const translationMap: Record<string, number> = {};
@@ -197,12 +213,14 @@ async function main() {
           continue;
         }
 
-        // Get or create category
-        const catName = article.categories[0] || 'Histoire';
-        const categoryId = await getOrCreateCategory(catName, locale.lang);
+        // Get or create all categories
+        const categoryIds: number[] = [];
+        for (const catName of (article.categories.length > 0 ? article.categories : ['Non classé'])) {
+          categoryIds.push(await getOrCreateCategory(catName, locale.lang));
+        }
 
         // Create post
-        const postId = await createPost(article, categoryId, locale.lang);
+        const postId = await createPost(article, categoryIds, locale.lang);
         translationMap[locale.lang] = postId;
         console.log(`  Created post: ID ${postId} (${article.title.slice(0, 50)}...)`);
       } catch (err: unknown) {

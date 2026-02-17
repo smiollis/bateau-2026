@@ -9,6 +9,7 @@ import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import { useTranslations, useLocale } from "next-intl";
+import OccasionsGrid from "@/components/OccasionsGrid";
 
 /** Lightweight post type for the list view (no content/link fields) */
 export interface PostSummary {
@@ -250,6 +251,9 @@ const Actualites = ({ posts }: ActualitesProps) => {
           )}
 
         </section>
+
+        {/* Nos croisières par occasion */}
+        <OccasionsGrid />
 
         {/* Instagram Section */}
         <section className={`section-padding ${isDark ? "bg-nuit-800" : "bg-secondary/30"}`}>
