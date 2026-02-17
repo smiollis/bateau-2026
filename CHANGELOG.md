@@ -4,6 +4,37 @@
 
 ---
 
+## [0.14.0] - 2026-02-17 — Audit Sprint 1+2 (Score 8.1 → 9.0)
+
+**12 agents paralleles — 2 sprints enchaines — 319 tests verts**
+
+### Sprint 1 — Quick Wins (Score 8.1 → 8.6)
+- CI/CD : permissions, timeout, concurrency sur 4 workflows GitHub Actions
+- CI/CD : retry 3x git push, Authorization header Instagram, validation JSON
+- SEO : priceRange LocalBusiness, aggregateRating dynamique, OG fallback blog
+- Accessibilite : `useReducedMotion` sur HeroCinemaSlideshow, scroll-behavior media query
+- i18n : 30+ cles ajoutees (ArticleDetail occasions, LandingBreadcrumb, StickyBar, CTA, Related)
+- Securite : DOMPurify sur LandingRichtext (7/7 dangerouslySetInnerHTML proteges)
+- Cleanup : `sonner` desinstalle, `useThemeVariant` retire de CGV
+- LazyMotion strict : `motion` → `m` dans 29 composants + 7 mocks tests (-20KB)
+- LandingPricing i18n : 24 cles × 6 locales, namespace `landingPricing`
+
+### Sprint 2 — Effort Moyen (Score 8.6 → 9.0)
+- Focus states : `focus-visible:ring-2` sur 22 elements dans 7 composants (Header, Footer, MobileMenu, LanguageSelector, CookieBanner, CookieModal)
+- Tokens nuit : 25 hex hardcodes remplaces par `bg-nuit-900`/`bg-nuit-800` via CSS custom properties dans 14 fichiers
+- Images : 14 images optimisees (-514 KB, 5.5%)
+- Tests : 6 tests corriges (motionProxy hoisting) + 16 nouveaux tests API (instagram + revalidate) — **319 tests verts**
+
+### UX
+- Formulaire contact : ecran de confirmation "Thank you" apres envoi (remplace toast ephemere)
+- 3 cles i18n ajoutees × 6 langues (successTitle, successDesc, sendAnother)
+
+### Documentation
+- Rapport audit consolide mis a jour (AUDIT-2026-02-17-CONSOLIDATED.md)
+- Plan d'action mis a jour (ACTION-PLAN.md)
+
+---
+
 ## [0.13.0] - 2026-02-17 — Data Pipeline + Automatisation + Liens contextuels
 
 ### Data Pipeline

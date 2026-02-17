@@ -52,7 +52,7 @@ bateau-2026/
 - **UI**: Tailwind CSS v4 (`@theme inline` pour les tokens), shadcn/ui (epure), Radix UI
 - **Animations**: Framer Motion 12 (LazyMotion + `m` components, `useReducedMotion` WCAG 2.3.1)
 - **TypeScript**: strict mode + `noUncheckedIndexedAccess`
-- **i18n**: next-intl 4 (FR/EN/ES/IT/DE/PT-BR) — 460 cles, 19 namespaces, blog multilingue
+- **i18n**: next-intl 4 (FR/EN/ES/IT/DE/PT-BR) — 490+ cles, 20 namespaces, blog multilingue
 - **Analytics**: GA4 (G-N20S788YDW) + Vercel Web Analytics + Google Consent Mode v2
 - **API**: Instagram Graph API, WordPress REST API (reservation Bookly via iframe)
 - **Logging**: `src/lib/logger.ts` — JSON structure en production, lisible en dev
@@ -85,7 +85,7 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 
 ## Points d'attention
 
-- **Tailwind v4** : les couleurs custom DOIVENT etre enregistrees dans `@theme inline {}` dans `globals.css` pour que les utility classes fonctionnent
+- **Tailwind v4** : les couleurs custom DOIVENT etre enregistrees dans `@theme inline {}` dans `globals.css` pour que les utility classes fonctionnent. Tokens nuit : `bg-nuit-900` (#0a1628), `bg-nuit-800` (#0d1d35) — definis via CSS custom properties `--nuit-*` dans `:root`
 - **Next.js static imports** : `import img from "@/assets/x.png"` retourne un objet `{ src, width, height }`, pas une string. Utiliser `.src` pour les `<img>` tags
 - **Pages Router conflit** : ne PAS creer de fichiers dans `src/pages/` — utiliser `src/views/` a la place
 - **Cookie consent** : le tracking GA4 ne demarre qu'apres consentement (Consent Mode v2 defaults "denied" pour EU)
@@ -123,9 +123,10 @@ npm run fix:all          # Corriger images + liens (combo)
 
 ## Tests
 
-- **Vitest** : 303 tests unitaires dans `src/__tests__/` (unit/ + components/)
+- **Vitest** : 319 tests unitaires dans `src/__tests__/` (unit/ + components/)
   - Composants : Header, Hero, Footer, Offers, CookieBanner, ContactForm, LandingComponents
   - Libs : cookie-consent, gtag, utils, escapeHtml, jsonld, metadata, logger, instagram-hook
+  - API routes : instagram-api (8 tests), revalidate-api (8 tests)
   - Data : landing-data (158 tests)
   - Coverage : `@vitest/coverage-v8` avec seuils (40/30/35/40)
 - **Playwright** : 28 tests E2E dans `e2e/` (chromium, firefox, webkit, mobile)
@@ -158,7 +159,7 @@ npm run fix:all          # Corriger images + liens (combo)
   - Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   - Content-Security-Policy: 12 directives
 - **poweredByHeader** : false
-- **DOMPurify** : `src/views/ArticleDetail.tsx` (contenu WordPress)
+- **DOMPurify** : 7/7 `dangerouslySetInnerHTML` proteges (ArticleDetail, LandingRichtext, LandingFAQ, LandingReviews, LandingSEOContent, LandingBenefits, LandingTestimonials)
 - **Error boundaries** : `error.tsx` + `global-error.tsx`
 - **Anti-spam** : rate limiting 3 req/min + honeypot + escapeHtml
 
@@ -221,23 +222,28 @@ Le token est valide 60 jours. Le workflow automatique le renouvelle toutes les 2
 
 ## Score audit
 
-### Audit Général (Code & Architecture) : 9.2/10
-Voir `AUDIT-2026-02-14.md`
+### Audit Consolide (17 fev 2026) : 8.1 → 8.6 → ~9.0/10
+Voir `docs/AUDIT-2026-02-17-CONSOLIDATED.md` et `docs/ACTION-PLAN.md`
 
-| Categorie | Score | Statut |
-|-----------|-------|--------|
-| Securite | 9.5/10 | HSTS, CSP, 6 headers, 0 XSS |
-| Performance | 9/10 | next/image partout, blur placeholders, deps nettoyees |
-| SEO | 9/10 | 10+ pages, 7 JSON-LD, OG images |
-| Accessibilite | 9/10 | WCAG 2.1 AA, reduced-motion, focus trap |
-| Qualite code | 9/10 | 0 code mort, escapeHtml extrait |
-| Tests | 9/10 | 303/303 unitaires + 28/28 E2E, coverage ~40% |
-| TypeScript | 9.5/10 | strict + noUncheckedIndexedAccess |
-| i18n | 9/10 | 6 langues actives, 460 cles, 17 landing pages |
-| Images | 9/10 | next/image, blur, OG, AVIF |
-| Architecture | 9.5/10 | layout.tsx unique, composants decomposes |
+| Categorie | Avant | Apres S1 | Apres S2 |
+|-----------|-------|----------|----------|
+| Securite | 7/10 | 8.5/10 | 8.5/10 |
+| Performance | 7/10 | 8/10 | 8.5/10 |
+| SEO | 8/10 | 9/10 | 9/10 |
+| Accessibilite | 7/10 | 8/10 | 9/10 |
+| Qualite code | 8/10 | 9/10 | 9/10 |
+| Tests | 7/10 | 7.5/10 | 8.5/10 |
+| TypeScript | 9/10 | 9/10 | 9/10 |
+| i18n | 8/10 | 9/10 | 9/10 |
+| UX/Design | 7/10 | 7.5/10 | 8.5/10 |
+| CI/CD | 6/10 | 8.5/10 | 8.5/10 |
+| Donnees | 7/10 | 8/10 | 8/10 |
+| Dependencies | 9/10 | 9/10 | 9/10 |
 
-Reste a faire (basse priorite) : contrastes gold/blanc, middleware proxy.
+Sprint 1 : CI/CD hardening, SEO JSON-LD, a11y reduced-motion, i18n 30+ cles, DOMPurify 7/7, LazyMotion -20KB, LandingPricing i18n
+Sprint 2 : Focus states 22 elements, nuit tokens CSS, images -514KB, 319 tests verts, contact form thank you
+
+Reste a faire : Sprint 3 (tests vues critiques, Server Components, E2E, rate limiting WP).
 
 ### Audit Qualité des Données : 6.5/10 → 8.5/10 (après fix)
 Voir `docs/AUDIT-2026-02-17-data-quality.md`
