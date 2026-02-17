@@ -7,7 +7,7 @@ import { transformToPost } from "@/lib/wordpress/transformers";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://bateau-a-paris.fr";
-  const staticPages = ["", "/croisiere", "/galerie", "/faq", "/actualites", "/reservation", "/cgv", "/mentions-legales", "/confidentialite"];
+  const staticPages = ["", "/croisiere", "/galerie", "/faq", "/actualites", "/reservation", "/cgv", "/mentions-legales", "/confidentialite", "/plan-du-site"];
   const locales = routing.locales;
 
   const entries: MetadataRoute.Sitemap = staticPages.flatMap((page) =>

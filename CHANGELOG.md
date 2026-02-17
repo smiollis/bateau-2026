@@ -4,6 +4,34 @@
 
 ---
 
+## [0.15.0] - 2026-02-17 — Sprint 3 + UX + Plan du site
+
+**3 chantiers Sprint 3 termines + 4 ameliorations UX + nouvelle page**
+
+### Sprint 3 — Gros Chantiers (3/4 faits)
+- Server Components migration : LandingRichtext, LandingBreadcrumb, LandingBenefits convertis en server components (-10KB JS client)
+- Cree composant `AnimatedReveal` (client wrapper framer-motion + useReducedMotion)
+- Tests E2E : 4 nouveaux specs Playwright (reservation, landing-seo, blog-multilingual, gallery-keyboard) — 38 tests, total 66 E2E
+- WP Plugin v2.2.0 : rate limiting transient lock 2 min, suppression localhost CORS, logging sync
+
+### UX
+- Landing pages CTA : `.btn-gold-outline` pour cards laterales (bordure gold, uppercase, hover fill)
+- Contact : liens `mailto:` et `tel:` cliquables dans section #contact
+- Galerie : section "Nos croisieres par occasion" ajoutee (12 cards, comme homepage/croisiere)
+- OG image WhatsApp : nouveau logo croppe 1200x630 (fond blanc + badge circulaire)
+
+### Nouvelle page
+- Page Plan du site (`/plan-du-site`) : route, vue server component, i18n 6 langues
+- Lien dans le footer (6 langues), ajout sitemap.xml
+- Listing dynamique des landing pages via `fetchAllLandingSlugs()`
+
+### Tests & Build
+- 319/319 tests unitaires (Vitest)
+- 66 tests E2E (Playwright, 10 spec files)
+- Build OK : 308 pages generees
+
+---
+
 ## [0.14.0] - 2026-02-17 — Audit Sprint 1+2 (Score 8.1 → 9.0)
 
 **12 agents paralleles — 2 sprints enchaines — 319 tests verts**

@@ -153,6 +153,7 @@
     "cgv": "Conditions générales de vente",
     "confidentialite": "Politique de confidentialité",
     "faq": "FAQ",
+    "sitemap": "Plan du site",
     "cookieSettings": "Paramètres cookies",
     "copyright": "© {year} Un Bateau à Paris. Tous droits réservés.",
     "tagline": "Croisières privées sur la Seine",
@@ -308,7 +309,9 @@
     "mentionsTitle": "Mentions Légales",
     "mentionsDescription": "Mentions légales du site Un Bateau à Paris. Informations sur l'éditeur, l'hébergeur et les droits de propriété intellectuelle.",
     "confidentialiteTitle": "Politique de Confidentialité",
-    "confidentialiteDescription": "Politique de confidentialité et protection des données personnelles du site Un Bateau à Paris."
+    "confidentialiteDescription": "Politique de confidentialité et protection des données personnelles du site Un Bateau à Paris.",
+    "sitemapTitle": "Plan du site",
+    "sitemapDescription": "Plan du site complet de bateau-a-paris.fr. Retrouvez toutes les pages de notre site."
   },
   "occasions": {
     "title": "Nos croisières par occasion",
@@ -504,5 +507,25 @@
     "cookiesContent2": "Vous pouvez modifier vos préférences à tout moment via le bandeau cookies.",
     "modificationTitle": "Modification de cette politique",
     "modificationContent": "Dernière mise à jour : février 2026. Nous nous réservons le droit de modifier cette politique. Les modifications seront publiées sur cette page."
+  },
+  "sitemap": {
+    "backToHome": "Retour à l'accueil",
+    "title": "Plan du site",
+    "subtitle": "Retrouvez toutes les pages de notre site",
+    "mainPages": "Pages principales",
+    "info": "Informations",
+    "landingPages": "Nos croisières thématiques",
+    "blog": "Blog",
+    "seeAllArticles": "Voir tous les articles",
+    "home": "Accueil",
+    "cruise": "La Croisière",
+    "gallery": "Galerie Photos",
+    "faqPage": "FAQ",
+    "news": "Actualités",
+    "reservation": "Réservation",
+    "cgv": "Conditions générales de vente",
+    "legalNotice": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "sitemapPage": "Plan du site"
   }
 }

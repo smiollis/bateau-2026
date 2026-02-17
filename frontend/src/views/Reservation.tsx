@@ -48,7 +48,7 @@ const ReservationSkeleton = ({ loadingText }: { loadingText: string }) => (
 const Reservation = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeState, setIframeState] = useState<IframeState>("loading");
-  const [iframeHeight, setIframeHeight] = useState(1800);
+  const [iframeHeight, setIframeHeight] = useState(2200);
   const { isDark } = useThemeVariant();
   const t = useTranslations("reservation");
   const locale = useLocale();
@@ -56,8 +56,8 @@ const Reservation = () => {
 
   const reassuranceBadges = [
     { icon: ShieldCheck, label: t("badgeSSL") },
-    { icon: Mail, label: t("badgeConfirmation") },
     { icon: CreditCard, label: t("badgePayment") },
+    { icon: Mail, label: t("badgeConfirmation") },
   ];
 
   const handleIframeLoad = useCallback(() => {
@@ -125,7 +125,7 @@ const Reservation = () => {
               <h1 className="font-heading text-4xl md:text-5xl font-semibold text-primary mb-3">
                 {t("title")}
               </h1>
-              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-0">
+              <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mb-2">
                 {t("subtitle")}
               </p>
             </m.div>
@@ -139,7 +139,7 @@ const Reservation = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="max-w-6xl mx-auto bg-card rounded-2xl shadow-2xl p-4 sm:p-8 md:p-12"
+              className="max-w-6xl mx-auto bg-card rounded-2xl shadow-2xl p-2 sm:p-4 md:p-6"
             >
               {/* Skeleton + message pendant le chargement */}
               {iframeState === "loading" && <ReservationSkeleton loadingText={t("loading")} />}

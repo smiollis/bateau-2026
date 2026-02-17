@@ -153,6 +153,7 @@
     "cgv": "Allgemeine Geschäftsbedingungen",
     "confidentialite": "Datenschutzrichtlinie",
     "faq": "FAQ",
+    "sitemap": "Seitenübersicht",
     "cookieSettings": "Cookie-Einstellungen",
     "copyright": "© {year} Un Bateau à Paris. Alle Rechte vorbehalten.",
     "tagline": "Private Rundfahrten auf der Seine",
@@ -308,7 +309,9 @@
     "mentionsTitle": "Impressum",
     "mentionsDescription": "Impressum der Website Un Bateau à Paris. Informationen zum Herausgeber, Hosting-Anbieter und geistigem Eigentum.",
     "confidentialiteTitle": "Datenschutzrichtlinie",
-    "confidentialiteDescription": "Datenschutzrichtlinie und Schutz personenbezogener Daten der Website Un Bateau à Paris."
+    "confidentialiteDescription": "Datenschutzrichtlinie und Schutz personenbezogener Daten der Website Un Bateau à Paris.",
+    "sitemapTitle": "Seitenübersicht",
+    "sitemapDescription": "Vollständige Seitenübersicht von bateau-a-paris.fr."
   },
   "occasions": {
     "title": "Unsere Rundfahrten nach Anlass",
@@ -504,5 +507,25 @@
     "cookiesContent2": "Sie können Ihre Einstellungen jederzeit über das Cookie-Banner ändern.",
     "modificationTitle": "Änderung dieser Richtlinie",
     "modificationContent": "Letzte Aktualisierung: Februar 2026. Wir behalten uns das Recht vor, diese Richtlinie zu ändern. Änderungen werden auf dieser Seite veröffentlicht."
+  },
+  "sitemap": {
+    "backToHome": "Zurück zur Startseite",
+    "title": "Seitenübersicht",
+    "subtitle": "Finden Sie alle Seiten unserer Website",
+    "mainPages": "Hauptseiten",
+    "info": "Informationen",
+    "landingPages": "Unsere Themenkreuzfahrten",
+    "blog": "Blog",
+    "seeAllArticles": "Alle Artikel ansehen",
+    "home": "Startseite",
+    "cruise": "Die Kreuzfahrt",
+    "gallery": "Fotogalerie",
+    "faqPage": "FAQ",
+    "news": "Neuigkeiten",
+    "reservation": "Reservierung",
+    "cgv": "Allgemeine Geschäftsbedingungen",
+    "legalNotice": "Impressum",
+    "privacy": "Datenschutzrichtlinie",
+    "sitemapPage": "Seitenübersicht"
   }
 }

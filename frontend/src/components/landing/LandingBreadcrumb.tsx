@@ -1,8 +1,6 @@
-"use client";
-
 import { ChevronRight, Home } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 interface BreadcrumbItem {
   name: string;
@@ -13,8 +11,8 @@ interface LandingBreadcrumbProps {
   items: BreadcrumbItem[];
 }
 
-const LandingBreadcrumb = ({ items }: LandingBreadcrumbProps) => {
-  const t = useTranslations("breadcrumb");
+const LandingBreadcrumb = async ({ items }: LandingBreadcrumbProps) => {
+  const t = await getTranslations("breadcrumb");
 
   return (
   <nav aria-label={t("ariaLabel")} className="container-custom py-4">

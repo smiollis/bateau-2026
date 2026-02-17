@@ -57,9 +57,10 @@ bateau-2026/
 - **API**: Instagram Graph API, WordPress REST API (reservation Bookly via iframe)
 - **Logging**: `src/lib/logger.ts` — JSON structure en production, lisible en dev
 - **Fonts**: Playfair Display (headings), Inter (body) via `next/font/google`
-- **Securite**: CSP (12 directives), HSTS, DOMPurify, 6 security headers
+- **Securite**: CSP (12 directives), HSTS, 6 security headers
 - **SEO**: Canonical + hreflang 6 locales + JSON-LD (4 schemas base + 3 par landing page), Rank Math sur WP
 - **Landing pages**: 17 pages SSG (route dynamique `[slug]`), traduites EN/ES/IT/DE/PT-BR
+- **Server Components**: LandingBreadcrumb, LandingRichtext, LandingBenefits (async server), AnimatedReveal (client wrapper animations)
 - **Data pipeline**: JSON-only (pas d'appels API WP au runtime). Import via GitHub Actions + bouton WP "Publier sur le site"
 - **CI/CD**: 4 workflows GitHub Actions (import-posts, import-reviews, refresh-instagram, lighthouse)
 
@@ -94,7 +95,7 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **Logger** : utiliser `logger.error/warn/info` de `@/lib/logger` au lieu de `console.error`
 - **Images** : TOUJOURS utiliser `next/image` (pas de `<img>`) — toutes les images sont migrees
 - **CSP** : le header Content-Security-Policy est dans `next.config.ts` — penser a ajouter les domaines si on integre un nouveau service
-- **DOMPurify** : TOUJOURS utiliser DOMPurify sur `dangerouslySetInnerHTML` (contenu WordPress)
+- **DOMPurify** : supprime des server components landing (contenu CMS trusted via ACF). Reste en place sur les composants client qui rendent du HTML WP
 - **Code splitting** : utiliser `next/dynamic` avec `ssr: false` pour les composants lourds client-only (ex: GalleryLightbox)
 - **JSON-LD** : 7 schemas en place (LocalBusiness, FAQPage, Offers/TouristTrip, Article, TouristAttraction, BreadcrumbList, Offer) — ajouter de nouveaux schemas dans les `page.tsx` server components
 - **Metadata** : utiliser `getAlternates(locale, path)` et `getOgLocale(locale)` de `@/lib/metadata` pour les `generateMetadata`
@@ -129,7 +130,8 @@ npm run fix:all          # Corriger images + liens (combo)
   - API routes : instagram-api (8 tests), revalidate-api (8 tests)
   - Data : landing-data (158 tests)
   - Coverage : `@vitest/coverage-v8` avec seuils (40/30/35/40)
-- **Playwright** : 28 tests E2E dans `e2e/` (chromium, firefox, webkit, mobile)
+- **Playwright** : 66 tests E2E dans `e2e/` (10 spec files — chromium, firefox, webkit, mobile)
+  - Specs : reservation, landing-seo, blog-multilingual, gallery-keyboard, + 6 existants
 - **axe-core** : audits accessibilite WCAG 2.1 AA integres aux E2E
 - Config : `vitest.config.ts`, `playwright.config.ts`
 - Setup : `src/__tests__/setup.ts` (jest-dom, gtag mock)
@@ -159,7 +161,7 @@ npm run fix:all          # Corriger images + liens (combo)
   - Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   - Content-Security-Policy: 12 directives
 - **poweredByHeader** : false
-- **DOMPurify** : 7/7 `dangerouslySetInnerHTML` proteges (ArticleDetail, LandingRichtext, LandingFAQ, LandingReviews, LandingSEOContent, LandingBenefits, LandingTestimonials)
+- **DOMPurify** : `dangerouslySetInnerHTML` proteges dans composants client (ArticleDetail, LandingFAQ, LandingReviews, LandingSEOContent, LandingTestimonials). Supprime de LandingRichtext/LandingBenefits (server components, contenu CMS trusted)
 - **Error boundaries** : `error.tsx` + `global-error.tsx`
 - **Anti-spam** : rate limiting 3 req/min + honeypot + escapeHtml
 
@@ -177,7 +179,7 @@ npm run fix:all          # Corriger images + liens (combo)
 - **BDD** : `wp_clone` (prefix `9Ju5UF_`) — 11 Mo, ~90 tables
 - **DB user** : `wp_clone_user`
 - **Theme** : `bateau-headless` (minimal, Bookly iframe only)
-- **Plugin** : `bateau-headless-mode` v2.1.0 (redirects 301, CORS, front-end disabled, bouton "Publier sur le site" → GitHub Actions)
+- **Plugin** : `bateau-headless-mode` v2.2.0 (redirects 301, CORS, front-end disabled, bouton "Publier sur le site" → GitHub Actions, rate limiting transient lock 2 min, logging sync)
 - **Plugins actifs** : 20 (ACF, Bookly x9, Polylang Pro, Loco Translate, Rank Math, etc.)
 - **API** : `https://admin.bateau-a-paris.fr/wp-json/`
 - **Reservation iframe** : `https://admin.bateau-a-paris.fr/reservation-embed/` (template `page-reservation-embed.php`)
@@ -243,7 +245,21 @@ Voir `docs/AUDIT-2026-02-17-CONSOLIDATED.md` et `docs/ACTION-PLAN.md`
 Sprint 1 : CI/CD hardening, SEO JSON-LD, a11y reduced-motion, i18n 30+ cles, DOMPurify 7/7, LazyMotion -20KB, LandingPricing i18n
 Sprint 2 : Focus states 22 elements, nuit tokens CSS, images -514KB, 319 tests verts, contact form thank you
 
-Reste a faire : Sprint 3 (tests vues critiques, Server Components, E2E, rate limiting WP).
+Sprint 3 (en cours) : Server Components migration fait, E2E critiques fait (66 tests), rate limiting WP fait. Reste : tests vues critiques.
+
+### Vercel Speed Insights (17 fev 2026)
+
+| Metrique | Desktop | Mobile |
+|----------|---------|--------|
+| RES (Real Experience Score) | **94** (Great) | **80** (Needs Improvement) |
+| FCP | 2.04s | 2.52s |
+| LCP | 2.74s | 4.04s |
+| INP | 56ms | 112ms |
+| CLS | 0.01 | 0 |
+| FID | 1ms | 21ms |
+| TTFB | 0.29s | 1.77s |
+
+Desktop : toutes les routes >90 RES. Mobile : homepage a 78 RES (TTFB 1.77s, LCP 4.04s).
 
 ### Audit Qualité des Données : 6.5/10 → 8.5/10 (après fix)
 Voir `docs/AUDIT-2026-02-17-data-quality.md`

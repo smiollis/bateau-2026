@@ -14,14 +14,15 @@
 | 3. Contact + Conformite | **Termine** | Formulaire Resend, page confidentialite |
 | 4. SEO + Performance | **Termine** | Canonical, hreflang, JSON-LD, next/image, AVIF, Lighthouse CI |
 | 5. i18n FR/EN | **Termine** | next-intl, 460+ cles, 6 langues actives |
-| 6. Tests + Deploy | **Termine** | 303 unit + 28 E2E, coverage ~40%, Vercel production |
+| 6. Tests + Deploy | **Termine** | 319 unit + 66 E2E, coverage ~40%, Vercel production |
 | Sprint Audit | **Termine** | Score 6/10 → 9.2/10 (2 sprints, 30+ actions) |
 | 7. Migration WP + Bascule | **En cours** | Clone WP ok, plugins ok, Rank Math ok — reste bascule DNS + config Vercel |
 | 8. Landing Pages SEO | **Termine** | 17 pages (6 Tier 1 + 6 Tier 2 + 5 Tier 3) + grille occasions homepage |
 | 9. i18n Multilingue | **Lot 1 termine** | 6 langues actives, blog + landings traduits, Lot 2 planifie (AR, JA, KO) |
 | 10. Performance | **Termine** | LazyMotion, Hero SSR, content stripping, compression images (-3.9MB) |
 
-**Score audit : 9.2/10** — 0 priorite haute/moyenne restante.
+**Score audit : ~9.0/10** — 0 priorite haute/moyenne restante.
+**Vercel Speed Insights** : Desktop RES 94 (Great), Mobile RES 80 (Needs Improvement).
 
 ---
 
@@ -75,7 +76,7 @@
 - [ ] Chat en direct (Crisp/Intercom)
 - [ ] Calendrier disponibilite temps reel
 - [ ] Newsletter (React Email + Resend)
-- [ ] PWA (manifest.json cree, service worker restant)
+- [ ] PWA (manifest.json cree, service worker restant — potentiel impact mobile : prefetch, offline, cache assets)
 - [ ] Video background hero
 - [ ] Visite virtuelle 360 du bateau
 - [ ] OG Image dynamique (`next/og`)

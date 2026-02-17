@@ -153,6 +153,7 @@
     "cgv": "Condicoes gerais de venda",
     "confidentialite": "Politica de privacidade",
     "faq": "FAQ",
+    "sitemap": "Mapa do site",
     "cookieSettings": "Configuracoes de cookies",
     "copyright": "© {year} Un Bateau à Paris. Todos os direitos reservados.",
     "tagline": "Cruzeiros privativos no Sena",
@@ -308,7 +309,9 @@
     "mentionsTitle": "Avisos Legais",
     "mentionsDescription": "Avisos legais do site Un Bateau à Paris. Informacoes sobre o editor, o hospedeiro e os direitos de propriedade intelectual.",
     "confidentialiteTitle": "Politica de Privacidade",
-    "confidentialiteDescription": "Politica de privacidade e protecao de dados pessoais do site Un Bateau à Paris."
+    "confidentialiteDescription": "Politica de privacidade e protecao de dados pessoais do site Un Bateau à Paris.",
+    "sitemapTitle": "Mapa do site",
+    "sitemapDescription": "Mapa do site completo de bateau-a-paris.fr."
   },
   "occasions": {
     "title": "Nossos cruzeiros por ocasiao",
@@ -504,5 +507,25 @@
     "cookiesContent2": "Voce pode modificar suas preferencias a qualquer momento atraves do banner de cookies.",
     "modificationTitle": "Modificacao desta politica",
     "modificationContent": "Ultima atualizacao: fevereiro 2026. Reservamo-nos o direito de modificar esta politica. As modificacoes serao publicadas nesta pagina."
+  },
+  "sitemap": {
+    "backToHome": "Voltar ao início",
+    "title": "Mapa do site",
+    "subtitle": "Encontre todas as páginas do nosso site",
+    "mainPages": "Páginas principais",
+    "info": "Informações",
+    "landingPages": "Nossos cruzeiros temáticos",
+    "blog": "Blog",
+    "seeAllArticles": "Ver todos os artigos",
+    "home": "Início",
+    "cruise": "O Cruzeiro",
+    "gallery": "Galeria de fotos",
+    "faqPage": "FAQ",
+    "news": "Notícias",
+    "reservation": "Reserva",
+    "cgv": "Termos e condições",
+    "legalNotice": "Aviso legal",
+    "privacy": "Política de privacidade",
+    "sitemapPage": "Mapa do site"
   }
 }

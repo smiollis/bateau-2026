@@ -70,7 +70,7 @@ describe("ContactForm", () => {
     );
   });
 
-  it("calls API and shows success toast on valid submit", async () => {
+  it("calls API and shows success confirmation on valid submit", async () => {
     const user = userEvent.setup();
     (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
       ok: true,
@@ -95,9 +95,10 @@ describe("ContactForm", () => {
       "/api/contact",
       expect.objectContaining({ method: "POST" }),
     );
-    expect(mockToast).toHaveBeenCalledWith(
-      expect.objectContaining({ title: "successTitle" }),
-    );
+    // Component renders a success confirmation UI (role="status") instead of a toast
+    const successStatus = await screen.findByRole("status");
+    expect(successStatus).toBeInTheDocument();
+    expect(successStatus).toHaveTextContent("successTitle");
   });
 
   it("shows error toast on API failure", async () => {

@@ -11,6 +11,7 @@ import { galleryImages } from "@/data/galleryImages";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import { useTranslations } from "next-intl";
+import OccasionsGrid from "@/components/OccasionsGrid";
 
 const GalleryLightbox = dynamic(() => import("@/components/GalleryLightbox"), {
   ssr: false,
@@ -163,6 +164,9 @@ const Galerie = () => {
           </div>
         </div>
       </section>
+
+      {/* Occasions Grid */}
+      <OccasionsGrid />
 
     </div>
   );

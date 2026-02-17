@@ -11,8 +11,8 @@ import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { Send, Phone, Mail, MapPin, CheckCircle } from "lucide-react";
 
 const contactInfo = [
-  { icon: Phone, label: "+33 6 70 34 25 43" },
-  { icon: Mail, label: "capitaine@bateau-a-paris.fr" },
+  { icon: Phone, label: "+33 6 70 34 25 43", href: "tel:+33670342543" },
+  { icon: Mail, label: "capitaine@bateau-a-paris.fr", href: "mailto:capitaine@bateau-a-paris.fr" },
   { icon: MapPin, label: "Port de l'Arsenal – Paris 12ème" },
 ];
 
@@ -212,7 +212,11 @@ const ContactForm = () => {
                 {contactInfo.map((info) => (
                   <div key={info.label} className="flex items-start gap-3">
                     <info.icon className={`w-5 h-5 mt-0.5 shrink-0 ${styles.infoIcon}`} />
-                    <span className={styles.infoText}>{info.label}</span>
+                    {info.href ? (
+                      <a href={info.href} className={`${styles.infoText} hover:underline`}>{info.label}</a>
+                    ) : (
+                      <span className={styles.infoText}>{info.label}</span>
+                    )}
                   </div>
                 ))}
               </div>

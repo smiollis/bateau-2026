@@ -3,7 +3,7 @@
  * Plugin Name: Bateau Headless Mode
  * Plugin URI:  https://bateau-a-paris.fr
  * Description: Transforms WordPress into a headless CMS — redirects all front-end URLs to the Next.js site, enables CORS for REST API, disables unnecessary front-end features.
- * Version:     2.1.0
+ * Version:     2.2.0
  * Author:      Un Bateau à Paris
  * License:     GPL-2.0-or-later
  * Text Domain: bateau-headless
@@ -224,7 +224,6 @@ add_action('rest_api_init', function () {
         $allowed_origins = [
             BATEAU_NEXTJS_URL,
             'https://bateau-2026.vercel.app',
-            'http://localhost:3000',
         ];
 
         if (in_array($origin, $allowed_origins, true)) {
@@ -246,7 +245,6 @@ add_action('init', function () {
         $allowed_origins = [
             BATEAU_NEXTJS_URL,
             'https://bateau-2026.vercel.app',
-            'http://localhost:3000',
         ];
 
         if (in_array($origin, $allowed_origins, true)) {
@@ -752,7 +750,7 @@ add_action('admin_bar_menu', function (\WP_Admin_Bar $admin_bar) {
             'class' => 'bateau-sync-btn',
         ],
     ]);
-}, 100);
+}, 50);
 
 // --- Admin bar inline styles + JS ---
 add_action('admin_head', function () {
@@ -816,6 +814,25 @@ add_action('admin_head', function () {
     <?php
 });
 
+/**
+ * Log sync actions with IP, timestamp, user, and status.
+ * Stores the last 50 entries in wp_options (bateau_sync_log).
+ */
+function bateau_log_sync(string $status, string $message): void {
+    $log = get_option('bateau_sync_log', []);
+    $user = wp_get_current_user();
+    $log[] = [
+        'timestamp' => current_time('mysql'),
+        'user'      => $user->user_login ?: 'unknown',
+        'ip'        => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
+        'status'    => $status,
+        'message'   => $message,
+    ];
+    // Keep only the last 50 entries
+    $log = array_slice($log, -50);
+    update_option('bateau_sync_log', $log, false);
+}
+
 // --- AJAX handler: trigger GitHub Actions ---
 add_action('wp_ajax_bateau_sync_site', function () {
     check_ajax_referer('bateau_sync_site');
@@ -824,10 +841,19 @@ add_action('wp_ajax_bateau_sync_site', function () {
         wp_send_json_error('Permission refusee', 403);
     }
 
+    // Rate limiting: transient lock of 2 minutes between syncs
+    $lock_key = 'bateau_sync_lock';
+    if (get_transient($lock_key)) {
+        bateau_log_sync('rate_limited', 'Sync blocked by rate limit');
+        wp_send_json_error('Publication deja en cours. Reessayez dans 2 minutes.');
+    }
+    set_transient($lock_key, true, 2 * MINUTE_IN_SECONDS);
+
     $token = defined('BATEAU_GITHUB_TOKEN') ? BATEAU_GITHUB_TOKEN : '';
     $repo  = defined('BATEAU_GITHUB_REPO')  ? BATEAU_GITHUB_REPO  : '';
 
     if (empty($token) || empty($repo)) {
+        bateau_log_sync('error', 'GITHUB_TOKEN ou GITHUB_REPO non defini');
         wp_send_json_error('BATEAU_GITHUB_TOKEN ou BATEAU_GITHUB_REPO non defini dans wp-config.php');
     }
 
@@ -851,6 +877,8 @@ add_action('wp_ajax_bateau_sync_site', function () {
     ]);
 
     if (is_wp_error($response)) {
+        bateau_log_sync('error', $response->get_error_message());
+        delete_transient($lock_key);
         wp_send_json_error($response->get_error_message());
     }
 
@@ -863,10 +891,13 @@ add_action('wp_ajax_bateau_sync_site', function () {
             'user'      => wp_get_current_user()->display_name,
             'timestamp' => current_time('mysql'),
         ]);
+        bateau_log_sync('success', 'GitHub dispatch 204');
         wp_send_json_success('Publication declenchee');
     }
 
     $body = wp_remote_retrieve_body($response);
+    bateau_log_sync('error', "GitHub API {$code}: {$body}");
+    delete_transient($lock_key);
     wp_send_json_error("GitHub API {$code}: {$body}");
 });
 

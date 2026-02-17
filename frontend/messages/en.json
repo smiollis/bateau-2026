@@ -153,6 +153,7 @@
     "cgv": "Terms and Conditions",
     "confidentialite": "Privacy Policy",
     "faq": "Frequently Asked Questions",
+    "sitemap": "Site map",
     "cookieSettings": "Cookie settings",
     "copyright": "© {year} Un Bateau à Paris. All rights reserved.",
     "tagline": "Private cruises on the Seine",
@@ -308,7 +309,9 @@
     "mentionsTitle": "Legal Notice",
     "mentionsDescription": "Legal notices for the Un Bateau à Paris website. Information about the publisher, host, and intellectual property rights.",
     "confidentialiteTitle": "Privacy Policy",
-    "confidentialiteDescription": "Privacy policy and personal data protection policy for the Un Bateau à Paris website."
+    "confidentialiteDescription": "Privacy policy and personal data protection policy for the Un Bateau à Paris website.",
+    "sitemapTitle": "Site Map",
+    "sitemapDescription": "Complete site map of bateau-a-paris.fr. Find all pages of our website."
   },
   "occasions": {
     "title": "Our cruises by occasion",
@@ -504,5 +507,25 @@
     "cookiesContent2": "You can change your preferences at any time via the cookie banner.",
     "modificationTitle": "Changes to this policy",
     "modificationContent": "Last updated: February 2026. We reserve the right to modify this policy. Changes will be published on this page."
+  },
+  "sitemap": {
+    "backToHome": "Back to home",
+    "title": "Site Map",
+    "subtitle": "Find all pages of our website",
+    "mainPages": "Main pages",
+    "info": "Information",
+    "landingPages": "Our themed cruises",
+    "blog": "Blog",
+    "seeAllArticles": "See all articles",
+    "home": "Home",
+    "cruise": "The Cruise",
+    "gallery": "Photo Gallery",
+    "faqPage": "FAQ",
+    "news": "News",
+    "reservation": "Reservation",
+    "cgv": "Terms & Conditions",
+    "legalNotice": "Legal Notice",
+    "privacy": "Privacy Policy",
+    "sitemapPage": "Site Map"
   }
 }

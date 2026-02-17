@@ -153,6 +153,7 @@
     "cgv": "Condiciones generales de venta",
     "confidentialite": "Política de privacidad",
     "faq": "FAQ",
+    "sitemap": "Mapa del sitio",
     "cookieSettings": "Configuración de cookies",
     "copyright": "© {year} Un Bateau à Paris. Todos los derechos reservados.",
     "tagline": "Cruceros privados por el Sena",
@@ -308,7 +309,9 @@
     "mentionsTitle": "Aviso Legal",
     "mentionsDescription": "Aviso legal del sitio Un Bateau à Paris. Información sobre el editor, el alojamiento web y los derechos de propiedad intelectual.",
     "confidentialiteTitle": "Política de Privacidad",
-    "confidentialiteDescription": "Política de privacidad y protección de datos personales del sitio Un Bateau à Paris."
+    "confidentialiteDescription": "Política de privacidad y protección de datos personales del sitio Un Bateau à Paris.",
+    "sitemapTitle": "Mapa del sitio",
+    "sitemapDescription": "Mapa del sitio completo de bateau-a-paris.fr."
   },
   "occasions": {
     "title": "Nuestros cruceros por ocasión",
@@ -504,5 +507,25 @@
     "cookiesContent2": "Puede modificar sus preferencias en cualquier momento a través del banner de cookies.",
     "modificationTitle": "Modificación de esta política",
     "modificationContent": "Última actualización: febrero 2026. Nos reservamos el derecho de modificar esta política. Las modificaciones serán publicadas en esta página."
+  },
+  "sitemap": {
+    "backToHome": "Volver al inicio",
+    "title": "Mapa del sitio",
+    "subtitle": "Encuentra todas las páginas de nuestro sitio web",
+    "mainPages": "Páginas principales",
+    "info": "Información",
+    "landingPages": "Nuestros cruceros temáticos",
+    "blog": "Blog",
+    "seeAllArticles": "Ver todos los artículos",
+    "home": "Inicio",
+    "cruise": "El Crucero",
+    "gallery": "Galería de fotos",
+    "faqPage": "FAQ",
+    "news": "Noticias",
+    "reservation": "Reserva",
+    "cgv": "Condiciones generales de venta",
+    "legalNotice": "Aviso legal",
+    "privacy": "Política de privacidad",
+    "sitemapPage": "Mapa del sitio"
   }
 }

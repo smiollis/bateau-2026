@@ -198,6 +198,25 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
+/* Premium button outline style */
+.btn-gold-outline {
+  background: transparent;
+  color: hsl(var(--gold-dark));
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  border: 2px solid hsl(var(--gold));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s;
+}
+
+.btn-gold-outline:hover {
+  background: hsl(var(--gold));
+  color: #fff;
+  transform: scale(1.05);
+}
+
 /* Card hover effect */
 .card-hover {
   transition: all 0.3s;

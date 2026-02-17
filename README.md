@@ -49,7 +49,7 @@ bateau-2026/
 | Fonts | Playfair Display, Inter (next/font) |
 | i18n | next-intl 4 (FR, EN, ES, IT, DE, PT-BR) — 460+ cles |
 | SEO | JSON-LD (7 schemas), hreflang, sitemap multi-locale, Rank Math |
-| Tests | Vitest (303 tests) + Playwright (28 E2E) + axe-core |
+| Tests | Vitest (319 tests) + Playwright (66 E2E) + axe-core |
 | Email | Resend (formulaire de contact) |
 | CI/CD | GitHub Actions (import posts, reviews, Instagram) + Vercel auto-deploy |
 | Deploy | Vercel (frontend) + OVH Plesk (WordPress) |
@@ -82,11 +82,11 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 - **Google Analytics 4** — defaults "denied" pour 33 regions EU/EEA, mise a jour apres consentement
 - **Formulaire de contact** — validation zod, rate limiting, honeypot antispam, envoi via Resend
 - **Instagram feed** — API route server-side avec cache 1h, 9 derniers posts
-- **Pages** — Accueil, Galerie, Croisiere, FAQ, CGV, Mentions Legales, Reservation, Actualites, Confidentialite
+- **Pages** — Accueil, Galerie, Croisiere, FAQ, CGV, Mentions Legales, Reservation, Actualites, Confidentialite, Plan du site
 - **17 landing pages SEO** — route dynamique SSG, 7 schemas JSON-LD, traduites en 5 langues
 - **SEO** — metadata i18n, sitemap multi-locale, robots.txt, JSON-LD (LocalBusiness, Article, FAQPage, TouristAttraction, Breadcrumb)
 - **Lightbox galerie** — navigation clavier, grille masonry responsive
-- **Tests** — 303 tests unitaires (Vitest) + 28 E2E (Playwright) + accessibilite (axe-core)
+- **Tests** — 319 tests unitaires (Vitest) + 66 E2E (Playwright) + accessibilite (axe-core)
 - **Accessibilite** — WCAG 2.1 AA, prefers-reduced-motion, focus trap, skip-to-content
 - **Animations** — Framer Motion sur tous les composants (scroll, hover, transitions)
 
@@ -129,7 +129,7 @@ CONTACT_EMAIL_TO=contact@example.com
 | Document | Description |
 |----------|-------------|
 | [ROADMAP.md](frontend/docs/ROADMAP.md) | Roadmap priorisee et backlog |
-| [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.13.0) |
+| [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.15.0) |
 | [frontend/CLAUDE.md](frontend/CLAUDE.md) | Contexte projet pour Claude Code |
 | [brief/](brief/) | Specifications et briefs du projet |
 | [frontend/docs/](frontend/docs/) | Audits, release notes, plans |

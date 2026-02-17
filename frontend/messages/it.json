@@ -153,6 +153,7 @@
     "cgv": "Condizioni generali di vendita",
     "confidentialite": "Informativa sulla privacy",
     "faq": "FAQ",
+    "sitemap": "Mappa del sito",
     "cookieSettings": "Impostazioni cookie",
     "copyright": "© {year} Un Bateau à Paris. Tutti i diritti riservati.",
     "tagline": "Crociere private sulla Senna",
@@ -308,7 +309,9 @@
     "mentionsTitle": "Note Legali",
     "mentionsDescription": "Note legali del sito Un Bateau à Paris. Informazioni sull'editore, l'hosting e i diritti di proprietà intellettuale.",
     "confidentialiteTitle": "Informativa sulla Privacy",
-    "confidentialiteDescription": "Informativa sulla privacy e protezione dei dati personali del sito Un Bateau à Paris."
+    "confidentialiteDescription": "Informativa sulla privacy e protezione dei dati personali del sito Un Bateau à Paris.",
+    "sitemapTitle": "Mappa del sito",
+    "sitemapDescription": "Mappa del sito completa di bateau-a-paris.fr."
   },
   "occasions": {
     "title": "Le nostre crociere per occasione",
@@ -504,5 +507,25 @@
     "cookiesContent2": "Potete modificare le vostre preferenze in qualsiasi momento tramite il banner cookie.",
     "modificationTitle": "Modifica di questa politica",
     "modificationContent": "Ultimo aggiornamento: febbraio 2026. Ci riserviamo il diritto di modificare questa politica. Le modifiche saranno pubblicate su questa pagina."
+  },
+  "sitemap": {
+    "backToHome": "Torna alla home",
+    "title": "Mappa del sito",
+    "subtitle": "Trova tutte le pagine del nostro sito web",
+    "mainPages": "Pagine principali",
+    "info": "Informazioni",
+    "landingPages": "Le nostre crociere tematiche",
+    "blog": "Blog",
+    "seeAllArticles": "Vedi tutti gli articoli",
+    "home": "Home",
+    "cruise": "La Crociera",
+    "gallery": "Galleria fotografica",
+    "faqPage": "FAQ",
+    "news": "Notizie",
+    "reservation": "Prenotazione",
+    "cgv": "Condizioni generali di vendita",
+    "legalNotice": "Note legali",
+    "privacy": "Informativa sulla privacy",
+    "sitemapPage": "Mappa del sito"
   }
 }

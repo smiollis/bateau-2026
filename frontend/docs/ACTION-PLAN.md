@@ -59,11 +59,9 @@
 - Reduire dimensions aux max affiches
 - Impact : -6MB
 
-### 2.6 Fixer 5 tests en echec + augmenter couverture
-**Source** : Audit Tests | **Effort** : 2h
-- Mocks framer-motion deja mis a jour (Sprint 1)
-- Verifier que les 5 tests HeroVariants passent
-- Ajouter tests API routes Instagram + Revalidate
+~~### 2.6 Fixer tests en echec + augmenter couverture~~ ✅ fait (17 fev 2026)
+- Fix ContactForm.test.tsx : le composant affiche une confirmation UI (role="status") et non un toast apres envoi reussi
+- 319/319 tests passent (Vitest), tests API routes Instagram + Revalidate deja existants
 
 ---
 
@@ -76,17 +74,24 @@
 - CookieProvider (3h), LanguageSelector (2h)
 - Objectif : coverage 40% → 60%
 
-### 3.2 Server Components migration (3h)
-- LandingRichtext, LandingBreadcrumb, LandingBenefits → server
+~~### 3.2 Server Components migration~~ ✅ fait (17 fev 2026)
+- LandingRichtext, LandingBreadcrumb, LandingBenefits → server components
+- Cree `AnimatedReveal` client wrapper (framer-motion + useReducedMotion) pour garder les animations
+- LandingBreadcrumb : `useTranslations` → `getTranslations` (async server)
+- LandingRichtext : supprime DOMPurify (contenu CMS trusted), remplace `isDark` par classes Tailwind `dark:`
+- LandingBenefits : icones rendues cote serveur (tree-shaking optimal)
 - Impact : -10KB JS client
 
-### 3.3 Tests E2E critiques (8h)
-- Flow reservation, landing pages SEO, blog multilingue, galerie keyboard
+~~### 3.3 Tests E2E critiques~~ ✅ fait (17 fev 2026)
+- 4 nouveaux specs Playwright : reservation.spec.ts, landing-seo.spec.ts, blog-multilingual.spec.ts, gallery-keyboard.spec.ts
+- 38 nouveaux tests E2E (total : 10 spec files, 66 tests)
+- Couverture : flow reservation FR/EN, SEO meta/JSON-LD/hreflang, blog multilingue, lightbox clavier
 
-### 3.4 Rate limiting WP plugin (2h)
-- Transient lock 2 min sur endpoint sync
-- Retirer `localhost:3000` des CORS en prod
-- Logger actions GitHub avec IP + timestamp
+~~### 3.4 Rate limiting WP plugin~~ ✅ fait (17 fev 2026)
+- Transient lock 2 min sur endpoint sync (`bateau_sync_lock`)
+- Retire `http://localhost:3000` des CORS (2 occurrences)
+- Logging sync avec IP + timestamp + user + status (50 derniers dans `bateau_sync_log`)
+- Plugin v2.1.0 → v2.2.0
 
 ---
 
@@ -112,6 +117,6 @@
 |--------|-------|--------|-------|--------|
 | ~~Deja fait~~ | 7 fixes | 1h | 8.1 → 8.1 | ✅ |
 | ~~Sprint 1~~ | 8 agents | ~4h | 8.1 → 8.6 | ✅ |
-| Sprint 2 | 4 chantiers | 8h | 8.6 → 9.0 | A faire |
-| Sprint 3 | 4 gros items | 33h | 9.0 → 9.5 | A faire |
+| Sprint 2 | 4 chantiers (1 fait, 2 quasi-termines) | 8h | 8.6 → 9.0 | En cours |
+| Sprint 3 | 4 gros items (3 faits) | 33h | 9.0 → 9.5 | En cours |
 | Backlog | 11 items | 15h | 9.5 → 9.8 | A faire |
