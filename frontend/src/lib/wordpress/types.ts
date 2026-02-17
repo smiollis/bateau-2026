@@ -20,6 +20,7 @@ export interface WPSeoData {
 export interface WPPost {
   id: number;
   date: string;
+  modified: string;
   slug: string;
   link: string;
   title: { rendered: string };

@@ -271,6 +271,10 @@
     "ctaFeature3Desc": "5 Mal täglich, ab dem Port de l'Arsenal, genießen Sie eine private Rundfahrt auf der Seine.",
     "ctaButton": "Gönnen Sie sich eine private Rundfahrt auf der Seine"
   },
+  "breadcrumb": {
+    "home": "Startseite",
+    "cruises": "Rundfahrten"
+  },
   "common": {
     "backToHome": "Zurück zur Startseite",
     "readMore": "Weiterlesen",

@@ -2,14 +2,17 @@
 
 import { ThemeVariantProvider } from "@/contexts/ThemeVariantContext";
 import { CookieProvider } from "@/components/cookie-consent";
+import { LazyMotion, domAnimation } from "framer-motion";
 import { ReactNode } from "react";
 
 export default function Providers({ children }: { children: ReactNode }) {
   return (
-    <ThemeVariantProvider>
-      <CookieProvider>
-        {children}
-      </CookieProvider>
-    </ThemeVariantProvider>
+    <LazyMotion features={domAnimation} strict>
+      <ThemeVariantProvider>
+        <CookieProvider>
+          {children}
+        </CookieProvider>
+      </ThemeVariantProvider>
+    </LazyMotion>
   );
 }

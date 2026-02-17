@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import HeroCinemaSlideshow from "@/components/HeroCinemaSlideshow";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -32,21 +32,21 @@ const HeroVariants = () => {
 
       {/* Content */}
       <div className="relative z-10 container-custom text-primary-foreground text-center">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.5, delay: 0 }}
           className="max-w-4xl mx-auto"
         >
           {/* Badge */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.3, delay: prefersReducedMotion ? 0 : 0.15 }}
             className="inline-flex items-center gap-2 bg-accent/90 text-white px-4 py-2 rounded-full text-sm font-medium mb-6"
           >
             <span>{t("badge")}</span>
-          </motion.div>
+          </m.div>
 
           {/* Main Title */}
           <h1 className={`${config.titleClass} mb-6`}>
@@ -61,7 +61,7 @@ const HeroVariants = () => {
           </p>
 
           {/* Price Badge */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.3, delay: prefersReducedMotion ? 0 : 0.25 }}
@@ -76,10 +76,10 @@ const HeroVariants = () => {
               {t("price")}
             </span>
             <span className={isDark ? "text-white/90" : "text-primary-foreground/80"}>· {t("priceDetail")}</span>
-          </motion.div>
+          </m.div>
 
           {/* CTA Button */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: prefersReducedMotion ? 0 : 0.3, delay: prefersReducedMotion ? 0 : 0.35 }}
@@ -87,25 +87,25 @@ const HeroVariants = () => {
             <Button className="btn-gold text-white text-lg px-10 py-6 h-auto" asChild>
               <Link href="/reservation">{t("cta")}</Link>
             </Button>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
 
       </div>
 
       {/* Scroll Indicator - outside content container */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.3, delay: prefersReducedMotion ? 0 : 0.6 }}
         className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20"
       >
-        <motion.div
+        <m.div
           animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
           transition={prefersReducedMotion ? {} : { duration: 1.5, repeat: Infinity }}
         >
           <ChevronDown className="w-8 h-8 text-primary-foreground/60" />
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </section>
   );
 };

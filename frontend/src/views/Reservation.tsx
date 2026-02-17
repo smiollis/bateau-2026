@@ -48,7 +48,7 @@ const ReservationSkeleton = ({ loadingText }: { loadingText: string }) => (
 const Reservation = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeState, setIframeState] = useState<IframeState>("loading");
-  const [iframeHeight, setIframeHeight] = useState(1200);
+  const [iframeHeight, setIframeHeight] = useState(1800);
   const { isDark } = useThemeVariant();
   const t = useTranslations("reservation");
   const locale = useLocale();
@@ -80,7 +80,7 @@ const Reservation = () => {
     const handleMessage = (event: MessageEvent) => {
       if (event.origin !== wpOrigin) return;
       if (event.data?.type === "bookly-height" && typeof event.data.height === "number") {
-        setIframeHeight(event.data.height + 50);
+        setIframeHeight(event.data.height + 100);
       }
     };
 

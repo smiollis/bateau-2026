@@ -271,6 +271,10 @@
     "ctaFeature3Desc": "5 vezes por dia, partindo do Port de l'Arsenal, aproveite um cruzeiro privativo no Sena.",
     "ctaButton": "Presenteie-se com um cruzeiro privativo no Sena"
   },
+  "breadcrumb": {
+    "home": "Inicio",
+    "cruises": "Cruzeiros"
+  },
   "common": {
     "backToHome": "Voltar ao inicio",
     "readMore": "Leia mais",

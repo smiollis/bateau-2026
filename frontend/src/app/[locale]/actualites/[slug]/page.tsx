@@ -52,16 +52,23 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const post = await fetchPost(slug, locale);
   if (!post) return {};
+
+  const seoTitle = post.seo?.title || post.title;
+  const seoDesc = post.seo?.description || post.excerpt.slice(0, 160);
+
   return {
-    title: post.title,
-    description: post.excerpt.slice(0, 160),
+    title: seoTitle,
+    description: seoDesc,
     alternates: getAlternates(locale, `/actualites/${slug}`),
     openGraph: {
       locale: getOgLocale(locale),
-      title: post.title,
-      description: post.excerpt.slice(0, 160),
+      title: seoTitle,
+      description: seoDesc,
       images: post.image ? [{ url: post.image }] : [],
     },
+    ...(post.seo?.robots?.includes('noindex') && {
+      robots: { index: false, follow: true },
+    }),
   };
 }
 
@@ -73,6 +80,10 @@ export default async function ArticlePage({
   const { locale, slug } = await params;
   const post = await fetchPost(slug, locale);
   if (!post) notFound();
+
+  const seoTitle = post.seo?.title || post.title;
+  const seoDesc = post.seo?.description || post.excerpt.slice(0, 160);
+
   return (
     <>
       <script
@@ -81,12 +92,20 @@ export default async function ArticlePage({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Article",
-            headline: post.title,
-            description: post.excerpt.slice(0, 160),
+            headline: seoTitle,
+            description: seoDesc,
             image: post.image || undefined,
             datePublished: post.date,
+            dateModified: post.modified || post.date,
             author: { "@type": "Organization", name: "Un Bateau à Paris" },
-            publisher: { "@type": "Organization", name: "Un Bateau à Paris" },
+            publisher: {
+              "@type": "Organization",
+              name: "Un Bateau à Paris",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://bateau-a-paris.fr/images/logo-bateau-a-paris.png",
+              },
+            },
           }),
         }}
       />

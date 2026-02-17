@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { fetchLandingData, fetchAllLandingSlugs, getRelatedPages } from "@/data/landings";
 import { getAlternates, getOgLocale } from "@/lib/metadata";
 import {
@@ -78,12 +79,14 @@ export default async function LandingPage({ params }: PageProps) {
   const landing = await fetchLandingData(slug, locale);
   if (!landing) notFound();
 
+  const t = await getTranslations({ locale, namespace: "breadcrumb" });
+
   const faqSection = landing.sections.find(
     (s): s is FAQSection => s.type === "faq"
   );
 
   const breadcrumbItems = [
-    { name: "Croisières", href: "/croisiere" },
+    { name: t("cruises"), href: "/croisiere" },
     { name: landing.hero.title },
   ];
 
@@ -92,8 +95,8 @@ export default async function LandingPage({ params }: PageProps) {
   const jsonLdScripts = [
     generateTouristAttractionJsonLd(landing, locale),
     generateBreadcrumbJsonLd([
-      { name: "Accueil", url: `/${locale}` },
-      { name: "Croisières", url: `/${locale}/croisiere` },
+      { name: t("home"), url: `/${locale}` },
+      { name: t("cruises"), url: `/${locale}/croisiere` },
       { name: landing.hero.title, url: `/${locale}/${slug}` },
     ]),
     ...(faqSection ? [generateFAQPageJsonLd(faqSection.items)] : []),

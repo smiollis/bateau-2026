@@ -22,26 +22,36 @@
 
 ```
 bateau-2026/
-├── frontend/          # Application Next.js 16 (App Router)
-├── brief/             # Specifications et briefs du projet
-├── docs/              # Documentation technique
-├── ROADMAP.md         # Roadmap priorisee et backlog
-└── CHANGELOG.md       # Release notes
+├── frontend/                 # Application Next.js 16 (App Router)
+│   ├── src/app/[locale]/     # Pages App Router (10 pages + 17 landing pages)
+│   ├── src/views/            # Composants de page
+│   ├── src/components/       # Composants React (ui/, landing/, variants)
+│   ├── src/data/             # Donnees statiques (posts, landings, reviews)
+│   ├── src/lib/              # Utilitaires (seo, wordpress, metadata)
+│   └── src/i18n/             # Configuration next-intl
+├── wordpress/
+│   ├── plugins/bateau-headless-mode/  # Plugin headless (redirects, CORS, SEO)
+│   └── themes/bateau-headless/        # Theme minimal (Bookly iframe)
+├── brief/                    # Specifications et briefs du projet
+├── ROADMAP.md                # Roadmap priorisee et backlog
+└── CHANGELOG.md              # Release notes
 ```
 
 | Couche | Technologie |
 |--------|-------------|
-| Frontend | Next.js 16 (App Router, Turbopack) |
+| Frontend | Next.js 16.1 (App Router, Turbopack, ISR) |
 | UI | Tailwind CSS v4 + shadcn/ui + Radix UI |
-| Animations | Framer Motion 12 |
-| Language | TypeScript 5 (strict) |
-| CMS | WordPress (REST API headless) |
-| Analytics | GA4 + Google Consent Mode v2 |
-| API | Instagram Graph API, WordPress REST API |
-| Fonts | Playfair Display, Inter |
-| i18n | next-intl (FR, EN, ES, IT, DE, PT-BR) |
+| Animations | Framer Motion 12 (LazyMotion) |
+| Language | TypeScript 5 (strict + noUncheckedIndexedAccess) |
+| CMS | WordPress headless sur admin.bateau-a-paris.fr (REST API) |
+| Analytics | GA4 + Vercel Analytics + Google Consent Mode v2 |
+| API | Instagram Graph API, WordPress REST API, Bookly |
+| Fonts | Playfair Display, Inter (next/font) |
+| i18n | next-intl 4 (FR, EN, ES, IT, DE, PT-BR) — 460+ cles |
+| SEO | JSON-LD (7 schemas), hreflang, sitemap multi-locale, Rank Math |
 | Tests | Vitest (303 tests) + Playwright (28 E2E) + axe-core |
 | Email | Resend (formulaire de contact) |
+| Deploy | Vercel (frontend) + OVH Plesk (WordPress) |
 
 ## Quick Start
 
@@ -82,9 +92,9 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 ## Variables d'environnement
 
 ```env
-# WordPress API
-NEXT_PUBLIC_WP_API_URL=https://bateau-a-paris.fr/wp-json
-NEXT_PUBLIC_WP_URL=https://bateau-a-paris.fr
+# WordPress API (headless backend)
+NEXT_PUBLIC_WP_API_URL=https://admin.bateau-a-paris.fr/wp-json
+NEXT_PUBLIC_WP_URL=https://admin.bateau-a-paris.fr
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 # Google Analytics 4
@@ -93,6 +103,10 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 # Instagram (server-side)
 INSTAGRAM_ACCESS_TOKEN=IGAA...
 INSTAGRAM_USER_ID=12345...
+
+# Contact form
+RESEND_API_KEY=re_...
+CONTACT_EMAIL_TO=contact@example.com
 ```
 
 ## Scripts
@@ -110,8 +124,7 @@ INSTAGRAM_USER_ID=12345...
 
 | Document | Description |
 |----------|-------------|
-| [ROADMAP.md](ROADMAP.md) | Roadmap priorisee (30-60j) et backlog |
-| [CHANGELOG.md](CHANGELOG.md) | Release notes |
-| [frontend/README.md](frontend/README.md) | Documentation frontend detaillee |
+| [ROADMAP.md](ROADMAP.md) | Roadmap priorisee et backlog |
+| [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.12.0) |
 | [frontend/CLAUDE.md](frontend/CLAUDE.md) | Contexte projet pour Claude Code |
 | [brief/](brief/) | Specifications et briefs du projet |

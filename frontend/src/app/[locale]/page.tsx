@@ -33,13 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default function Home() {
   return (
     <>
-      {/* Server-side preload for LCP hero image */}
-      <link
-        rel="preload"
-        as="image"
-        href="/images/hero/2025-04-08-a-22.20.47_261af646.webp"
-        fetchPriority="high"
-      />
+      {/* next/image priority in HeroCinemaSlideshow auto-generates the correct preload */}
       <div className="min-h-screen">
         <HeroVariants />
         <FeaturesVariants />

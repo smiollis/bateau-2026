@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Clock, MapPin, Users, Sparkles, ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -53,7 +53,7 @@ const FeaturesVariants = () => {
   return (
     <section className={`section-padding ${styles.section}`} id="croisiere">
       <div className="container-custom">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -62,11 +62,11 @@ const FeaturesVariants = () => {
         >
           <h2 className={`${styles.title} mb-4`}>{t("title")}</h2>
           <p className={styles.subtitle}>{t("subtitle")}</p>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {features.map((feature, index) => (
-            <motion.div
+            <m.div
               key={feature.title}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -83,11 +83,11 @@ const FeaturesVariants = () => {
                   <p className={`${styles.cardText} leading-relaxed`}>{feature.description}</p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -100,7 +100,7 @@ const FeaturesVariants = () => {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

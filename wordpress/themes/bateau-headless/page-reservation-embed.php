@@ -99,9 +99,13 @@ if (!defined('ABSPATH')) {
     <script>
         // Notify the parent Next.js window of height changes for responsive iframe
         (function() {
+            var debounceTimer;
             function sendHeight() {
-                var height = document.getElementById('bookly-container').scrollHeight + 32;
-                window.parent.postMessage({ type: 'bookly-height', height: height }, '*');
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(function() {
+                    var height = document.getElementById('bookly-container').scrollHeight + 80;
+                    window.parent.postMessage({ type: 'bookly-height', height: height }, '*');
+                }, 150);
             }
             // Send height on load and on resize
             window.addEventListener('load', sendHeight);

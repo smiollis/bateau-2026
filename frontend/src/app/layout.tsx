@@ -5,6 +5,7 @@ import "./globals.css";
 import Providers from "@/components/Providers";
 
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { getConsentDefaultScript } from "@/lib/gtag";
 import { getLocale } from "next-intl/server";
 
@@ -112,6 +113,7 @@ export default async function RootLayout({
           {children}
         </Providers>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

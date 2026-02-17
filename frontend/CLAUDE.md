@@ -50,16 +50,17 @@ bateau-2026/
 
 - **Framework**: Next.js 16.1.6 (App Router, Turbopack)
 - **UI**: Tailwind CSS v4 (`@theme inline` pour les tokens), shadcn/ui (epure), Radix UI
-- **Animations**: Framer Motion 12 (avec `useReducedMotion` WCAG 2.3.1)
+- **Animations**: Framer Motion 12 (LazyMotion + `m` components, `useReducedMotion` WCAG 2.3.1)
 - **TypeScript**: strict mode + `noUncheckedIndexedAccess`
 - **i18n**: next-intl 4 (FR/EN/ES/IT/DE/PT-BR) — 460 cles, 19 namespaces, blog multilingue
-- **Analytics**: GA4 (G-N20S788YDW) + Google Consent Mode v2
-- **API**: Instagram Graph API, WordPress REST API (reservation Bookly)
+- **Analytics**: GA4 (G-N20S788YDW) + Vercel Web Analytics + Google Consent Mode v2
+- **API**: Instagram Graph API, WordPress REST API (reservation Bookly via iframe)
 - **Logging**: `src/lib/logger.ts` — JSON structure en production, lisible en dev
 - **Fonts**: Playfair Display (headings), Inter (body) via `next/font/google`
 - **Securite**: CSP (12 directives), HSTS, DOMPurify, 6 security headers
-- **SEO**: Canonical + hreflang + JSON-LD (4 schemas base + 3 par landing page)
-- **Landing pages**: 17 pages SSG (route dynamique `[slug]`), traduites EN/ES/IT/DE
+- **SEO**: Canonical + hreflang 6 locales + JSON-LD (4 schemas base + 3 par landing page), Rank Math sur WP
+- **Landing pages**: 17 pages SSG (route dynamique `[slug]`), traduites EN/ES/IT/DE/PT-BR
+- **ISR**: revalidate 3600s + webhook `save_post` → `/api/revalidate` (6 locales)
 
 ## Systeme de themes
 
@@ -88,16 +89,16 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **Pages Router conflit** : ne PAS creer de fichiers dans `src/pages/` — utiliser `src/views/` a la place
 - **Cookie consent** : le tracking GA4 ne demarre qu'apres consentement (Consent Mode v2 defaults "denied" pour EU)
 - **Instagram token** : expire le 2026-04-04 — voir section "Renouvellement token Instagram" ci-dessous
-- **Blog bilingue** : `posts.json` (FR) + `posts-en.json` (EN), chargement par locale dans views et pages
+- **Blog multilingue** : `posts.json` (FR) + `posts-{locale}.json` (EN/ES/IT/DE/PT-BR), chargement par locale dans views et pages
 - **Logger** : utiliser `logger.error/warn/info` de `@/lib/logger` au lieu de `console.error`
 - **Images** : TOUJOURS utiliser `next/image` (pas de `<img>`) — toutes les images sont migrees
 - **CSP** : le header Content-Security-Policy est dans `next.config.ts` — penser a ajouter les domaines si on integre un nouveau service
 - **DOMPurify** : TOUJOURS utiliser DOMPurify sur `dangerouslySetInnerHTML` (contenu WordPress)
 - **Code splitting** : utiliser `next/dynamic` avec `ssr: false` pour les composants lourds client-only (ex: GalleryLightbox)
-- **JSON-LD** : 4 schemas en place (LocalBusiness, FAQPage, Offers/TouristTrip, Article) — ajouter de nouveaux schemas dans les `page.tsx` server components
+- **JSON-LD** : 7 schemas en place (LocalBusiness, FAQPage, Offers/TouristTrip, Article, TouristAttraction, BreadcrumbList, Offer) — ajouter de nouveaux schemas dans les `page.tsx` server components
 - **Metadata** : utiliser `getAlternates(locale, path)` et `getOgLocale(locale)` de `@/lib/metadata` pour les `generateMetadata`
 - **Landing i18n** : `getLandingData(slug, locale)` dans `src/data/landings/index.ts` fait un deep merge FR base + overlay locale. Les fichiers `i18n/<locale>/<slug>.ts` exportent un type `LandingPageTranslation` (partiel)
-- **Animations** : TOUJOURS utiliser `useReducedMotion()` de framer-motion et conditionner les animations avec `shouldReduceMotion` pour WCAG 2.3.1
+- **Animations** : TOUJOURS utiliser `useReducedMotion()` de framer-motion et conditionner les animations avec `shouldReduceMotion` pour WCAG 2.3.1. Utiliser `m` (pas `motion`) car `LazyMotion` est active dans Providers.tsx
 - **Header/Footer** : dans `[locale]/layout.tsx` uniquement — NE PAS les ajouter dans les vues
 
 ## Commandes
@@ -128,7 +129,7 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 ## SEO
 
 - **Canonical** : unique par page (10 pages + landing pages) via `generateMetadata`
-- **Hreflang** : FR/EN + x-default par page via `getAlternates()`
+- **Hreflang** : 6 locales + x-default par page via `getAlternates()`
 - **og:locale** : dynamique via `getOgLocale()`
 - **JSON-LD** :
   - `LocalBusiness` : root layout
@@ -176,8 +177,9 @@ npm run test:e2e:ui  # Tests E2E avec interface Playwright
 
 ### Deploiement
 
-- **Frontend** : Vercel (auto-deploy on push to main)
-- **WordPress** : Plesk-managed sur OVH
+- **Frontend** : Vercel (auto-deploy on push to main) — bascule DNS en cours
+- **WordPress** : Plesk-managed sur OVH (admin.bateau-a-paris.fr)
+- **SFTP WordPress** : `lftp -u '<user>' sftp://admin.bateau-a-paris.fr` → `httpdocs/wp-content/`
 
 ## Variables d'environnement (.env.local)
 
@@ -225,7 +227,7 @@ Le token est valide 60 jours. Renouveler au moins 10 jours avant expiration.
 | Images | 9/10 | next/image, blur, OG, AVIF |
 | Architecture | 9.5/10 | layout.tsx unique, composants decomposes |
 
-Reste a faire (basse priorite) : contrastes gold/blanc, blog PT-BR, landing PT-BR, middleware proxy.
+Reste a faire (basse priorite) : contrastes gold/blanc, middleware proxy, bascule DNS Vercel.
 
 ## Briefs de reference
 

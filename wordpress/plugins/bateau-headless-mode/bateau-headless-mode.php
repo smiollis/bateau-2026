@@ -164,6 +164,9 @@ function bateau_get_redirect_url(string $path): string {
         '/en/history-of-bateaux-mouches-de-paris'            => '/en/actualites/history-of-bateaux-mouches-de-paris',
         '/en/private-cruises-on-the-seine-back-on-march-15'  => '/en/actualites/private-cruises-on-the-seine-back-on-march-15',
         '/en/un-bateau-a-paris-at-the-olympic-games'         => '/en/actualites/un-bateau-a-paris-at-the-olympic-games',
+        '/en/un-bateau-a-paris-at-the-olympic-games-2'       => '/en/actualites/un-bateau-a-paris-at-the-olympic-games',
+        '/en/un-bateau-a-paris-at-the-olympic-games-3'       => '/en/actualites/un-bateau-a-paris-at-the-olympic-games',
+        '/en/un-bateau-a-paris-at-the-olympic-games-4'       => '/en/actualites/un-bateau-a-paris-at-the-olympic-games',
     ];
     if (isset($en_articles[$path])) {
         return $base . $en_articles[$path];
@@ -182,6 +185,15 @@ function bateau_get_redirect_url(string $path): string {
         status_header(410);
         echo '<!DOCTYPE html><html><head><title>Gone</title></head><body><h1>410 Gone</h1></body></html>';
         exit;
+    }
+
+    // ---- Blog articles (EN) — catch-all for English single posts ----
+    if (preg_match('#^/en/([a-z0-9-]+)$#', $path, $matches)) {
+        $slug = $matches[1];
+        $post = get_page_by_path($slug, OBJECT, 'post');
+        if ($post) {
+            return $base . '/en/actualites/' . $slug;
+        }
     }
 
     // ---- Blog articles (FR) — catch-all for single posts ----
@@ -301,6 +313,27 @@ remove_action('wp_head', 'feed_links_extra', 3);
 // Disable XML-RPC (security)
 add_filter('xmlrpc_enabled', '__return_false');
 
+// Disable Rank Math sitemap (Next.js generates its own at /sitemap.xml)
+add_filter('rank_math/sitemap/enable', '__return_false');
+
+// Redirect any sitemap request to the Next.js sitemap
+add_action('template_redirect', function () {
+    if (preg_match('#/sitemap[_\-]?(index)?\.xml#', $_SERVER['REQUEST_URI'])) {
+        wp_redirect(BATEAU_NEXTJS_URL . '/sitemap.xml', 301);
+        exit;
+    }
+}, 0);
+
+// Register landing_page with Rank Math (public=false needs manual registration).
+// Rank Math v1.0.264+ uses rank_math/excluded_post_types as the filter in
+// get_accessible_post_types(). The base list comes from get_post_types(['public' => true])
+// filtered through is_post_type_viewable(), so landing_page (public=false) is
+// excluded by default. We re-inject it via this filter.
+add_filter('rank_math/excluded_post_types', function ($types) {
+    $types['landing_page'] = 'landing_page';
+    return $types;
+});
+
 /**
  * ============================================================
  * 4. ADMIN NOTICES
@@ -354,6 +387,81 @@ add_action('init', function () {
 add_filter('pll_get_post_types', function (array $post_types): array {
     $post_types['landing_page'] = 'landing_page';
     return $post_types;
+});
+
+/**
+ * Add a language dropdown filter to admin list tables for Articles and Landing Pages.
+ * Polylang Pro uses an admin-bar switcher by default; this adds an explicit
+ * dropdown in the list table filters row for easier per-language filtering.
+ */
+add_action('restrict_manage_posts', function (string $post_type) {
+    if (!in_array($post_type, ['post', 'landing_page'], true)) {
+        return;
+    }
+    if (!function_exists('pll_languages_list') || !function_exists('pll_get_post_language')) {
+        return;
+    }
+
+    $languages = pll_languages_list(['fields' => '']);
+    if (empty($languages)) {
+        return;
+    }
+
+    $current = $_GET['lang'] ?? '';
+    echo '<select name="lang" id="filter-by-language">';
+    echo '<option value="">' . esc_html__('Toutes les langues', 'bateau-headless') . '</option>';
+    foreach ($languages as $lang) {
+        $selected = selected($current, $lang->slug, false);
+        $flag = '';
+        if (!empty($lang->flag_url)) {
+            $flag = '<img src="' . esc_url($lang->flag_url) . '" style="width:16px;height:11px;margin-right:4px;vertical-align:middle;" />';
+        }
+        echo '<option value="' . esc_attr($lang->slug) . '" ' . $selected . '>' . esc_html($lang->name) . '</option>';
+    }
+    echo '</select>';
+});
+
+/**
+ * Filter admin post list queries by the selected language.
+ * Polylang stores each post's language as a taxonomy term (language).
+ * We add a tax_query when the lang parameter is set.
+ */
+add_action('pre_get_posts', function (WP_Query $query) {
+    if (!is_admin() || !$query->is_main_query()) {
+        return;
+    }
+
+    $screen = function_exists('get_current_screen') ? get_current_screen() : null;
+    if (!$screen || $screen->base !== 'edit') {
+        return;
+    }
+
+    if (!in_array($query->get('post_type'), ['post', 'landing_page'], true)) {
+        return;
+    }
+
+    $lang = $_GET['lang'] ?? '';
+    if (empty($lang) || !function_exists('pll_languages_list')) {
+        return;
+    }
+
+    // Validate that the slug is a real Polylang language
+    $valid_slugs = pll_languages_list(['fields' => 'slug']);
+    if (!in_array($lang, $valid_slugs, true)) {
+        return;
+    }
+
+    // Polylang uses the 'language' taxonomy internally
+    $tax_query = $query->get('tax_query') ?: [];
+    $tax_query[] = [
+        'taxonomy' => 'language',
+        'field'    => 'slug',
+        'terms'    => $lang,
+    ];
+    $query->set('tax_query', $tax_query);
+
+    // Tell Polylang not to apply its own language filter on top of ours
+    $query->set('lang', '');
 });
 
 /**
@@ -631,7 +739,10 @@ add_action('save_post', function (int $post_id, \WP_Post $post, bool $update) {
 
     $revalidate_url = BATEAU_NEXTJS_URL . '/api/revalidate';
 
-    // Determine which paths to revalidate based on post type
+    // Determine which locale-agnostic paths to revalidate based on post type.
+    // The Next.js /api/revalidate endpoint expands a single path across ALL
+    // locales (fr, en, es, it, de, pt-BR), so we only need to send one
+    // locale-prefixed path per resource.
     $paths = [];
 
     if ($post->post_type === 'post') {
@@ -644,7 +755,8 @@ add_action('save_post', function (int $post_id, \WP_Post $post, bool $update) {
         $paths[] = '/fr/' . $slug;
     }
 
-    // Fire revalidation requests (non-blocking)
+    // Fire revalidation requests (non-blocking).
+    // Each request triggers revalidation for all 6 locales on the Next.js side.
     foreach ($paths as $path) {
         $url = add_query_arg([
             'secret' => $secret,

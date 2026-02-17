@@ -82,9 +82,15 @@ export interface BlogPost {
   content: string;
   image: string;
   date: string;
+  modified?: string;
   category: string;
   link: string;
   slug: string;
+  seo?: {
+    title: string | null;
+    description: string | null;
+    robots: string[];
+  };
 }
 
 /**
@@ -99,9 +105,17 @@ export function transformToPost(wp: WPPost): BlogPost {
     content: cleanContent(wp.content?.rendered ?? ""),
     image: wp._embedded?.["wp:featuredmedia"]?.[0]?.source_url ?? "",
     date: wp.date,
+    modified: wp.modified,
     category: wp._embedded?.["wp:term"]?.[0]?.[0]?.name ?? "",
     link: wp.link,
     slug: wp.slug,
+    seo: wp.seo
+      ? {
+          title: wp.seo.title,
+          description: wp.seo.description,
+          robots: wp.seo.robots || [],
+        }
+      : undefined,
   };
 }
 

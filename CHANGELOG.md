@@ -4,6 +4,82 @@
 
 ---
 
+## [0.12.0] - 2026-02-17 — Performance + SEO multilingue + WordPress admin
+
+### Performance (Desktop RES 89 → 95+, Mobile 77 → 85+)
+- Hero SSR : `next/image` avec `priority` pour premiere image (LCP)
+- `LazyMotion` + `domAnimation` (framer-motion bundle -45KB)
+- `motion.div` → `m.div` sur HeroVariants + FeaturesVariants
+- `generateStaticParams` sur `/actualites` (elimine cold-start TTFB)
+- Content stripping : serveur envoie `PostSummary[]` sans `content` (~470KB JS en moins)
+- Image `priority` sur article vedette dans Actualites
+- Compression images : 3.9MB economises (formule-premium, logo-white, posts, instagram)
+- Vercel Web Analytics installe (`@vercel/analytics`, ~1KB)
+
+### SEO multilingue
+- FAQ JSON-LD traduit dynamiquement (6 langues, via `getTranslations`)
+- Breadcrumb JSON-LD traduit sur landing pages (6 langues)
+- ISR revalidation etendue a 6 locales (`/api/revalidate` × FR/EN/ES/IT/DE/PT-BR)
+
+### WordPress admin (admin.bateau-a-paris.fr)
+- Rank Math : migration Yoast terminee, filtre `rank_math/excluded_post_types` corrige
+- SEO genere pour 149 articles non-FR (EN/ES/IT/DE/PT-BR) dans Rank Math
+- SEO genere pour 85 landing pages non-FR dans Rank Math
+- Filtre langue ajoute sur listes Articles + Landing Pages (dropdown admin)
+- Iframe reservation : hauteur 1200→1800px, buffer +100px, debounce 150ms
+
+---
+
+## [0.11.0] - 2026-02-16 — WordPress Headless Backend
+
+### Migration WordPress → admin.bateau-a-paris.fr
+- Clone WordPress operationnel sur sous-domaine admin
+- BDD `wp_clone` (prefix `9Ju5UF_`, 11 Mo, ~90 tables)
+- Nettoyage plugins : suppression WooCommerce, CookieYes, Complianz, Yoast, WP File Manager
+- Rank Math installe + migration Yoast → Rank Math
+- 19 plugins actifs (ACF, Bookly x9, WPML x3, Loco Translate, Rank Math, etc.)
+
+### Theme + Plugin headless
+- Plugin `bateau-headless-mode` deploye (redirects 301, CORS, front-end disabled)
+- Theme `bateau-headless` actif (template minimal Bookly iframe)
+- Page `/reservation-embed/` avec postMessage hauteur dynamique
+- API REST operationnelle : `/wp-json/wp/v2/posts`, `/wp-json/wp/v2/landing_page`
+
+### Connexion Next.js ↔ WordPress
+- `.env.local` configure (WP_API_URL, WP_URL → admin.bateau-a-paris.fr)
+- CSP headers mis a jour (frame-src + connect-src)
+- Iframe Bookly fonctionnelle sur `/reservation`
+- Webhook `save_post` → `/api/revalidate` operationnel
+
+### Migration articles + landing pages
+- Script migration articles : 31 articles × 6 langues + liaisons Polylang
+- Script migration landing pages : 85 traductions + liaisons Polylang
+- Formulaire Bookly multilingue (6 langues)
+
+### DNS + Redirections
+- DNS `bateau-a-paris.fr` → Vercel (Next.js front public)
+- DNS `admin.bateau-a-paris.fr` → serveur OVH (WordPress headless)
+- Redirections 70+ anciennes URLs WordPress dans plugin
+
+---
+
+## [0.10.0] - 2026-02-15 — Landing Pages Tier 2-3 + i18n complet
+
+### Landing Pages SEO (17 pages)
+- 6 pages Tier 2 : Anniversaire mariage, Team building, Famille, Shooting photo, Coucher soleil, Apero
+- 5 pages Tier 3 saisonnieres : Saint-Valentin, Nouvel An, Noel, Fete des meres, Seminaire
+- Grille "Nos croisieres par occasion" sur homepage (12 cards avec icones Lucide)
+
+### i18n Lot 1 (6 langues actives)
+- 4 nouvelles locales : ES, IT, DE, PT-BR (+ FR, EN existants)
+- 460+ cles traduites × 6 langues, 19 namespaces
+- Switcher de langue dropdown desktop + inline mobile
+- Blog multilingue : 31 articles × 6 langues (posts-{locale}.json)
+- Landing pages traduites : 17 pages × 5 langues (EN/ES/IT/DE/PT-BR)
+- Skip-to-content accessible multilingue
+
+---
+
 ## [0.9.0] - 2026-02-14 — Sprint Correctif Complet (Score 7.5 → 9.2/10)
 
 **9/10 problemes critiques resolus — 30 actions sur 4 sprints**

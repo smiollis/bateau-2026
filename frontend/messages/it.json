@@ -271,6 +271,10 @@
     "ctaFeature3Desc": "5 volte al giorno, partendo dal Port de l'Arsenal, godetevi una crociera privata sulla Senna.",
     "ctaButton": "Regalatevi una crociera privata sulla Senna"
   },
+  "breadcrumb": {
+    "home": "Home",
+    "cruises": "Crociere"
+  },
   "common": {
     "backToHome": "Torna alla home",
     "readMore": "Continua a leggere",

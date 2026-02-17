@@ -9,12 +9,21 @@ import { Link } from "@/i18n/navigation";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useInstagramFeed } from "@/hooks/useInstagramFeed";
 import { useTranslations, useLocale } from "next-intl";
-import postsFr from "@/data/posts.json";
-import postsEn from "@/data/posts-en.json";
-import postsEs from "@/data/posts-es.json";
-import postsIt from "@/data/posts-it.json";
-import postsDe from "@/data/posts-de.json";
-import postsPtBR from "@/data/posts-pt-BR.json";
+
+/** Lightweight post type for the list view (no content/link fields) */
+export interface PostSummary {
+  id: number;
+  title: string;
+  excerpt: string;
+  image: string;
+  date: string;
+  category: string;
+  slug: string;
+}
+
+interface ActualitesProps {
+  posts: PostSummary[];
+}
 
 const localeMap: Record<string, string> = {
   fr: "fr-FR", en: "en-US", es: "es-ES", it: "it-IT", de: "de-DE", "pt-BR": "pt-BR",
@@ -28,22 +37,11 @@ function formatDate(iso: string, locale: string): string {
   });
 }
 
-function getPostsByLocale(locale: string) {
-  switch (locale) {
-    case "en": return postsEn;
-    case "es": return postsEs;
-    case "it": return postsIt;
-    case "de": return postsDe;
-    case "pt-BR": return postsPtBR;
-    default: return postsFr;
-  }
-}
-
 const POSTS_PER_PAGE = 6;
 
 const ALL_CATEGORY = "__all__";
 
-const Actualites = () => {
+const Actualites = ({ posts }: ActualitesProps) => {
   const [activeCategory, setActiveCategory] = useState(ALL_CATEGORY);
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
   const { isDark } = useThemeVariant();
@@ -51,16 +49,15 @@ const Actualites = () => {
   const t = useTranslations("actualites");
   const tCommon = useTranslations("common");
   const locale = useLocale();
-  const allPosts = getPostsByLocale(locale);
 
   const categories = useMemo(
-    () => [ALL_CATEGORY, ...Array.from(new Set(allPosts.map((p) => p.category).filter(Boolean)))],
-    [allPosts]
+    () => [ALL_CATEGORY, ...Array.from(new Set(posts.map((p) => p.category).filter(Boolean)))],
+    [posts]
   );
 
   const filteredPosts = activeCategory === ALL_CATEGORY
-    ? allPosts
-    : allPosts.filter((p) => p.category === activeCategory);
+    ? posts
+    : posts.filter((p) => p.category === activeCategory);
 
   // 1 featured + up to visibleCount in grid
   const gridPosts = filteredPosts.slice(1, 1 + visibleCount);
@@ -140,6 +137,7 @@ const Actualites = () => {
                         alt={featured.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        priority
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                     ) : (

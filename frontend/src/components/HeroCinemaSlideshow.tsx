@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 // Helper to generate Next.js image optimizer URL for responsive loading
 function nextImageUrl(src: string, width: number, quality = 75): string {
@@ -45,9 +46,13 @@ const INTERVAL = 6000;
 
 const HeroCinemaSlideshow = () => {
   const [current, setCurrent] = useState(0);
+  // Track whether the slideshow has advanced past the first image.
+  // While false, we show the SSR-friendly next/image for LCP.
+  const [hasAdvanced, setHasAdvanced] = useState(false);
 
   const advance = useCallback(() => {
     setCurrent((prev) => (prev + 1) % heroImages.length);
+    setHasAdvanced(true);
   }, []);
 
   useEffect(() => {
@@ -59,8 +64,21 @@ const HeroCinemaSlideshow = () => {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* SSR-rendered first image for instant LCP — visible until slideshow advances */}
+      {!hasAdvanced && (
+        <Image
+          src={heroImages[0]!.src}
+          alt={heroImages[0]!.alt}
+          fill
+          sizes="100vw"
+          priority
+          className="object-cover"
+        />
+      )}
+
+      {/* Animated slideshow layer — takes over once JS has hydrated */}
       <AnimatePresence mode="sync">
-        <motion.img
+        <m.img
           key={current}
           src={heroImages[current]?.src}
           srcSet={heroImages[current]?.src ? makeSrcSet(heroImages[current].src) : undefined}

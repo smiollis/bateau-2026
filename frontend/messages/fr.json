@@ -271,6 +271,10 @@
     "ctaFeature3Desc": "5 fois par jour, au départ du Port de l'Arsenal, profitez d'une croisière privée sur la Seine.",
     "ctaButton": "Offrez-vous une croisière privée sur la Seine"
   },
+  "breadcrumb": {
+    "home": "Accueil",
+    "cruises": "Croisières"
+  },
   "common": {
     "backToHome": "Retour à l'accueil",
     "readMore": "Lire la suite",
