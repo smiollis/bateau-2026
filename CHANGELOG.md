@@ -1,6 +1,6 @@
 # Changelog — bateau-a-paris.fr
 
-> Historique des livraisons. Pour le reste a faire, voir [ROADMAP.md](ROADMAP.md).
+> Historique des livraisons. Pour le reste a faire, voir [ROADMAP.md](frontend/docs/ROADMAP.md).
 
 ---
 

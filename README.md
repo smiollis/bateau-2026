@@ -33,7 +33,7 @@ bateau-2026/
 │   ├── plugins/bateau-headless-mode/  # Plugin headless (redirects, CORS, SEO)
 │   └── themes/bateau-headless/        # Theme minimal (Bookly iframe)
 ├── brief/                    # Specifications et briefs du projet
-├── ROADMAP.md                # Roadmap priorisee et backlog
+├── frontend/docs/ROADMAP.md  # Roadmap priorisee et backlog
 └── CHANGELOG.md              # Release notes
 ```
 
@@ -124,7 +124,7 @@ CONTACT_EMAIL_TO=contact@example.com
 
 | Document | Description |
 |----------|-------------|
-| [ROADMAP.md](ROADMAP.md) | Roadmap priorisee et backlog |
+| [ROADMAP.md](frontend/docs/ROADMAP.md) | Roadmap priorisee et backlog |
 | [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.12.0) |
 | [frontend/CLAUDE.md](frontend/CLAUDE.md) | Contexte projet pour Claude Code |
 | [brief/](brief/) | Specifications et briefs du projet |
