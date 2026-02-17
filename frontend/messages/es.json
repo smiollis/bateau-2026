@@ -523,9 +523,14 @@
     "faqPage": "FAQ",
     "news": "Noticias",
     "reservation": "Reserva",
+    "pricing": "Tarifas y Fórmulas",
+    "contact": "Contacto",
     "cgv": "Condiciones generales de venta",
     "legalNotice": "Aviso legal",
     "privacy": "Política de privacidad",
-    "sitemapPage": "Mapa del sitio"
+    "sitemapPage": "Mapa del sitio",
+    "tierEvents": "Eventos",
+    "tierExperiences": "Experiencias",
+    "tierSeasons": "Temporadas"
   }
 }

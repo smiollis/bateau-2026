@@ -523,9 +523,14 @@
     "faqPage": "FAQ",
     "news": "Actualités",
     "reservation": "Réservation",
+    "pricing": "Tarifs & Formules",
+    "contact": "Contact",
     "cgv": "Conditions générales de vente",
     "legalNotice": "Mentions légales",
     "privacy": "Politique de confidentialité",
-    "sitemapPage": "Plan du site"
+    "sitemapPage": "Plan du site",
+    "tierEvents": "Événements",
+    "tierExperiences": "Expériences",
+    "tierSeasons": "Saisons"
   }
 }

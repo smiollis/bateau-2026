@@ -132,7 +132,6 @@ const FooterVariants = () => {
               <li><Link href="/cgv" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("cgv")}</Link></li>
               <li><Link href="/confidentialite" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("confidentialite")}</Link></li>
               <li><Link href="/faq" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("faq")}</Link></li>
-              <li><Link href="/plan-du-site" className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("sitemap")}</Link></li>
               <li><button onClick={openCookieSettings} className={`${styles.link} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("cookieSettings")}</button></li>
             </ul>
           </div>
@@ -141,7 +140,11 @@ const FooterVariants = () => {
         <div className={`mt-12 pt-8 border-t ${styles.border}`}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className={`${styles.copyright} text-sm`}>{t("copyright", { year: new Date().getFullYear() })}</p>
-            <p className={`${styles.copyright} text-sm`}>{t("tagline")}</p>
+            <div className="flex items-center gap-3">
+              <Link href="/plan-du-site" className={`${styles.copyright} text-sm hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded-sm`}>{t("sitemap")}</Link>
+              <span className={`${styles.copyright} text-sm`}>·</span>
+              <p className={`${styles.copyright} text-sm`}>{t("tagline")}</p>
+            </div>
           </div>
         </div>
       </div>
