@@ -52,7 +52,9 @@ export async function generateMetadata({
       locale: getOgLocale(locale),
       title: seoTitle,
       description: seoDesc,
-      images: post.image ? [{ url: post.image }] : [],
+      images: post.image
+        ? [{ url: post.image, width: 1200, height: 630, alt: post.title }]
+        : [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Un Bateau à Paris — Actualités" }],
     },
     ...(post.seo?.robots?.includes('noindex') && {
       robots: { index: false, follow: true },

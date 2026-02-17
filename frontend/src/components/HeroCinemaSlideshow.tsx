@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { m, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 // Helper to generate Next.js image optimizer URL for responsive loading
@@ -49,6 +49,7 @@ const HeroCinemaSlideshow = () => {
   // Track whether the slideshow has advanced past the first image.
   // While false, we show the SSR-friendly next/image for LCP.
   const [hasAdvanced, setHasAdvanced] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const advance = useCallback(() => {
     setCurrent((prev) => (prev + 1) % heroImages.length);
@@ -84,20 +85,32 @@ const HeroCinemaSlideshow = () => {
           srcSet={heroImages[current]?.src ? makeSrcSet(heroImages[current].src) : undefined}
           sizes="100vw"
           alt={heroImages[current]?.alt ?? ""}
-          initial={{ opacity: 0, scale: kb.scale[0], x: kb.x[0], y: kb.y[0] }}
-          animate={{
-            opacity: 1,
-            scale: kb.scale[1],
-            x: kb.x[1],
-            y: kb.y[1],
-          }}
+          initial={
+            prefersReducedMotion
+              ? { opacity: 0 }
+              : { opacity: 0, scale: kb.scale[0], x: kb.x[0], y: kb.y[0] }
+          }
+          animate={
+            prefersReducedMotion
+              ? { opacity: 1 }
+              : {
+                  opacity: 1,
+                  scale: kb.scale[1],
+                  x: kb.x[1],
+                  y: kb.y[1],
+                }
+          }
           exit={{ opacity: 0 }}
-          transition={{
-            opacity: { duration: 1.5, ease: "easeInOut" },
-            scale: { duration: INTERVAL / 1000, ease: "linear" },
-            x: { duration: INTERVAL / 1000, ease: "linear" },
-            y: { duration: INTERVAL / 1000, ease: "linear" },
-          }}
+          transition={
+            prefersReducedMotion
+              ? { opacity: { duration: 0.5, ease: "easeInOut" } }
+              : {
+                  opacity: { duration: 1.5, ease: "easeInOut" },
+                  scale: { duration: INTERVAL / 1000, ease: "linear" },
+                  x: { duration: INTERVAL / 1000, ease: "linear" },
+                  y: { duration: INTERVAL / 1000, ease: "linear" },
+                }
+          }
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
           decoding="async"

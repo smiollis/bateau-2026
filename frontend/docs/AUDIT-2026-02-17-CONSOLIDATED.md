@@ -41,61 +41,53 @@
 
 Classées par impact/effort (ROI maximal) :
 
-### 1. Fixer 118 images manquantes articles (Data Quality)
-**Domaine** : Data Quality
-**Impact** : Critique (SEO + UX)
-**Effort** : S (30 min)
-**Action** : Modifier `scripts/import-posts.js` pour copier l'image FR vers tous les locales
+### 1. ~~Fixer 118 images manquantes articles~~ ✅ FAIT
+**Domaine** : Data Quality — Corrigé le 17/02 (slug matching + position fallback)
 
 ### 2. Créer 11 images OG manquantes (SEO)
 **Domaine** : SEO
 **Impact** : Élevé (CTR social +25%)
 **Effort** : M (2h)
 **Action** : Générer les OG images 1200×630px pour landing pages Tier 2/3
+**Statut** : Backlog (nécessite design graphique)
 
-### 3. Corriger contraste bouton .btn-gold (Accessibilité)
-**Domaine** : Accessibilité
-**Impact** : Critique (WCAG AA bloquant)
-**Effort** : S (30 min)
-**Action** : `color: hsl(var(--navy-dark))` au lieu de `#fff` (ratio 2.24:1 → 5.3:1)
+### 3. ~~Corriger contraste bouton .btn-gold~~ ⏭️ SKIP
+**Domaine** : Accessibilité — Compensé par le mode nuit contrasté
 
-### 4. Implémenter retry loop git push (CI/CD)
+### 4. Implémenter retry loop git push (CI/CD) 🔧 EN COURS
 **Domaine** : CI/CD
 **Impact** : Critique (race conditions)
 **Effort** : S (10 min)
-**Action** : Ajouter `git pull --rebase && git push` avec retry 5x dans workflows
+**Action** : Ajouter `git pull --rebase && git push` avec retry 3x dans workflows
 
-### 5. Remplacer 36 liens admin.bateau-a-paris.fr (Data Quality)
-**Domaine** : Data Quality
-**Impact** : Élevé (UX cassée)
-**Effort** : M (1h)
-**Action** : Script de remplacement global vers URLs relatives `/reservation`
+### 5. ~~Remplacer 36 liens admin.bateau-a-paris.fr~~ ✅ FAIT
+**Domaine** : Data Quality — 54 URLs remplacées le 17/02 (fix:links)
 
-### 6. Sécuriser curl Instagram token (CI/CD)
+### 6. Sécuriser curl Instagram token (CI/CD) 🔧 EN COURS
 **Domaine** : CI/CD
 **Impact** : Élevé (sécurité token)
 **Effort** : S (15 min)
 **Action** : Validation réponse API + masquage token dans logs
 
-### 7. Basculer vers LazyMotion strict (Performance)
+### 7. Basculer vers LazyMotion strict (Performance) 🔧 EN COURS
 **Domaine** : Performance
 **Impact** : Élevé (-20 KB bundle)
 **Effort** : M (1h)
-**Action** : Remplacer `motion` → `m` dans 37 fichiers (rechercher/remplacer)
+**Action** : Remplacer `motion` → `m` dans 37 fichiers
 
-### 8. Ajouter useReducedMotion HeroCinemaSlideshow (Accessibilité)
+### 8. Ajouter useReducedMotion HeroCinemaSlideshow (Accessibilité) 🔧 EN COURS
 **Domaine** : Accessibilité
 **Impact** : Important (WCAG 2.3.1)
 **Effort** : S (15 min)
 **Action** : Conditionner animations Ken Burns avec `prefersReducedMotion`
 
-### 9. Définir permissions GitHub Actions (CI/CD)
+### 9. Définir permissions GitHub Actions (CI/CD) 🔧 EN COURS
 **Domaine** : CI/CD
 **Impact** : Élevé (principe moindre privilège)
 **Effort** : S (20 min)
 **Action** : Ajouter `permissions:` explicites dans les 4 workflows
 
-### 10. Internationaliser LandingPricing.tsx (i18n)
+### 10. Internationaliser LandingPricing.tsx (i18n) 🔧 EN COURS
 **Domaine** : i18n
 **Impact** : Élevé (visible sur toutes les landings)
 **Effort** : M (2h)

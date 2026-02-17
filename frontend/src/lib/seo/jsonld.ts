@@ -1,6 +1,14 @@
 import type { FAQItem, LandingPageData } from "@/data/landings/types";
+import reviewsData from "@/data/reviews.json";
 
 const SITE_URL = "https://bateau-a-paris.fr";
+
+// Compute aggregate rating from reviews data
+const reviewRatings = reviewsData.reviews.map((r) => r.rating);
+const computedRatingValue = (
+  reviewRatings.reduce((sum, r) => sum + r, 0) / reviewRatings.length
+).toFixed(1);
+const computedReviewCount = String(reviewsData.totalReviews);
 
 /**
  * Generate FAQPage JSON-LD schema.
@@ -58,8 +66,8 @@ export function generateTouristAttractionJsonLd(
     },
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "69",
+      ratingValue: computedRatingValue,
+      reviewCount: computedReviewCount,
     },
   };
 }

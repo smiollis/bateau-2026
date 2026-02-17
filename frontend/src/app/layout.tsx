@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { getConsentDefaultScript } from "@/lib/gtag";
 import { getLocale } from "next-intl/server";
+import reviewsData from "@/data/reviews.json";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,6 +24,13 @@ const playfair = Playfair_Display({
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
+
+// Compute aggregate rating from reviews data
+const reviewRatings = reviewsData.reviews.map((r) => r.rating);
+const ratingValue = (
+  reviewRatings.reduce((sum, r) => sum + r, 0) / reviewRatings.length
+).toFixed(1);
+const reviewCount = String(reviewsData.totalReviews);
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://bateau-a-paris.fr"),
@@ -78,10 +86,10 @@ export default async function RootLayout({
               },
               aggregateRating: {
                 "@type": "AggregateRating",
-                ratingValue: "4.9",
-                reviewCount: "69",
+                ratingValue: ratingValue,
+                reviewCount: reviewCount,
               },
-              priceRange: "420€ - 600€",
+              priceRange: "480€ - 600€",
             }),
           }}
         />

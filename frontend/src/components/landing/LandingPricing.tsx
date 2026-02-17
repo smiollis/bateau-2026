@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
@@ -10,45 +11,46 @@ interface LandingPricingProps {
   occasion?: string;
 }
 
-const formulas = [
-  {
-    name: "Formule Simple",
-    price: "480",
-    unit: "1-6 pers.",
-    features: [
-      "Bateau privatise 2h",
-      "Parcours Tour Eiffel — Notre-Dame",
-      "Amenez vos boissons et nourriture",
-      "Capitaine dedie",
-    ],
-  },
-  {
-    name: "Formule Festive",
-    price: "540",
-    unit: "1-6 pers.",
-    highlight: true,
-    features: [
-      "Tout de la Formule Simple",
-      "Champagne offert (1 coupe/pers.)",
-      "Enceinte Bluetooth a disposition",
-      "Ambiance festive garantie",
-    ],
-  },
-  {
-    name: "Formule Tout Inclus",
-    price: "Sur devis",
-    unit: "",
-    features: [
-      "Tout de la Formule Festive",
-      "Traiteur a bord (planches, buffet)",
-      "Decoration personnalisee",
-      "Photographe en option",
-    ],
-  },
-];
-
 const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
   const prefersReducedMotion = useReducedMotion();
+  const t = useTranslations("landingPricing");
+
+  const formulas = [
+    {
+      name: t("formulaSimpleName"),
+      price: t("formulaSimplePrice"),
+      unit: t("formulaSimpleUnit"),
+      features: [
+        t("formulaSimpleFeature1"),
+        t("formulaSimpleFeature2"),
+        t("formulaSimpleFeature3"),
+        t("formulaSimpleFeature4"),
+      ],
+    },
+    {
+      name: t("formulaFestiveName"),
+      price: t("formulaFestivePrice"),
+      unit: t("formulaFestiveUnit"),
+      highlight: true,
+      features: [
+        t("formulaFestiveFeature1"),
+        t("formulaFestiveFeature2"),
+        t("formulaFestiveFeature3"),
+        t("formulaFestiveFeature4"),
+      ],
+    },
+    {
+      name: t("formulaAllInclusiveName"),
+      price: t("formulaAllInclusivePrice"),
+      unit: t("formulaAllInclusiveUnit"),
+      features: [
+        t("formulaAllInclusiveFeature1"),
+        t("formulaAllInclusiveFeature2"),
+        t("formulaAllInclusiveFeature3"),
+        t("formulaAllInclusiveFeature4"),
+      ],
+    },
+  ];
 
   return (
     <section className="section-padding bg-secondary/30">
@@ -63,12 +65,12 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
           {title}
         </motion.h2>
         <p className="text-center text-muted-foreground mb-10">
-          +110 &euro;/pers. supplementaire au-dela de 6 (max 12)
+          {t("extraPersonNote")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {formulas.map((formula, i) => (
             <motion.div
-              key={formula.name}
+              key={i}
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -88,13 +90,13 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
                 </span>
                 {formula.unit && (
                   <span className="text-muted-foreground ml-1">
-                    {formula.price !== "Sur devis" ? "\u20ac" : ""} {formula.unit}
+                    {formula.price !== t("onQuote") ? "\u20ac" : ""} {formula.unit}
                   </span>
                 )}
               </div>
               <ul className="space-y-2 mb-6">
-                {formula.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
+                {formula.features.map((feature, j) => (
+                  <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
                     <Check className="w-4 h-4 text-gold shrink-0 mt-0.5" />
                     {feature}
                   </li>
@@ -102,7 +104,7 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
               </ul>
               <Button asChild className={formula.highlight ? "btn-gold text-white w-full" : "w-full"}>
                 <Link href={`/reservation${occasion ? `?occasion=${occasion}` : ""}`}>
-                  Reserver
+                  {t("cta")}
                 </Link>
               </Button>
             </motion.div>
