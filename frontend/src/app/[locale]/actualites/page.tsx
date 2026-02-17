@@ -4,7 +4,10 @@ import { getAlternates, getOgLocale } from '@/lib/metadata';
 import { locales } from '@/i18n/routing';
 import Page from '@/views/Actualites';
 import type { PostSummary } from '@/views/Actualites';
+import { getPosts } from '@/lib/wordpress/client';
+import { transformToPost } from '@/lib/wordpress/transformers';
 
+// Fallback JSON (used when WP API is unavailable)
 import postsFr from "@/data/posts.json";
 import postsEn from "@/data/posts-en.json";
 import postsEs from "@/data/posts-es.json";
@@ -12,7 +15,7 @@ import postsIt from "@/data/posts-it.json";
 import postsDe from "@/data/posts-de.json";
 import postsPtBR from "@/data/posts-pt-BR.json";
 
-const postsMap: Record<string, typeof postsFr> = {
+const fallbackMap: Record<string, typeof postsFr> = {
   fr: postsFr,
   en: postsEn,
   es: postsEs,
@@ -22,8 +25,11 @@ const postsMap: Record<string, typeof postsFr> = {
 };
 
 /** Strip heavy `content` and unused `link` fields — only send list-view data to client */
-function stripContent(posts: typeof postsFr): PostSummary[] {
-  return posts.map(({ content, link, ...rest }) => rest);
+function stripContent(
+  posts: Array<PostSummary & { content?: string; link?: string; modified?: string; seo?: unknown }>
+): PostSummary[] {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return posts.map(({ content, link, modified, seo, ...rest }) => rest);
 }
 
 export function generateStaticParams() {
@@ -43,7 +49,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function RouteWrapper({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const allPosts = postsMap[locale] ?? postsFr;
-  const posts = stripContent(allPosts);
+
+  let posts: PostSummary[];
+  try {
+    // API-first: fetch WP REST with ISR (1h cache + webhook revalidation)
+    const wpPosts = await getPosts(locale);
+    const transformed = wpPosts.map(transformToPost);
+    posts = stripContent(transformed);
+  } catch {
+    // Fallback: static JSON if API is unavailable
+    const fallback = fallbackMap[locale] ?? postsFr;
+    posts = stripContent(fallback);
+  }
+
   return <Page posts={posts} />;
 }
