@@ -146,8 +146,8 @@ npm run fix:all          # Corriger images + liens (combo)
   - `FAQPage` : page FAQ (10 Q&A) + chaque landing page
   - `TouristAttraction` + `Offer` : chaque landing page
   - `BreadcrumbList` : chaque landing page
-  - `Offers` (TouristTrip) : page croisiere
-  - `Article` : `src/views/ArticleDetail.tsx`
+  - `TouristTrip` + 3 `Offer` : page croisiere (itineraire 5 etapes, 3 formules 480/540/660€, aggregateRating dynamique)
+  - `Article` : `src/app/[locale]/actualites/[slug]/page.tsx`
   - Generators : `src/lib/seo/jsonld.ts`
 - **Sitemap** : `src/app/sitemap.ts` (statiques + articles + landing pages, multi-locale)
 

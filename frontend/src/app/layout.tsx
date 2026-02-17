@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     default: "Un Bateau à Paris | Croisières Privées sur la Seine",
     template: "%s | Un Bateau à Paris",
   },
-  description: "Croisière privée sur la Seine à Paris. Naviguez au fil de l'eau avec vue sur la Tour Eiffel et Notre-Dame. Jusqu'à 12 personnes. À partir de 420€.",
+  description: "Croisière privée sur la Seine à Paris. Naviguez au fil de l'eau avec vue sur la Tour Eiffel et Notre-Dame. Jusqu'à 12 personnes. À partir de 480€.",
   openGraph: {
     type: "website",
     siteName: "Un Bateau à Paris",
@@ -89,7 +89,7 @@ export default async function RootLayout({
                 ratingValue: ratingValue,
                 reviewCount: reviewCount,
               },
-              priceRange: "480€ - 600€",
+              priceRange: "480€ - 660€",
             }),
           }}
         />
