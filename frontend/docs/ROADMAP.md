@@ -1,6 +1,6 @@
 # Roadmap — bateau-a-paris.fr
 
-> Derniere mise a jour : 2026-02-17
+> Derniere mise a jour : 2026-02-18
 > Pour l'historique detaille, voir [CHANGELOG.md](../../CHANGELOG.md)
 
 ---
@@ -15,13 +15,13 @@
 | 4. SEO + Performance | **Termine** | Canonical, hreflang, JSON-LD, next/image, AVIF, Lighthouse CI |
 | 5. i18n FR/EN | **Termine** | next-intl, 460+ cles, 6 langues actives |
 | 6. Tests + Deploy | **Termine** | 319 unit + 66 E2E, coverage ~40%, Vercel production |
-| Sprint Audit | **Termine** | Score 6/10 → 9.2/10 (2 sprints, 30+ actions) |
+| Sprint Audit | **Termine** | Score 8.5/10 (12 agents, 3 audits) |
 | 7. Migration WP + Bascule | **En cours** | Clone WP ok, plugins ok, Rank Math ok — reste bascule DNS + config Vercel |
 | 8. Landing Pages SEO | **Termine** | 17 pages (6 Tier 1 + 6 Tier 2 + 5 Tier 3) + grille occasions homepage |
 | 9. i18n Multilingue | **Lot 1 termine** | 6 langues actives, blog + landings traduits, Lot 2 planifie (AR, JA, KO) |
 | 10. Performance | **Termine** | LazyMotion, Hero SSR, content stripping, compression images (-3.9MB) |
 
-**Score audit : ~9.0/10** — 0 priorite haute/moyenne restante.
+**Score audit : 8.5/10** (18 fev 2026) — voir `docs/AUDIT-2026-02-18-CONSOLIDATED.md`
 **Vercel Speed Insights** : Desktop RES 94 (Great), Mobile RES 80 (Needs Improvement).
 
 ---

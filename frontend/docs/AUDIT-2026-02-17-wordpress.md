@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Audit de sécurité WordPress — 17 février 2026
 
 **Auditeur** : Claude (Sonnet 4.5)

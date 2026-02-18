@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Résumé Audit Qualité des Données - 2026-02-17
 
 ## TL;DR

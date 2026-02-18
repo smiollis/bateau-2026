@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Audit Sécurité Supply Chain - Dépendances npm
 
 **Date**: 2026-02-17

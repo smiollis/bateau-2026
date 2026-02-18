@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Statistiques de l'Audit Qualité des Données
 
 **Date :** 2026-02-17

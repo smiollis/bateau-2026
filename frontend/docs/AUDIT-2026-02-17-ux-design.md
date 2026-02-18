@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Audit UX & Design System - Un Bateau à Paris
 
 **Date :** 17 février 2026

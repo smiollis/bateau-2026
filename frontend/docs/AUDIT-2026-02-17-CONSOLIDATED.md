@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Audit Consolidé — Un Bateau à Paris (Frontend)
 
 **Date** : 17 février 2026

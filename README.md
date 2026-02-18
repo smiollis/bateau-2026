@@ -23,7 +23,7 @@
 ```
 bateau-2026/
 ├── frontend/                 # Application Next.js 16 (App Router)
-│   ├── src/app/[locale]/     # Pages App Router (10 pages + 17 landing pages)
+│   ├── src/app/[locale]/     # Pages App Router (10 pages + 17 landing pages + 39 articles)
 │   ├── src/views/            # Composants de page
 │   ├── src/components/       # Composants React (ui/, landing/, variants)
 │   ├── src/data/             # Donnees statiques (posts, landings, reviews)
@@ -47,7 +47,8 @@ bateau-2026/
 | Analytics | GA4 + Vercel Analytics + Google Consent Mode v2 |
 | API | Instagram Graph API, WordPress REST API, Bookly |
 | Fonts | Playfair Display, Inter (next/font) |
-| i18n | next-intl 4 (FR, EN, ES, IT, DE, PT-BR) — 460+ cles |
+| i18n | next-intl 4 (FR, EN, ES, IT, DE, PT-BR) — 490+ cles |
+| Blog | 39 articles x 6 locales (4 categories), 356 pages statiques |
 | SEO | JSON-LD (7 schemas), hreflang, sitemap multi-locale, Rank Math |
 | Tests | Vitest (319 tests) + Playwright (66 E2E) + axe-core |
 | Email | Resend (formulaire de contact) |

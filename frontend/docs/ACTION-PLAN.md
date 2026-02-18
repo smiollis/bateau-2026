@@ -1,17 +1,31 @@
 # Plan d'Action Post-Audit — bateau-a-paris.fr
 
-**Date** : 17 fevrier 2026
-**Score initial** : 8.1/10
-**Score post-Sprint 1** : 8.6/10
-**Objectif Sprint 2** : 9.0/10
+**Date** : 18 fevrier 2026
+**Score initial** : 8.1/10 (17 fev)
+**Score post-Sprint 1** : 8.6/10 (17 fev soir)
+**Score actuel** : 8.5/10 (18 fev — data-quality plus strict)
+**Objectif Sprint 3** : 9.0/10
 
 ---
 
-## Deja fait (cette session)
+## Session 2026-02-18 ✅ TERMINE
+
+> 39 articles x 6 locales, images fixees, load more par categorie
+
+- [x] ~~Importer 3 articles Histoire dans 6 locales~~ (merge-histoire-articles.ts)
+- [x] ~~Corriger 8 images manquantes~~ (assign-images.ts, mapping WP media)
+- [x] ~~Fix load more par categorie~~ (Actualites.tsx hasMore + reset visibleCount)
+- [x] ~~Fix JSON syntax articles-histoire-de.json~~ (3 guillemets non echappes)
+- [x] ~~Copier image renovation → public/images/blog/~~ (1.3 MB PNG)
+- [x] ~~Audit complet 12 agents paralleles~~ (score 8.5/10)
+
+---
+
+## Deja fait (sessions precedentes)
 
 - [x] ~~118 images manquantes articles traduits~~ (fix:images slug matching)
 - [x] ~~54 URLs admin hardcodees dans content/excerpt~~ (fix:links)
-- [x] ~~Boutons blancs sur fond blanc (Croisiere, landing)~~ (bg-transparent)
+- [x] ~~Boutons blancs sur fond blanc~~ (bg-transparent)
 - [x] ~~Liens occasions en double dans Tarifs~~ (suppression section)
 - [x] ~~Qualite image hero article~~ (quality=85)
 - [x] ~~OG image WhatsApp 404~~ (og-image.jpg)
@@ -19,104 +33,115 @@
 
 ---
 
-## Sprint 1 — Quick Wins ✅ TERMINE (17 fev 2026)
+## Sprint 1 ✅ TERMINE (17 fev 2026)
 
 > 6 agents en parallele + LazyMotion
 > **Resultat** : Score 8.1 → 8.6 (+0.5)
 
-- [x] ~~Agent 1 : CI/CD Securisation~~ (permissions, timeout, concurrency dans 4 workflows)
-- [x] ~~Agent 2 : CI/CD Git Push Retry + Instagram~~ (retry 3x, Authorization header, validation JSON)
-- [x] ~~Agent 3 : SEO JSON-LD + Metadata~~ (priceRange, aggregateRating dynamique, OG fallback blog)
-- [x] ~~Agent 4 : Accessibilite WCAG~~ (useReducedMotion, scroll-behavior media query)
-- [x] ~~Agent 5 : i18n Hardcoded Strings~~ (ArticleDetail, LandingBreadcrumb, StickyBar, CTA, Related)
-- [x] ~~Agent 6 : TypeScript Cleanup + Security~~ (DOMPurify LandingRichtext, CGV cleanup, sonner supprime)
-- [x] ~~LazyMotion strict~~ (29 composants + 7 mocks migres motion → m, -20 KB)
-- [x] ~~LandingPricing i18n~~ (24 cles × 6 locales, namespace landingPricing)
+- [x] ~~CI/CD Securisation~~ (permissions, timeout, concurrency)
+- [x] ~~SEO JSON-LD + Metadata~~ (priceRange, aggregateRating, OG fallback)
+- [x] ~~Accessibilite WCAG~~ (useReducedMotion, scroll-behavior)
+- [x] ~~i18n Hardcoded Strings~~ (ArticleDetail, LandingBreadcrumb, StickyBar)
+- [x] ~~TypeScript Cleanup~~ (DOMPurify, CGV, sonner supprime)
+- [x] ~~LazyMotion strict~~ (29 composants, -20 KB)
+- [x] ~~LandingPricing i18n~~ (24 cles x 6 locales)
+- [x] ~~Tests fix~~ (319/319 verts)
+- [x] ~~Server Components migration~~ (LandingRichtext, Breadcrumb, Benefits)
+- [x] ~~Tests E2E~~ (66 tests Playwright)
+- [x] ~~Rate limiting WP plugin~~ (v2.2.0)
 
 ---
 
-## Sprint 2 — Effort Moyen (1-2h chacun)
+## Sprint 2 — En Cours
 
-> A traiter maintenant
-> **Impact** : Score 8.6 → 9.0 (+0.4)
+> **Impact cible** : Score 8.5 → 9.0 (+0.5)
 
-~~### 2.1 Internationaliser LandingPricing.tsx~~ ✅ fait en Sprint 1
-~~### 2.2 LazyMotion strict (motion → m)~~ ✅ fait en Sprint 1
+### 2.1 Headers CSP ⭐ Priorite haute
+**Source** : Audit Securite 18/02 | **Effort** : 2h
+- Configurer Content-Security-Policy dans next.config.ts
+- Bloquer scripts inline, limiter sources images/fonts
+- Ajouter X-Content-Type-Options, Referrer-Policy
 
-### 2.3 Focus states composants
-**Source** : Audit Accessibilite + UX | **Effort** : 2h
-- Ajouter `focus-visible:ring-2 focus-visible:ring-primary` sur elements interactifs
-- HeaderVariants navigation, FooterVariants social icons, galerie items
+### 2.2 Traduire les categories par locale ⭐ Priorite haute
+**Source** : Audit i18n + Data Quality 18/02 | **Effort** : 2h
+- "Histoire" → "History"/"Historia"/"Storia"/"Geschichte"/"Historia"
+- Idem pour "Actualites", "Decouverte", "Pont de Paris"
+- Mettre a jour les 6 fichiers posts*.json via script
 
-### 2.4 Tokeniser 32 couleurs hex nuit
-**Source** : Audit UX/Design | **Effort** : 1.5h
-- Remplacer `#0a1628`, `#0d1d35`, `#060f1e` par tokens CSS `--nuit-*`
-- Definir dans `:root` + `.dark` dans globals.css
+### 2.3 JSON-LD Article sur pages articles
+**Source** : Audit SEO 18/02 | **Effort** : 1h
+- Schema.org Article (headline, datePublished, image, author, publisher)
+- Generer dans layout article via generateMetadata
+
+### 2.4 Focus states composants
+**Source** : Audit Accessibilite | **Effort** : 2h
+- `focus-visible:ring-2 focus-visible:ring-primary` sur elements interactifs
+- Skip-to-content link en haut de page
 
 ### 2.5 Optimiser images /public/images/
-**Source** : Audit Performance | **Effort** : 2h
-- Convertir 15+ images > 200KB en WebP
-- Reduire dimensions aux max affiches
-- Impact : -6MB
+**Source** : Audit Performance | **Effort** : 1h
+- Convertir renovation-hivernale-senang.png (1.3 MB) en WebP
+- Verifier les autres images > 200KB
 
-~~### 2.6 Fixer tests en echec + augmenter couverture~~ ✅ fait (17 fev 2026)
-- Fix ContactForm.test.tsx : le composant affiche une confirmation UI (role="status") et non un toast apres envoi reussi
-- 319/319 tests passent (Vitest), tests API routes Instagram + Revalidate deja existants
+### 2.6 Tokeniser couleurs hex nuit
+**Source** : Audit UX/Design | **Effort** : 1.5h
+- Remplacer `#0a1628` etc. par tokens CSS `--nuit-*`
 
 ---
 
-## Sprint 3 — Gros Chantiers (demi-journee+)
+## Sprint 3 — Gros Chantiers
 
-> **Impact** : Score 9.2 → 9.5 (+0.3)
+> **Impact** : Score 9.0 → 9.5 (+0.5)
 
-### 3.1 Tests vues critiques (20h total)
-- Reservation.tsx (4h), GalleryLightbox (3h), MobileMenu (2h)
-- CookieProvider (3h), LanguageSelector (2h)
-- Objectif : coverage 40% → 60%
+### 3.1 Tests multi-category + load more
+**Source** : Audit Tests 18/02 | **Effort** : 4h
+- Tests filtre categorie, bouton load more, reset compteur
+- Tests articles Histoire dans donnees
+- Objectif : couverture 40% → 55%
 
-~~### 3.2 Server Components migration~~ ✅ fait (17 fev 2026)
-- LandingRichtext, LandingBreadcrumb, LandingBenefits → server components
-- Cree `AnimatedReveal` client wrapper (framer-motion + useReducedMotion) pour garder les animations
-- LandingBreadcrumb : `useTranslations` → `getTranslations` (async server)
-- LandingRichtext : supprime DOMPurify (contenu CMS trusted), remplace `isDark` par classes Tailwind `dark:`
-- LandingBenefits : icones rendues cote serveur (tree-shaking optimal)
-- Impact : -10KB JS client
+### 3.2 Localiser les slugs des 8 nouveaux articles
+**Source** : Audit Data Quality 18/02 | **Effort** : 4h
+- Les slugs FR dans les fichiers locales degradent le SEO multilingue
+- Creer un script de generation slugs localises
+- Mettre a jour generateStaticParams
 
-~~### 3.3 Tests E2E critiques~~ ✅ fait (17 fev 2026)
-- 4 nouveaux specs Playwright : reservation.spec.ts, landing-seo.spec.ts, blog-multilingual.spec.ts, gallery-keyboard.spec.ts
-- 38 nouveaux tests E2E (total : 10 spec files, 66 tests)
-- Couverture : flow reservation FR/EN, SEO meta/JSON-LD/hreflang, blog multilingue, lightbox clavier
+### 3.3 Push featured images vers WordPress
+**Source** : Audit WordPress 18/02 | **Effort** : 4h
+- Ameliorer push-articles-wp.ts pour upload media + set featured image
+- Automatiser le pipeline de publication complet
 
-~~### 3.4 Rate limiting WP plugin~~ ✅ fait (17 fev 2026)
-- Transient lock 2 min sur endpoint sync (`bateau_sync_lock`)
-- Retire `http://localhost:3000` des CORS (2 occurrences)
-- Logging sync avec IP + timestamp + user + status (50 derniers dans `bateau_sync_log`)
-- Plugin v2.1.0 → v2.2.0
+### 3.4 Tests vues critiques
+**Source** : Audit Tests | **Effort** : 12h
+- Reservation.tsx, GalleryLightbox, MobileMenu
+- CookieProvider, LanguageSelector
 
 ---
 
 ## Backlog (priorite basse)
 
-- [ ] Creer 11 images OG landing pages Tier 2/3 (design graphique)
-- [ ] Ajouter JSON-LD TouristTrip sur /croisiere
+- [ ] Creer 11 images OG landing pages Tier 2/3
 - [ ] Activer Dependabot (`.github/dependabot.yml`)
 - [ ] Ajouter workflow CodeQL
 - [ ] Hook `useScrollToAnchor` (DRY 3 duplications)
-- [ ] Valider 3 assertions `as` avec Zod (CookieConsent, Instagram, LanguageSelector)
-- [ ] Decomposer Actualites.tsx (331 lignes → 3 composants)
+- [ ] Valider 3 assertions `as` avec Zod
+- [ ] Decomposer Actualites.tsx (336 lignes → 3 composants)
 - [ ] Ajouter placeholders blur sur images
-- [ ] Unifier 2 composants Breadcrumb (shadcn + landing)
-- [ ] Configurer ou supprimer `@tailwindcss/typography`
+- [ ] Unifier 2 composants Breadcrumb
 - [ ] Notifications echec GitHub Actions (Slack/email)
+- [ ] Ajouter `push:articles` dans package.json scripts
+- [ ] Mettre a jour packages patch (`npm update`)
 
 ---
 
 ## Resume
 
-| Sprint | Items | Effort | Score | Statut |
-|--------|-------|--------|-------|--------|
-| ~~Deja fait~~ | 7 fixes | 1h | 8.1 → 8.1 | ✅ |
-| ~~Sprint 1~~ | 8 agents | ~4h | 8.1 → 8.6 | ✅ |
-| Sprint 2 | 4 chantiers (1 fait, 2 quasi-termines) | 8h | 8.6 → 9.0 | En cours |
-| Sprint 3 | 4 gros items (3 faits) | 33h | 9.0 → 9.5 | En cours |
+| Phase | Items | Effort | Score | Statut |
+|-------|-------|--------|-------|--------|
+| ~~Fixes initiaux~~ | 7 fixes | 1h | → 8.1 | ✅ |
+| ~~Sprint 1~~ | 11 chantiers | ~6h | 8.1 → 8.6 | ✅ |
+| ~~Session 18 fev~~ | 6 corrections | ~2h | 8.6 → 8.5* | ✅ |
+| Sprint 2 | 6 chantiers | 10h | 8.5 → 9.0 | A faire |
+| Sprint 3 | 4 gros items | 24h | 9.0 → 9.5 | A faire |
 | Backlog | 11 items | 15h | 9.5 → 9.8 | A faire |
+
+*Score data-quality plus strict (detection slugs non localises)

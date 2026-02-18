@@ -91,7 +91,7 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **Pages Router conflit** : ne PAS creer de fichiers dans `src/pages/` — utiliser `src/views/` a la place
 - **Cookie consent** : le tracking GA4 ne demarre qu'apres consentement (Consent Mode v2 defaults "denied" pour EU)
 - **Instagram token** : expire le 2026-04-04 — voir section "Renouvellement token Instagram" ci-dessous
-- **Blog multilingue** : `posts.json` (FR) + `posts-{locale}.json` (EN/ES/IT/DE/PT-BR), JSON statique uniquement (pas d'appel API WP au runtime), importe via GitHub Actions
+- **Blog multilingue** : 39 articles x 6 locales dans `posts.json` (FR) + `posts-{locale}.json`, 4 categories (Actualites, Decouverte, Histoire, Pont de Paris), JSON statique uniquement, importe via GitHub Actions
 - **Logger** : utiliser `logger.error/warn/info` de `@/lib/logger` au lieu de `console.error`
 - **Images** : TOUJOURS utiliser `next/image` (pas de `<img>`) — toutes les images sont migrees
 - **CSP** : le header Content-Security-Policy est dans `next.config.ts` — penser a ajouter les domaines si on integre un nouveau service
@@ -224,28 +224,26 @@ Le token est valide 60 jours. Le workflow automatique le renouvelle toutes les 2
 
 ## Score audit
 
-### Audit Consolide (17 fev 2026) : 8.1 → 8.6 → ~9.0/10
-Voir `docs/AUDIT-2026-02-17-CONSOLIDATED.md` et `docs/ACTION-PLAN.md`
+### Audit Consolide (18 fev 2026) : 8.5/10
+Voir `docs/AUDIT-2026-02-18-CONSOLIDATED.md` et `docs/ACTION-PLAN.md`
 
-| Categorie | Avant | Apres S1 | Apres S2 |
-|-----------|-------|----------|----------|
-| Securite | 7/10 | 8.5/10 | 8.5/10 |
-| Performance | 7/10 | 8/10 | 8.5/10 |
-| SEO | 8/10 | 9/10 | 9/10 |
-| Accessibilite | 7/10 | 8/10 | 9/10 |
-| Qualite code | 8/10 | 9/10 | 9/10 |
-| Tests | 7/10 | 7.5/10 | 8.5/10 |
-| TypeScript | 9/10 | 9/10 | 9/10 |
-| i18n | 8/10 | 9/10 | 9/10 |
-| UX/Design | 7/10 | 7.5/10 | 8.5/10 |
-| CI/CD | 6/10 | 8.5/10 | 8.5/10 |
-| Donnees | 7/10 | 8/10 | 8/10 |
-| Dependencies | 9/10 | 9/10 | 9/10 |
+| Categorie | 17 fev (S1) | 18 fev |
+|-----------|-------------|--------|
+| Securite ⚠️ | 9.0 | 8.5 |
+| SEO ⚠️ | 9.0 | 8.8 |
+| Performance | 8.5 | 8.8 |
+| Accessibilite | 8.5 | 8.8 |
+| i18n | 9.5 | 9.2 |
+| TypeScript | 9.0 | 9.2 |
+| Tests | 6.5 | 7.0 |
+| Data Quality | 8.5 | 6.7 |
+| Dependencies | 9.0 | 8.5 |
+| CI/CD | 8.5 | 8.8 |
+| UX/Design | 8.5 | 8.7 |
+| WordPress | 7.5 | 8.5 |
 
-Sprint 1 : CI/CD hardening, SEO JSON-LD, a11y reduced-motion, i18n 30+ cles, DOMPurify 7/7, LazyMotion -20KB, LandingPricing i18n
-Sprint 2 : Focus states 22 elements, nuit tokens CSS, images -514KB, 319 tests verts, contact form thank you
-
-Sprint 3 (en cours) : Server Components migration fait, E2E critiques fait (66 tests), rate limiting WP fait. Reste : tests vues critiques.
+Session 18 fev : 3 articles Histoire importes, 8 images corrigees, load more per category, audit 12 agents.
+Prochaine priorite : headers CSP, categories traduites, JSON-LD Article.
 
 ### Vercel Speed Insights (17 fev 2026)
 
@@ -261,23 +259,17 @@ Sprint 3 (en cours) : Server Components migration fait, E2E critiques fait (66 t
 
 Desktop : toutes les routes >90 RES. Mobile : homepage a 78 RES (TTFB 1.77s, LCP 4.04s).
 
-### Audit Qualité des Données : 6.5/10 → 8.5/10 (après fix)
-Voir `docs/AUDIT-2026-02-17-data-quality.md`
+### Data Quality : 6.7/10 (18 fev 2026)
+Voir `docs/AUDIT-2026-02-18-data-quality.md`
 
-**Problèmes identifiés :**
-- ❌ 118 images manquantes dans posts traduits (EN/ES/IT/DE)
-- ❌ 36 liens hardcodés vers `admin.bateau-a-paris.fr`
-- ⚠️ Contenu HTML non traduit (ES/IT/DE)
+**Etat actuel :** 39 articles x 6 locales, toutes les images assignees.
+**Points restants :** slugs non localises (FR dans toutes les locales), categories non traduites.
 
-**Scripts de correction :**
+**Scripts utilitaires :**
 - `npm run fix:images` — Copie les images FR vers toutes les locales
 - `npm run fix:links` — Remplace les URLs admin par des chemins relatifs
-- `npm run fix:all` — Combo des 2 scripts
-
-**Documentation :**
-- Rapport complet : `docs/AUDIT-2026-02-17-data-quality.md`
-- Guide de fix : `scripts/README-FIX.md`
-- Résumé : `docs/AUDIT-2026-02-17-summary.md`
+- `npx tsx scripts/merge-histoire-articles.ts` — Import articles Histoire
+- `npx tsx scripts/assign-images.ts` — Attribution images par slug
 
 ## GitHub Actions Secrets
 

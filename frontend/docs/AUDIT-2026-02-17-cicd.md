@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18-cicd.md
+
 # Audit CI/CD - GitHub Actions
 **Date**: 2026-02-17
 **Auditeur**: Expert DevOps/CI-CD
@@ -5,7 +7,7 @@
 
 ---
 
-## Score Global: 6.5/10
+## Score Global: 6.5/10 → 8.8/10 (18 fév 2026)
 
 ### Répartition des scores
 

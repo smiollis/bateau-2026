@@ -62,7 +62,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
 
   // 1 featured + up to visibleCount in grid
   const gridPosts = filteredPosts.slice(1, 1 + visibleCount);
-  const hasMore = activeCategory === ALL_CATEGORY && filteredPosts.length > 1 + visibleCount;
+  const hasMore = filteredPosts.length > 1 + visibleCount;
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-16">
@@ -96,7 +96,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setActiveCategory(cat)}
+                  onClick={() => { setActiveCategory(cat); setVisibleCount(POSTS_PER_PAGE); }}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     activeCategory === cat
                       ? "bg-primary text-primary-foreground"

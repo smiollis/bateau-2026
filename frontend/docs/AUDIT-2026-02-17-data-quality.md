@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Audit Qualité des Données - 2026-02-17
 
 ## Score Global : 6.5/10

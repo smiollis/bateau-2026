@@ -1,3 +1,5 @@
+> **ARCHIVED** — Superseded by AUDIT-2026-02-18
+
 # Audit de sécurité - bateau-a-paris.fr
 
 Date : 2026-02-17

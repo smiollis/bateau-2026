@@ -4,6 +4,35 @@
 
 ---
 
+## [0.16.0] - 2026-02-18 — Articles Blog + Fix Images + Load More + Audit
+
+**39 articles x 6 locales, images fixees, load more par categorie, audit 12 agents**
+
+### Contenu
+- Import 3 articles Histoire dans 6 locales (total 39 articles, 4+ categories)
+- Attribution images aux 8 articles sans visuel (WP media + 1 image locale)
+- Image renovation copiee dans public/images/blog/
+
+### Corrections
+- Fix "Charger plus" affiche dans toutes les categories (pas uniquement "Toutes")
+- Reset compteur visible au changement de categorie
+- Fix 3 guillemets JSON non echappes dans articles-histoire-de.json
+
+### Scripts
+- `merge-histoire-articles.ts` : import 3 articles Histoire → posts*.json
+- `assign-images.ts` : attribution images aux 8 articles
+
+### Audit (12 agents paralleles)
+- Score global : 8.5/10 (securite 8.5, SEO 8.8, perf 8.8, a11y 8.8, i18n 9.2, TS 9.2, tests 7.0, data 6.7, deps 8.5, CI/CD 8.8, UX 8.7, WP 8.5)
+- 17 anciens audits archives
+- Rapport consolide + plan d'action mis a jour
+
+### Build
+- 356 pages statiques (vs 320 precedemment)
+- 319/319 tests unitaires verts
+
+---
+
 ## [0.15.0] - 2026-02-17 — Sprint 3 + UX + Plan du site
 
 **3 chantiers Sprint 3 termines + 4 ameliorations UX + nouvelle page**
