@@ -47,6 +47,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
   verification: {
     google: "cKXOGqTV4Uxra0cWXHL3lqg-HReW3skbVGDhAw_Ocwo",
   },
