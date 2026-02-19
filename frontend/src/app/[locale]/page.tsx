@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { getTranslations } from 'next-intl/server';
-import { getAlternates, getOgLocale } from '@/lib/metadata';
+import { getAlternates, getOgLocale, getOgAlternateLocales } from '@/lib/metadata';
 import { locales } from '@/i18n/routing';
 import HeroVariants from '@/components/HeroVariants';
 
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t("homeTitle"),
     description: t("homeDescription"),
     alternates: getAlternates(locale, ""),
-    openGraph: { locale: getOgLocale(locale) },
+    openGraph: { locale: getOgLocale(locale), alternateLocale: getOgAlternateLocales(locale) },
   };
 }
 

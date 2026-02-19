@@ -4,6 +4,36 @@
 
 ---
 
+## [0.17.0] - 2026-02-19 — Audit SEO Approfondi + Sprint P0/P1/P2
+
+**Score SEO : 7.2/10 → 9.0/10 — 12 actions, 356 pages, 319 tests verts**
+
+### P0 — Critiques
+- Header `<button>` → `<Link>` (liens decouverts par crawlers)
+- Blog slugs cross-locale : slug-map.json + getBlogAlternates (70 URLs 404 corrigees)
+- Boilerplate nettoye dans 30 articles (CTA + liens admin supprimes)
+
+### P1 — Importants
+- Breadcrumbs + BreadcrumbList JSON-LD sur 5 pages principales
+- og:locale:alternate sur toutes les 12 pages
+- Hreflang alternates dans sitemap.xml (3 entry types)
+- WebSite + Organization JSON-LD dans root layout (SearchAction, sameAs, contactPoint)
+- /reservation dans footer + 5 landings manquantes dans OccasionsGrid
+
+### P2 — Ameliorations
+- Liens internes dans 31 articles (160 updates x 6 locales)
+- Heading hierarchy H3 → H2 (CaptainSection + ArticleDetail)
+- Pages 404/erreur localisees (6 langues)
+- /api/ bloque dans robots.txt
+
+### Scripts
+- `clean-boilerplate.mjs`, `add-internal-links.mjs`, `add-og-alternate.mjs`, `add-occasion-translations.mjs`, `add-error-translations.mjs`
+
+### Build
+- 356 pages statiques, 319/319 tests unitaires verts
+
+---
+
 ## [0.16.0] - 2026-02-18 — Articles Blog + Fix Images + Load More + Audit
 
 **39 articles x 6 locales, images fixees, load more par categorie, audit 12 agents**

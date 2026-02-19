@@ -1,6 +1,8 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-import { getAlternates, getOgLocale } from '@/lib/metadata';
+import { getAlternates, getOgLocale, getOgAlternateLocales } from '@/lib/metadata';
+import { generateBreadcrumbJsonLd } from '@/lib/seo/jsonld';
+import LandingBreadcrumb from '@/components/landing/LandingBreadcrumb';
 import reviewsData from "@/data/reviews.json";
 import Page from '@/views/Croisiere';
 
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t("croisiereTitle"),
     description: t("croisiereDescription"),
     alternates: getAlternates(locale, "/croisiere"),
-    openGraph: { locale: getOgLocale(locale) },
+    openGraph: { locale: getOgLocale(locale), alternateLocale: getOgAlternateLocales(locale) },
   };
 }
 
@@ -111,13 +113,24 @@ const touristTripJsonLd = {
   },
 };
 
-export default function RouteWrapper() {
+export default async function RouteWrapper({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "nav" });
+  const tBreadcrumb = await getTranslations({ locale, namespace: "breadcrumb" });
+
+  const breadcrumbItems = [{ name: t("croisiere"), url: `/${locale}/croisiere` }];
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(touristTripJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbJsonLd([{ name: tBreadcrumb("home"), url: `/${locale}` }, ...breadcrumbItems])) }}
+      />
+      <LandingBreadcrumb items={[{ name: t("croisiere") }]} />
       <Page />
     </>
   );

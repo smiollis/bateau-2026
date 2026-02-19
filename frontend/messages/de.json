@@ -328,7 +328,12 @@
     "shooting": "Fotoshooting",
     "coucherSoleil": "Sonnenuntergang",
     "apero": "Aperitif auf dem Boot",
-    "saintValentin": "Valentinstag"
+    "saintValentin": "Valentinstag",
+    "anniversaireMariage": "Hochzeitstag",
+    "nouvelAn": "Silvester",
+    "noel": "Weihnachten",
+    "feteDesMeres": "Muttertag",
+    "seminaire": "Seminar"
   },
   "faq": {
     "backToHome": "Zurück zur Startseite",
@@ -532,5 +537,15 @@
     "tierEvents": "Veranstaltungen",
     "tierExperiences": "Erlebnisse",
     "tierSeasons": "Jahreszeiten"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die Seite, die Sie suchen, existiert nicht oder wurde verschoben.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "error": {
+    "title": "Ein Fehler ist aufgetreten",
+    "description": "Wir entschuldigen uns für die Unannehmlichkeiten. Bitte versuchen Sie es erneut.",
+    "retry": "Erneut versuchen"
   }
 }

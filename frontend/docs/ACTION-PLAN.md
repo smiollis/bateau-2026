@@ -1,10 +1,42 @@
 # Plan d'Action Post-Audit — bateau-a-paris.fr
 
-**Date** : 18 fevrier 2026
+**Date** : 19 fevrier 2026
 **Score initial** : 8.1/10 (17 fev)
 **Score post-Sprint 1** : 8.6/10 (17 fev soir)
-**Score actuel** : 8.5/10 (18 fev — data-quality plus strict)
-**Objectif Sprint 3** : 9.0/10
+**Score 18 fev** : 8.5/10 (data-quality plus strict)
+**Score actuel** : 9.0/10 (19 fev — audit SEO approfondi + sprint correctif P0/P1/P2)
+**Objectif Sprint 3** : 9.5/10
+
+---
+
+## Session 2026-02-19 ✅ TERMINE
+
+> Audit SEO approfondi (5 agents) → 20 actions priorisees → P0 + P1 + P2 implementes
+
+### P0 — CRITIQUE (3/3)
+- [x] ~~Header nav : `<button>` → `<Link>` dans HeaderVariants + MobileMenu~~ (liens decouverts par crawlers)
+- [x] ~~Blog slugs cross-locale : slug-map.json + getBlogAlternates + generateStaticParams per locale~~ (70 URLs 404 corrigees)
+- [x] ~~Boilerplate duplique : nettoyage 30 articles (CTA blocks + liens admin.bateau-a-paris.fr)~~
+
+### P1 — IMPORTANT (5/5)
+- [x] ~~Breadcrumbs + BreadcrumbList schema sur 5 pages~~ (croisiere, galerie, faq, actualites, article detail)
+- [x] ~~og:locale:alternate sur les 12 pages~~ (script bulk add-og-alternate.mjs)
+- [x] ~~Hreflang alternates dans sitemap.xml~~ (3 entry types : static, articles, landings)
+- [x] ~~WebSite + Organization JSON-LD dans root layout~~ (SearchAction, sameAs, contactPoint)
+- [x] ~~/reservation dans footer + 5 landings manquantes dans OccasionsGrid~~ (+ 5 traductions x 6 locales)
+
+### P2 — AMELIORATION (4/6)
+- [x] ~~Liens internes dans 31 articles~~ (160 updates across 6 locales, add-internal-links.mjs)
+- [x] ~~Heading hierarchy H3 → H2~~ (CaptainSection + ArticleDetail)
+- [x] ~~Pages 404/erreur localisees~~ (not-found.tsx + error.tsx + traductions 6 locales)
+- [x] ~~/api/ bloque dans robots.txt~~
+- [ ] Enrichir 19 articles "Pont de Paris" (thin content) — delegue agence SEO
+- [ ] Ameliorer alt texts galerie — backlog
+
+### Resultats
+- Build : 356 pages OK
+- Tests : 319/319 verts
+- Score audit SEO : 7.2/10 → ~9.0/10 (+1.8)
 
 ---
 
@@ -54,7 +86,7 @@
 
 ## Sprint 2 — En Cours
 
-> **Impact cible** : Score 8.5 → 9.0 (+0.5)
+> **Impact cible** : Score 9.0 → 9.5 (+0.5)
 
 ### 2.1 Headers CSP ⭐ Priorite haute
 **Source** : Audit Securite 18/02 | **Effort** : 2h
@@ -140,8 +172,9 @@
 | ~~Fixes initiaux~~ | 7 fixes | 1h | → 8.1 | ✅ |
 | ~~Sprint 1~~ | 11 chantiers | ~6h | 8.1 → 8.6 | ✅ |
 | ~~Session 18 fev~~ | 6 corrections | ~2h | 8.6 → 8.5* | ✅ |
-| Sprint 2 | 6 chantiers | 10h | 8.5 → 9.0 | A faire |
-| Sprint 3 | 4 gros items | 24h | 9.0 → 9.5 | A faire |
-| Backlog | 11 items | 15h | 9.5 → 9.8 | A faire |
+| ~~Session 19 fev (SEO)~~ | 12 actions P0/P1/P2 | ~8h | 8.5 → 9.0 | ✅ |
+| Sprint 2 | 6 chantiers | 10h | 9.0 → 9.5 | A faire |
+| Sprint 3 | 4 gros items | 24h | 9.5 → 9.8 | A faire |
+| Backlog | 11 items | 15h | 9.8+ | A faire |
 
 *Score data-quality plus strict (detection slugs non localises)

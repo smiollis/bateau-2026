@@ -328,7 +328,12 @@
     "shooting": "Shooting photo",
     "coucherSoleil": "Coucher de soleil",
     "apero": "Apéro bateau",
-    "saintValentin": "Saint-Valentin"
+    "saintValentin": "Saint-Valentin",
+    "anniversaireMariage": "Anniversaire mariage",
+    "nouvelAn": "Nouvel An",
+    "noel": "Noël",
+    "feteDesMeres": "Fête des Mères",
+    "seminaire": "Séminaire"
   },
   "faq": {
     "backToHome": "Retour à l'accueil",
@@ -532,5 +537,15 @@
     "tierEvents": "Événements",
     "tierExperiences": "Expériences",
     "tierSeasons": "Saisons"
+  },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
+  },
+  "error": {
+    "title": "Une erreur est survenue",
+    "description": "Nous nous excusons pour la gêne occasionnée. Veuillez réessayer.",
+    "retry": "Réessayer"
   }
 }

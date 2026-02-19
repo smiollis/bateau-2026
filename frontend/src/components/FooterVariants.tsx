@@ -51,6 +51,7 @@ const FooterVariants = () => {
     { label: tNav("tarifs"), to: "/#tarifs" },
     { label: tNav("galerie"), to: "/galerie" },
     { label: tNav("actualites"), to: "/actualites" },
+    { label: tNav("reservation"), to: "/reservation" },
   ];
 
   const handleNavClick = useCallback((to: string, e: React.MouseEvent) => {

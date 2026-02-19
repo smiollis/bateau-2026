@@ -1,10 +1,9 @@
 "use client";
 
 import { m, AnimatePresence, useReducedMotion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations, useLocale } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
+import { Link, useRouter, usePathname } from "@/i18n/navigation";
 import { locales } from "@/i18n/routing";
 import { localeLabels, localeFlags } from "@/components/LanguageSelector";
 import HeaderThemeToggle from "@/components/HeaderThemeToggle";
@@ -18,7 +17,6 @@ interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   navItems: NavItem[];
-  onNavClick: (href: string) => void;
   styles: {
     nav: string;
     cta: string;
@@ -38,7 +36,7 @@ const variantMobileStyles: Record<ThemeVariant, {
   },
 };
 
-const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMenuProps) => {
+const MobileMenu = ({ isOpen, onClose, navItems, styles }: MobileMenuProps) => {
   const { variant } = useThemeVariant();
   const router = useRouter();
   const pathname = usePathname();
@@ -46,6 +44,17 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
   const locale = useLocale();
   const mobileStyles = variantMobileStyles[variant];
   const prefersReducedMotion = useReducedMotion();
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("/#")) {
+      const id = href.slice(2);
+      if (pathname === "/") {
+        e.preventDefault();
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    onClose();
+  };
 
   return (
     <AnimatePresence>
@@ -60,13 +69,14 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
         >
           <div className="container-custom py-4 space-y-4">
             {navItems.map((item) => (
-              <button
+              <Link
                 key={item.label}
-                onClick={() => { onNavClick(item.href); onClose(); }}
+                href={item.href}
+                onClick={(e) => handleAnchorClick(e, item.href)}
                 className={`block py-2 ${styles.nav} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm`}
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
             <div className="pt-4 border-t border-border/50 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -88,9 +98,9 @@ const MobileMenu = ({ isOpen, onClose, navItems, onNavClick, styles }: MobileMen
                 </div>
                 <HeaderThemeToggle className="hover:bg-transparent" />
               </div>
-              <Button className={styles.cta} onClick={() => router.push("/reservation")}>
+              <Link href="/reservation" className={styles.cta + " inline-flex items-center justify-center rounded-md text-sm font-medium h-10 px-4 py-2"} onClick={onClose}>
                 {t("reservation")}
-              </Button>
+              </Link>
             </div>
           </div>
         </m.div>

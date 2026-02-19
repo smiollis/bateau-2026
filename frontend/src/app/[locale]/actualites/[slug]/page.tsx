@@ -6,7 +6,10 @@ import postsEs from '@/data/posts-es.json';
 import postsIt from '@/data/posts-it.json';
 import postsDe from '@/data/posts-de.json';
 import postsPtBR from '@/data/posts-pt-BR.json';
-import { getAlternates, getOgLocale } from '@/lib/metadata';
+import { getTranslations } from 'next-intl/server';
+import { getBlogAlternates, getOgLocale, getOgAlternateLocales } from '@/lib/metadata';
+import { generateBreadcrumbJsonLd } from '@/lib/seo/jsonld';
+import LandingBreadcrumb from '@/components/landing/LandingBreadcrumb';
 import { locales } from '@/i18n/routing';
 import ArticleDetail from '@/views/ArticleDetail';
 import type { BlogPost } from '@/lib/wordpress/transformers';
@@ -27,9 +30,10 @@ function getPost(slug: string, locale: string): BlogPost | undefined {
 }
 
 export function generateStaticParams() {
-  return locales.flatMap((locale) =>
-    postsFr.map((post) => ({ locale, slug: post.slug }))
-  );
+  return locales.flatMap((locale) => {
+    const posts = postsMap[locale] ?? postsFr;
+    return posts.map((post) => ({ locale, slug: post.slug }));
+  });
 }
 
 export async function generateMetadata({
@@ -47,9 +51,10 @@ export async function generateMetadata({
   return {
     title: seoTitle,
     description: seoDesc,
-    alternates: getAlternates(locale, `/actualites/${slug}`),
+    alternates: getBlogAlternates(locale, slug),
     openGraph: {
       locale: getOgLocale(locale),
+      alternateLocale: getOgAlternateLocales(locale),
       title: seoTitle,
       description: seoDesc,
       images: post.image
@@ -73,6 +78,8 @@ export default async function ArticlePage({
 
   const seoTitle = post.seo?.title || post.title;
   const seoDesc = post.seo?.description || post.excerpt.slice(0, 160);
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const tBreadcrumb = await getTranslations({ locale, namespace: "breadcrumb" });
 
   return (
     <>
@@ -99,6 +106,17 @@ export default async function ArticlePage({
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbJsonLd([
+            { name: tBreadcrumb("home"), url: `/${locale}` },
+            { name: tNav("actualites"), url: `/${locale}/actualites` },
+            { name: post.title, url: `/${locale}/actualites/${slug}` },
+          ])),
+        }}
+      />
+      <LandingBreadcrumb items={[{ name: tNav("actualites"), href: "/actualites" }, { name: post.title }]} />
       <ArticleDetail post={post} />
     </>
   );

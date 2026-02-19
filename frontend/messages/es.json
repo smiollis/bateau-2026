@@ -328,7 +328,12 @@
     "shooting": "Sesión de fotos",
     "coucherSoleil": "Atardecer",
     "apero": "Aperitivo en barco",
-    "saintValentin": "San Valentín"
+    "saintValentin": "San Valentín",
+    "anniversaireMariage": "Aniversario de boda",
+    "nouvelAn": "Nochevieja",
+    "noel": "Navidad",
+    "feteDesMeres": "Día de la Madre",
+    "seminaire": "Seminario"
   },
   "faq": {
     "backToHome": "Volver al inicio",
@@ -532,5 +537,15 @@
     "tierEvents": "Eventos",
     "tierExperiences": "Experiencias",
     "tierSeasons": "Temporadas"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La página que busca no existe o ha sido movida.",
+    "backHome": "Volver al inicio"
+  },
+  "error": {
+    "title": "Se produjo un error",
+    "description": "Nos disculpamos por las molestias. Por favor, inténtelo de nuevo.",
+    "retry": "Reintentar"
   }
 }

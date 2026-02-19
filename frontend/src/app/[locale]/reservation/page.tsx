@@ -1,6 +1,6 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-import { getAlternates, getOgLocale } from '@/lib/metadata';
+import { getAlternates, getOgLocale, getOgAlternateLocales } from '@/lib/metadata';
 import Page from '@/views/Reservation';
 
 const WP_URL = process.env.NEXT_PUBLIC_WP_URL;
@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t("reservationTitle"),
     description: t("reservationDescription"),
     alternates: getAlternates(locale, "/reservation"),
-    openGraph: { locale: getOgLocale(locale) },
+    openGraph: { locale: getOgLocale(locale), alternateLocale: getOgAlternateLocales(locale) },
   };
 }
 

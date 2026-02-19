@@ -328,7 +328,12 @@
     "shooting": "Servizio fotografico",
     "coucherSoleil": "Tramonto",
     "apero": "Aperitivo in barca",
-    "saintValentin": "San Valentino"
+    "saintValentin": "San Valentino",
+    "anniversaireMariage": "Anniversario di matrimonio",
+    "nouvelAn": "Capodanno",
+    "noel": "Natale",
+    "feteDesMeres": "Festa della mamma",
+    "seminaire": "Seminario"
   },
   "faq": {
     "backToHome": "Torna alla home",
@@ -532,5 +537,15 @@
     "tierEvents": "Eventi",
     "tierExperiences": "Esperienze",
     "tierSeasons": "Stagioni"
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "description": "La pagina che stai cercando non esiste o è stata spostata.",
+    "backHome": "Torna alla home"
+  },
+  "error": {
+    "title": "Si è verificato un errore",
+    "description": "Ci scusiamo per l'inconveniente. Riprova.",
+    "retry": "Riprova"
   }
 }

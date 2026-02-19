@@ -328,7 +328,12 @@
     "shooting": "Ensaio fotografico",
     "coucherSoleil": "Por do sol",
     "apero": "Happy hour no barco",
-    "saintValentin": "Dia dos Namorados"
+    "saintValentin": "Dia dos Namorados",
+    "anniversaireMariage": "Aniversário de casamento",
+    "nouvelAn": "Ano Novo",
+    "noel": "Natal",
+    "feteDesMeres": "Dia das Mães",
+    "seminaire": "Seminário"
   },
   "faq": {
     "backToHome": "Voltar ao inicio",
@@ -532,5 +537,15 @@
     "tierEvents": "Eventos",
     "tierExperiences": "Experiências",
     "tierSeasons": "Temporadas"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "A página que você procura não existe ou foi movida.",
+    "backHome": "Voltar ao início"
+  },
+  "error": {
+    "title": "Ocorreu um erro",
+    "description": "Pedimos desculpas pelo inconveniente. Por favor, tente novamente.",
+    "retry": "Tentar novamente"
   }
 }

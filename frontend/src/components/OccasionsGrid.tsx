@@ -14,6 +14,11 @@ import {
   Beer,
   Diamond,
   Crown,
+  HeartHandshake,
+  Sparkles,
+  TreePine,
+  Flower2,
+  Presentation,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
@@ -74,6 +79,11 @@ const occasions: OccasionItem[] = [
     icon: CalendarHeart,
     labelKey: "saintValentin",
   },
+  { slug: "anniversaire-mariage-seine", icon: HeartHandshake, labelKey: "anniversaireMariage" },
+  { slug: "nouvel-an-seine", icon: Sparkles, labelKey: "nouvelAn" },
+  { slug: "noel-seine", icon: TreePine, labelKey: "noel" },
+  { slug: "fete-des-meres-seine", icon: Flower2, labelKey: "feteDesMeres" },
+  { slug: "seminaire-seine", icon: Presentation, labelKey: "seminaire" },
 ];
 
 const OccasionsGrid = () => {

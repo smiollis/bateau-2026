@@ -53,7 +53,7 @@ const CaptainSection = () => {
             viewport={{ once: true }}
             transition={{ delay: prefersReducedMotion ? 0 : 0.2, duration: prefersReducedMotion ? 0 : undefined }}
           >
-            <h3 className={`${styles.title} mb-4`}>{t("title")}</h3>
+            <h2 className={`${styles.title} mb-4`}>{t("title")}</h2>
             <p className={`${styles.quote} mb-6`}>
               &laquo; {t("quote")} &raquo;
             </p>

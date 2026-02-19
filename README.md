@@ -47,9 +47,9 @@ bateau-2026/
 | Analytics | GA4 + Vercel Analytics + Google Consent Mode v2 |
 | API | Instagram Graph API, WordPress REST API, Bookly |
 | Fonts | Playfair Display, Inter (next/font) |
-| i18n | next-intl 4 (FR, EN, ES, IT, DE, PT-BR) — 490+ cles |
-| Blog | 39 articles x 6 locales (4 categories), 356 pages statiques |
-| SEO | JSON-LD (7 schemas), hreflang, sitemap multi-locale, Rank Math |
+| i18n | next-intl 4 (FR, EN, ES, IT, DE, PT-BR) — 500+ cles |
+| Blog | 39 articles x 6 locales (4 categories), 356 pages statiques, liens internes |
+| SEO | JSON-LD (9 schemas), hreflang (HTML + sitemap), og:locale:alternate, breadcrumbs, Rank Math |
 | Tests | Vitest (319 tests) + Playwright (66 E2E) + axe-core |
 | Email | Resend (formulaire de contact) |
 | CI/CD | GitHub Actions (import posts, reviews, Instagram) + Vercel auto-deploy |
@@ -85,7 +85,7 @@ Ouvrir [http://localhost:3000](http://localhost:3000).
 - **Instagram feed** — API route server-side avec cache 1h, 9 derniers posts
 - **Pages** — Accueil, Galerie, Croisiere, FAQ, CGV, Mentions Legales, Reservation, Actualites, Confidentialite, Plan du site
 - **17 landing pages SEO** — route dynamique SSG, 7 schemas JSON-LD, traduites en 5 langues
-- **SEO** — metadata i18n, sitemap multi-locale, robots.txt, JSON-LD (LocalBusiness, Article, FAQPage, TouristAttraction, Breadcrumb)
+- **SEO** — metadata i18n, sitemap multi-locale avec hreflang, robots.txt, og:locale:alternate, breadcrumbs (5 pages), JSON-LD (LocalBusiness, WebSite, Organization, Article, FAQPage, TouristAttraction, TouristTrip, Offer, Breadcrumb)
 - **Lightbox galerie** — navigation clavier, grille masonry responsive
 - **Tests** — 319 tests unitaires (Vitest) + 66 E2E (Playwright) + accessibilite (axe-core)
 - **Accessibilite** — WCAG 2.1 AA, prefers-reduced-motion, focus trap, skip-to-content
@@ -130,7 +130,7 @@ CONTACT_EMAIL_TO=contact@example.com
 | Document | Description |
 |----------|-------------|
 | [ROADMAP.md](frontend/docs/ROADMAP.md) | Roadmap priorisee et backlog |
-| [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.15.0) |
+| [CHANGELOG.md](CHANGELOG.md) | Release notes (v0.1.0 → v0.17.0) |
 | [frontend/CLAUDE.md](frontend/CLAUDE.md) | Contexte projet pour Claude Code |
 | [brief/](brief/) | Specifications et briefs du projet |
 | [frontend/docs/](frontend/docs/) | Audits, release notes, plans |

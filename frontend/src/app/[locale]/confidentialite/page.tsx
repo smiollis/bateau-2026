@@ -1,6 +1,6 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-import { getAlternates, getOgLocale } from '@/lib/metadata';
+import { getAlternates, getOgLocale, getOgAlternateLocales } from '@/lib/metadata';
 import Confidentialite from '@/views/Confidentialite';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t("confidentialiteTitle"),
     description: t("confidentialiteDescription"),
     alternates: getAlternates(locale, "/confidentialite"),
-    openGraph: { locale: getOgLocale(locale) },
+    openGraph: { locale: getOgLocale(locale), alternateLocale: getOgAlternateLocales(locale) },
   };
 }
 

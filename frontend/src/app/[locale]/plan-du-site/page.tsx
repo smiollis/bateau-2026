@@ -1,6 +1,6 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-import { getAlternates, getOgLocale } from '@/lib/metadata';
+import { getAlternates, getOgLocale, getOgAlternateLocales } from '@/lib/metadata';
 import Page from '@/views/PlanDuSite';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t("sitemapTitle"),
     description: t("sitemapDescription"),
     alternates: getAlternates(locale, "/plan-du-site"),
-    openGraph: { locale: getOgLocale(locale) },
+    openGraph: { locale: getOgLocale(locale), alternateLocale: getOgAlternateLocales(locale) },
   };
 }
 

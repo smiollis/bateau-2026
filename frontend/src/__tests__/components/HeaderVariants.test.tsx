@@ -111,12 +111,10 @@ describe("HeaderVariants", () => {
     expect(themeBtn).toBeInTheDocument();
   });
 
-  it("navigates to reservation on CTA click", async () => {
-    const user = userEvent.setup();
+  it("reservation CTA links to /reservation", () => {
     render(<HeaderVariants />);
-    const ctaButtons = screen.getAllByText("reservation");
-    expect(ctaButtons[0]).toBeDefined();
-    await user.click(ctaButtons[0]!);
-    expect(mockPush).toHaveBeenCalledWith("/reservation");
+    const ctaLinks = screen.getAllByText("reservation");
+    expect(ctaLinks[0]).toBeDefined();
+    expect(ctaLinks[0]!.closest("a")).toHaveAttribute("href", "/reservation");
   });
 });

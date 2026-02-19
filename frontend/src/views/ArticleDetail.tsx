@@ -177,9 +177,9 @@ export default function ArticleDetail({ post }: ArticleDetailProps) {
 
         {/* Landing pages contextuelles */}
         <section className="container-custom max-w-4xl mx-auto mt-12">
-          <h3 className="font-heading text-lg text-primary mb-4 text-center">
+          <h2 className="font-heading text-lg text-primary mb-4 text-center">
             {t("discoverOccasions")}
-          </h3>
+          </h2>
           <div className="flex flex-wrap justify-center gap-3">
             {[
               { slug: "croisiere-romantique-seine", labelKey: "romantique" as const },

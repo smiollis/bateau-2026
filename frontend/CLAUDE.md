@@ -58,7 +58,7 @@ bateau-2026/
 - **Logging**: `src/lib/logger.ts` — JSON structure en production, lisible en dev
 - **Fonts**: Playfair Display (headings), Inter (body) via `next/font/google`
 - **Securite**: CSP (12 directives), HSTS, 6 security headers
-- **SEO**: Canonical + hreflang 6 locales + JSON-LD (4 schemas base + 3 par landing page), Rank Math sur WP
+- **SEO**: Canonical + hreflang 6 locales (HTML head + sitemap) + og:locale:alternate + JSON-LD (9 schemas : LocalBusiness, WebSite, Organization, Article, FAQPage, TouristTrip, TouristAttraction, Offer, BreadcrumbList) + breadcrumbs (5 pages + landings), Rank Math sur WP
 - **Landing pages**: 17 pages SSG (route dynamique `[slug]`), traduites EN/ES/IT/DE/PT-BR
 - **Server Components**: LandingBreadcrumb, LandingRichtext, LandingBenefits (async server), AnimatedReveal (client wrapper animations)
 - **Data pipeline**: JSON-only (pas d'appels API WP au runtime). Import via GitHub Actions + bouton WP "Publier sur le site"
@@ -98,7 +98,8 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **DOMPurify** : supprime des server components landing (contenu CMS trusted via ACF). Reste en place sur les composants client qui rendent du HTML WP
 - **Code splitting** : utiliser `next/dynamic` avec `ssr: false` pour les composants lourds client-only (ex: GalleryLightbox)
 - **JSON-LD** : 7 schemas en place (LocalBusiness, FAQPage, Offers/TouristTrip, Article, TouristAttraction, BreadcrumbList, Offer) — ajouter de nouveaux schemas dans les `page.tsx` server components
-- **Metadata** : utiliser `getAlternates(locale, path)` et `getOgLocale(locale)` de `@/lib/metadata` pour les `generateMetadata`
+- **Metadata** : utiliser `getAlternates(locale, path)`, `getBlogAlternates(locale, slug)`, `getOgLocale(locale)` et `getOgAlternateLocales(locale)` de `@/lib/metadata` pour les `generateMetadata`
+- **Blog cross-locale** : `slug-map.json` mappe les slugs FR → slugs locaux. `getBlogAlternates()` resout le hreflang par slug local. `generateStaticParams` genere les params par locale
 - **Landing i18n** : `getLandingData(slug, locale)` dans `src/data/landings/index.ts` fait un deep merge FR base + overlay locale. Les fichiers `i18n/<locale>/<slug>.ts` exportent un type `LandingPageTranslation` (partiel)
 - **Animations** : TOUJOURS utiliser `useReducedMotion()` de framer-motion et conditionner les animations avec `shouldReduceMotion` pour WCAG 2.3.1. Utiliser `m` (pas `motion`) car `LazyMotion` est active dans Providers.tsx
 - **Header/Footer** : dans `[locale]/layout.tsx` uniquement — NE PAS les ajouter dans les vues
@@ -142,14 +143,15 @@ npm run fix:all          # Corriger images + liens (combo)
 - **Hreflang** : 6 locales + x-default par page via `getAlternates()`
 - **og:locale** : dynamique via `getOgLocale()`
 - **JSON-LD** :
-  - `LocalBusiness` : root layout
+  - `LocalBusiness` + `WebSite` (SearchAction) + `Organization` (sameAs, contactPoint) : root layout
   - `FAQPage` : page FAQ (10 Q&A) + chaque landing page
   - `TouristAttraction` + `Offer` : chaque landing page
-  - `BreadcrumbList` : chaque landing page
+  - `BreadcrumbList` : chaque landing page + croisiere, galerie, faq, actualites, articles
   - `TouristTrip` + 3 `Offer` : page croisiere (itineraire 5 etapes, 3 formules 480/540/660€, aggregateRating dynamique)
   - `Article` : `src/app/[locale]/actualites/[slug]/page.tsx`
   - Generators : `src/lib/seo/jsonld.ts`
-- **Sitemap** : `src/app/sitemap.ts` (statiques + articles + landing pages, multi-locale)
+- **Sitemap** : `src/app/sitemap.ts` (statiques + articles + landings, multi-locale, hreflang alternates.languages)
+- **og:locale:alternate** : toutes les pages via `getOgAlternateLocales(locale)` dans openGraph metadata
 
 ## Securite
 
@@ -224,8 +226,17 @@ Le token est valide 60 jours. Le workflow automatique le renouvelle toutes les 2
 
 ## Score audit
 
+### Audit SEO Approfondi (19 fev 2026) : 9.0/10
+Voir `docs/AUDIT-SEO-2026-02-19.md` et `docs/ACTION-PLAN.md`
+
+Session 19 fev : audit SEO approfondi (5 agents) revelant score 7.2/10, sprint correctif P0+P1+P2 (12 actions) → score remonte a 9.0/10.
+
+Actions realisees :
+- P0 : header `<button>` → `<Link>`, blog slugs cross-locale (slug-map.json), boilerplate 30 articles nettoye
+- P1 : breadcrumbs 5 pages, og:locale:alternate 12 pages, hreflang sitemap, WebSite+Organization JSON-LD, footer+OccasionsGrid
+- P2 : liens internes 160 articles, heading H3→H2, 404/erreur localisees, /api/ robots.txt
+
 ### Audit Consolide (18 fev 2026) : 8.5/10
-Voir `docs/AUDIT-2026-02-18-CONSOLIDATED.md` et `docs/ACTION-PLAN.md`
 
 | Categorie | 17 fev (S1) | 18 fev |
 |-----------|-------------|--------|
@@ -242,8 +253,7 @@ Voir `docs/AUDIT-2026-02-18-CONSOLIDATED.md` et `docs/ACTION-PLAN.md`
 | UX/Design | 8.5 | 8.7 |
 | WordPress | 7.5 | 8.5 |
 
-Session 18 fev : 3 articles Histoire importes, 8 images corrigees, load more per category, audit 12 agents.
-Prochaine priorite : headers CSP, categories traduites, JSON-LD Article.
+Prochaine priorite : headers CSP, categories traduites, enrichir articles "Pont de Paris".
 
 ### Vercel Speed Insights (17 fev 2026)
 
@@ -268,6 +278,8 @@ Voir `docs/AUDIT-2026-02-18-data-quality.md`
 **Scripts utilitaires :**
 - `npm run fix:images` — Copie les images FR vers toutes les locales
 - `npm run fix:links` — Remplace les URLs admin par des chemins relatifs
+- `node scripts/add-internal-links.mjs` — Ajoute 2-3 liens internes dans les articles sans lien
+- `node scripts/clean-boilerplate.mjs` — Supprime les blocs boilerplate commerciaux des articles
 - `npx tsx scripts/merge-histoire-articles.ts` — Import articles Histoire
 - `npx tsx scripts/assign-images.ts` — Attribution images par slug
 

@@ -1,6 +1,6 @@
 # Roadmap — bateau-a-paris.fr
 
-> Derniere mise a jour : 2026-02-18
+> Derniere mise a jour : 2026-02-19
 > Pour l'historique detaille, voir [CHANGELOG.md](../../CHANGELOG.md)
 
 ---
@@ -21,7 +21,7 @@
 | 9. i18n Multilingue | **Lot 1 termine** | 6 langues actives, blog + landings traduits, Lot 2 planifie (AR, JA, KO) |
 | 10. Performance | **Termine** | LazyMotion, Hero SSR, content stripping, compression images (-3.9MB) |
 
-**Score audit : 8.5/10** (18 fev 2026) — voir `docs/AUDIT-2026-02-18-CONSOLIDATED.md`
+**Score audit : 9.0/10** (19 fev 2026) — voir `docs/AUDIT-SEO-2026-02-19.md` et `docs/ACTION-PLAN.md`
 **Vercel Speed Insights** : Desktop RES 94 (Great), Mobile RES 80 (Needs Improvement).
 
 ---

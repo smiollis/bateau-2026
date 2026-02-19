@@ -3,10 +3,9 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { useThemeVariant, ThemeVariant } from "@/contexts/ThemeVariantContext";
 import { useTranslations } from "next-intl";
-import { Link, useRouter, usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import logoDay from "@/assets/logo-day.svg";
 import logoNight from "@/assets/logo-night.svg";
 import LanguageSelector from "@/components/LanguageSelector";
@@ -44,7 +43,6 @@ const HeaderVariants = () => {
   const { variant, isDark } = useThemeVariant();
   const styles = variantStyles[variant];
   const logo = isDark ? logoNight : logoDay;
-  const router = useRouter();
   const pathname = usePathname();
   const t = useTranslations("nav");
 
@@ -57,27 +55,14 @@ const HeaderVariants = () => {
     { label: t("contact"), href: "/#contact" },
   ];
 
-  const handleNavClick = (href: string) => {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("/#")) {
       const id = href.slice(2);
       if (pathname === "/") {
+        e.preventDefault();
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      } else {
-        router.push("/");
-        let attempts = 0;
-        const interval = setInterval(() => {
-          const el = document.getElementById(id);
-          attempts++;
-          if (el) {
-            clearInterval(interval);
-            el.scrollIntoView({ behavior: "smooth" });
-          } else if (attempts >= 60) {
-            clearInterval(interval);
-          }
-        }, 50);
       }
-    } else {
-      router.push(href);
+      // If not on homepage, let Link navigate to /#id naturally
     }
   };
 
@@ -103,13 +88,14 @@ const HeaderVariants = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
-              <button
+              <Link
                 key={item.label}
-                onClick={() => handleNavClick(item.href)}
+                href={item.href}
+                onClick={(e) => handleAnchorClick(e, item.href)}
                 className={`${styles.nav} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm`}
               >
                 {item.label}
-              </button>
+              </Link>
             ))}
           </div>
 
@@ -117,9 +103,9 @@ const HeaderVariants = () => {
           <div className="hidden lg:flex items-center gap-4">
             <LanguageSelector iconColor={styles.iconColor} />
             <HeaderThemeToggle />
-            <Button className={styles.cta} onClick={() => router.push("/reservation")}>
+            <Link href="/reservation" className={styles.cta + " inline-flex items-center justify-center rounded-md text-sm font-medium h-10 px-4 py-2"}>
               {t("reservation")}
-            </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -144,7 +130,6 @@ const HeaderVariants = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         navItems={navItems}
-        onNavClick={handleNavClick}
         styles={styles}
       />
     </header>

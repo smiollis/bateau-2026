@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { fetchLandingData, fetchAllLandingSlugs, getRelatedPages } from "@/data/landings";
-import { getAlternates, getOgLocale } from "@/lib/metadata";
+import { getAlternates, getOgLocale, getOgAlternateLocales } from "@/lib/metadata";
 import {
   generateFAQPageJsonLd,
   generateTouristAttractionJsonLd,
@@ -46,6 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: getAlternates(locale, `/${slug}`),
     openGraph: {
       locale: getOgLocale(locale),
+      alternateLocale: getOgAlternateLocales(locale),
       title: landing.meta.title,
       description: landing.meta.description,
       ...(landing.meta.ogImage && {

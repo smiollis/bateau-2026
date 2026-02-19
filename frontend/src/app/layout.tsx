@@ -98,6 +98,45 @@ export default async function RootLayout({
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Un Bateau à Paris",
+              url: "https://bateau-a-paris.fr",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://bateau-a-paris.fr/fr/actualites?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Un Bateau à Paris",
+              url: "https://bateau-a-paris.fr",
+              logo: "https://bateau-a-paris.fr/images/logo-bateau-a-paris.png",
+              sameAs: [
+                "https://www.instagram.com/bateau_a_paris/",
+                "https://www.facebook.com/profile.php?id=61557848940884",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+33670342543",
+                email: "capitaine@bateau-a-paris.fr",
+                contactType: "reservations",
+                availableLanguage: ["French", "English"],
+              },
+            }),
+          }}
+        />
         {/* Preconnect WordPress (accélère le chargement de l'iframe Bookly) */}
         {WP_URL && (
           <>

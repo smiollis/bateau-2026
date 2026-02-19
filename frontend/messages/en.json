@@ -328,7 +328,12 @@
     "shooting": "Photo shoot",
     "coucherSoleil": "Sunset cruise",
     "apero": "Aperitif boat",
-    "saintValentin": "Valentine's Day"
+    "saintValentin": "Valentine's Day",
+    "anniversaireMariage": "Wedding Anniversary",
+    "nouvelAn": "New Year's Eve",
+    "noel": "Christmas",
+    "feteDesMeres": "Mother's Day",
+    "seminaire": "Seminar"
   },
   "faq": {
     "backToHome": "Back to home page",
@@ -532,5 +537,15 @@
     "tierEvents": "Events",
     "tierExperiences": "Experiences",
     "tierSeasons": "Seasons"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "backHome": "Back to home"
+  },
+  "error": {
+    "title": "An error occurred",
+    "description": "We apologize for the inconvenience. Please try again.",
+    "retry": "Try again"
   }
 }
