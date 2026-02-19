@@ -22,7 +22,7 @@ const HeroVariants = () => {
     : {
         titleClass: "font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight",
         subtitleClass: "text-lg md:text-xl text-primary-foreground/90",
-        overlayClass: "bg-gradient-to-b from-primary/60 via-primary/40 to-primary/70",
+        overlayClass: "bg-gradient-to-b from-primary/40 via-primary/20 to-primary/50",
       };
 
   return (

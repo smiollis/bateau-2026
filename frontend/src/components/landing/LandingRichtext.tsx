@@ -18,7 +18,7 @@ const LandingRichtext = ({ title, content }: LandingRichtextProps) => {
         </AnimatedReveal>
         <AnimatedReveal>
           <div
-            className="prose prose-lg max-w-none text-muted-foreground dark:prose-invert dark:prose-strong:text-blue-100 dark:prose-p:text-blue-200/70 dark:prose-li:text-blue-200/70"
+            className="prose prose-lg max-w-none text-foreground dark:prose-invert dark:prose-strong:text-blue-100 dark:prose-p:text-blue-200/70 dark:prose-li:text-blue-200/70"
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </AnimatedReveal>

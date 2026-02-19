@@ -103,8 +103,8 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
                 ))}
               </ul>
               <Button asChild className={formula.highlight ? "btn-gold text-white w-full" : "btn-gold-outline w-full"}>
-                <Link href={`/reservation${occasion ? `?occasion=${occasion}` : ""}`}>
-                  {t("cta")}
+                <Link href={i === 2 ? "/#contact" : `/reservation${occasion ? `?occasion=${occasion}` : ""}`}>
+                  {i === 2 ? t("ctaOnDemand") : t("cta")}
                 </Link>
               </Button>
             </m.div>

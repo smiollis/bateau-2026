@@ -71,13 +71,15 @@ describe("OffersVariants", () => {
     expect(screen.getByText("popular")).toBeInTheDocument();
   });
 
-  it("renders CTA buttons linking to reservation", () => {
+  it("renders CTA buttons linking to reservation (3 reserve + 1 on demand)", () => {
     render(<OffersVariants />);
     const ctaLinks = screen.getAllByText("cta");
-    expect(ctaLinks).toHaveLength(4);
+    expect(ctaLinks).toHaveLength(3);
     ctaLinks.forEach((link) => {
       expect(link.closest("a")).toHaveAttribute("href", "/reservation");
     });
+    const onDemandLink = screen.getByText("ctaOnDemand");
+    expect(onDemandLink.closest("a")).toHaveAttribute("href", "/#contact");
   });
 
   it("renders features for each offer", () => {

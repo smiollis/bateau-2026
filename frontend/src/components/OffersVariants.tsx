@@ -83,7 +83,7 @@ const OffersVariants = () => {
       priceExtra: 110,
       description: t("offer4Desc"),
       image: "https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      features: [t("feature_2h"), t("feature_6pers"), t("feature_guide"), t("feature_anecdotes")],
+      features: [t("feature_2h"), t("feature_11pers"), t("feature_guide"), t("feature_anecdotes")],
       popular: false,
     },
   ];
@@ -178,7 +178,9 @@ const OffersVariants = () => {
                   </ul>
 
                   <Button className={offer.popular ? styles.cta : `w-full ${variant === "nuit" ? "bg-white/10 border border-accent/40 text-accent hover:bg-accent hover:text-white" : ""}`} variant={offer.popular ? "default" : "outline"} asChild>
-                    <Link href="/reservation">{t("cta")}</Link>
+                    <Link href={index === 3 ? "/#contact" : "/reservation"}>
+                      {index === 3 ? t("ctaOnDemand") : t("cta")}
+                    </Link>
                   </Button>
                 </div>
               </div>

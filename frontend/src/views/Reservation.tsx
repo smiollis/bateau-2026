@@ -88,6 +88,11 @@ const Reservation = () => {
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
+  // Toujours arriver en haut de la page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background pt-16 md:pt-20">
         {/* HERO SECTION */}
