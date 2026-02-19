@@ -2,7 +2,7 @@
 
 import { m, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 
@@ -14,6 +14,7 @@ interface LandingPricingProps {
 const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
   const prefersReducedMotion = useReducedMotion();
   const t = useTranslations("landingPricing");
+  const locale = useLocale();
 
   const formulas = [
     {
@@ -103,9 +104,13 @@ const LandingPricing = ({ title, occasion }: LandingPricingProps) => {
                 ))}
               </ul>
               <Button asChild className={formula.highlight ? "btn-gold text-white w-full" : "btn-gold-outline w-full"}>
-                <Link href={i === 2 ? "/#contact" : `/reservation${occasion ? `?occasion=${occasion}` : ""}`}>
-                  {i === 2 ? t("ctaOnDemand") : t("cta")}
-                </Link>
+                {i === 2 ? (
+                  <a href={`/${locale}#contact`}>{t("ctaOnDemand")}</a>
+                ) : (
+                  <Link href={`/reservation${occasion ? `?occasion=${occasion}` : ""}`}>
+                    {t("cta")}
+                  </Link>
+                )}
               </Button>
             </m.div>
           ))}

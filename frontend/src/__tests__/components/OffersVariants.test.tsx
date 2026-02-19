@@ -79,7 +79,7 @@ describe("OffersVariants", () => {
       expect(link.closest("a")).toHaveAttribute("href", "/reservation");
     });
     const onDemandLink = screen.getByText("ctaOnDemand");
-    expect(onDemandLink.closest("a")).toHaveAttribute("href", "/#contact");
+    expect(onDemandLink.closest("a")).toHaveAttribute("href", "#contact");
   });
 
   it("renders features for each offer", () => {
