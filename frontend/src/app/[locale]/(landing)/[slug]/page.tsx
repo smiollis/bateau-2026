@@ -21,8 +21,11 @@ import {
   LandingStickyBar,
   LandingRelated,
 } from "@/components/landing";
+import dynamic from "next/dynamic";
 import { locales } from "@/i18n/routing";
 import type { FAQSection, LandingSection } from "@/data/landings/types";
+
+const OccasionsGrid = dynamic(() => import("@/components/OccasionsGrid"));
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -117,6 +120,7 @@ export default async function LandingPage({ params }: PageProps) {
       {landing.sections.map((section, i) => (
         <SectionRenderer key={`${section.type}-${i}`} section={section} />
       ))}
+      <OccasionsGrid />
       <LandingCTA ctaHref={landing.hero.cta.href} ctaText={landing.hero.cta.text} />
       {relatedPages.length > 0 && <LandingRelated pages={relatedPages} />}
       <LandingStickyBar ctaHref={landing.hero.cta.href} ctaText={landing.hero.cta.text} />
