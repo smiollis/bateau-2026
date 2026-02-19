@@ -147,42 +147,34 @@ const Croisiere = () => {
             <p className="text-muted-foreground">{t("timelineSubtitle")}</p>
           </div>
 
-          <div className="max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {itinerarySteps.map((step, index) => (
               <m.div
                 key={step.label}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                className="flex gap-4 mb-0"
+                transition={{ delay: index * 0.05 }}
+                className={`flex items-start gap-3 p-4 rounded-xl ${isDark ? "bg-white/5" : "bg-background"}`}
               >
-                <div className="flex flex-col items-center">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
-                    index === 0 || index === itinerarySteps.length - 1
-                      ? "bg-accent text-white"
-                      : isDark ? "bg-white/10 text-accent" : "bg-primary/10 text-primary"
-                  }`}>
-                    {index === 0 || index === itinerarySteps.length - 1 ? (
-                      <Ship className="w-4 h-4" />
-                    ) : (
-                      <MapPin className="w-4 h-4" />
-                    )}
-                  </div>
-                  {index < itinerarySteps.length - 1 && (
-                    <div className={`w-0.5 h-16 ${isDark ? "bg-blue-400/20" : "bg-border"}`} />
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
+                  index === 0 || index === itinerarySteps.length - 1
+                    ? "bg-accent text-white"
+                    : isDark ? "bg-white/10 text-accent" : "bg-primary/10 text-primary"
+                }`}>
+                  {index === 0 || index === itinerarySteps.length - 1 ? (
+                    <Ship className="w-4 h-4" />
+                  ) : (
+                    <MapPin className="w-4 h-4" />
                   )}
                 </div>
-
-                <div className="pb-8">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-semibold text-accent flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {step.time}
-                    </span>
-                  </div>
-                  <h3 className="font-heading text-base font-semibold text-primary">{step.label}</h3>
-                  <p className="text-muted-foreground text-sm">{step.detail}</p>
+                <div>
+                  <span className="text-xs font-semibold text-accent flex items-center gap-1 mb-1">
+                    <Clock className="w-3 h-3" />
+                    {step.time}
+                  </span>
+                  <h3 className="font-heading text-sm font-semibold text-primary">{step.label}</h3>
+                  <p className="text-muted-foreground text-xs">{step.detail}</p>
                 </div>
               </m.div>
             ))}
