@@ -255,7 +255,22 @@
     "faq": "Domande frequenti",
     "badgeSSL": "Pagamento sicuro SSL",
     "badgeConfirmation": "Conferma immediata",
-    "badgePayment": "CB, Visa, Mastercard"
+    "badgePayment": "CB, Visa, Mastercard",
+    "infoTitle": "Le nostre formule di crociera privata",
+    "infoClassicTitle": "Formula Classic",
+    "infoClassicPrice": "480€",
+    "infoClassicDesc": "Crociera privata di 2h per massimo 6 persone. Ideale per un momento romantico o un'uscita intima tra persone care.",
+    "infoFestiveTitle": "Formula Festive",
+    "infoFestivePrice": "540€",
+    "infoFestiveDesc": "Crociera privata di 2h per massimo 8 persone. Perfetta per compleanni, addii al nubilato o feste tra amici.",
+    "infoPrestigeTitle": "Formula Prestige",
+    "infoPrestigePrice": "660€",
+    "infoPrestigeDesc": "Crociera privata di 2h per massimo 12 persone. L'esperienza completa con comfort premium per i vostri eventi.",
+    "infoProcessTitle": "Come prenotare?",
+    "infoStep1": "Scegliete la data e la formula dal calendario qui sopra.",
+    "infoStep2": "Inserite i vostri dati e il numero di passeggeri.",
+    "infoStep3": "Pagate online in modo sicuro. Riceverete una conferma immediata via email.",
+    "infoIncluded": "Tutte le formule includono: navigazione di 2h sulla Senna, passaggio davanti ai monumenti emblematici (Torre Eiffel, Notre-Dame, Louvre…), capitano esperto e partenza dal Port de l'Arsenal (Bastille)."
   },
   "actualites": {
     "title": "Novità",
@@ -296,7 +311,7 @@
     "backToArticles": "Torna alle novità"
   },
   "meta": {
-    "homeTitle": "Un Bateau à Paris | Crociere Private sulla Senna",
+    "homeTitle": "Crociere Private sulla Senna a Parigi",
     "homeDescription": "Crociera privata sulla Senna a Parigi. Navigate lungo il fiume con vista sulla Torre Eiffel e Notre-Dame. Fino a 12 persone. A partire da 480€.",
     "croisiereTitle": "La Crociera",
     "croisiereDescription": "Itinerario, durata, monumenti visibili dalla Senna durante le nostre crociere private a Parigi.",

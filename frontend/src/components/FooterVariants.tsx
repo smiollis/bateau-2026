@@ -47,7 +47,7 @@ const FooterVariants = () => {
 
   const navItems = [
     { label: tNav("bateau"), to: "/#bateau" },
-    { label: tNav("croisiere"), to: "/#croisiere" },
+    { label: tNav("croisiere"), to: "/croisiere" },
     { label: tNav("tarifs"), to: "/#tarifs" },
     { label: tNav("galerie"), to: "/galerie" },
     { label: tNav("actualites"), to: "/actualites" },

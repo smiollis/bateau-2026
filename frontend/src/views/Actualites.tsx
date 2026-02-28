@@ -60,9 +60,7 @@ const Actualites = ({ posts }: ActualitesProps) => {
     ? posts
     : posts.filter((p) => p.categories.includes(activeCategory));
 
-  // 1 featured + up to visibleCount in grid
-  const gridPosts = filteredPosts.slice(1, 1 + visibleCount);
-  const hasMore = filteredPosts.length > 1 + visibleCount;
+  // All remaining posts for the grid (featured is at index 0)
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-16">
@@ -178,15 +176,16 @@ const Actualites = ({ posts }: ActualitesProps) => {
             );
           })()}
 
-          {/* Blog Grid */}
-          {gridPosts.length > 0 && (
+          {/* Blog Grid — all articles rendered in DOM for crawlability */}
+          {filteredPosts.slice(1).length > 0 && (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {gridPosts.map((post, i) => (
+              {filteredPosts.slice(1).map((post, i) => (
                 <m.div
                   key={post.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
+                  transition={{ delay: Math.min(i, 5) * 0.1 }}
+                  className={i >= visibleCount ? "hidden" : undefined}
                 >
                   <Link href={`/actualites/${post.slug}`} className="group block h-full">
                     <div className="bg-card rounded-xl overflow-hidden border border-border card-hover h-full flex flex-col">
@@ -212,12 +211,6 @@ const Actualites = ({ posts }: ActualitesProps) => {
                               {cat}
                             </span>
                           ))}
-                          {/* Date masquee temporairement
-                          <span className="text-muted-foreground text-xs flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            {formatDate(post.date, locale)}
-                          </span>
-                          */}
                         </div>
                         <h3 className="font-heading text-lg text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
                           {post.title}
@@ -237,8 +230,8 @@ const Actualites = ({ posts }: ActualitesProps) => {
             </div>
           )}
 
-          {/* Load More */}
-          {hasMore && (
+          {/* Load More — reveals hidden articles (all links already in DOM for SEO) */}
+          {filteredPosts.slice(1).length > visibleCount && (
             <div className="flex justify-center mt-10">
               <Button
                 onClick={() => setVisibleCount((c) => c + POSTS_PER_PAGE)}

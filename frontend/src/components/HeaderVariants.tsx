@@ -47,7 +47,7 @@ const HeaderVariants = () => {
   const t = useTranslations("nav");
 
   const navItems = [
-    { label: t("croisiere"), href: "/#croisiere" },
+    { label: t("croisiere"), href: "/croisiere" },
     { label: t("bateau"), href: "/#bateau" },
     { label: t("galerie"), href: "/galerie" },
     { label: t("tarifs"), href: "/#tarifs" },

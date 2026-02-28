@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { m } from "framer-motion";
 import { Link } from "@/i18n/navigation";
-import { Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2 } from "lucide-react";
+import { Phone, Mail, HelpCircle, ChevronRight, ShieldCheck, CreditCard, Loader2, Anchor, PartyPopper, Crown } from "lucide-react";
 import { useThemeVariant } from "@/contexts/ThemeVariantContext";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -212,6 +212,51 @@ const Reservation = () => {
                   <span className="text-sm text-muted-foreground">{label}</span>
                 </div>
               ))}
+            </m.div>
+
+            {/* FORMULAS INFO SECTION */}
+            <m.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-6xl mx-auto mt-16"
+            >
+              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-primary text-center mb-8">
+                {t("infoTitle")}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                {([
+                  { icon: Anchor, titleKey: "infoClassicTitle" as const, priceKey: "infoClassicPrice" as const, descKey: "infoClassicDesc" as const },
+                  { icon: PartyPopper, titleKey: "infoFestiveTitle" as const, priceKey: "infoFestivePrice" as const, descKey: "infoFestiveDesc" as const },
+                  { icon: Crown, titleKey: "infoPrestigeTitle" as const, priceKey: "infoPrestigePrice" as const, descKey: "infoPrestigeDesc" as const },
+                ] as const).map(({ icon: Icon, titleKey, priceKey, descKey }) => (
+                  <div key={titleKey} className="bg-card rounded-xl border border-border p-6 text-center">
+                    <Icon className="w-8 h-8 text-primary mx-auto mb-3" />
+                    <h3 className="font-heading text-lg font-semibold text-foreground mb-1">{t(titleKey)}</h3>
+                    <p className="text-2xl font-bold text-primary mb-3">{t(priceKey)}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{t(descKey)}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-card/50 rounded-xl border border-border/50 p-6 md:p-8">
+                <h3 className="font-heading text-xl font-semibold text-primary mb-4">{t("infoProcessTitle")}</h3>
+                <ol className="space-y-3 text-muted-foreground mb-6">
+                  <li className="flex gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-semibold flex items-center justify-center">1</span>
+                    {t("infoStep1")}
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-semibold flex items-center justify-center">2</span>
+                    {t("infoStep2")}
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-semibold flex items-center justify-center">3</span>
+                    {t("infoStep3")}
+                  </li>
+                </ol>
+                <p className="text-sm text-muted-foreground italic">{t("infoIncluded")}</p>
+              </div>
             </m.div>
 
             {/* FAQ LINK */}

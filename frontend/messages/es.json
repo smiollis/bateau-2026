@@ -255,7 +255,22 @@
     "faq": "Preguntas frecuentes",
     "badgeSSL": "Pago seguro SSL",
     "badgeConfirmation": "Confirmación inmediata",
-    "badgePayment": "Tarjeta, Visa, Mastercard"
+    "badgePayment": "Tarjeta, Visa, Mastercard",
+    "infoTitle": "Nuestras fórmulas de crucero privado",
+    "infoClassicTitle": "Fórmula Classic",
+    "infoClassicPrice": "480€",
+    "infoClassicDesc": "Crucero privado de 2h para 6 personas máx. Ideal para un momento romántico o una salida íntima entre seres queridos.",
+    "infoFestiveTitle": "Fórmula Festive",
+    "infoFestivePrice": "540€",
+    "infoFestiveDesc": "Crucero privado de 2h para 8 personas máx. Perfecto para cumpleaños, despedidas de soltera o fiestas entre amigos.",
+    "infoPrestigeTitle": "Fórmula Prestige",
+    "infoPrestigePrice": "660€",
+    "infoPrestigeDesc": "Crucero privado de 2h para 12 personas máx. La experiencia completa con confort premium para sus eventos.",
+    "infoProcessTitle": "¿Cómo reservar?",
+    "infoStep1": "Elija su fecha y su fórmula en el calendario de arriba.",
+    "infoStep2": "Introduzca sus datos y el número de pasajeros.",
+    "infoStep3": "Pague en línea de forma segura. Recibirá una confirmación inmediata por email.",
+    "infoIncluded": "Todas las fórmulas incluyen: navegación de 2h por el Sena, paso frente a los monumentos emblemáticos (Torre Eiffel, Notre-Dame, Louvre…), capitán experimentado y salida desde el Port de l'Arsenal (Bastille)."
   },
   "actualites": {
     "title": "Novedades",
@@ -296,7 +311,7 @@
     "backToArticles": "Volver a las novedades"
   },
   "meta": {
-    "homeTitle": "Un Bateau à Paris | Cruceros Privados por el Sena",
+    "homeTitle": "Cruceros Privados por el Sena en París",
     "homeDescription": "Crucero privado por el Sena en París. Navegue por el río con vistas a la Torre Eiffel y Notre-Dame. Hasta 12 personas. Desde 480€.",
     "croisiereTitle": "El Crucero",
     "croisiereDescription": "Itinerario, duración y monumentos vistos desde el Sena durante nuestros cruceros privados en París.",

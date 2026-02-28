@@ -255,7 +255,22 @@
     "faq": "Häufig gestellte Fragen",
     "badgeSSL": "Sichere SSL-Zahlung",
     "badgeConfirmation": "Sofortige Bestätigung",
-    "badgePayment": "Kreditkarte, Visa, Mastercard"
+    "badgePayment": "Kreditkarte, Visa, Mastercard",
+    "infoTitle": "Unsere privaten Rundfahrt-Pakete",
+    "infoClassicTitle": "Classic-Paket",
+    "infoClassicPrice": "480€",
+    "infoClassicDesc": "2-stündige private Rundfahrt für max. 6 Personen. Ideal für einen romantischen Moment oder einen intimen Ausflug mit Ihren Liebsten.",
+    "infoFestiveTitle": "Festive-Paket",
+    "infoFestivePrice": "540€",
+    "infoFestiveDesc": "2-stündige private Rundfahrt für max. 8 Personen. Perfekt für Geburtstage, Junggesellinnenabschiede oder Feiern mit Freunden.",
+    "infoPrestigeTitle": "Prestige-Paket",
+    "infoPrestigePrice": "660€",
+    "infoPrestigeDesc": "2-stündige private Rundfahrt für max. 12 Personen. Das komplette Erlebnis mit Premium-Komfort für Ihre Veranstaltungen.",
+    "infoProcessTitle": "Wie buchen?",
+    "infoStep1": "Wählen Sie Ihr Datum und Paket im Kalender oben aus.",
+    "infoStep2": "Geben Sie Ihre Daten und die Anzahl der Passagiere ein.",
+    "infoStep3": "Bezahlen Sie sicher online. Sie erhalten sofort eine Bestätigung per E-Mail.",
+    "infoIncluded": "Alle Pakete beinhalten: 2-stündige Fahrt auf der Seine, vorbei an den berühmten Sehenswürdigkeiten (Eiffelturm, Notre-Dame, Louvre…), erfahrener Kapitän und Abfahrt vom Port de l'Arsenal (Bastille)."
   },
   "actualites": {
     "title": "Aktuelles",
@@ -296,7 +311,7 @@
     "backToArticles": "Zurück zu Aktuelles"
   },
   "meta": {
-    "homeTitle": "Un Bateau à Paris | Private Rundfahrten auf der Seine",
+    "homeTitle": "Private Rundfahrten auf der Seine in Paris",
     "homeDescription": "Private Rundfahrt auf der Seine in Paris. Fahren Sie auf dem Wasser mit Blick auf den Eiffelturm und Notre-Dame. Bis zu 12 Personen. Ab 480€.",
     "croisiereTitle": "Die Rundfahrt",
     "croisiereDescription": "Route, Dauer und Sehenswürdigkeiten, die bei unseren privaten Rundfahrten in Paris von der Seine aus zu sehen sind.",

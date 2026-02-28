@@ -255,7 +255,22 @@
     "faq": "Perguntas frequentes",
     "badgeSSL": "Pagamento seguro SSL",
     "badgeConfirmation": "Confirmação imediata",
-    "badgePayment": "Cartao, Visa, Mastercard"
+    "badgePayment": "Cartão, Visa, Mastercard",
+    "infoTitle": "Nossas opções de cruzeiro privativo",
+    "infoClassicTitle": "Opção Classic",
+    "infoClassicPrice": "480€",
+    "infoClassicDesc": "Cruzeiro privativo de 2h para até 6 pessoas. Ideal para um momento romântico ou um passeio íntimo com entes queridos.",
+    "infoFestiveTitle": "Opção Festive",
+    "infoFestivePrice": "540€",
+    "infoFestiveDesc": "Cruzeiro privativo de 2h para até 8 pessoas. Perfeito para aniversários, despedidas de solteira ou festas entre amigos.",
+    "infoPrestigeTitle": "Opção Prestige",
+    "infoPrestigePrice": "660€",
+    "infoPrestigeDesc": "Cruzeiro privativo de 2h para até 12 pessoas. A experiência completa com conforto premium para seus eventos.",
+    "infoProcessTitle": "Como reservar?",
+    "infoStep1": "Escolha sua data e opção no calendário acima.",
+    "infoStep2": "Preencha seus dados e o número de passageiros.",
+    "infoStep3": "Pague online com segurança. Você receberá uma confirmação imediata por e-mail.",
+    "infoIncluded": "Todas as opções incluem: navegação de 2h no Sena, passagem pelos monumentos emblemáticos (Torre Eiffel, Notre-Dame, Louvre…), capitão experiente e partida do Port de l'Arsenal (Bastille)."
   },
   "actualites": {
     "title": "Novidades",
@@ -296,7 +311,7 @@
     "backToArticles": "Voltar as novidades"
   },
   "meta": {
-    "homeTitle": "Un Bateau à Paris | Cruzeiros Privativos no Sena",
+    "homeTitle": "Cruzeiros Privativos no Sena em Paris",
     "homeDescription": "Cruzeiro privativo no rio Sena em Paris. Navegue ao longo da agua com vista para a Torre Eiffel e Notre-Dame. Até 12 pessoas. A partir de 480€.",
     "croisiereTitle": "O Cruzeiro",
     "croisiereDescription": "Itinerário, duração, monumentos vistos do Sena durante nossos cruzeiros privativos em Paris.",

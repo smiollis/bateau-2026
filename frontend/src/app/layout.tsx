@@ -122,7 +122,7 @@ export default async function RootLayout({
               "@type": "Organization",
               name: "Un Bateau à Paris",
               url: "https://bateau-a-paris.fr",
-              logo: "https://bateau-a-paris.fr/images/logo-bateau-a-paris.png",
+              logo: "https://bateau-a-paris.fr/og-image.jpg",
               sameAs: [
                 "https://www.instagram.com/bateau_a_paris/",
                 "https://www.facebook.com/profile.php?id=61557848940884",

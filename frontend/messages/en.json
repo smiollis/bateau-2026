@@ -255,7 +255,22 @@
     "faq": "Frequently asked questions",
     "badgeSSL": "Secure SSL payment",
     "badgeConfirmation": "Instant confirmation",
-    "badgePayment": "Visa, Mastercard"
+    "badgePayment": "Visa, Mastercard",
+    "infoTitle": "Our private cruise packages",
+    "infoClassicTitle": "Classic Package",
+    "infoClassicPrice": "€480",
+    "infoClassicDesc": "2-hour private cruise for up to 6 guests. Perfect for a romantic outing or an intimate gathering with loved ones.",
+    "infoFestiveTitle": "Festive Package",
+    "infoFestivePrice": "€540",
+    "infoFestiveDesc": "2-hour private cruise for up to 8 guests. Ideal for birthdays, hen parties or celebrations with friends.",
+    "infoPrestigeTitle": "Prestige Package",
+    "infoPrestigePrice": "€660",
+    "infoPrestigeDesc": "2-hour private cruise for up to 12 guests. The complete experience with premium comfort for your events.",
+    "infoProcessTitle": "How to book?",
+    "infoStep1": "Choose your date and package from the calendar above.",
+    "infoStep2": "Enter your details and the number of passengers.",
+    "infoStep3": "Pay securely online. You'll receive an instant confirmation by email.",
+    "infoIncluded": "All packages include: 2-hour cruise on the Seine, passing iconic landmarks (Eiffel Tower, Notre-Dame, Louvre…), experienced captain, and departure from Port de l'Arsenal (Bastille)."
   },
   "actualites": {
     "title": "News",
@@ -296,7 +311,7 @@
     "backToArticles": "Back to news"
   },
   "meta": {
-    "homeTitle": "Un Bateau à Paris | Private Cruises on the Seine",
+    "homeTitle": "Private Cruises on the Seine in Paris",
     "homeDescription": "Private cruise on the Seine in Paris. Sail along the river with views of the Eiffel Tower and Notre Dame. Up to 12 people. From €480.",
     "croisiereTitle": "The Cruise",
     "croisiereDescription": "Itinerary, duration, monuments seen from the Seine during our private cruises in Paris.",

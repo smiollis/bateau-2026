@@ -34,7 +34,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: (page === "" ? "weekly" : "monthly") as "weekly" | "monthly",
       priority: page === "" ? 1.0 : 0.8,
       alternates: {
-        languages: Object.fromEntries(locales.map((l) => [l, `${baseUrl}/${l}${page}`])),
+        languages: {
+          ...Object.fromEntries(locales.map((l) => [l, `${baseUrl}/${l}${page}`])),
+          "x-default": `${baseUrl}/fr${page}`,
+        },
       },
     }))
   );
@@ -60,9 +63,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: "monthly" as const,
         priority: 0.6,
         alternates: {
-          languages: Object.fromEntries(
-            locales.map((l) => [l, `${baseUrl}/${l}/actualites/${mapping?.[l] || post.slug}`])
-          ),
+          languages: {
+            ...Object.fromEntries(
+              locales.map((l) => [l, `${baseUrl}/${l}/actualites/${mapping?.[l] || post.slug}`])
+            ),
+            "x-default": `${baseUrl}/fr/actualites/${post.slug}`,
+          },
         },
       };
     });
@@ -78,7 +84,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.7,
       alternates: {
-        languages: Object.fromEntries(locales.map((l) => [l, `${baseUrl}/${l}/${slug}`])),
+        languages: {
+          ...Object.fromEntries(locales.map((l) => [l, `${baseUrl}/${l}/${slug}`])),
+          "x-default": `${baseUrl}/fr/${slug}`,
+        },
       },
     }))
   );

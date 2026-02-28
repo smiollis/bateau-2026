@@ -29,7 +29,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t("homeTitle"),
     description: t("homeDescription"),
     alternates: getAlternates(locale, ""),
-    openGraph: { locale: getOgLocale(locale), alternateLocale: getOgAlternateLocales(locale) },
+    openGraph: {
+      locale: getOgLocale(locale),
+      alternateLocale: getOgAlternateLocales(locale),
+      url: `https://bateau-a-paris.fr/${locale}`,
+      images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Un Bateau à Paris — Croisière privée sur la Seine" }],
+    },
   };
 }
 

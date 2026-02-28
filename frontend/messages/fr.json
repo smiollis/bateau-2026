@@ -255,7 +255,22 @@
     "faq": "Questions fréquentes",
     "badgeSSL": "Paiement sécurisé SSL",
     "badgeConfirmation": "Confirmation immédiate",
-    "badgePayment": "CB, Visa, Mastercard"
+    "badgePayment": "CB, Visa, Mastercard",
+    "infoTitle": "Nos formules de croisière privée",
+    "infoClassicTitle": "Formule Classic",
+    "infoClassicPrice": "480€",
+    "infoClassicDesc": "Croisière privée de 2h pour 6 personnes max. Idéale pour un moment romantique ou une sortie intime entre proches.",
+    "infoFestiveTitle": "Formule Festive",
+    "infoFestivePrice": "540€",
+    "infoFestiveDesc": "Croisière privée de 2h pour 8 personnes max. Parfaite pour un anniversaire, un EVJF ou une fête entre amis.",
+    "infoPrestigeTitle": "Formule Prestige",
+    "infoPrestigePrice": "660€",
+    "infoPrestigeDesc": "Croisière privée de 2h pour 12 personnes max. L'expérience complète avec confort premium pour vos événements.",
+    "infoProcessTitle": "Comment réserver ?",
+    "infoStep1": "Choisissez votre date et votre formule dans le calendrier ci-dessus.",
+    "infoStep2": "Renseignez vos coordonnées et le nombre de passagers.",
+    "infoStep3": "Réglez en ligne de manière sécurisée. Vous recevez une confirmation immédiate par email.",
+    "infoIncluded": "Toutes les formules incluent : navigation de 2h sur la Seine, passage devant les monuments emblématiques (Tour Eiffel, Notre-Dame, Louvre…), capitaine expérimenté, et départ depuis le Port de l'Arsenal (Bastille)."
   },
   "actualites": {
     "title": "Actualités",
@@ -296,7 +311,7 @@
     "backToArticles": "Retour aux actualités"
   },
   "meta": {
-    "homeTitle": "Un Bateau à Paris | Croisières Privées sur la Seine",
+    "homeTitle": "Croisières Privées sur la Seine à Paris",
     "homeDescription": "Croisière privée sur la Seine à Paris. Naviguez au fil de l'eau avec vue sur la Tour Eiffel et Notre-Dame. Jusqu'à 12 personnes. À partir de 480€.",
     "croisiereTitle": "La Croisière",
     "croisiereDescription": "Itinéraire, durée, monuments vus depuis la Seine lors de nos croisières privées à Paris.",

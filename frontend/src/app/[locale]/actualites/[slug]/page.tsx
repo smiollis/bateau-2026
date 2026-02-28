@@ -29,6 +29,17 @@ function getPost(slug: string, locale: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
 }
 
+/** Strip leading title duplication from excerpt ("Le pont X Le Pont X est..." → "Le Pont X est...") */
+function cleanExcerpt(title: string, excerpt: string): string {
+  const titleNorm = title.toLowerCase().replace(/\s+/g, " ").trim();
+  const excerptTrimmed = excerpt.replace(/^\s+/, "");
+  const excerptNorm = excerptTrimmed.toLowerCase().replace(/\s+/g, " ").trim();
+  if (excerptNorm.startsWith(titleNorm)) {
+    return excerptTrimmed.slice(title.length).replace(/^\s+/, "");
+  }
+  return excerpt;
+}
+
 export function generateStaticParams() {
   return locales.flatMap((locale) => {
     const posts = postsMap[locale] ?? postsFr;
@@ -46,7 +57,7 @@ export async function generateMetadata({
   if (!post) return {};
 
   const seoTitle = post.seo?.title || post.title;
-  const seoDesc = post.seo?.description || post.excerpt.slice(0, 160);
+  const seoDesc = post.seo?.description || cleanExcerpt(post.title, post.excerpt).slice(0, 160);
 
   return {
     title: seoTitle,
@@ -77,7 +88,7 @@ export default async function ArticlePage({
   if (!post) notFound();
 
   const seoTitle = post.seo?.title || post.title;
-  const seoDesc = post.seo?.description || post.excerpt.slice(0, 160);
+  const seoDesc = post.seo?.description || cleanExcerpt(post.title, post.excerpt).slice(0, 160);
   const tNav = await getTranslations({ locale, namespace: "nav" });
   const tBreadcrumb = await getTranslations({ locale, namespace: "breadcrumb" });
 
@@ -100,7 +111,7 @@ export default async function ArticlePage({
               name: "Un Bateau à Paris",
               logo: {
                 "@type": "ImageObject",
-                url: "https://bateau-a-paris.fr/images/logo-bateau-a-paris.png",
+                url: "https://bateau-a-paris.fr/og-image.jpg",
               },
             },
           }),

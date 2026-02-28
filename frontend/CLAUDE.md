@@ -98,7 +98,7 @@ Tous les composants `*Variants.tsx` utilisent `isDark` (ternaire) pour adapter l
 - **DOMPurify** : supprime des server components landing (contenu CMS trusted via ACF). Reste en place sur les composants client qui rendent du HTML WP
 - **Code splitting** : utiliser `next/dynamic` avec `ssr: false` pour les composants lourds client-only (ex: GalleryLightbox)
 - **JSON-LD** : 7 schemas en place (LocalBusiness, FAQPage, Offers/TouristTrip, Article, TouristAttraction, BreadcrumbList, Offer) — ajouter de nouveaux schemas dans les `page.tsx` server components
-- **Metadata** : utiliser `getAlternates(locale, path)`, `getBlogAlternates(locale, slug)`, `getOgLocale(locale)` et `getOgAlternateLocales(locale)` de `@/lib/metadata` pour les `generateMetadata`
+- **Metadata** : utiliser `getAlternates(locale, path)`, `getBlogAlternates(locale, slug)`, `getOgLocale(locale)` et `getOgAlternateLocales(locale)` de `@/lib/metadata` pour les `generateMetadata`. Attention : per-page `openGraph` remplace (ne merge pas) le root layout `openGraph.images` — toujours inclure `images` explicitement
 - **Blog cross-locale** : `slug-map.json` mappe les slugs FR → slugs locaux. `getBlogAlternates()` resout le hreflang par slug local. `generateStaticParams` genere les params par locale
 - **Landing i18n** : `getLandingData(slug, locale)` dans `src/data/landings/index.ts` fait un deep merge FR base + overlay locale. Les fichiers `i18n/<locale>/<slug>.ts` exportent un type `LandingPageTranslation` (partiel)
 - **Animations** : TOUJOURS utiliser `useReducedMotion()` de framer-motion et conditionner les animations avec `shouldReduceMotion` pour WCAG 2.3.1. Utiliser `m` (pas `motion`) car `LazyMotion` est active dans Providers.tsx
@@ -150,7 +150,7 @@ npm run fix:all          # Corriger images + liens (combo)
   - `TouristTrip` + 3 `Offer` : page croisiere (itineraire 5 etapes, 3 formules 480/540/660€, aggregateRating dynamique)
   - `Article` : `src/app/[locale]/actualites/[slug]/page.tsx`
   - Generators : `src/lib/seo/jsonld.ts`
-- **Sitemap** : `src/app/sitemap.ts` (statiques + articles + landings, multi-locale, hreflang alternates.languages)
+- **Sitemap** : `src/app/sitemap.ts` (statiques + articles + landings, multi-locale, hreflang alternates.languages + x-default)
 - **og:locale:alternate** : toutes les pages via `getOgAlternateLocales(locale)` dans openGraph metadata
 
 ## Securite
@@ -226,8 +226,22 @@ Le token est valide 60 jours. Le workflow automatique le renouvelle toutes les 2
 
 ## Score audit
 
-### Audit SEO Approfondi (19 fev 2026) : 9.0/10
-Voir `docs/AUDIT-SEO-2026-02-19.md` et `docs/ACTION-PLAN.md`
+### Re-audit SEO (28 fev 2026) : 9.5/10
+Voir `docs/AUDIT-SEO-2026-02-19.md` (mis a jour le 28/02)
+
+Session 28 fev : re-audit approfondi (3 agents) apres corrections du 19/02. Score 9.0 → 9.5/10.
+
+Corrections du 28/02 :
+- NP0 #21 : og:image + og:url explicites sur homepage (`generateMetadata`)
+- NP0 #22 : logo Organization 404 → `/og-image.jpg`
+- NP0 #23 : meta descriptions articles — `cleanExcerpt()` supprime le titre duplique
+- NP1 #24 : homeTitle prefixe "Un Bateau a Paris | " supprime (evite duplication avec root template)
+- NP1 #25 : pagination actualites crawlable (articles dans le DOM avec `hidden`, plus JS-only)
+- NP1 #26 : nav header/footer `/croisiere` au lieu de `/#croisiere` (page indexable)
+- NP1 #27 : sitemap x-default dans alternates.languages
+- NP2 #29 : /reservation thin content enrichi (3 formules, processus 3 etapes, inclusions)
+
+### Audit SEO Initial (19 fev 2026) : 9.0/10
 
 Session 19 fev : audit SEO approfondi (5 agents) revelant score 7.2/10, sprint correctif P0+P1+P2 (12 actions) → score remonte a 9.0/10.
 
