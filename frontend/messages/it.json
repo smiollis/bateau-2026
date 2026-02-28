@@ -239,7 +239,9 @@
     "itinerary8Detail": "Ritorno dalla riva opposta per nuove prospettive",
     "itinerary9Time": "2h",
     "itinerary9Label": "Ritorno al porto",
-    "itinerary9Detail": "Fine della crociera al Port de Javel"
+    "itinerary9Detail": "Fine della crociera al Port de Javel",
+    "schemaName": "Crociera privata sulla Senna a Parigi",
+    "schemaDescription": "Scopri Parigi dall'acqua a bordo del Sénang, barca privata per fino a 12 persone. Partenza dal Port de l'Arsenal (Bastiglia), 2 ore di navigazione."
   },
   "reservation": {
     "loading": "Caricamento del calendario delle disponibilità…",

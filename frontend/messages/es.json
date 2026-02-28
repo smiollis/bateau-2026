@@ -239,7 +239,9 @@
     "itinerary8Detail": "Regreso por la orilla opuesta para nuevas perspectivas",
     "itinerary9Time": "2h",
     "itinerary9Label": "Regreso al puerto",
-    "itinerary9Detail": "Fin del crucero en el Port de Javel"
+    "itinerary9Detail": "Fin del crucero en el Port de Javel",
+    "schemaName": "Crucero privado por el Sena en París",
+    "schemaDescription": "Descubra París desde el agua a bordo del Sénang, barco privado para hasta 12 personas. Salida del Port de l'Arsenal (Bastilla), 2 horas de navegación."
   },
   "reservation": {
     "loading": "Cargando el calendario de disponibilidades…",

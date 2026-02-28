@@ -23,102 +23,41 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const touristTripJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "TouristTrip",
-  name: "Croisière privée sur la Seine à Paris",
-  description:
-    "Découvrez Paris au fil de l'eau à bord du Sénang, bateau privatisé jusqu'à 12 personnes. Départ Port de l'Arsenal (Bastille), 2h de navigation.",
-  touristType: "Couples, Families, Groups",
-  itinerary: {
-    "@type": "ItemList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        item: {
-          "@type": "TouristAttraction",
-          name: "Port de l'Arsenal",
-          description: "Point de départ à Bastille",
-        },
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        item: {
-          "@type": "TouristAttraction",
-          name: "Île Saint-Louis",
-          description: "Navigation autour de l'île historique",
-        },
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        item: {
-          "@type": "TouristAttraction",
-          name: "Notre-Dame de Paris",
-          description: "Vue sur la cathédrale emblématique",
-        },
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
-        item: {
-          "@type": "TouristAttraction",
-          name: "Musée d'Orsay",
-          description: "Passage devant le musée impressionniste",
-        },
-      },
-      {
-        "@type": "ListItem",
-        position: 5,
-        item: {
-          "@type": "TouristAttraction",
-          name: "Tour Eiffel",
-          description: "Vue panoramique sur le monument iconique",
-        },
-      },
-    ],
-  },
-  offers: [
-    {
-      "@type": "Offer",
-      name: "Formule Classic",
-      priceCurrency: "EUR",
-      price: "480",
-      url: "https://bateau-a-paris.fr/fr/reservation",
-      availability: "https://schema.org/InStock",
-    },
-    {
-      "@type": "Offer",
-      name: "Formule Festive",
-      priceCurrency: "EUR",
-      price: "540",
-      url: "https://bateau-a-paris.fr/fr/reservation",
-      availability: "https://schema.org/InStock",
-    },
-    {
-      "@type": "Offer",
-      name: "Formule Prestige",
-      priceCurrency: "EUR",
-      price: "660",
-      url: "https://bateau-a-paris.fr/fr/reservation",
-      availability: "https://schema.org/InStock",
-    },
-  ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: ratingValue,
-    reviewCount: reviewCount,
-  },
-};
-
 export default async function RouteWrapper({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "nav" });
+  const tC = await getTranslations({ locale, namespace: "croisiere" });
   const tBreadcrumb = await getTranslations({ locale, namespace: "breadcrumb" });
 
   const breadcrumbItems = [{ name: t("croisiere"), url: `/${locale}/croisiere` }];
+
+  const touristTripJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    name: tC("schemaName"),
+    description: tC("schemaDescription"),
+    touristType: "Couples, Families, Groups",
+    itinerary: {
+      "@type": "ItemList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, item: { "@type": "TouristAttraction", name: tC("landmark_liberte_name"), description: tC("landmark_liberte_description") } },
+        { "@type": "ListItem", position: 2, item: { "@type": "TouristAttraction", name: tC("landmark_tour-eiffel_name"), description: tC("landmark_tour-eiffel_description") } },
+        { "@type": "ListItem", position: 3, item: { "@type": "TouristAttraction", name: tC("landmark_notre-dame_name"), description: tC("landmark_notre-dame_description") } },
+        { "@type": "ListItem", position: 4, item: { "@type": "TouristAttraction", name: tC("landmark_orsay_name"), description: tC("landmark_orsay_description") } },
+        { "@type": "ListItem", position: 5, item: { "@type": "TouristAttraction", name: tC("landmark_louvre_name"), description: tC("landmark_louvre_description") } },
+      ],
+    },
+    offers: [
+      { "@type": "Offer", name: "Formule Classic", priceCurrency: "EUR", price: "480", url: `https://bateau-a-paris.fr/${locale}/reservation`, availability: "https://schema.org/InStock" },
+      { "@type": "Offer", name: "Formule Festive", priceCurrency: "EUR", price: "540", url: `https://bateau-a-paris.fr/${locale}/reservation`, availability: "https://schema.org/InStock" },
+      { "@type": "Offer", name: "Formule Prestige", priceCurrency: "EUR", price: "660", url: `https://bateau-a-paris.fr/${locale}/reservation`, availability: "https://schema.org/InStock" },
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue,
+      reviewCount,
+    },
+  };
 
   return (
     <>

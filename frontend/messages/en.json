@@ -239,7 +239,9 @@
     "itinerary8Detail": "Return via the opposite bank for new perspectives",
     "itinerary9Time": "2h",
     "itinerary9Label": "Back to port",
-    "itinerary9Detail": "End of the cruise at Port de Javel"
+    "itinerary9Detail": "End of the cruise at Port de Javel",
+    "schemaName": "Private cruise on the Seine in Paris",
+    "schemaDescription": "Discover Paris from the water aboard the Sénang, a private boat for up to 12 guests. Departure from Port de l'Arsenal (Bastille), 2-hour cruise."
   },
   "reservation": {
     "loading": "Loading availability calendar…",

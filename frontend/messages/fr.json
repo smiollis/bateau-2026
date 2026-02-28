@@ -239,7 +239,9 @@
     "itinerary8Detail": "Retour par la rive opposée pour de nouvelles perspectives",
     "itinerary9Time": "2h",
     "itinerary9Label": "Retour au port",
-    "itinerary9Detail": "Fin de la croisière au Port de Javel"
+    "itinerary9Detail": "Fin de la croisière au Port de Javel",
+    "schemaName": "Croisière privée sur la Seine à Paris",
+    "schemaDescription": "Découvrez Paris au fil de l'eau à bord du Sénang, bateau privatisé jusqu'à 12 personnes. Départ Port de l'Arsenal (Bastille), 2h de navigation."
   },
   "reservation": {
     "loading": "Chargement du calendrier des disponibilités…",

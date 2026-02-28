@@ -239,7 +239,9 @@
     "itinerary8Detail": "Rückfahrt über das gegenüberliegende Ufer für neue Perspektiven",
     "itinerary9Time": "2h",
     "itinerary9Label": "Rückkehr zum Hafen",
-    "itinerary9Detail": "Ende der Rundfahrt am Port de Javel"
+    "itinerary9Detail": "Ende der Rundfahrt am Port de Javel",
+    "schemaName": "Private Bootsfahrt auf der Seine in Paris",
+    "schemaDescription": "Entdecken Sie Paris vom Wasser aus an Bord der Sénang, einem privaten Boot für bis zu 12 Personen. Abfahrt vom Port de l'Arsenal (Bastille), 2 Stunden Fahrt."
   },
   "reservation": {
     "loading": "Verfügbarkeitskalender wird geladen...",
